@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Client\RedisBase.cs" />
+    <Compile Remove="Client\RedisManager.cs" />
+    <Compile Remove="RedisConfigService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HWL.ShareConfig\HWL.ShareConfig.csproj" />
+  </ItemGroup>
+
+</Project>

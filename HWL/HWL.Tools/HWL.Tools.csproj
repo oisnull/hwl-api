@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="BaiduIPAdressAPI.cs" />
+    <Compile Remove="Base64ImageAction.cs" />
+    <Compile Remove="CacheAction.cs" />
+    <Compile Remove="CustomJson.cs" />
+    <Compile Remove="ImageAction.cs" />
+    <Compile Remove="LogAction.cs" />
+    <Compile Remove="ViewExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+</Project>

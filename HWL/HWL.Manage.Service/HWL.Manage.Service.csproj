@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ConfigService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HWL.Entity\HWL.Entity.csproj" />
+    <ProjectReference Include="..\HWL.ShareConfig\HWL.ShareConfig.csproj" />
+    <ProjectReference Include="..\HWL.Tools\HWL.Tools.csproj" />
+  </ItemGroup>
+
+</Project>

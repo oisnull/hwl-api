@@ -1,0 +1,25 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/.vs/HWL/v15
+/HWL/.vs
+/HWL/HWL.API/bin
+/HWL/HWL.API/obj
+/HWL/HWL.Entity/bin
+/HWL/HWL.Entity/obj
+/HWL/HWL.H5/bin
+/HWL/HWL.H5/obj
+/HWL/HWL.Manage/bin
+/HWL/HWL.Manage/obj
+/HWL/HWL.Manage.Service/bin
+/HWL/HWL.Manage.Service/obj
+/HWL/HWL.Redis/bin
+/HWL/HWL.Redis/obj
+/HWL/HWL.Service/bin
+/HWL/HWL.Service/obj
+/HWL/HWL.ShareConfig/bin
+/HWL/HWL.ShareConfig/obj
+/HWL/HWL.Tools/bin
+/HWL/HWL.Tools/obj
+/HWL/HWL.H5/app.png
