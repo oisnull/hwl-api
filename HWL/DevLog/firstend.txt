@@ -1,0 +1,53 @@
+2018-04-26:
+android:
+1,user circle index 图片布局 V
+2,user circle details V
+3,user index circles list(top 3) V
+4,user group manage(list/add/delete) V
+5,app share page(html) V
+6,app download/update V
+7,mqtt long connection optimization V
+8,my circle info comment/like message push V
+9,my message push manage V
+10,image photo view V
+11,chat group/user setting V
+12,move right and exit activity V
+13,receive mq message of sound tip V
+
+2018-05-12:
+14,集成第三方登录（QQ，微信，SINA微薄）审核中
+15,实现附近信息/圈子信息删除 V
+16,隐私设置,密码重置,消息提示设置 V
+17,greendao多帐号登录后串号的bug处理 V
+18,HWL官网搭建 V
+19,聊天界面分页加载消息 V
+20,线上测试环境搭建
+
+
+2018-05-15:
+国外ngrok: https://ngrok.com/
+国内ngrok: https://www.ngrok.cc/
+opensourceframe https://blog.csdn.net/hbyh632/article/details/78121370
+
+2018-05-18:
+21,图片发送优化 V
+22,视频发送优化
+23,发送(near/circle)评论回复MQ消息 V
+24,退出Chat后,如果消息没有发送完毕,可以继续发送 V
+25,群/用户消息设置,主页显示屏蔽的图标 V
+26,二维码分享Activity中添加以其它方式分享 V
+27,显示用户备注,如果设置了备注,则以用户备注为准 V
+28,用户信息展示界面,需要区分用户的name/remark/symbol V
+29,显示时间处理 V
+30,朋友圈子背景更换 V
+31,隐私设置后,需要在聊天，附近圈子里面不展示用户的基本数据 V
+34,好友信息更新后需要同步更新到附近圈子和好友圈子中 V
+35,不同分辨率下的表情大小处理
+36,不同分辨率下的字体大小处理
+37,群组图片生成处理 V
+
+
+2018-05-24:
+android permissions: https://blog.csdn.net/elsdnwn/article/details/50037475
+屏幕适配: https://blog.csdn.net/xxf377376701/article/details/78925646
+Wechat font:http://www.zcool.com.cn/work/ZMTYzNjM2MTI=.html

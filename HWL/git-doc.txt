@@ -1,4 +1,0 @@
-//撤消最近一次commit
-git reset --soft HEAD^
-git reset --soft HEAD~1
-git reset --soft HEAD~2

@@ -1,0 +1,342 @@
+﻿android发送消息到mq中的group queue
+c#控制台监听mq中的group queue
+有消息进来，开启线程处理消息
+首先从redis里面取出组用户数据和组数量数据，拼接成queue name
+然后再调用mq,将消息发送到拼接的queue name
+
+redis中存储组用户的格式:
+db0:groupid usercount
+db1:groupid hset<userid>
+
+rabbitmq:hwl_group_queue
+
+1,先定义redis格式，并输入测试数据
+2，编写从redis里获取数据，和更新数据的处理程序
+3，定义mq中group_queue中消息的格式，并录入消息
+4，监听mq中指定的group_queue，并获取消息进行分析后分发到指定队列
+
+
+2018-02-08:
+添加好友成功后需要发送添加成共的消息
+好友接受到消息后需要将我的信息添加到自己本地的数据库中,并且还要添加一条聊天信息
+
+
+2018-02-22:
+1,表情发送 V
+2,图片发送 V
+3,语音发送 V
+4,视频发送 V
+5,附近圈子API V
+
+
+//语音：http://blog.csdn.net/lhk147852369/article/details/78658055
+public class AudioManager {  
+  
+    private MediaRecorder mMediaRecorder;  
+    private String mDir;  
+    private String mCurrentFilePath;  
+  
+    private static AudioManager mInstance;  
+  
+    private boolean isPrepared;  
+    public AudioManager(String dir){  
+        mDir = dir;  
+    };  
+  
+  
+  
+    /** 
+     * 回调准备完毕 
+     */  
+    public interface AudioStateListener {  
+        void wellPrepared();  
+    }  
+  
+    public AudioStateListener mListener;  
+  
+    public void setOnAudioStateListener(AudioStateListener listener){  
+        mListener = listener;  
+    }  
+  
+    public static AudioManager getInstance(String dir){  
+        if (mInstance == null) {  
+            synchronized (AudioManager.class) {  
+                if (mInstance == null) {  
+                    mInstance = new AudioManager(dir);  
+                }  
+            }  
+        }  
+        return mInstance;  
+    }  
+  
+  
+    /** 
+     * 准备 
+     */  
+    public void prepareAudio() {  
+        try {  
+            isPrepared = false;  
+            File dir = new File(mDir);  
+            if (!dir.exists()) {  
+                dir.mkdir();  
+            }  
+            String fileName = generateFileName();  
+  
+            File file = new File(dir, fileName);  
+  
+            mCurrentFilePath = file.getAbsolutePath();  
+  
+            mMediaRecorder = new MediaRecorder();  
+            //设置输出文件  
+            mMediaRecorder.setOutputFile(file.getAbsolutePath());  
+            //设置MediaRecorder的音频源为麦克风  
+            mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);  
+            //设置音频格式  
+            mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);  
+            //设置音频的格式为amr  
+            mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);  
+            mMediaRecorder.prepare();  
+            mMediaRecorder.start();  
+            //准备结束  
+            isPrepared = true;  
+            if (mListener != null) {  
+                mListener.wellPrepared();  
+            }  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+  
+//    生成UUID唯一标示符  
+//    算法的核心思想是结合机器的网卡、当地时间、一个随即数来生成GUID  
+//    .amr音频文件  
+    private String generateFileName() {  
+        return UUID.randomUUID().toString()+".amr";  
+    }  
+  
+    public int getVoiceLevel(int maxLevel) {  
+        if (isPrepared) {  
+            //获得最大的振幅getMaxAmplitude() 1-32767  
+            try {  
+                return maxLevel * mMediaRecorder.getMaxAmplitude()/32768+1;  
+            } catch (Exception e) {  
+  
+            }  
+        }  
+        return 1;  
+    }  
+  
+    public void release() {  
+        mMediaRecorder.stop();  
+        mMediaRecorder.release();  
+        mMediaRecorder = null;  
+    }  
+  
+    public void cancel(){  
+        release();  
+        if(mCurrentFilePath!=null) {  
+            File file = new File(mCurrentFilePath);  
+            file.delete();  
+            mCurrentFilePath = null;  
+        }  
+    }  
+    public String getCurrentFilePath() {  
+        return mCurrentFilePath;  
+    }  
+}  
+
+2018-03-15:
+1,Near IMP
+
+2018-04-08：
+http://www.cnblogs.com/dasusu/p/6745032.html
+/**
+ *
+ * Fragment基类，封装了懒加载的实现
+ *
+ * 1、Viewpager + Fragment情况下，fragment的生命周期因Viewpager的缓存机制而失去了具体意义
+ * 该抽象类自定义新的回调方法，当fragment可见状态改变时会触发的回调方法，和 Fragment 第一次可见时会回调的方法
+ *
+ * @see #onFragmentVisibleChange(boolean)
+ * @see #onFragmentFirstVisible()
+ */
+public abstract class BaseFragment extends Fragment {
+
+    private static final String TAG = BaseFragment.class.getSimpleName();
+
+    private boolean isFragmentVisible;
+    private boolean isReuseView;
+    private boolean isFirstVisible;
+    private View rootView;
+
+
+    //setUserVisibleHint()在Fragment创建时会先被调用一次，传入isVisibleToUser = false
+    //如果当前Fragment可见，那么setUserVisibleHint()会再次被调用一次，传入isVisibleToUser = true
+    //如果Fragment从可见->不可见，那么setUserVisibleHint()也会被调用，传入isVisibleToUser = false
+    //总结：setUserVisibleHint()除了Fragment的可见状态发生变化时会被回调外，在new Fragment()时也会被回调
+    //如果我们需要在 Fragment 可见与不可见时干点事，用这个的话就会有多余的回调了，那么就需要重新封装一个
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        //setUserVisibleHint()有可能在fragment的生命周期外被调用
+        if (rootView == null) {
+            return;
+        }
+        if (isFirstVisible && isVisibleToUser) {
+            onFragmentFirstVisible();
+            isFirstVisible = false;
+        }
+        if (isVisibleToUser) {
+            onFragmentVisibleChange(true);
+            isFragmentVisible = true;
+            return;
+        }
+        if (isFragmentVisible) {
+            isFragmentVisible = false;
+            onFragmentVisibleChange(false);
+        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initVariable();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        //如果setUserVisibleHint()在rootView创建前调用时，那么
+        //就等到rootView创建完后才回调onFragmentVisibleChange(true)
+        //保证onFragmentVisibleChange()的回调发生在rootView创建完成之后，以便支持ui操作
+        if (rootView == null) {
+            rootView = view;
+            if (getUserVisibleHint()) {
+                if (isFirstVisible) {
+                    onFragmentFirstVisible();
+                    isFirstVisible = false;
+                }
+                onFragmentVisibleChange(true);
+                isFragmentVisible = true;
+            }
+        }
+        super.onViewCreated(isReuseView ? rootView : view, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        initVariable();
+    }
+
+    private void initVariable() {
+        isFirstVisible = true;
+        isFragmentVisible = false;
+        rootView = null;
+        isReuseView = true;
+    }
+
+    /**
+     * 设置是否使用 view 的复用，默认开启
+     * view 的复用是指，ViewPager 在销毁和重建 Fragment 时会不断调用 onCreateView() -> onDestroyView() 
+     * 之间的生命函数，这样可能会出现重复创建 view 的情况，导致界面上显示多个相同的 Fragment
+     * view 的复用其实就是指保存第一次创建的 view，后面再 onCreateView() 时直接返回第一次创建的 view
+     *
+     * @param isReuse
+     */
+    protected void reuseView(boolean isReuse) {
+        isReuseView = isReuse;
+    }
+
+    /**
+     * 去除setUserVisibleHint()多余的回调场景，保证只有当fragment可见状态发生变化时才回调
+     * 回调时机在view创建完后，所以支持ui操作，解决在setUserVisibleHint()里进行ui操作有可能报null异常的问题
+     *
+     * 可在该回调方法里进行一些ui显示与隐藏，比如加载框的显示和隐藏
+     *
+     * @param isVisible true  不可见 -> 可见
+     *                  false 可见  -> 不可见
+     */
+    protected void onFragmentVisibleChange(boolean isVisible) {
+
+    }
+
+    /**
+     * 在fragment首次可见时回调，可在这里进行加载数据，保证只在第一次打开Fragment时才会加载数据，
+     * 这样就可以防止每次进入都重复加载数据
+     * 该方法会在 onFragmentVisibleChange() 之前调用，所以第一次打开时，可以用一个全局变量表示数据下载状态，
+     * 然后在该方法内将状态设置为下载状态，接着去执行下载的任务
+     * 最后在 onFragmentVisibleChange() 里根据数据下载状态来控制下载进度ui控件的显示与隐藏
+     */
+    protected void onFragmentFirstVisible() {
+
+    }
+
+    protected boolean isFragmentVisible() {
+        return isFragmentVisible;
+    }
+}
+
+
+public class CategoryFragment extends BaseFragment {
+    private static final String TAG = CategoryFragment.class.getSimpleName();
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_category, container, false);
+        initView(view);
+        return view;
+    }
+
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+        if (isVisible) {
+            //更新界面数据，如果数据还在下载中，就显示加载框
+            notifyDataSetChanged();
+            if (mRefreshState == STATE_REFRESHING) {
+                mRefreshListener.onRefreshing();
+            }
+        } else {
+            //关闭加载框
+            mRefreshListener.onRefreshFinish();
+        }
+    }
+
+    @Override
+    protected void onFragmentFirstVisible() {
+        //去服务器下载数据
+        mRefreshState = STATE_REFRESHING;
+        mCategoryController.loadBaseData();
+    }
+}
+
+2018-04-09:
+Recycler 上拉加载,下拉刷新 https://blog.csdn.net/mynameishuangshuai/article/details/51153978
+utils https://www.jianshu.com/p/72494773aace
+
+2018-04-16
+1. 引用如下命名空间：
+import java.util.Date;
+import android.text.format.DateFormat;
+2. 设置时间格式：
+
+SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+3. 获取时间：
+
+Date curDate = new Date(System.currentTimeMillis());
+//PROCESSING
+Date endDate = new Date(System.currentTimeMillis());
+long diff = endDate.getTime() - curDate.getTime();
+
+2018-04-18:
+开源资料 http://www.cnblogs.com/huolongluo/p/6607704.html
+2018-04-19:
+android gitignore : https://github.com/github/gitignore/blob/master/Android.gitignore
+
+2018-05-11: 
+icon制作 https://github.com/romannurik/AndroidAssetStudio

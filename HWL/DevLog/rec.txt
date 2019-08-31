@@ -1,0 +1,297 @@
+﻿1577592799@qq.com
+Nv-Wrj7tJR
+
+no identity specification:
+t_admin
+t_user
+t_user_code
+
+ redis3.2
+ https://github.com/MicrosoftArchive/redis/releases
+
+ android hx chat
+ http://blog.csdn.net/diyangxia/article/details/45393599
+
+
+ 每个用户只能有一个附近的组
+ 每个用户在进入应用会自动分配到附近的组里面
+ 附近的组，用户不能对里面的其他用户进行任何操作管理，也不能对组进行操作管理，只能对组里面的消息进行操作
+
+
+2018-01-16:
+android
+1,添加 user shareprefrences action v
+1,launcher 添加引导页 v
+2,引导页逻辑处理 v
+3,定位,用户当前位子信息获取
+4,activity管理 v
+5,activity跳转动画 v
+
+
+2018-01-19:
+1,加一个resxservice,用来处理资源上传
+
+
+2018-01-24:
+1,bigmap转为file
+2,图片压缩
+3,弹出加载窗口
+4,下载文件到指定文件夹（fresco图片缓存框架https://www.fresco-cn.org/）目前先用glide
+5,图片浏览（viewpager+photoview）https://github.com/chrisbanes/PhotoView
+标题栏显示和隐藏动画 https://www.cnblogs.com/liqw/p/4602876.html
+1.top_in.xml
+ <?xml version="1.0" encoding="utf-8"?>
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromYDelta="-100%"
+    android:toYDelta="0%"
+    android:duration="500">
+</translate>
+2.top_out.xml
+ <?xml version="1.0" encoding="utf-8"?>
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromYDelta="0%"
+    android:toYDelta="-100%"
+    android:duration="500">
+</translate>
+
+
+//相册图片排序
+// 得到一个游标Media.DATA_ADDED Media.DATA
+Cursor cur = cr.query(Media.EXTERNAL_CONTENT_URI, columns, null, null,Media.DATE_MODIFIED+" desc");
+
+可存储的路径获取说明：
+https://www.cnblogs.com/dongweiq/p/6593753.html
+http://blog.csdn.net/samuel__liu/article/details/50743106
+
+//http://blog.csdn.net/mchenys/article/details/51599039
+String url = "http://www.qq745.com/uploads/allimg/141106/1-141106153Q5.png";
+ImageView targetView = (ImageView) findViewById(R.id.iv_target);
+Glide.with(this).
+        load(url).
+        asBitmap(). //强制处理为bitmap
+        into(targetView);//显示到目标View中
+
+File file = new File(Environment.getExternalStorageDirectory(), "test.jpg");
+ImageView targetView = (ImageView) findViewById(R.id.iv_target);
+Glide.with(this).
+        load(file).
+        asBitmap().
+        into(targetView);
+
+Uri uri = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.drawable.test);
+ImageView targetView = (ImageView) findViewById(R.id.iv_target);
+Glide.with(this).
+        load(uri).
+        asBitmap().
+        into(targetView);
+
+//加载gif图片
+ImageView targetView = (ImageView) findViewById(R.id.iv_target);
+Glide.with(this).
+        load(R.drawable.smail).
+        asGif().//注意:这里显示的指明了要加载的是gif图片,当然即使不指明,glide也会自己判断.
+        into(targetView);
+
+//设置默认图片和加载失败时显示的图片
+Glide.with(this).
+        load(R.drawable.test).
+        asBitmap().
+        placeholder(R.drawable.bg_loading).//加载中显示的图片
+        error(R.drawable.bg_error).//加载失败时显示的图片
+        into(targetView);
+
+//crossFade().//淡入显示,注意:如果设置了这个,则必须要去掉asBitmap
+ Glide.with(this).
+        load(R.drawable.test).
+        placeholder(R.drawable.bg_loading).//加载中显示的图片
+        error(R.drawable.bg_error).//加载失败时显示的图片
+        crossFade(1000).//淡入显示的时间,注意:如果设置了这个,则必须要去掉asBitmap
+        override(80,80).//设置最终显示的图片像素为80*80,注意:这个是像素,而不是控件的宽高
+        into(targetView);
+
+//内存缓存设置,通过skipMemoryCache(boolean)来设置是否需要缓存到内存,默认是会缓存到内存的.
+Glide.with(this).
+        load(R.drawable.test).
+        placeholder(R.drawable.bg_loading).//加载中显示的图片
+        error(R.drawable.bg_error).//加载失败时显示的图片
+        crossFade(1000).//淡入淡出,注意:如果设置了这个,则必须要去掉asBitmap
+        override(80,80).//设置最终显示的图片像素为80*80,注意:这个是像素,而不是控件的宽高
+        centerCrop().//中心裁剪,缩放填充至整个ImageView
+        skipMemoryCache(true).//跳过内存缓存
+        into(targetView);
+
+//磁盘缓存,磁盘缓存通过diskCacheStrategy(DiskCacheStrategy)来设置,
+DiskCacheStrategy一共有4种模式:
+DiskCacheStrategy.NONE:什么都不缓存 
+DiskCacheStrategy.SOURCE:仅缓存原图(全分辨率的图片)
+DiskCacheStrategy.RESULT:仅缓存最终的图片,即修改了尺寸或者转换后的图片
+DiskCacheStrategy.ALL:缓存所有版本的图片,默认模式
+
+Glide.with(this).
+        load(R.drawable.test).
+        placeholder(R.drawable.bg_loading).//加载中显示的图片
+        error(R.drawable.bg_error).//加载失败时显示的图片
+        crossFade(1000).//淡入淡出,注意:如果设置了这个,则必须要去掉asBitmap
+        override(80, 80).//设置最终显示的图片像素为80*80,注意:这个是像素,而不是控件的宽高
+        centerCrop().//中心裁剪,缩放填充至整个ImageView
+        skipMemoryCache(true).//跳过内存缓存
+        diskCacheStrategy(DiskCacheStrategy.RESULT).//保存最终图片
+        into(targetView);
+
+//Glide获取已经缓存过的图片，并存储到指定的位置
+private class getImageCacheAsyncTask extends AsyncTask<String, Void, File> {  
+        private final Context context;  
+  
+        public getImageCacheAsyncTask(Context context) {  
+            this.context = context;  
+        }  
+  
+        @Override  
+        protected File doInBackground(String... params) {  
+            String imgUrl =  params[0];  
+            try {  
+                return Glide.with(context)  
+                        .load(imgUrl)  
+                        .downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)  
+                        .get();  
+            } catch (Exception ex) {  
+                return null;  
+            }  
+        }  
+  
+        @Override  
+        protected void onPostExecute(File result) {  
+            if (result == null) {  
+                return;  
+            }  
+            //这里得到的就是我们要的文件了，接下来是保存文件。  
+            File target = new File(filepath);//filepath是目标保存文件的路径，根据自己的项目需要去配置  
+            //最后一步就是复制文件咯  
+            FileUtil.copy(result,target);  
+        }  
+    }  
+
+//指定Glide缓存目录
+public class GlideCache implements GlideModule {
+
+	@Override
+	public void applyOptions(Context context, GlideBuilder builder) {
+        
+		//设置磁盘缓存目录（和创建的缓存目录相同）
+		File storageDirectory = Environment.getExternalStorageDirectory();
+		String downloadDirectoryPath=storageDirectory+"/GlideCache";
+		//设置缓存的大小为100M
+		int cacheSize = 100*1000*1000;        
+		builder.setDiskCache(new DiskLruCacheFactory(downloadDirectoryPath, cacheSize));    
+	}    
+		
+	@Override    
+	public void registerComponents(Context context, Glide glide) {}
+}
+
+2：在AndroidManifest中配置GlideCache，
+<meta-data android:name="包名.GlideCache" android:value="GlideCache"/>
+
+
+/** 
+ * 复制文件 
+ * 
+ * @param source 输入文件 
+ * @param target 输出文件 
+ */  
+public static void copy(File source, File target) {  
+    FileInputStream fileInputStream = null;  
+    FileOutputStream fileOutputStream = null;  
+    try {  
+        fileInputStream = new FileInputStream(source);  
+        fileOutputStream = new FileOutputStream(target);  
+        byte[] buffer = new byte[1024];  
+        while (fileInputStream.read(buffer) > 0) {  
+            fileOutputStream.write(buffer);  
+        }  
+    } catch (Exception e) {  
+        e.printStackTrace();  
+    } finally {  
+        closeStream(fileInputStream);  
+        closeStream(fileOutputStream);  
+    }  
+}  
+
+
+Environment 常用方法： 
+
+* 方法：getDataDirectory()
+解释：返回 File ，获取 Android 数据目录。
+* 方法：getDownloadCacheDirectory()
+解释：返回 File ，获取 Android 下载/缓存内容目录。
+* 方法：getExternalStorageDirectory()
+解释：返回 File ，获取外部存储目录即 SDCard
+* 方法：getExternalStoragePublicDirectory(String type)
+解释：返回 File ，取一个高端的公用的外部存储器目录来摆放某些类型的文件
+* 方法：getExternalStorageState()
+解释：返回 File ，获取外部存储设备的当前状态
+* 方法：getRootDirectory()
+解释：返回 File ，获取 Android 的根目录
+
+public void getSDPath(){ 
+File sdDir = null; 
+File sdDir1 = null;
+File sdDir2 = null;
+boolean sdCardExist = Environment.getExternalStorageState() 
+.equals(android.os.Environment.MEDIA_MOUNTED); //判断sd卡是否存在 
+if (sdCardExist) 
+{ 
+sdDir = Environment.getExternalStorageDirectory();//获取跟目录 
+sdDir1 = Environment.getDataDirectory();
+sdDir2 =Environment.getRootDirectory();
+} 
+System.out.println("getExternalStorageDirectory(): "+sdDir.toString()); 
+System.out.println("getDataDirectory(): "+sdDir1.toString()); 
+System.out.println("getRootDirectory(): "+sdDir2.toString()); 
+} 
+
+通过Context.getExternalFilesDir()方法可以获取到 SDCard/Android/data/你的应用的包名/files/ 目录，一般放一些长时间保存的数据
+
+通过Context.getExternalCacheDir()方法可以获取到SDCard/Android/data/你的应用包名/cache/目录，一般存放临时缓存数据
+如果使用上面的方法，当你的应用在被用户卸载后，SDCard/Android/data/你的应用的包名/ 这个目录下的所有文件都会被删除，不会留下垃圾信息。
+Environment.getDataDirectory() = /data
+Environment.getDownloadCacheDirectory() = /cache
+Environment.getExternalStorageDirectory() = /mnt/sdcard
+Environment.getExternalStoragePublicDirectory(“test”) = /mnt/sdcard/test
+Environment.getRootDirectory() = /system
+getPackageCodePath() = /data/app/com.my.app-1.apk
+getPackageResourcePath() = /data/app/com.my.app-1.apk
+getCacheDir() = /data/data/com.my.app/cache
+getDatabasePath(“test”) = /data/data/com.my.app/databases/test
+getDir(“test”, Context.MODE_PRIVATE) = /data/data/com.my.app/app_test
+getExternalCacheDir() = /mnt/sdcard/Android/data/com.my.app/cache
+getExternalFilesDir(“test”) = /mnt/sdcard/Android/data/com.my.app/files/test
+getExternalFilesDir(null) = /mnt/sdcard/Android/data/com.my.app/files
+getFilesDir() = /data/data/com.my.app/files
+public class GlideCache implements GlideModule {
+
+    @Override
+    public void applyOptions(Context context, GlideBuilder builder) {
+        
+        //设置磁盘缓存目录（和创建的缓存目录相同）
+        File storageDirectory = Environment.getExternalStorageDirectory();
+        String downloadDirectoryPath=storageDirectory+"/GlideCache";
+		//设置缓存的大小为100M
+        int cacheSize = 100*1000*1000;        
+		builder.setDiskCache(new DiskLruCacheFactory(downloadDirectoryPath, cacheSize));    
+	}    
+		
+		@Override    
+		public void registerComponents(Context context, Glide glide) {}
+}
+2：在AndroidManifest中配置GlideCache，
+<meta-data android:name="包名.GlideCache" android:value="GlideCache"/>
+
+2018-01-26:
+1,推送
+mqtt:http://www.cnblogs.com/yinyi521/p/6084029.html
+http://blog.csdn.net/clh604/article/details/20167263
+
+
+2018-02-05：
+后面再项目中应用rxjava https://github.com/rengwuxian/RxJavaSamples

@@ -22,13 +22,21 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWL.Tools", "HWL.Tools\HWL.Tools.csproj", "{D2F9D812-9CD8-4A71-BD4E-B6FA8B448EA5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9CC7B349-62E0-43A3-9BAF-BF3B2E9AFFF4}"
-	ProjectSection(SolutionItems) = preProject
-		ef-doc.txt = ef-doc.txt
-		git-doc.txt = git-doc.txt
-		GMSF.dll = GMSF.dll
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manage", "Manage", "{F0666E9E-50A6-42C8-81D4-859BA7EB6ABF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWL.Resx", "HWL.Resx\HWL.Resx.csproj", "{ECEADAB4-C325-4D1A-9D1C-6BC0A60C7520}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevLog", "DevLog", "{1ECF5749-8535-42D3-B15E-CEEC29BF8865}"
+	ProjectSection(SolutionItems) = preProject
+		DevLog\chat.txt = DevLog\chat.txt
+		DevLog\ef-doc.txt = DevLog\ef-doc.txt
+		DevLog\firstend.txt = DevLog\firstend.txt
+		DevLog\git-doc.txt = DevLog\git-doc.txt
+		DevLog\GMSF.dll = DevLog\GMSF.dll
+		DevLog\rec.txt = DevLog\rec.txt
+		DevLog\secondend.txt = DevLog\secondend.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +80,10 @@ Global
 		{D2F9D812-9CD8-4A71-BD4E-B6FA8B448EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2F9D812-9CD8-4A71-BD4E-B6FA8B448EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2F9D812-9CD8-4A71-BD4E-B6FA8B448EA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECEADAB4-C325-4D1A-9D1C-6BC0A60C7520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECEADAB4-C325-4D1A-9D1C-6BC0A60C7520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECEADAB4-C325-4D1A-9D1C-6BC0A60C7520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECEADAB4-C325-4D1A-9D1C-6BC0A60C7520}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
