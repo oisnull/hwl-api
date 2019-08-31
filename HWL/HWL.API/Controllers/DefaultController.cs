@@ -28,7 +28,7 @@ namespace HWL.API.Controllers
 
         [HttpPost]
         [Description("用户登陆")]
-        public Response<UserLoginResponseBody> UserLogin([FromForm] Request<UserLoginRequestBody> request)
+        public Response<UserLoginResponseBody> UserLogin(Request<UserLoginRequestBody> request)
         {
             return UserService.UserLogin(dbContext, request);
         }

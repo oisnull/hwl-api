@@ -30,11 +30,12 @@
                 }
                 console.log(JSON.stringify(jsonObj));
                 $("#div_result").html("<font color='blue'>Working on it...</font>");
-                $(this).ajaxSubmit({
+                $.ajax({
                     type: "post",
-                    dataType: "json",
+                    //dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
                     url: document.getElementById('txt_url').value,
-                    data: jsonObj,
+                    data: JSON.stringify(jsonObj),
                     success: function (data) {
                         isAction = false;
                         $("#div_result").html("");
