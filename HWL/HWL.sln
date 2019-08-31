@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWL.IMClient", "HWL.IMClien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWL.IMClientTest", "HWL.IMClientTest\HWL.IMClientTest.csproj", "{C0F913FB-4AAE-4CA1-ABDF-DD82AF5DDD05}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HWL.DBScript", "HWL.DBScript\HWL.DBScript.sqlproj", "{777E1E08-8726-4575-A718-2E203F4BC4D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,12 @@ Global
 		{C0F913FB-4AAE-4CA1-ABDF-DD82AF5DDD05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0F913FB-4AAE-4CA1-ABDF-DD82AF5DDD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0F913FB-4AAE-4CA1-ABDF-DD82AF5DDD05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{777E1E08-8726-4575-A718-2E203F4BC4D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{777E1E08-8726-4575-A718-2E203F4BC4D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{777E1E08-8726-4575-A718-2E203F4BC4D0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{777E1E08-8726-4575-A718-2E203F4BC4D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{777E1E08-8726-4575-A718-2E203F4BC4D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{777E1E08-8726-4575-A718-2E203F4BC4D0}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
