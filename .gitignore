@@ -29,3 +29,9 @@
 /HWL/HWL.Manage/wwwroot/upload
 /HWL/HWL.Resx/bin
 /HWL/HWL.Resx/obj
+/HWL/HWL.IMClient/bin
+/HWL/HWL.IMClient/obj
+/HWL/HWL.IMCore/bin
+/HWL/HWL.IMCore/obj
+/HWL/HWL.IMClientTest/bin
+/HWL/HWL.IMClientTest/obj

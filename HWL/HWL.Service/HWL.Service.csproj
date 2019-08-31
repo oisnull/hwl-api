@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <Reference Include="GMSF">
-      <HintPath>..\GMSF.dll</HintPath>
+      <HintPath>..\DevLog\GMSF.dll</HintPath>
     </Reference>
   </ItemGroup>
 
