@@ -1,6 +1,7 @@
 ﻿using HWL.Entity.Models;
 using HWL.H5.Models;
 using HWL.Manage.Service;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,12 @@ namespace HWL.H5.Controllers
     public class HomeController : Controller
     {
         private HWLEntities dbContext;
+        private IHostingEnvironment hostingEnvironment;
 
-        public HomeController(HWLEntities dbContext)
+        public HomeController(HWLEntities dbContext, IHostingEnvironment hostingEnvironment)
         {
             this.dbContext = dbContext;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         // GET: Home
@@ -32,8 +35,8 @@ namespace HWL.H5.Controllers
 
         public ActionResult QRShare()
         {
-            string url = "http://" + Request.Path.Value + "/home/shareapp";
-            QRCodeBuild.CreateQR(url);
+            string url = string.Format("{0}://{1}/home/shareapp", Request.Scheme, Request.Host.Value);
+            QRCodeBuild.CreateQR(url, hostingEnvironment.WebRootPath);
             return View();
         }
 

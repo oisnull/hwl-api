@@ -24,6 +24,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9CC7B349-62E0-43A3-9BAF-BF3B2E9AFFF4}"
 	ProjectSection(SolutionItems) = preProject
 		ef-doc.txt = ef-doc.txt
+		git-doc.txt = git-doc.txt
 		GMSF.dll = GMSF.dll
 	EndProjectSection
 EndProject
