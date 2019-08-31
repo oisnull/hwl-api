@@ -95,8 +95,8 @@ namespace HWL.Service.User.Service
                 register_date = DateTime.Now,
                 update_date = DateTime.Now,
                 name = "HWL-" + RandomText.GetNum(),
-                head_image = ApiConfigManager.UserDefaultHeadImage,
-                circle_back_image = ApiConfigManager.UserCircleBackImage,
+                head_image = AppConfigManager.UserDefaultHeadImage,
+                circle_back_image = AppConfigManager.UserCircleBackImage,
             };
             db.t_user.Add(model);
             db.SaveChanges();

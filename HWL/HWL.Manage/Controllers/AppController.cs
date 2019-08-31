@@ -1,7 +1,9 @@
 ﻿using HWL.Entity.Extends;
 using HWL.Entity.Models;
 using HWL.Manage.Service;
+using HWL.ShareConfig;
 using HWL.Tools;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,10 +16,12 @@ namespace HWL.Manage.Controllers
     {
         private HWLEntities dbContext;
         private AppService appService;
+        private IHostingEnvironment hostingEnvironment;
 
-        public AppController(HWLEntities dbContext)
+        public AppController(HWLEntities dbContext, IHostingEnvironment hostingEnvironment)
         {
             this.dbContext = dbContext;
+            this.hostingEnvironment = hostingEnvironment;
             this.appService = new AppService(dbContext);
         }
 
@@ -59,11 +63,16 @@ namespace HWL.Manage.Controllers
 
             //apk文件上传处理
             //file_apk
-            //var paths = UpfileHandler.Process(Request.Files, "apkversion", out error);
-            //if (paths != null && paths.Count > 0)
-            //{
-            //    model.DownloadUrl = paths.FirstOrDefault();
-            //}
+            string folder = string.Format("{0}/{1}apkversion", hostingEnvironment.WebRootPath, AppConfigManager.UploadDirectory);
+            var paths = UpfileHandler.Process(Request.Form.Files, folder, out error);
+            if (paths != null && paths.Count > 0)
+            {
+                model.DownloadUrl = string.Format("{0}{1}{2}", AppConfigManager.FileAccessUrl, AppConfigManager.UploadDirectory, paths.FirstOrDefault());
+            }
+            else
+            {
+                return Json(new { state = -1, error = error });
+            }
 
             int result = appService.AppVersionAction(model, out error);
             if (result > 0)

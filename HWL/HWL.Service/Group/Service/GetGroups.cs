@@ -71,7 +71,7 @@ namespace HWL.Service.Group.Service
                     BuildDate = GenericUtility.FormatDate2(f.build_date),
                     UpdateDate = GenericUtility.FormatDate2(f.update_date),
                 };
-                info.GroupUserImages = info.GroupUsers.Select(u => u.UserHeadImage).Take(ApiConfigManager.GROUP_USER_IMAGE_COUNT).ToList();
+                info.GroupUserImages = info.GroupUsers.Select(u => u.UserHeadImage).Take(AppConfigManager.GROUP_USER_IMAGE_COUNT).ToList();
 
                 if (info.GroupUsers == null || info.GroupUsers.Count <= 0)
                 {

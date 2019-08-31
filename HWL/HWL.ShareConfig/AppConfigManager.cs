@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HWL.ShareConfig
 {
-    public class ApiConfigManager : ShareConfiguration
+    public class AppConfigManager : ShareConfiguration
     {
         /// <summary>
         /// 用户登录过期时间设置,按天算,指在当前时间往后加的天数

@@ -89,7 +89,7 @@ namespace HWL.Service.User
                 code = code,
                 code_type = codeType,
                 create_date = currTime,
-                expire_time = currTime.AddSeconds(ApiConfigManager.UserCodeExpireSecond),
+                expire_time = currTime.AddSeconds(AppConfigManager.UserCodeExpireSecond),
                 remark = remark,
                 user_id = userId,
                 user_account = userAccount,

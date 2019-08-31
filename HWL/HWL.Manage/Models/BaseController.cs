@@ -1,4 +1,5 @@
 ﻿using HWL.Entity.Extends;
+using HWL.Manage.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -52,14 +53,14 @@ namespace HWL.Manage
 
                 if (currentAdmin == null)
                 {
-                    //if (filterContext.HttpContext.Request.IsAjaxRequest())
-                    //{
-                    //    HttpResponse response = filterContext.HttpContext.Response;
-                    //    response.Headers.Add("sessionstatus", "timeout");
-                    //    response.WriteAsync("<script>TimeoutError();</script>").ConfigureAwait(false);
-                    //}
-                    //else
-                    filterContext.Result = RedirectToRoute("Default", new { Controller = "Home", Action = "Login" });
+                    if (filterContext.HttpContext.Request.IsAjaxRequest())
+                    {
+                        HttpResponse response = filterContext.HttpContext.Response;
+                        response.Headers.Add("sessionstatus", "timeout");
+                        response.WriteAsync("<script>TimeoutError();</script>").ConfigureAwait(false);
+                    }
+                    else
+                        filterContext.Result = RedirectToRoute("Default", new { Controller = "Home", Action = "Login" });
                 }
             }
 

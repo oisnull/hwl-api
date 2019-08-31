@@ -46,7 +46,7 @@ namespace HWL.Service.User.Service
             }
 
             int myFriendCount = db.t_user_friend.Where(u => u.user_id == this.request.MyUserId).Count();//获取我的好友数量
-            if (myFriendCount >= ApiConfigManager.UserAddFriendTotalCount)
+            if (myFriendCount >= AppConfigManager.UserAddFriendTotalCount)
             {
                 throw new Exception("您添加的好友达到上限,请清理后再添加");
             }
@@ -54,18 +54,18 @@ namespace HWL.Service.User.Service
             DateTime start = DateTime.Now.Date;
             DateTime end = DateTime.Now.AddDays(1).Date;
             int myFriendDayCount = db.t_user_friend.Where(u => u.user_id == this.request.MyUserId && u.add_time > start && u.add_time < end).Count();//获取我今天添加的好友数量
-            if (myFriendDayCount >= ApiConfigManager.UserAddFriendDayCount)
+            if (myFriendDayCount >= AppConfigManager.UserAddFriendDayCount)
             {
                 throw new Exception("您今天添加的好友已经达到上限");
             }
 
             var userFriendCount = db.t_user_friend.Where(u => u.user_id == this.request.FriendUserId).Count();//获取添加用户的好友数量
-            if (userFriendCount >= ApiConfigManager.UserAddFriendTotalCount)
+            if (userFriendCount >= AppConfigManager.UserAddFriendTotalCount)
             {
                 throw new Exception("您添加的用户所拥有的好友数量达到上限");
             }
             int userFriendDayCount = db.t_user_friend.Where(u => u.user_id == this.request.FriendUserId && u.add_time > start && u.add_time < end).Count();//获取用户今天添加的好友数量
-            if (userFriendDayCount >= ApiConfigManager.UserAddFriendDayCount)
+            if (userFriendDayCount >= AppConfigManager.UserAddFriendDayCount)
             {
                 throw new Exception("今天添加的好友已经达到上限,请您明天再试");
             }
