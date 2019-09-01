@@ -1,5 +1,6 @@
 ﻿using GMSF.Model;
 using HWL.Service;
+using HWL.Tools.Resx;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -40,17 +41,17 @@ namespace HWL.Resx.Models
             return new Tuple<bool, int>(succ, userid);
         }
 
-        //protected Response<ResxResult> GetResult(string resultCode, string message, ResxResult body = null)
-        //{
-        //    Response<ResxResult> response = new Response<ResxResult>();
-        //    response.Head = new GMSF.HeadDefine.ResponseHead()
-        //    {
-        //        ResultCode = resultCode,
-        //        ResultMessage = message
-        //    };
-        //    response.Body = body;
+        protected Response<ResxResult> GetResult(string resultCode, string message, ResxResult body = null)
+        {
+            Response<ResxResult> response = new Response<ResxResult>();
+            response.Head = new GMSF.HeadDefine.ResponseHead()
+            {
+                ResultCode = resultCode,
+                ResultMessage = message
+            };
+            response.Body = body;
 
-        //    return response;
-        //}
+            return response;
+        }
     }
 }

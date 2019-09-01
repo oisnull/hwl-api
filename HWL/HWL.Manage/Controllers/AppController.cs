@@ -3,10 +3,12 @@ using HWL.Entity.Models;
 using HWL.Manage.Service;
 using HWL.ShareConfig;
 using HWL.Tools;
+using HWL.Tools.Resx;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -59,29 +61,31 @@ namespace HWL.Manage.Controllers
         [HttpPost]
         public ActionResult Action(AppExt model)
         {
-            string error;
+            string partialPath = string.Format("{0}apkversion", AppConfigManager.UploadDirectory);
 
-            //apk文件上传处理
-            //file_apk
-            string folder = string.Format("{0}/{1}apkversion", hostingEnvironment.WebRootPath, AppConfigManager.UploadDirectory);
-            var paths = UpfileHandler.Process(Request.Form.Files, folder, out error);
-            if (paths != null && paths.Count > 0)
+            ResxHandler resx = new ResxHandler();
+            resx.ResxTypes = new List<string>() { ".apk" };
+            resx.SaveLocalDirectory = string.Format("{0}{1}", hostingEnvironment.WebRootPath, partialPath);
+            resx.AccessUrl = string.Format("{0}{1}", AppConfigManager.FileAccessUrl, partialPath);
+            ResxResult result = resx.Upload(Request.Form.Files.FirstOrDefault());
+
+            if (result.Success)
             {
-                model.DownloadUrl = string.Format("{0}{1}{2}", AppConfigManager.FileAccessUrl, AppConfigManager.UploadDirectory, paths.FirstOrDefault());
+                string error;
+                model.DownloadUrl = result.ResxAccessUrl;
+                int ret = appService.AppVersionAction(model, out error);
+                if (ret > 0)
+                {
+                    return Json(new { state = 1 });
+                }
+                else
+                {
+                    return Json(new { state = -1, error });
+                }
             }
             else
             {
-                return Json(new { state = -1, error = error });
-            }
-
-            int result = appService.AppVersionAction(model, out error);
-            if (result > 0)
-            {
-                return Json(new { state = 1 });
-            }
-            else
-            {
-                return Json(new { state = -1, error = error });
+                return Json(new { state = -1, error = result.Message });
             }
         }
     }

@@ -58,7 +58,10 @@
                         <p style="margin:10px;">
                             <input type="submit" class="btn btn-submit btn-primary" style="width:100px;margin-left: 0px;margin-right:10px;" value="发 布">
                             <a class="btn btn-default" style="width:100px;margin-left: 10px;margin-right:10px;" href="/App/List?page=0" id="a_return" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true">返 回</a>
-                            <a style="vertical-align:bottom;" href="javascript:;" id="a_del_art">删除</a>
+                            @if (Model.Id > 0)
+                            {
+                                <a style="vertical-align:bottom;" href="javascript:;" id="a_del_art">删除</a>
+                            }
 
                             <span id="span_info" style="margin-left:10px;"></span>
                         </p>

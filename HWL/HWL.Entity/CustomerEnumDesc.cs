@@ -57,32 +57,39 @@ namespace HWL.Entity
             switch (resxType)
             {
                 case ResxType.UserHeadImage:
-                    path = string.Format("user-head/{0}/", DateTime.Now.ToString("yyyy"));
+                    path = string.Format("user-head/{0}", DateTime.Now.ToString("yyyy"));
                     break;
                 case ResxType.ChatImage:
-                    path = string.Format("chat-image/{0}/{1}/", DateTime.Now.ToString("yyyyMMdd"), userId);
+                    path = string.Format("chat-image/{0}/{1}", DateTime.Now.ToString("yyyyMMdd"), userId);
                     break;
                 case ResxType.ChatSound:
-                    path = string.Format("chat-sound/{0}/{1}/", DateTime.Now.ToString("yyyyMMdd"), userId);
+                    path = string.Format("chat-sound/{0}/{1}", DateTime.Now.ToString("yyyyMMdd"), userId);
                     break;
                 case ResxType.ChatVideo:
-                    path = string.Format("chat-video/{0}/{1}/", DateTime.Now.ToString("yyyyMMdd"), userId);
+                    path = string.Format("chat-video/{0}/{1}", DateTime.Now.ToString("yyyyMMdd"), userId);
                     break;
                 case ResxType.CircleBackImage:
-                    path = string.Format("circle-back-image/{0}/", DateTime.Now.ToString("yyyy"));
+                    path = string.Format("circle-back-image/{0}", DateTime.Now.ToString("yyyy"));
                     break;
                 case ResxType.NearCirclePostImage:
-                    path = string.Format("circle-near-post/{0}/{1}/", DateTime.Now.ToString("yyyyMMdd"), userId);
+                    path = string.Format("circle-near-post/{0}/{1}", DateTime.Now.ToString("yyyyMMdd"), userId);
                     break;
                 case ResxType.FriendCirclePostImage:
-                    path = string.Format("circle-user-post/{0}/{1}/", DateTime.Now.ToString("yyyyMMdd"), userId);
+                    path = string.Format("circle-user-post/{0}/{1}", DateTime.Now.ToString("yyyyMMdd"), userId);
                     break;
                 case ResxType.Other:
                 default:
-                    path = string.Format("other/{0}/{1}/", DateTime.Now.ToString("yyyyMMdd"), userId);
+                    path = string.Format("other/{0}/{1}", DateTime.Now.ToString("yyyyMMdd"), userId);
                     break;
             }
             return path;
+        }
+
+        public static bool IsTumbnail(ResxType resxType)
+        {
+            return resxType == ResxType.ChatImage ||
+                resxType == ResxType.FriendCirclePostImage ||
+                resxType == ResxType.NearCirclePostImage;
         }
 
         public static List<CircleContentType> ImageContentTypes()

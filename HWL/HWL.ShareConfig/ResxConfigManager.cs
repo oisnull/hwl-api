@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
 
 namespace HWL.ShareConfig
 {
@@ -35,21 +36,21 @@ namespace HWL.ShareConfig
         /// <summary>
         /// 定义图片允许上传的文件扩展名
         /// </summary>
-        public readonly static string[] IMAGE_FILE_TYPES = { ".gif", ".jpg", ".jpeg", ".png", ".bmp" };
+        public readonly static List<string> IMAGE_FILE_TYPES = new List<string>() { ".gif", ".jpg", ".jpeg", ".png", ".bmp" };
         public readonly static int IMAGE_MAX_SIZE = 1 * 1024 * 1024;//默认1M
 
         /// <summary>
         /// 定义语音允许上传的文件扩展名
         /// </summary>
-        public readonly static string[] SOUND_FILE_TYPES = { ".amr" };
-        public readonly static int SOUND_MAX_SIZE = 2 * 1024 * 1024;//默认2M
+        public readonly static List<string> SOUND_FILE_TYPES = new List<string>() { ".amr" };
+        public readonly static int SOUND_MAX_SIZE = 5 * 1024 * 1024;//默认5M
         public readonly static int SOUND_MAX_TIME = 60;//默认60s
 
         /// <summary>
         /// 定义视频允许上传的文件扩展名
         /// </summary>
-        public readonly static string[] VIDEO_FILE_TYPES = { ".mp4", ".tmp" };
-        //public readonly static int VIDEO_MAX_SIZE = 20 * 1024 * 1024;//默认20M
-        public readonly static int VIDEO_MAX_SIZE = 700 * 1024;//默认600K
+        public readonly static List<string> VIDEO_FILE_TYPES = new List<string>() { ".mp4", ".tmp" };
+        public readonly static int VIDEO_MAX_SIZE = 20 * 1024 * 1024;//默认20M
+        //public readonly static int VIDEO_MAX_SIZE = 700 * 1024;//默认600K
     }
 }

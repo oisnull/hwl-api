@@ -5,6 +5,8 @@ using System.Web.Http;
 
 namespace HWL.Resx.Controllers
 {
+    [Route("[controller]/[action]")]
+    [ApiController]
     public class HomeController : ControllerBase
     {
         [HttpGet]
