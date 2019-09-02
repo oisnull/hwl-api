@@ -28,8 +28,6 @@ namespace HWL.Tools.Resx
 
         public ImageHandler()
         {
-            //base.ResxTypes = new List<string>() { ".gif", ".jpg", ".jpeg", ".png", ".bmp" };
-            //base.ResxSize = 5 * 1024 * 1024;
         }
 
         private void BuildThumbnailPath()

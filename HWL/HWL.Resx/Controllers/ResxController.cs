@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using GMSF.Model;
 using HWL.Entity;
 using HWL.Resx.Models;
+using HWL.Service;
+using HWL.Service.Resx.Body;
 using HWL.ShareConfig;
 using HWL.Tools.Resx;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HWL.Resx.Controllers
@@ -17,62 +21,65 @@ namespace HWL.Resx.Controllers
     [ApiController]
     public class ResxController : BaseApiController
     {
-        private IHostingEnvironment hostingEnvironment;
+        //private IHostingEnvironment hostingEnvironment;
 
-        public ResxController(IHostingEnvironment hostingEnvironment)
+        //public ResxController(IHostingEnvironment hostingEnvironment)
+        //{
+        //    this.hostingEnvironment = hostingEnvironment;
+        //}
+
+        [HttpPost]
+        [Description("Resx upload handle")]
+        public Response<ResxUploadResponseBody> ResxUpload([FromForm]List<IFormFile> files, int userId, string token)
         {
-            this.hostingEnvironment = hostingEnvironment;
+            Request<ResxUploadRequestBody> request = base.GetDefaultRequest(token, new ResxUploadRequestBody()
+            {
+                File = files.FirstOrDefault(),
+                ResxType = ResxType.Other,
+                UserId = userId
+            });
+            return ResxService.ResxUpload(request);
         }
 
-        public Response<ResxResult> Image([FromForm]string token = null, [FromForm] ResxType resxType = ResxType.Other)
+        [HttpPost]
+        [Description("Image upload handle")]
+        public Response<ImageUploadResponseBody> ImageUpload([FromForm]List<IFormFile> files, int userId, string token, ResxType resxType = ResxType.Other)
         {
-            var ret = this.CheckToken(token);
-            if (!ret.Item1)
+            Request<ImageUploadRequestBody> request = base.GetDefaultRequest(token, new ImageUploadRequestBody()
             {
-                return GetResult(GMSF.ResponseResult.FAILED, "TOKEN 验证失败");
-            }
-
-            string partialPath = string.Format("{0}{1}", AppConfigManager.UploadDirectory, CustomerEnumDesc.GetResxTypePath(resxType, ret.Item2));
-            ImageHandler resx = new ImageHandler
-            {
-                ResxTypes = ResxConfigManager.IMAGE_FILE_TYPES,
-                ResxSize = ResxConfigManager.IMAGE_MAX_SIZE,
-                IsThumbnail = CustomerEnumDesc.IsTumbnail(resxType),
-                SaveLocalDirectory = string.Format("{0}{1}", hostingEnvironment.WebRootPath, partialPath),
-                AccessUrl = string.Format("{0}{1}", ResxConfigManager.FileAccessUrl, partialPath)
-            };
-            ResxResult result = resx.Upload(Request.Form.Files.FirstOrDefault());
-            var res = GetResult(GMSF.ResponseResult.SUCCESS, null, result);
-            //log.WriterLog(Newtonsoft.Json.JsonConvert.SerializeObject(res));
-            return res;
+                File = files.FirstOrDefault(),
+                ResxType = resxType,
+                UserId = userId
+            });
+            return ResxService.ImageUpload(request);
         }
 
-        public Response<ResxResult> Audio(string token = null)
+        [HttpPost]
+        [Description("Audio upload handle")]
+        public Response<AudioUploadResponseBody> AudioUpload([FromForm]List<IFormFile> files, int userId, string token, ResxType resxType = ResxType.Other)
         {
-            var ret = this.CheckToken(token);
-            if (!ret.Item1)
+            Request<AudioUploadRequestBody> request = base.GetDefaultRequest(token, new AudioUploadRequestBody()
             {
-                return GetResult(GMSF.ResponseResult.FAILED, "TOKEN 验证失败");
-            }
-
-            string partialPath = string.Format("{0}{1}", AppConfigManager.UploadDirectory, CustomerEnumDesc.GetResxTypePath(ResxType.ChatSound, ret.Item2));
-            ResxHandler resx = new ResxHandler
-            {
-                ResxTypes = ResxConfigManager.SOUND_FILE_TYPES,
-                ResxSize = ResxConfigManager.SOUND_MAX_SIZE,
-                SaveLocalDirectory = string.Format("{0}{1}", hostingEnvironment.WebRootPath, partialPath),
-                AccessUrl = string.Format("{0}{1}", ResxConfigManager.FileAccessUrl, partialPath)
-            };
-            ResxResult result = resx.Upload(Request.Form.Files.FirstOrDefault());
-            var res = GetResult(GMSF.ResponseResult.SUCCESS, null, result);
-            return res;
+                File = files.FirstOrDefault(),
+                ResxType = resxType,
+                UserId = userId
+            });
+            return ResxService.AudioUpload(request);
         }
 
-        ///// <summary>
-        ///// 分断接收处理
-        ///// </summary>
-        ///// <param name="token"></param>
-        ///// <returns></returns>
+        [HttpPost]
+        [Description("Video upload handle")]
+        public Response<VideoUploadResponseBody> VideoUpload([FromForm]List<IFormFile> files, int userId, string token, ResxType resxType = ResxType.Other)
+        {
+            Request<VideoUploadRequestBody> request = base.GetDefaultRequest(token, new VideoUploadRequestBody()
+            {
+                File = files.FirstOrDefault(),
+                ResxType = resxType,
+                UserId = userId
+            });
+            return ResxService.VideoUpload(request);
+        }
+
         //public Response<ResxResult> Video(string token = null)
         //{
         //    if (string.IsNullOrEmpty(token))
