@@ -90,7 +90,7 @@
 
         $(this).ajaxSubmit({
             type: "post",
-            url: "/App/Action/",
+            url: "/App/Deploy/",
             success: function (data) {
                 if (data.state > 0) {
                     $("span#span_info").html("<font color='blue'>发布成功,跳转中...</font>");

@@ -4,53 +4,62 @@ using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System;
 using System.Drawing;
+using System.IO;
 
 namespace HWL.Tools
 {
     public class ImageSharpUtils
     {
-        public static Tuple<int, int> ThumbnailImage(string originImagePath, string newImagePath, int allocateWidth, int allocateHeight, int quality = 70)
+        public static Size ThumbnailImage(string originImagePath, string newImagePath, int allocateWidth, int allocateHeight, int quality = 70)
         {
             using (Image<Rgba32> image = Image.Load(originImagePath))
             {
-                var size = GetThumbnailSize(image, allocateWidth, allocateHeight);
+                Size size = GetThumbnailSize(image, allocateWidth, allocateHeight);
                 image.Mutate(x => x
-                     .Resize(size.Item1, size.Item2)
+                     .Resize(size.Width, size.Height)
                      );
                 image.Save(newImagePath, new JpegEncoder()
                 {
                     Quality = quality,
                     //Subsample = JpegSubsample.Ratio420
                 });
-
                 return size;
             }
         }
 
-        public static Tuple<int, int> GetThumbnailSize(Image<Rgba32> image, int allocateWidth, int allocateHeight)
+        public static Size GetImageSize(string originImagePath)
+        {
+            using (Image<Rgba32> image = Image.Load(originImagePath))
+            {
+                return new Size(image.Width, image.Height);
+            }
+        }
+
+        public static Size GetThumbnailSize(Image<Rgba32> image, int allocateWidth, int allocateHeight)
         {
             int sW = 0, sH = 0;
-            Size tem_size = new Size(image.Width, image.Height);
-            if (tem_size.Width > allocateHeight || tem_size.Width > allocateWidth)
+            int sWidth = image.Width;
+            int sHeight = image.Height;
+            if (sHeight > allocateHeight || sWidth > allocateWidth)
             {
-                if ((tem_size.Width * allocateHeight) > (tem_size.Width * allocateWidth))
+                if ((sWidth * allocateHeight) > (sHeight * allocateWidth))
                 {
                     sW = allocateWidth;
-                    sH = (allocateWidth * tem_size.Height) / tem_size.Width;
+                    sH = (allocateWidth * sHeight) / sWidth;
                 }
                 else
                 {
                     sH = allocateHeight;
-                    sW = (tem_size.Width * allocateHeight) / tem_size.Height;
+                    sW = (sWidth * allocateHeight) / sHeight;
                 }
             }
             else
             {
-                sW = tem_size.Width;
-                sH = tem_size.Height;
+                sW = sWidth;
+                sH = sHeight;
             }
 
-            return new Tuple<int, int>(sW, sH);
+            return new Size(sW, sH);
         }
     }
 }

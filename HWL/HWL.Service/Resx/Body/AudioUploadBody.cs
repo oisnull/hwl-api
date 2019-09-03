@@ -7,15 +7,12 @@ using System.Text;
 
 namespace HWL.Service.Resx.Body
 {
-    public class AudioUploadRequestBody
+    public class AudioUploadRequestBody : ResxUploadRequestBody
     {
-        public int UserId { get; set; }
-        public IFormFile File { get; set; }
-        public ResxType ResxType { get; set; }
     }
 
     public class AudioUploadResponseBody
     {
-        public ResxResult ResxResult { get; set; }
+        public ResxResult ResxAudioResult { get; set; }
     }
 }

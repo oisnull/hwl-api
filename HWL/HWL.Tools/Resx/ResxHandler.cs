@@ -13,7 +13,7 @@ namespace HWL.Tools.Resx
         /// <summary>
         /// Unit:byte
         /// </summary>
-        public int ResxSize { get; set; }
+        public long ResxSize { get; set; }
         public string SaveLocalDirectory { get; set; }
         public string AccessUrl { get; set; }
 
@@ -40,7 +40,7 @@ namespace HWL.Tools.Resx
                 throw new ArgumentNullException("AccessUrl");
         }
 
-        public virtual string GetNewFileName(string oldFileName)
+        protected virtual string GetNewFileName(string oldFileName)
         {
             string newFileName = "";
             string fileExt = Path.GetExtension(oldFileName).ToLower();
@@ -50,7 +50,7 @@ namespace HWL.Tools.Resx
             return newFileName;
         }
 
-        public virtual ResxResult Upload(IFormFile file, bool useNewFileName = true)
+        public ResxResult Upload(IFormFile file, bool useNewFileName = true)
         {
             ResxResult result = new ResxResult();
             FileStream fileStream = null;
@@ -81,6 +81,5 @@ namespace HWL.Tools.Resx
 
             return result;
         }
-
     }
 }

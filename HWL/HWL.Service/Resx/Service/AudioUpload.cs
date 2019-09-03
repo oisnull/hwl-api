@@ -21,7 +21,7 @@ namespace HWL.Service.Resx.Service
             if (this.request.UserId <= 0)
                 throw new ArgumentNullException("UserId");
 
-            if (this.request.File == null)
+            if (this.request.Files == null || this.request.Files.Count <= 0)
                 throw new ArgumentNullException("Files");
         }
 
@@ -35,11 +35,11 @@ namespace HWL.Service.Resx.Service
                 SaveLocalDirectory = string.Format("{0}{1}", AppConfigManager.UploadDirectory, partialPath),
                 AccessUrl = string.Format("{0}{1}", ResxConfigManager.FileAccessUrl, partialPath)
             };
-            ResxResult result = resx.Upload(request.File);
+            ResxResult result = resx.Upload(request.Files.FirstOrDefault());
 
             return new AudioUploadResponseBody()
             {
-                ResxResult = result
+                ResxAudioResult = result
             };
         }
     }

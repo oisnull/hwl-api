@@ -21,7 +21,7 @@ namespace HWL.Service.Resx.Service
             if (this.request.UserId <= 0)
                 throw new ArgumentNullException("UserId");
 
-            if (this.request.File == null)
+            if (this.request.Files == null || this.request.Files.Count <= 0)
                 throw new ArgumentNullException("Files");
         }
 
@@ -32,15 +32,16 @@ namespace HWL.Service.Resx.Service
             {
                 ResxTypes = ResxConfigManager.IMAGE_FILE_TYPES,
                 ResxSize = ResxConfigManager.IMAGE_MAX_SIZE,
-                IsThumbnail = CustomerEnumDesc.IsTumbnail(request.ResxType),
+                //IsThumbnail = CustomerEnumDesc.IsTumbnail(request.ResxType),
+                IsThumbnail = false,
                 SaveLocalDirectory = string.Format("{0}{1}", AppConfigManager.UploadDirectory, partialPath),
                 AccessUrl = string.Format("{0}{1}", ResxConfigManager.FileAccessUrl, partialPath)
             };
-            resx.Upload(request.File);
+            ResxImageResult result = resx.Upload(request.Files.FirstOrDefault());
 
             return new ImageUploadResponseBody()
             {
-                ResxImageResult = resx.GetUploadResult()
+                ResxImageResult = result
             };
         }
     }
