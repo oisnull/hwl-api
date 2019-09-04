@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Upload resx test</title>
+    <meta charset="utf-8" />
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var isAction = false;
+            $("form").submit(function () {
+                if (isAction) {
+                    return false;
+                }
+                isAction = true;
+
+                console.log(this.action);
+                $("span#span_info").html("<font color='blue'>Working on it...</font>");
+                $(this).ajaxSubmit({
+                    type: "post",
+                    url: $("#endpoint").val(),
+                    success: function (data) {
+                        console.log(data);
+                        $("span#span_info").html(JSON.stringify(data));
+                        isAction = false;
+                    },
+                    error: function (xhr) {
+                        $("span#span_info").html("<font color='red'>" + xhr.responseText + "</font>");
+                        isAction = false;
+                    }
+                });
+                return false;
+            });
+        })
+
+    </script>
+</head>
+<body>
+    <form enctype="multipart/form-data" action="/resx/resxupload" method="post">
+        <table cellpadding="5" cellspacing="5">
+            <tr>
+                <td>Endpoint</td>
+                <td>
+                    <select id="endpoint" style="width:180px;">
+                        <option value="/resx/resxupload" selected="selected">/resx/resxupload</option>
+                        <option value="/resx/imageupload">/resx/imageupload</option>
+                        <option value="/resx/audioupload">/resx/audioupload</option>
+                        <option value="/resx/videoupload">/resx/videoupload</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>ResxType</td>
+                <td>
+                    <select name="ResxType" style="width:180px;">
+                        <option value="1">ChatImage</option>
+                        <option value="2">CircleBackImage</option>
+                        <option value="3">NearCirclePostImage</option>
+                        <option value="4">FriendCirclePostImage</option>
+                        <option value="5">ChatSound</option>
+                        <option value="6" selected="selected">UserHeadImage</option>
+                        <option value="7">ChatVideo</option>
+                        <option value="8">Other</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Token</td>
+                <td>
+                    <input type="text" id="input_token" name="Token" value="88888888" style="width:180px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>User</td>
+                <td>
+                    <input type="text" id="input_userid" name="UserId" value="1" style="width:180px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>File:</td>
+                <td>
+                    <input type="file" id="input_resx" name="Files" style="width:180px;" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Submit" />
+                    <span id="span_info"></span>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

@@ -25,4 +25,13 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resx\ffmpeg\ffmpeg.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resx\ffmpeg\pthreadGC2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

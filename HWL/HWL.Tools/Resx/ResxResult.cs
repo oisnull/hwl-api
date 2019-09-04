@@ -22,6 +22,11 @@ namespace HWL.Tools.Resx
 
     public class ResxImageResult : ResxResult
     {
+        public ResxImageResult() { }
+        public ResxImageResult(bool success, string message = null, string resxAccessUrl = null) : base(success, message, resxAccessUrl)
+        {
+        }
+
         public int ImageWidth { get; set; }
         public int ImageHeight { get; set; }
         public string ImagePreviewUrl { get; set; }
@@ -29,6 +34,11 @@ namespace HWL.Tools.Resx
 
     public class ResxVideoResult : ResxImageResult
     {
+        public ResxVideoResult() { }
+        public ResxVideoResult(bool success, string message = null, string resxAccessUrl = null) : base(success, message, resxAccessUrl)
+        {
+        }
+
         public double Duration { get; set; }
     }
 }

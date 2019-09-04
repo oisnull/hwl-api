@@ -59,14 +59,12 @@ namespace HWL.Manage.Controllers
         }
 
         [HttpPost]
-        public ActionResult Action(AppExt model)
+        public ActionResult Deploy(AppExt model)
         {
-            string partialPath = string.Format("{0}apkversion", AppConfigManager.UploadDirectory);
-
             ResxHandler resx = new ResxHandler();
             resx.ResxTypes = new List<string>() { ".apk" };
-            resx.SaveLocalDirectory = string.Format("{0}{1}", hostingEnvironment.WebRootPath, partialPath);
-            resx.AccessUrl = string.Format("{0}{1}", AppConfigManager.FileAccessUrl, partialPath);
+            resx.SaveLocalDirectory = string.Format("{0}/apkversion", AppConfigManager.UploadDirectory);
+            resx.AccessUrl = string.Format("{0}/apkversion", ResxConfigManager.FileAccessUrl);
             ResxResult result = resx.Upload(Request.Form.Files.FirstOrDefault());
 
             if (result.Success)

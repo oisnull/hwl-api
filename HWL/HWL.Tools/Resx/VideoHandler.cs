@@ -9,7 +9,7 @@ namespace HWL.Tools.Resx
 {
     public class VideoHandler : ResxHandler
     {
-        const string ffmpegPath = "/content/ffmpeg/ffmpeg.exe";
+        const string ffmpegPath = "/Resx/ffmpeg/ffmpeg.exe";
 
         public bool IsThumbnail { get; set; }
         /// <summary>
@@ -23,7 +23,6 @@ namespace HWL.Tools.Resx
 
         private string ThumbnailImageName;
         private string SaveThumbnailLocalPath;
-        private ResxVideoResult VideoResult;
 
         public VideoHandler()
         {
@@ -34,21 +33,21 @@ namespace HWL.Tools.Resx
         private void BuildThumbnailPath()
         {
             string ext = Path.GetExtension(base.SaveLocalPath);
-            this.ThumbnailImageName = Path.GetFileName(base.SaveLocalPath).Replace(ext, "_s" + ext);
-            this.SaveThumbnailLocalPath = string.Format("{0}{1}", base.SaveLocalDirectory, this.ThumbnailImageName);
+            this.ThumbnailImageName = Path.GetFileName(base.SaveLocalPath).Replace(ext, "_s.png");
+            this.SaveThumbnailLocalPath = string.Format("{0}/{1}", base.SaveLocalDirectory, this.ThumbnailImageName);
         }
 
-        public override ResxResult Upload(IFormFile file, bool useNewFileName = true)
+        public new ResxVideoResult Upload(IFormFile file, bool useNewFileName = true)
         {
             ResxResult result = base.Upload(file, useNewFileName);
-            if (!result.Success) return result;
+            if (!result.Success) return new ResxVideoResult(result.Success, result.Message);
 
-            if (!this.IsThumbnail) return result;
+            if (!this.IsThumbnail) return new ResxVideoResult(result.Success, result.Message, result.ResxAccessUrl);
 
             this.BuildThumbnailPath();
             var ret = this.CatchImage(base.SaveLocalPath, this.SaveThumbnailLocalPath);
 
-            VideoResult = new ResxVideoResult()
+            return new ResxVideoResult()
             {
                 Success = result.Success,
                 Message = result.Message,
@@ -58,20 +57,12 @@ namespace HWL.Tools.Resx
                 ImageHeight = ret.Item3,
                 Duration = ret.Item4
             };
-
-            return VideoResult;
-        }
-
-        public ResxVideoResult GetUploadResult()
-        {
-            return this.VideoResult;
         }
 
         private void ExecuteCommand(string command, out string output)
         {
             try
             {
-                //创建一个进程
                 Process pc = new Process();
                 pc.StartInfo.FileName = "cmd.exe";
                 pc.StartInfo.UseShellExecute = false;
@@ -100,14 +91,12 @@ namespace HWL.Tools.Resx
             string output;
             this.ExecuteCommand("\"" + toolPath + "\"" + " -i " + "\"" + videoFullPath + "\"", out output);
 
-            //获取视频的高度和宽度
             string sizeString = Regex.Match(output, "(\\d{2,4})x(\\d{2,4})").Value;
             if (string.IsNullOrEmpty(sizeString))
             {
                 sizeString = string.Format("{0}x{1}", this.ThumbnailImageWidth, this.ThumbnailImageHeight);
             }
 
-            //获取视频的时长
             string timeSize = output.Substring(output.IndexOf("Duration: ") + ("Duration: ").Length, ("00:00:00").Length);
             double time = 0;
             if (!string.IsNullOrEmpty(timeSize))
