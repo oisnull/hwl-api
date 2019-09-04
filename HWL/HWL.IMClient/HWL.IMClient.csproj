@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HWL.IMCore\HWL.IMCore.csproj" />
+    <ProjectReference Include="..\HWL.ShareConfig\HWL.ShareConfig.csproj" />
   </ItemGroup>
 
 </Project>

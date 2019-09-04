@@ -40,5 +40,13 @@ namespace HWL.ShareConfig
                 return Configuration.GetConnectionString("HWLDBConnectionString");
             }
         }
+
+        protected static IConfigurationSection IMSettings
+        {
+            get
+            {
+                return Configuration.GetSection("IMSettings");
+            }
+        }
     }
 }

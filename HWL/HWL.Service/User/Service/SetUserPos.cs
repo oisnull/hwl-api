@@ -5,10 +5,9 @@ using HWL.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HWL.Entity;
 using HWL.Redis;
+using HWL.IMClient;
 
 namespace HWL.Service.User.Service
 {
@@ -68,10 +67,20 @@ namespace HWL.Service.User.Service
             {
                 res.GroupUserInfos = GetGroupUsers(groupGuid);
                 string userName = res.GroupUserInfos?.Where(g => g.UserId == request.UserId).Select(g => g.UserName).FirstOrDefault();
-                //IMClientV.INSTANCE.SendSystemMessage((ulong)request.UserId, userName, groupGuid);
+                IMClientV.INSTANCE.SendSystemMessage((ulong)request.UserId, userName, groupGuid, getNearDesc());
             }
 
             return res;
+        }
+
+        public string getNearDesc()
+        {
+            string desc = null;
+            if (string.IsNullOrEmpty(request.Street))
+            {
+                desc = request.District;
+            }
+            return desc + "附近";
         }
 
         public List<UserSecretInfo> GetGroupUsers(string groupGuid)

@@ -12,10 +12,8 @@ namespace HWL.IMClientTest
     {
         static void Main(string[] args)
         {
-            IMClientV.SetIMAddress("127.0.0.1", 8081);
             IMClientV.SetConnectListener(new DefaultClientConnectListenerV2());
-
-            IMClientV.INSTANCE.SendSystemMessage(1, "uname", null);
+            IMClientV.INSTANCE.SendSystemMessage(1, "uname", null, null);
 
             Console.ReadLine();
         }

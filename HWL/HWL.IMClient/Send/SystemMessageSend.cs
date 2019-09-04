@@ -8,12 +8,14 @@ namespace HWL.IMClient.Send
         ulong toUserId = 0L;
         string toUserName = null;
         string toGroupGuid = null;
+        string groupName = null;
 
-        public SystemMessageSend(ulong toUserId, string toUserName, string groupGuid)
+        public SystemMessageSend(ulong toUserId, string toUserName, string groupGuid, string groupName)
         {
             this.toUserId = toUserId;
-            this.toGroupGuid = groupGuid;
             this.toUserName = toUserName;
+            this.toGroupGuid = groupGuid;
+            this.groupName = groupName;
         }
 
         public override ImMessageType getMessageType()
@@ -32,8 +34,8 @@ namespace HWL.IMClient.Send
                     SystemMessageContent = new ImSystemMessageContent()
                     {
                         SystemMessageType = ImSystemMessageType.AddNearGroup,
-                        AddGroupDesc = string.Format("Welcome {0} to {1} group.", toUserName, toGroupGuid),
-                        ToUserDesc = string.Format("Welcome to {0}", toGroupGuid)
+                        AddGroupDesc = string.Format("Welcome {0} to {1} group.", toUserName, groupName),
+                        ToUserDesc = string.Format("Welcome to {0}", groupName)
                     }
                 }
             };

@@ -12,8 +12,12 @@
     "UserDynamicRedisHosts": "127.0.0.1:6379,allowadmin=true,password=123456", //用户token配置
     "MsgHandlerRedisHosts": "127.0.0.1:8379,allowadmin=true,password=123456" //消息处理地址配置
   },
+  "IMSettings": {
+    "IMHost": "127.0.0.1",
+    "IMPort": 8081
+  },
   "ConnectionStrings": {
-    "HWLDBConnectionString": "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303",
+    "HWLDBConnectionString": "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303"
     //"HWLDBConnectionStringHome": "Data Source=.;Initial Catalog=hwl;Persist Security Info=True;User ID=sa;Password=ac.123456"
   }
 }

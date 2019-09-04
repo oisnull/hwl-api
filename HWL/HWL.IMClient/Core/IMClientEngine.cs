@@ -2,6 +2,7 @@
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
+using HWL.IMClient.Default;
 using HWL.IMCore.Protocol;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,6 @@ namespace HWL.IMClient.Core
         private IEventLoopGroup workGroup;
         private Bootstrap bootstrap;
         private IChannel currentChannel;
-        //private ClientMessageOperator _messageOperator;
         private IClientConnectListener _connectListener;
 
         public IMClientEngine(string host, int port)
@@ -34,18 +34,13 @@ namespace HWL.IMClient.Core
             init();
         }
 
-        //public void setMessageOperator(ClientMessageOperator messageOperator)
-        //{
-        //    this._messageOperator = messageOperator;
-        //    if (this._messageOperator == null)
-        //    {
-        //        throw new ArgumentNullException("ClientMessageOperator");
-        //    }
-        //}
-
         public void setConnectListener(IClientConnectListener connectListener)
         {
             this._connectListener = connectListener;
+            if (this._connectListener == null)
+            {
+                this._connectListener = new DefaultClientConnectListener();
+            }
         }
 
         private void init()
@@ -75,11 +70,9 @@ namespace HWL.IMClient.Core
             try
             {
                 Task<IChannel> task = bootstrap.ConnectAsync(IPAddress.Parse(host), port);
-                //task.Wait();
 
                 this.currentChannel = task.Result;
                 status = STATUS_CONNECT;
-                //_messageOperator.setChannel(currentChannel);
                 _connectListener.onBuildConnectionSuccess(this.currentChannel?.LocalAddress?.ToString(), this.currentChannel?.RemoteAddress?.ToString());
             }
             catch (Exception ex)
