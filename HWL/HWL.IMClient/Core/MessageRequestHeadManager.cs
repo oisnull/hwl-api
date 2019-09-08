@@ -11,7 +11,7 @@ namespace HWL.IMClient
         {
             Client = "",
             Language = "ch-cn",
-            Sessionid = "",
+            Session = "",
             Timestamp = 0,
             Version = "1.0.0",
         };
@@ -23,7 +23,7 @@ namespace HWL.IMClient
 
         public static void setSessionId(string sessionId)
         {
-            requestHead.Sessionid = sessionId;
+            requestHead.Session = sessionId;
         }
     }
 }

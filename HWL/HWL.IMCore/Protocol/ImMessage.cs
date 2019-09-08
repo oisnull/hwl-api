@@ -46,145 +46,147 @@ namespace HWL.IMCore.Protocol {
             "UmVxdWVzdEgAEkUKG2NpcmNsZU9wZXJhdGVNZXNzYWdlUmVxdWVzdBgMIAEo",
             "CzIeLkltQ2lyY2xlT3BlcmF0ZU1lc3NhZ2VSZXF1ZXN0SAASNwoUc3lzdGVt",
             "TWVzc2FnZVJlcXVlc3QYDSABKAsyFy5JbVN5c3RlbU1lc3NhZ2VSZXF1ZXN0",
-            "SABCDQoLcmVxdWVzdEJvZHkibwoUSW1NZXNzYWdlUmVxdWVzdEhlYWQSEQoJ",
-            "dGltZXN0YW1wGAEgASgEEg4KBmNsaWVudBgCIAEoCRIRCglzZXNzaW9uaWQY",
-            "AyABKAkSEAoIbGFuZ3VhZ2UYBCABKAkSDwoHdmVyc2lvbhgFIAEoCSL3BQoR",
-            "SW1NZXNzYWdlUmVzcG9uc2USLAoMcmVzcG9uc2VIZWFkGAEgASgLMhYuSW1N",
-            "ZXNzYWdlUmVzcG9uc2VIZWFkEjcKFHVzZXJWYWxpZGF0ZVJlc3BvbnNlGAIg",
-            "ASgLMhcuSW1Vc2VyVmFsaWRhdGVSZXNwb25zZUgAEj0KF2NoYXRVc2VyTWVz",
-            "c2FnZVJlc3BvbnNlGAMgASgLMhouSW1DaGF0VXNlck1lc3NhZ2VSZXNwb25z",
-            "ZUgAEj8KGGNoYXRHcm91cE1lc3NhZ2VSZXNwb25zZRgEIAEoCzIbLkltQ2hh",
-            "dEdyb3VwTWVzc2FnZVJlc3BvbnNlSAASPwoYYWRkRnJpZW5kTWVzc2FnZVJl",
-            "c3BvbnNlGAUgASgLMhsuSW1BZGRGcmllbmRNZXNzYWdlUmVzcG9uc2VIABJJ",
-            "Ch10ZXN0Q29ubmVjdGlvbk1lc3NhZ2VSZXNwb25zZRgGIAEoCzIgLkltVGVz",
-            "dENvbm5lY3Rpb25NZXNzYWdlUmVzcG9uc2VIABJDChpjaGF0U2V0dGluZ01l",
-            "c3NhZ2VSZXNwb25zZRgHIAEoCzIdLkltQ2hhdFNldHRpbmdNZXNzYWdlUmVz",
-            "cG9uc2VIABJFChtncm91cE9wZXJhdGVNZXNzYWdlUmVzcG9uc2UYCCABKAsy",
-            "Hi5JbUdyb3VwT3BlcmF0ZU1lc3NhZ2VSZXNwb25zZUgAEk8KIG5lYXJDaXJj",
-            "bGVPcGVyYXRlTWVzc2FnZVJlc3BvbnNlGAkgASgLMiMuSW1OZWFyQ2lyY2xl",
-            "T3BlcmF0ZU1lc3NhZ2VSZXNwb25zZUgAEkcKHGNpcmNsZU9wZXJhdGVNZXNz",
-            "YWdlUmVzcG9uc2UYCiABKAsyHy5JbUNpcmNsZU9wZXJhdGVNZXNzYWdlUmVz",
-            "cG9uc2VIABI5ChVzeXN0ZW1NZXNzYWdlUmVzcG9uc2UYCyABKAsyGC5JbVN5",
-            "c3RlbU1lc3NhZ2VSZXNwb25zZUgAQg4KDHJlc3BvbnNlQm9keSKCAQoVSW1N",
-            "ZXNzYWdlUmVzcG9uc2VIZWFkEgwKBGNvZGUYASABKA0SDwoHbWVzc2FnZRgC",
-            "IAEoCRINCgVpc2FjaxgDIAEoCBIRCgltZXNzYWdlaWQYBCABKAkSKAoGc291",
-            "cmNlGAUgASgOMhguSW1NZXNzYWdlU291cmNlUG9zaXRpb24iSQoVSW1Vc2Vy",
-            "VmFsaWRhdGVSZXF1ZXN0Eg4KBnVzZXJJZBgBIAEoBBINCgV0b2tlbhgCIAEo",
-            "CRIRCgltZXNzYWdlaWQYAyABKAkiYQoWSW1Vc2VyVmFsaWRhdGVSZXNwb25z",
-            "ZRIRCglpc1N1Y2Nlc3MYASABKAgSDwoHbWVzc2FnZRgCIAEoCRIQCghpc09u",
-            "bGluZRgDIAEoCBIRCglzZXNzaW9uaWQYBCABKAkiVQoYSW1DaGF0VXNlck1l",
-            "c3NhZ2VSZXF1ZXN0EjkKFmNoYXRVc2VyTWVzc2FnZUNvbnRlbnQYASABKAsy",
-            "GS5JbUNoYXRVc2VyTWVzc2FnZUNvbnRlbnQiaQoZSW1DaGF0VXNlck1lc3Nh",
-            "Z2VSZXNwb25zZRI5ChZjaGF0VXNlck1lc3NhZ2VDb250ZW50GAEgASgLMhku",
-            "SW1DaGF0VXNlck1lc3NhZ2VDb250ZW50EhEKCWJ1aWxkVGltZRgCIAEoBCKX",
-            "AgoYSW1DaGF0VXNlck1lc3NhZ2VDb250ZW50EhIKCmZyb21Vc2VySWQYASAB",
-            "KAQSFAoMZnJvbVVzZXJOYW1lGAIgASgJEhUKDWZyb21Vc2VySW1hZ2UYAyAB",
-            "KAkSEAoIdG9Vc2VySWQYBCABKAQSEwoLY29udGVudFR5cGUYBSABKA0SDwoH",
-            "Y29udGVudBgGIAEoCRITCgtvcmlnaW5hbFVybBgHIAEoCRISCgpwcmV2aWV3",
-            "VXJsGAggASgJEhIKCmltYWdlV2lkdGgYCSABKA0SEwoLaW1hZ2VIZWlnaHQY",
-            "CiABKA0SDAoEc2l6ZRgLIAEoDRIQCghwbGF5VGltZRgMIAEoDRIQCghpc0Zy",
-            "aWVuZBgNIAEoCCJYChlJbUNoYXRHcm91cE1lc3NhZ2VSZXF1ZXN0EjsKF2No",
-            "YXRHcm91cE1lc3NhZ2VDb250ZW50GAEgASgLMhouSW1DaGF0R3JvdXBNZXNz",
-            "YWdlQ29udGVudCJsChpJbUNoYXRHcm91cE1lc3NhZ2VSZXNwb25zZRI7Chdj",
-            "aGF0R3JvdXBNZXNzYWdlQ29udGVudBgBIAEoCzIaLkltQ2hhdEdyb3VwTWVz",
-            "c2FnZUNvbnRlbnQSEQoJYnVpbGRUaW1lGAIgASgEIpsCChlJbUNoYXRHcm91",
-            "cE1lc3NhZ2VDb250ZW50EhIKCmZyb21Vc2VySWQYASABKAQSFAoMZnJvbVVz",
-            "ZXJOYW1lGAIgASgJEhUKDWZyb21Vc2VySW1hZ2UYAyABKAkSEwoLdG9Hcm91",
-            "cEd1aWQYBCABKAkSEwoLY29udGVudFR5cGUYBSABKA0SDwoHY29udGVudBgG",
-            "IAEoCRITCgtvcmlnaW5hbFVybBgHIAEoCRISCgpwcmV2aWV3VXJsGAggASgJ",
-            "EhIKCmltYWdlV2lkdGgYCSABKA0SEwoLaW1hZ2VIZWlnaHQYCiABKA0SDAoE",
-            "c2l6ZRgLIAEoDRIQCghwbGF5VGltZRgMIAEoDRIQCghpc0ZyaWVuZBgNIAEo",
-            "CCJEChlJbUhlYXJ0QmVhdE1lc3NhZ2VSZXF1ZXN0EhIKCmZyb21Vc2VySWQY",
-            "ASABKAQSEwoLY3VycmVudFRpbWUYAiABKAQiWAoZSW1BZGRGcmllbmRNZXNz",
-            "YWdlUmVxdWVzdBI7ChdhZGRGcmllbmRNZXNzYWdlQ29udGVudBgBIAEoCzIa",
-            "LkltQWRkRnJpZW5kTWVzc2FnZUNvbnRlbnQibAoaSW1BZGRGcmllbmRNZXNz",
-            "YWdlUmVzcG9uc2USOwoXYWRkRnJpZW5kTWVzc2FnZUNvbnRlbnQYASABKAsy",
-            "Gi5JbUFkZEZyaWVuZE1lc3NhZ2VDb250ZW50EhEKCWJ1aWxkVGltZRgCIAEo",
-            "BCKDAQoZSW1BZGRGcmllbmRNZXNzYWdlQ29udGVudBISCgpmcm9tVXNlcklk",
-            "GAEgASgEEhQKDGZyb21Vc2VyTmFtZRgCIAEoCRIZChFmcm9tVXNlckhlYWRJ",
-            "bWFnZRgDIAEoCRIQCgh0b1VzZXJJZBgEIAEoBBIPCgdjb250ZW50GAYgASgJ",
-            "IkUKHkltVGVzdENvbm5lY3Rpb25NZXNzYWdlUmVxdWVzdBISCgpmcm9tVXNl",
-            "cklkGAEgASgEEg8KB2NvbnRlbnQYAiABKAkiRAofSW1UZXN0Q29ubmVjdGlv",
-            "bk1lc3NhZ2VSZXNwb25zZRIPCgdjb250ZW50GAEgASgJEhAKCHNlbmRUaW1l",
-            "GAIgASgEIjwKE0ltQWNrTWVzc2FnZVJlcXVlc3QSEgoKZnJvbVVzZXJJZBgB",
-            "IAEoBBIRCgltZXNzYWdlaWQYAiABKAkiXgobSW1DaGF0U2V0dGluZ01lc3Nh",
-            "Z2VSZXF1ZXN0Ej8KGWNoYXRTZXR0aW5nTWVzc2FnZUNvbnRlbnQYASABKAsy",
-            "HC5JbUNoYXRTZXR0aW5nTWVzc2FnZUNvbnRlbnQicgocSW1DaGF0U2V0dGlu",
-            "Z01lc3NhZ2VSZXNwb25zZRI/ChljaGF0U2V0dGluZ01lc3NhZ2VDb250ZW50",
-            "GAEgASgLMhwuSW1DaGF0U2V0dGluZ01lc3NhZ2VDb250ZW50EhEKCWJ1aWxk",
-            "VGltZRgCIAEoBCKkAQobSW1DaGF0U2V0dGluZ01lc3NhZ2VDb250ZW50EicK",
-            "C3NldHRpbmdUeXBlGAEgASgOMhIuSW1DaGF0U2V0dGluZ1R5cGUSIwoLc2V0",
-            "dGluZ1VzZXIYAiABKAsyDi5JbVVzZXJDb250ZW50EhEKCWdyb3VwR3VpZBgD",
-            "IAEoCRIRCglncm91cE5vdGUYBCABKAkSEQoJZ3JvdXBOYW1lGAUgASgJImEK",
-            "HEltR3JvdXBPcGVyYXRlTWVzc2FnZVJlcXVlc3QSQQoaZ3JvdXBPcGVyYXRl",
-            "TWVzc2FnZUNvbnRlbnQYASABKAsyHS5JbUdyb3VwT3BlcmF0ZU1lc3NhZ2VD",
-            "b250ZW50InUKHUltR3JvdXBPcGVyYXRlTWVzc2FnZVJlc3BvbnNlEkEKGmdy",
-            "b3VwT3BlcmF0ZU1lc3NhZ2VDb250ZW50GAEgASgLMh0uSW1Hcm91cE9wZXJh",
-            "dGVNZXNzYWdlQ29udGVudBIRCglidWlsZFRpbWUYAiABKAQitwEKHEltR3Jv",
-            "dXBPcGVyYXRlTWVzc2FnZUNvbnRlbnQSKAoLb3BlcmF0ZVR5cGUYASABKA4y",
-            "Ey5JbUdyb3VwT3BlcmF0ZVR5cGUSIwoLb3BlcmF0ZVVzZXIYAiABKAsyDi5J",
-            "bVVzZXJDb250ZW50EhEKCWdyb3VwR3VpZBgDIAEoCRIRCglncm91cE5hbWUY",
-            "BCABKAkSIgoKZ3JvdXBVc2VycxgFIAMoCzIOLkltVXNlckNvbnRlbnQiXQoN",
-            "SW1Vc2VyQ29udGVudBIOCgZ1c2VySWQYASABKAQSEAoIdXNlck5hbWUYAiAB",
-            "KAkSEQoJdXNlckltYWdlGAMgASgJEhcKD2dyb3VwVXNlclJlbWFyaxgEIAEo",
-            "CSJwCiFJbU5lYXJDaXJjbGVPcGVyYXRlTWVzc2FnZVJlcXVlc3QSSwofbmVh",
-            "ckNpcmNsZU9wZXJhdGVNZXNzYWdlQ29udGVudBgBIAEoCzIiLkltTmVhckNp",
-            "cmNsZU9wZXJhdGVNZXNzYWdlQ29udGVudCKEAQoiSW1OZWFyQ2lyY2xlT3Bl",
-            "cmF0ZU1lc3NhZ2VSZXNwb25zZRJLCh9uZWFyQ2lyY2xlT3BlcmF0ZU1lc3Nh",
-            "Z2VDb250ZW50GAEgASgLMiIuSW1OZWFyQ2lyY2xlT3BlcmF0ZU1lc3NhZ2VD",
-            "b250ZW50EhEKCWJ1aWxkVGltZRgCIAEoBCL1AQohSW1OZWFyQ2lyY2xlT3Bl",
-            "cmF0ZU1lc3NhZ2VDb250ZW50EikKC29wZXJhdGVUeXBlGAEgASgOMhQuSW1D",
-            "aXJjbGVPcGVyYXRlVHlwZRIgCghwb3N0VXNlchgCIAEoCzIOLkltVXNlckNv",
-            "bnRlbnQSIgoKb3JpZ2luVXNlchgDIAEoCzIOLkltVXNlckNvbnRlbnQSIQoJ",
-            "cmVwbHlVc2VyGAQgASgLMg4uSW1Vc2VyQ29udGVudBIUCgxuZWFyQ2lyY2xl",
-            "SWQYBSABKAQSEQoJY29tbWVudElkGAYgASgEEhMKC2NvbW1lbnRDb250GAcg",
-            "ASgJImQKHUltQ2lyY2xlT3BlcmF0ZU1lc3NhZ2VSZXF1ZXN0EkMKG2NpcmNs",
-            "ZU9wZXJhdGVNZXNzYWdlQ29udGVudBgBIAEoCzIeLkltQ2lyY2xlT3BlcmF0",
-            "ZU1lc3NhZ2VDb250ZW50IngKHkltQ2lyY2xlT3BlcmF0ZU1lc3NhZ2VSZXNw",
-            "b25zZRJDChtjaXJjbGVPcGVyYXRlTWVzc2FnZUNvbnRlbnQYASABKAsyHi5J",
-            "bUNpcmNsZU9wZXJhdGVNZXNzYWdlQ29udGVudBIRCglidWlsZFRpbWUYAiAB",
-            "KAQi7QEKHUltQ2lyY2xlT3BlcmF0ZU1lc3NhZ2VDb250ZW50EikKC29wZXJh",
-            "dGVUeXBlGAEgASgOMhQuSW1DaXJjbGVPcGVyYXRlVHlwZRIgCghwb3N0VXNl",
-            "chgCIAEoCzIOLkltVXNlckNvbnRlbnQSIgoKb3JpZ2luVXNlchgDIAEoCzIO",
-            "LkltVXNlckNvbnRlbnQSIQoJcmVwbHlVc2VyGAQgASgLMg4uSW1Vc2VyQ29u",
-            "dGVudBIQCghjaXJjbGVJZBgFIAEoBBIRCgljb21tZW50SWQYBiABKAQSEwoL",
-            "Y29tbWVudENvbnQYByABKAkidgoWSW1TeXN0ZW1NZXNzYWdlUmVxdWVzdBIQ",
-            "Cgh0b1VzZXJJZBgBIAEoBBITCgt0b0dyb3VwR3VpZBgCIAEoCRI1ChRzeXN0",
-            "ZW1NZXNzYWdlQ29udGVudBgDIAEoCzIXLkltU3lzdGVtTWVzc2FnZUNvbnRl",
-            "bnQiYwoXSW1TeXN0ZW1NZXNzYWdlUmVzcG9uc2USNQoUc3lzdGVtTWVzc2Fn",
-            "ZUNvbnRlbnQYASABKAsyFy5JbVN5c3RlbU1lc3NhZ2VDb250ZW50EhEKCWJ1",
-            "aWxkVGltZRgCIAEoBCJzChZJbVN5c3RlbU1lc3NhZ2VDb250ZW50Ei8KEXN5",
-            "c3RlbU1lc3NhZ2VUeXBlGAEgASgOMhQuSW1TeXN0ZW1NZXNzYWdlVHlwZRIS",
-            "Cgp0b1VzZXJEZXNjGAIgASgJEhQKDGFkZEdyb3VwRGVzYxgDIAEoCSrwAQoN",
-            "SW1NZXNzYWdlVHlwZRIICgRCYXNlEAASEAoMVXNlclZhbGlkYXRlEAESDAoI",
-            "Q2hhdFVzZXIQAhINCglDaGF0R3JvdXAQAxINCglIZWFydEJlYXQQBBINCglB",
-            "ZGRGcmllbmQQBRISCg5UZXN0Q29ubmVjdGlvbhAGEhQKEENsaWVudEFja01l",
-            "c3NhZ2UQBxIPCgtDaGF0U2V0dGluZxAIEhAKDEdyb3VwT3BlcmF0ZRAJEhUK",
-            "EU5lYXJDaXJjbGVPcGVyYXRlEAoSEQoNQ2lyY2xlT3BlcmF0ZRALEhEKDVN5",
-            "c3RlbU1lc3NhZ2UQDCpTChVJbU1lc3NhZ2VSZXNwb25zZUNvZGUSCQoFT3Ro",
-            "ZXIQABILCgdTdWNjZXNzEGQSCwoGRmFpbGVkEMgBEhUKEFNlc3Npb25pZElu",
-            "dmFsaWQQyQEqSQoXSW1NZXNzYWdlU291cmNlUG9zaXRpb24SCAoETm9uZRAA",
-            "EgwKCFJlYWxUaW1lEAESCwoHT2ZmbGluZRACEgkKBVJldHJ5EAMqUgoRSW1D",
-            "aGF0U2V0dGluZ1R5cGUSDwoLU2V0dGluZ05vbmUQABINCglHcm91cE5vdGUQ",
-            "ARINCglHcm91cE5hbWUQAhIOCgpVc2VyUmVtYXJrEAMqeQoSSW1Hcm91cE9w",
-            "ZXJhdGVUeXBlEhQKEEdyb3VwT3BlcmF0ZU5vbmUQABIPCgtDcmVhdGVHcm91",
-            "cBABEg0KCUV4aXRHcm91cBACEhAKDERpc21pc3NHcm91cBADEgsKB0FkZFVz",
-            "ZXIQBBIOCgpSZW1vdmVVc2VyEAUqcQoTSW1DaXJjbGVPcGVyYXRlVHlwZRIZ",
-            "ChVOZWFyQ2lyY2xlT3BlcmF0ZU5vbmUQABILCgdBZGRMaWtlEAESDgoKQ2Fu",
-            "Y2VsTGlrZRACEg8KC1Bvc3RDb21tZW50EAMSEQoNQ2FuY2VsQ29tbWVudBAE",
-            "KicKE0ltU3lzdGVtTWVzc2FnZVR5cGUSEAoMQWRkTmVhckdyb3VwEABCMAoW",
-            "Y29tLmh3bC5pbWNvcmUuaW1wcm90b1ABqgITSFdMLklNQ29yZS5Qcm90b2Nv",
-            "bGIGcHJvdG8z"));
+            "SABCDQoLcmVxdWVzdEJvZHkibQoUSW1NZXNzYWdlUmVxdWVzdEhlYWQSEQoJ",
+            "dGltZXN0YW1wGAEgASgEEg4KBmNsaWVudBgCIAEoCRIPCgdzZXNzaW9uGAMg",
+            "ASgJEhAKCGxhbmd1YWdlGAQgASgJEg8KB3ZlcnNpb24YBSABKAki9wUKEUlt",
+            "TWVzc2FnZVJlc3BvbnNlEiwKDHJlc3BvbnNlSGVhZBgBIAEoCzIWLkltTWVz",
+            "c2FnZVJlc3BvbnNlSGVhZBI3ChR1c2VyVmFsaWRhdGVSZXNwb25zZRgCIAEo",
+            "CzIXLkltVXNlclZhbGlkYXRlUmVzcG9uc2VIABI9ChdjaGF0VXNlck1lc3Nh",
+            "Z2VSZXNwb25zZRgDIAEoCzIaLkltQ2hhdFVzZXJNZXNzYWdlUmVzcG9uc2VI",
+            "ABI/ChhjaGF0R3JvdXBNZXNzYWdlUmVzcG9uc2UYBCABKAsyGy5JbUNoYXRH",
+            "cm91cE1lc3NhZ2VSZXNwb25zZUgAEj8KGGFkZEZyaWVuZE1lc3NhZ2VSZXNw",
+            "b25zZRgFIAEoCzIbLkltQWRkRnJpZW5kTWVzc2FnZVJlc3BvbnNlSAASSQod",
+            "dGVzdENvbm5lY3Rpb25NZXNzYWdlUmVzcG9uc2UYBiABKAsyIC5JbVRlc3RD",
+            "b25uZWN0aW9uTWVzc2FnZVJlc3BvbnNlSAASQwoaY2hhdFNldHRpbmdNZXNz",
+            "YWdlUmVzcG9uc2UYByABKAsyHS5JbUNoYXRTZXR0aW5nTWVzc2FnZVJlc3Bv",
+            "bnNlSAASRQobZ3JvdXBPcGVyYXRlTWVzc2FnZVJlc3BvbnNlGAggASgLMh4u",
+            "SW1Hcm91cE9wZXJhdGVNZXNzYWdlUmVzcG9uc2VIABJPCiBuZWFyQ2lyY2xl",
+            "T3BlcmF0ZU1lc3NhZ2VSZXNwb25zZRgJIAEoCzIjLkltTmVhckNpcmNsZU9w",
+            "ZXJhdGVNZXNzYWdlUmVzcG9uc2VIABJHChxjaXJjbGVPcGVyYXRlTWVzc2Fn",
+            "ZVJlc3BvbnNlGAogASgLMh8uSW1DaXJjbGVPcGVyYXRlTWVzc2FnZVJlc3Bv",
+            "bnNlSAASOQoVc3lzdGVtTWVzc2FnZVJlc3BvbnNlGAsgASgLMhguSW1TeXN0",
+            "ZW1NZXNzYWdlUmVzcG9uc2VIAEIOCgxyZXNwb25zZUJvZHkiggEKFUltTWVz",
+            "c2FnZVJlc3BvbnNlSGVhZBIMCgRjb2RlGAEgASgNEg8KB21lc3NhZ2UYAiAB",
+            "KAkSDQoFaXNhY2sYAyABKAgSEQoJbWVzc2FnZWlkGAQgASgJEigKBnNvdXJj",
+            "ZRgFIAEoDjIYLkltTWVzc2FnZVNvdXJjZVBvc2l0aW9uIkkKFUltVXNlclZh",
+            "bGlkYXRlUmVxdWVzdBIOCgZ1c2VySWQYASABKAQSDQoFdG9rZW4YAiABKAkS",
+            "EQoJbWVzc2FnZWlkGAMgASgJIl8KFkltVXNlclZhbGlkYXRlUmVzcG9uc2US",
+            "EQoJaXNTdWNjZXNzGAEgASgIEg8KB21lc3NhZ2UYAiABKAkSEAoIaXNPbmxp",
+            "bmUYAyABKAgSDwoHc2Vzc2lvbhgEIAEoCSJVChhJbUNoYXRVc2VyTWVzc2Fn",
+            "ZVJlcXVlc3QSOQoWY2hhdFVzZXJNZXNzYWdlQ29udGVudBgBIAEoCzIZLklt",
+            "Q2hhdFVzZXJNZXNzYWdlQ29udGVudCJpChlJbUNoYXRVc2VyTWVzc2FnZVJl",
+            "c3BvbnNlEjkKFmNoYXRVc2VyTWVzc2FnZUNvbnRlbnQYASABKAsyGS5JbUNo",
+            "YXRVc2VyTWVzc2FnZUNvbnRlbnQSEQoJYnVpbGRUaW1lGAIgASgEIpcCChhJ",
+            "bUNoYXRVc2VyTWVzc2FnZUNvbnRlbnQSEgoKZnJvbVVzZXJJZBgBIAEoBBIU",
+            "Cgxmcm9tVXNlck5hbWUYAiABKAkSFQoNZnJvbVVzZXJJbWFnZRgDIAEoCRIQ",
+            "Cgh0b1VzZXJJZBgEIAEoBBITCgtjb250ZW50VHlwZRgFIAEoDRIPCgdjb250",
+            "ZW50GAYgASgJEhMKC29yaWdpbmFsVXJsGAcgASgJEhIKCnByZXZpZXdVcmwY",
+            "CCABKAkSEgoKaW1hZ2VXaWR0aBgJIAEoDRITCgtpbWFnZUhlaWdodBgKIAEo",
+            "DRIMCgRzaXplGAsgASgNEhAKCHBsYXlUaW1lGAwgASgNEhAKCGlzRnJpZW5k",
+            "GA0gASgIIlgKGUltQ2hhdEdyb3VwTWVzc2FnZVJlcXVlc3QSOwoXY2hhdEdy",
+            "b3VwTWVzc2FnZUNvbnRlbnQYASABKAsyGi5JbUNoYXRHcm91cE1lc3NhZ2VD",
+            "b250ZW50ImwKGkltQ2hhdEdyb3VwTWVzc2FnZVJlc3BvbnNlEjsKF2NoYXRH",
+            "cm91cE1lc3NhZ2VDb250ZW50GAEgASgLMhouSW1DaGF0R3JvdXBNZXNzYWdl",
+            "Q29udGVudBIRCglidWlsZFRpbWUYAiABKAQimwIKGUltQ2hhdEdyb3VwTWVz",
+            "c2FnZUNvbnRlbnQSEgoKZnJvbVVzZXJJZBgBIAEoBBIUCgxmcm9tVXNlck5h",
+            "bWUYAiABKAkSFQoNZnJvbVVzZXJJbWFnZRgDIAEoCRITCgt0b0dyb3VwR3Vp",
+            "ZBgEIAEoCRITCgtjb250ZW50VHlwZRgFIAEoDRIPCgdjb250ZW50GAYgASgJ",
+            "EhMKC29yaWdpbmFsVXJsGAcgASgJEhIKCnByZXZpZXdVcmwYCCABKAkSEgoK",
+            "aW1hZ2VXaWR0aBgJIAEoDRITCgtpbWFnZUhlaWdodBgKIAEoDRIMCgRzaXpl",
+            "GAsgASgNEhAKCHBsYXlUaW1lGAwgASgNEhAKCGlzRnJpZW5kGA0gASgIIkQK",
+            "GUltSGVhcnRCZWF0TWVzc2FnZVJlcXVlc3QSEgoKZnJvbVVzZXJJZBgBIAEo",
+            "BBITCgtjdXJyZW50VGltZRgCIAEoBCJYChlJbUFkZEZyaWVuZE1lc3NhZ2VS",
+            "ZXF1ZXN0EjsKF2FkZEZyaWVuZE1lc3NhZ2VDb250ZW50GAEgASgLMhouSW1B",
+            "ZGRGcmllbmRNZXNzYWdlQ29udGVudCJsChpJbUFkZEZyaWVuZE1lc3NhZ2VS",
+            "ZXNwb25zZRI7ChdhZGRGcmllbmRNZXNzYWdlQ29udGVudBgBIAEoCzIaLklt",
+            "QWRkRnJpZW5kTWVzc2FnZUNvbnRlbnQSEQoJYnVpbGRUaW1lGAIgASgEIoMB",
+            "ChlJbUFkZEZyaWVuZE1lc3NhZ2VDb250ZW50EhIKCmZyb21Vc2VySWQYASAB",
+            "KAQSFAoMZnJvbVVzZXJOYW1lGAIgASgJEhkKEWZyb21Vc2VySGVhZEltYWdl",
+            "GAMgASgJEhAKCHRvVXNlcklkGAQgASgEEg8KB2NvbnRlbnQYBiABKAkiRQoe",
+            "SW1UZXN0Q29ubmVjdGlvbk1lc3NhZ2VSZXF1ZXN0EhIKCmZyb21Vc2VySWQY",
+            "ASABKAQSDwoHY29udGVudBgCIAEoCSJECh9JbVRlc3RDb25uZWN0aW9uTWVz",
+            "c2FnZVJlc3BvbnNlEg8KB2NvbnRlbnQYASABKAkSEAoIc2VuZFRpbWUYAiAB",
+            "KAQiPAoTSW1BY2tNZXNzYWdlUmVxdWVzdBISCgpmcm9tVXNlcklkGAEgASgE",
+            "EhEKCW1lc3NhZ2VpZBgCIAEoCSJeChtJbUNoYXRTZXR0aW5nTWVzc2FnZVJl",
+            "cXVlc3QSPwoZY2hhdFNldHRpbmdNZXNzYWdlQ29udGVudBgBIAEoCzIcLklt",
+            "Q2hhdFNldHRpbmdNZXNzYWdlQ29udGVudCJyChxJbUNoYXRTZXR0aW5nTWVz",
+            "c2FnZVJlc3BvbnNlEj8KGWNoYXRTZXR0aW5nTWVzc2FnZUNvbnRlbnQYASAB",
+            "KAsyHC5JbUNoYXRTZXR0aW5nTWVzc2FnZUNvbnRlbnQSEQoJYnVpbGRUaW1l",
+            "GAIgASgEIqQBChtJbUNoYXRTZXR0aW5nTWVzc2FnZUNvbnRlbnQSJwoLc2V0",
+            "dGluZ1R5cGUYASABKA4yEi5JbUNoYXRTZXR0aW5nVHlwZRIjCgtzZXR0aW5n",
+            "VXNlchgCIAEoCzIOLkltVXNlckNvbnRlbnQSEQoJZ3JvdXBHdWlkGAMgASgJ",
+            "EhEKCWdyb3VwTm90ZRgEIAEoCRIRCglncm91cE5hbWUYBSABKAkiYQocSW1H",
+            "cm91cE9wZXJhdGVNZXNzYWdlUmVxdWVzdBJBChpncm91cE9wZXJhdGVNZXNz",
+            "YWdlQ29udGVudBgBIAEoCzIdLkltR3JvdXBPcGVyYXRlTWVzc2FnZUNvbnRl",
+            "bnQidQodSW1Hcm91cE9wZXJhdGVNZXNzYWdlUmVzcG9uc2USQQoaZ3JvdXBP",
+            "cGVyYXRlTWVzc2FnZUNvbnRlbnQYASABKAsyHS5JbUdyb3VwT3BlcmF0ZU1l",
+            "c3NhZ2VDb250ZW50EhEKCWJ1aWxkVGltZRgCIAEoBCK3AQocSW1Hcm91cE9w",
+            "ZXJhdGVNZXNzYWdlQ29udGVudBIoCgtvcGVyYXRlVHlwZRgBIAEoDjITLklt",
+            "R3JvdXBPcGVyYXRlVHlwZRIjCgtvcGVyYXRlVXNlchgCIAEoCzIOLkltVXNl",
+            "ckNvbnRlbnQSEQoJZ3JvdXBHdWlkGAMgASgJEhEKCWdyb3VwTmFtZRgEIAEo",
+            "CRIiCgpncm91cFVzZXJzGAUgAygLMg4uSW1Vc2VyQ29udGVudCJdCg1JbVVz",
+            "ZXJDb250ZW50Eg4KBnVzZXJJZBgBIAEoBBIQCgh1c2VyTmFtZRgCIAEoCRIR",
+            "Cgl1c2VySW1hZ2UYAyABKAkSFwoPZ3JvdXBVc2VyUmVtYXJrGAQgASgJInAK",
+            "IUltTmVhckNpcmNsZU9wZXJhdGVNZXNzYWdlUmVxdWVzdBJLCh9uZWFyQ2ly",
+            "Y2xlT3BlcmF0ZU1lc3NhZ2VDb250ZW50GAEgASgLMiIuSW1OZWFyQ2lyY2xl",
+            "T3BlcmF0ZU1lc3NhZ2VDb250ZW50IoQBCiJJbU5lYXJDaXJjbGVPcGVyYXRl",
+            "TWVzc2FnZVJlc3BvbnNlEksKH25lYXJDaXJjbGVPcGVyYXRlTWVzc2FnZUNv",
+            "bnRlbnQYASABKAsyIi5JbU5lYXJDaXJjbGVPcGVyYXRlTWVzc2FnZUNvbnRl",
+            "bnQSEQoJYnVpbGRUaW1lGAIgASgEIvUBCiFJbU5lYXJDaXJjbGVPcGVyYXRl",
+            "TWVzc2FnZUNvbnRlbnQSKQoLb3BlcmF0ZVR5cGUYASABKA4yFC5JbUNpcmNs",
+            "ZU9wZXJhdGVUeXBlEiAKCHBvc3RVc2VyGAIgASgLMg4uSW1Vc2VyQ29udGVu",
+            "dBIiCgpvcmlnaW5Vc2VyGAMgASgLMg4uSW1Vc2VyQ29udGVudBIhCglyZXBs",
+            "eVVzZXIYBCABKAsyDi5JbVVzZXJDb250ZW50EhQKDG5lYXJDaXJjbGVJZBgF",
+            "IAEoBBIRCgljb21tZW50SWQYBiABKAQSEwoLY29tbWVudENvbnQYByABKAki",
+            "ZAodSW1DaXJjbGVPcGVyYXRlTWVzc2FnZVJlcXVlc3QSQwobY2lyY2xlT3Bl",
+            "cmF0ZU1lc3NhZ2VDb250ZW50GAEgASgLMh4uSW1DaXJjbGVPcGVyYXRlTWVz",
+            "c2FnZUNvbnRlbnQieAoeSW1DaXJjbGVPcGVyYXRlTWVzc2FnZVJlc3BvbnNl",
+            "EkMKG2NpcmNsZU9wZXJhdGVNZXNzYWdlQ29udGVudBgBIAEoCzIeLkltQ2ly",
+            "Y2xlT3BlcmF0ZU1lc3NhZ2VDb250ZW50EhEKCWJ1aWxkVGltZRgCIAEoBCLt",
+            "AQodSW1DaXJjbGVPcGVyYXRlTWVzc2FnZUNvbnRlbnQSKQoLb3BlcmF0ZVR5",
+            "cGUYASABKA4yFC5JbUNpcmNsZU9wZXJhdGVUeXBlEiAKCHBvc3RVc2VyGAIg",
+            "ASgLMg4uSW1Vc2VyQ29udGVudBIiCgpvcmlnaW5Vc2VyGAMgASgLMg4uSW1V",
+            "c2VyQ29udGVudBIhCglyZXBseVVzZXIYBCABKAsyDi5JbVVzZXJDb250ZW50",
+            "EhAKCGNpcmNsZUlkGAUgASgEEhEKCWNvbW1lbnRJZBgGIAEoBBITCgtjb21t",
+            "ZW50Q29udBgHIAEoCSKZAQoWSW1TeXN0ZW1NZXNzYWdlUmVxdWVzdBIeCgZ0",
+            "b1VzZXIYASABKAsyDi5JbVVzZXJDb250ZW50EhMKC3RvR3JvdXBHdWlkGAIg",
+            "ASgJEhMKC3RvR3JvdXBOYW1lGAMgASgJEjUKFHN5c3RlbU1lc3NhZ2VDb250",
+            "ZW50GAQgASgLMhcuSW1TeXN0ZW1NZXNzYWdlQ29udGVudCKtAQoXSW1TeXN0",
+            "ZW1NZXNzYWdlUmVzcG9uc2USHgoGdG9Vc2VyGAEgASgLMg4uSW1Vc2VyQ29u",
+            "dGVudBITCgt0b0dyb3VwR3VpZBgCIAEoCRITCgt0b0dyb3VwTmFtZRgDIAEo",
+            "CRI1ChRzeXN0ZW1NZXNzYWdlQ29udGVudBgEIAEoCzIXLkltU3lzdGVtTWVz",
+            "c2FnZUNvbnRlbnQSEQoJYnVpbGRUaW1lGAUgASgEInMKFkltU3lzdGVtTWVz",
+            "c2FnZUNvbnRlbnQSLwoRc3lzdGVtTWVzc2FnZVR5cGUYASABKA4yFC5JbVN5",
+            "c3RlbU1lc3NhZ2VUeXBlEhIKCnRvVXNlckRlc2MYAiABKAkSFAoMYWRkR3Jv",
+            "dXBEZXNjGAMgASgJKvABCg1JbU1lc3NhZ2VUeXBlEggKBEJhc2UQABIQCgxV",
+            "c2VyVmFsaWRhdGUQARIMCghDaGF0VXNlchACEg0KCUNoYXRHcm91cBADEg0K",
+            "CUhlYXJ0QmVhdBAEEg0KCUFkZEZyaWVuZBAFEhIKDlRlc3RDb25uZWN0aW9u",
+            "EAYSFAoQQ2xpZW50QWNrTWVzc2FnZRAHEg8KC0NoYXRTZXR0aW5nEAgSEAoM",
+            "R3JvdXBPcGVyYXRlEAkSFQoRTmVhckNpcmNsZU9wZXJhdGUQChIRCg1DaXJj",
+            "bGVPcGVyYXRlEAsSEQoNU3lzdGVtTWVzc2FnZRAMKlEKFUltTWVzc2FnZVJl",
+            "c3BvbnNlQ29kZRIJCgVPdGhlchAAEgsKB1N1Y2Nlc3MQZBILCgZGYWlsZWQQ",
+            "yAESEwoOU2Vzc2lvbkludmFsaWQQyQEqSQoXSW1NZXNzYWdlU291cmNlUG9z",
+            "aXRpb24SCAoETm9uZRAAEgwKCFJlYWxUaW1lEAESCwoHT2ZmbGluZRACEgkK",
+            "BVJldHJ5EAMqUgoRSW1DaGF0U2V0dGluZ1R5cGUSDwoLU2V0dGluZ05vbmUQ",
+            "ABINCglHcm91cE5vdGUQARINCglHcm91cE5hbWUQAhIOCgpVc2VyUmVtYXJr",
+            "EAMqeQoSSW1Hcm91cE9wZXJhdGVUeXBlEhQKEEdyb3VwT3BlcmF0ZU5vbmUQ",
+            "ABIPCgtDcmVhdGVHcm91cBABEg0KCUV4aXRHcm91cBACEhAKDERpc21pc3NH",
+            "cm91cBADEgsKB0FkZFVzZXIQBBIOCgpSZW1vdmVVc2VyEAUqcQoTSW1DaXJj",
+            "bGVPcGVyYXRlVHlwZRIZChVOZWFyQ2lyY2xlT3BlcmF0ZU5vbmUQABILCgdB",
+            "ZGRMaWtlEAESDgoKQ2FuY2VsTGlrZRACEg8KC1Bvc3RDb21tZW50EAMSEQoN",
+            "Q2FuY2VsQ29tbWVudBAEKicKE0ltU3lzdGVtTWVzc2FnZVR5cGUSEAoMQWRk",
+            "TmVhckdyb3VwEABCMAoWY29tLmh3bC5pbWNvcmUuaW1wcm90b1ABqgITSFdM",
+            "LklNQ29yZS5Qcm90b2NvbGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::HWL.IMCore.Protocol.ImMessageType), typeof(global::HWL.IMCore.Protocol.ImMessageResponseCode), typeof(global::HWL.IMCore.Protocol.ImMessageSourcePosition), typeof(global::HWL.IMCore.Protocol.ImChatSettingType), typeof(global::HWL.IMCore.Protocol.ImGroupOperateType), typeof(global::HWL.IMCore.Protocol.ImCircleOperateType), typeof(global::HWL.IMCore.Protocol.ImSystemMessageType), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImMessageContext), global::HWL.IMCore.Protocol.ImMessageContext.Parser, new[]{ "Type", "Request", "Response" }, new[]{ "Body" }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImMessageRequest), global::HWL.IMCore.Protocol.ImMessageRequest.Parser, new[]{ "RequestHead", "UserValidateRequest", "ChatUserMessageRequest", "ChatGroupMessageRequest", "HeartBeatMessageRequest", "AddFriendMessageRequest", "TestConnectionMessageRequest", "AckMessageRequest", "ChatSettingMessageRequest", "GroupOperateMessageRequest", "NearCircleOperateMessageRequest", "CircleOperateMessageRequest", "SystemMessageRequest" }, new[]{ "RequestBody" }, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImMessageRequestHead), global::HWL.IMCore.Protocol.ImMessageRequestHead.Parser, new[]{ "Timestamp", "Client", "Sessionid", "Language", "Version" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImMessageRequestHead), global::HWL.IMCore.Protocol.ImMessageRequestHead.Parser, new[]{ "Timestamp", "Client", "Session", "Language", "Version" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImMessageResponse), global::HWL.IMCore.Protocol.ImMessageResponse.Parser, new[]{ "ResponseHead", "UserValidateResponse", "ChatUserMessageResponse", "ChatGroupMessageResponse", "AddFriendMessageResponse", "TestConnectionMessageResponse", "ChatSettingMessageResponse", "GroupOperateMessageResponse", "NearCircleOperateMessageResponse", "CircleOperateMessageResponse", "SystemMessageResponse" }, new[]{ "ResponseBody" }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImMessageResponseHead), global::HWL.IMCore.Protocol.ImMessageResponseHead.Parser, new[]{ "Code", "Message", "Isack", "Messageid", "Source" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImUserValidateRequest), global::HWL.IMCore.Protocol.ImUserValidateRequest.Parser, new[]{ "UserId", "Token", "Messageid" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImUserValidateResponse), global::HWL.IMCore.Protocol.ImUserValidateResponse.Parser, new[]{ "IsSuccess", "Message", "IsOnline", "Sessionid" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImUserValidateResponse), global::HWL.IMCore.Protocol.ImUserValidateResponse.Parser, new[]{ "IsSuccess", "Message", "IsOnline", "Session" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImChatUserMessageRequest), global::HWL.IMCore.Protocol.ImChatUserMessageRequest.Parser, new[]{ "ChatUserMessageContent" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImChatUserMessageResponse), global::HWL.IMCore.Protocol.ImChatUserMessageResponse.Parser, new[]{ "ChatUserMessageContent", "BuildTime" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImChatUserMessageContent), global::HWL.IMCore.Protocol.ImChatUserMessageContent.Parser, new[]{ "FromUserId", "FromUserName", "FromUserImage", "ToUserId", "ContentType", "Content", "OriginalUrl", "PreviewUrl", "ImageWidth", "ImageHeight", "Size", "PlayTime", "IsFriend" }, null, null, null),
@@ -211,8 +213,8 @@ namespace HWL.IMCore.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImCircleOperateMessageRequest), global::HWL.IMCore.Protocol.ImCircleOperateMessageRequest.Parser, new[]{ "CircleOperateMessageContent" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImCircleOperateMessageResponse), global::HWL.IMCore.Protocol.ImCircleOperateMessageResponse.Parser, new[]{ "CircleOperateMessageContent", "BuildTime" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImCircleOperateMessageContent), global::HWL.IMCore.Protocol.ImCircleOperateMessageContent.Parser, new[]{ "OperateType", "PostUser", "OriginUser", "ReplyUser", "CircleId", "CommentId", "CommentCont" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImSystemMessageRequest), global::HWL.IMCore.Protocol.ImSystemMessageRequest.Parser, new[]{ "ToUserId", "ToGroupGuid", "SystemMessageContent" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImSystemMessageResponse), global::HWL.IMCore.Protocol.ImSystemMessageResponse.Parser, new[]{ "SystemMessageContent", "BuildTime" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImSystemMessageRequest), global::HWL.IMCore.Protocol.ImSystemMessageRequest.Parser, new[]{ "ToUser", "ToGroupGuid", "ToGroupName", "SystemMessageContent" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImSystemMessageResponse), global::HWL.IMCore.Protocol.ImSystemMessageResponse.Parser, new[]{ "ToUser", "ToGroupGuid", "ToGroupName", "SystemMessageContent", "BuildTime" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::HWL.IMCore.Protocol.ImSystemMessageContent), global::HWL.IMCore.Protocol.ImSystemMessageContent.Parser, new[]{ "SystemMessageType", "ToUserDesc", "AddGroupDesc" }, null, null, null)
           }));
     }
@@ -240,7 +242,7 @@ namespace HWL.IMCore.Protocol {
     [pbr::OriginalName("Other")] Other = 0,
     [pbr::OriginalName("Success")] Success = 100,
     [pbr::OriginalName("Failed")] Failed = 200,
-    [pbr::OriginalName("SessionidInvalid")] SessionidInvalid = 201,
+    [pbr::OriginalName("SessionInvalid")] SessionInvalid = 201,
   }
 
   public enum ImMessageSourcePosition {
@@ -550,7 +552,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImMessageRequest(ImMessageRequest other) : this() {
-      requestHead_ = other.requestHead_ != null ? other.requestHead_.Clone() : null;
+      RequestHead = other.requestHead_ != null ? other.RequestHead.Clone() : null;
       switch (other.RequestBodyCase) {
         case RequestBodyOneofCase.UserValidateRequest:
           UserValidateRequest = other.UserValidateRequest.Clone();
@@ -1180,7 +1182,7 @@ namespace HWL.IMCore.Protocol {
     public ImMessageRequestHead(ImMessageRequestHead other) : this() {
       timestamp_ = other.timestamp_;
       client_ = other.client_;
-      sessionid_ = other.sessionid_;
+      session_ = other.session_;
       language_ = other.language_;
       version_ = other.version_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -1213,14 +1215,14 @@ namespace HWL.IMCore.Protocol {
       }
     }
 
-    /// <summary>Field number for the "sessionid" field.</summary>
-    public const int SessionidFieldNumber = 3;
-    private string sessionid_ = "";
+    /// <summary>Field number for the "session" field.</summary>
+    public const int SessionFieldNumber = 3;
+    private string session_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Sessionid {
-      get { return sessionid_; }
+    public string Session {
+      get { return session_; }
       set {
-        sessionid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        session_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -1261,7 +1263,7 @@ namespace HWL.IMCore.Protocol {
       }
       if (Timestamp != other.Timestamp) return false;
       if (Client != other.Client) return false;
-      if (Sessionid != other.Sessionid) return false;
+      if (Session != other.Session) return false;
       if (Language != other.Language) return false;
       if (Version != other.Version) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -1272,7 +1274,7 @@ namespace HWL.IMCore.Protocol {
       int hash = 1;
       if (Timestamp != 0UL) hash ^= Timestamp.GetHashCode();
       if (Client.Length != 0) hash ^= Client.GetHashCode();
-      if (Sessionid.Length != 0) hash ^= Sessionid.GetHashCode();
+      if (Session.Length != 0) hash ^= Session.GetHashCode();
       if (Language.Length != 0) hash ^= Language.GetHashCode();
       if (Version.Length != 0) hash ^= Version.GetHashCode();
       if (_unknownFields != null) {
@@ -1296,9 +1298,9 @@ namespace HWL.IMCore.Protocol {
         output.WriteRawTag(18);
         output.WriteString(Client);
       }
-      if (Sessionid.Length != 0) {
+      if (Session.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteString(Sessionid);
+        output.WriteString(Session);
       }
       if (Language.Length != 0) {
         output.WriteRawTag(34);
@@ -1322,8 +1324,8 @@ namespace HWL.IMCore.Protocol {
       if (Client.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Client);
       }
-      if (Sessionid.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Sessionid);
+      if (Session.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Session);
       }
       if (Language.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Language);
@@ -1348,8 +1350,8 @@ namespace HWL.IMCore.Protocol {
       if (other.Client.Length != 0) {
         Client = other.Client;
       }
-      if (other.Sessionid.Length != 0) {
-        Sessionid = other.Sessionid;
+      if (other.Session.Length != 0) {
+        Session = other.Session;
       }
       if (other.Language.Length != 0) {
         Language = other.Language;
@@ -1377,7 +1379,7 @@ namespace HWL.IMCore.Protocol {
             break;
           }
           case 26: {
-            Sessionid = input.ReadString();
+            Session = input.ReadString();
             break;
           }
           case 34: {
@@ -1422,7 +1424,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImMessageResponse(ImMessageResponse other) : this() {
-      responseHead_ = other.responseHead_ != null ? other.responseHead_.Clone() : null;
+      ResponseHead = other.responseHead_ != null ? other.ResponseHead.Clone() : null;
       switch (other.ResponseBodyCase) {
         case ResponseBodyOneofCase.UserValidateResponse:
           UserValidateResponse = other.UserValidateResponse.Clone();
@@ -2404,7 +2406,7 @@ namespace HWL.IMCore.Protocol {
       isSuccess_ = other.isSuccess_;
       message_ = other.message_;
       isOnline_ = other.isOnline_;
-      sessionid_ = other.sessionid_;
+      session_ = other.session_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2446,14 +2448,14 @@ namespace HWL.IMCore.Protocol {
       }
     }
 
-    /// <summary>Field number for the "sessionid" field.</summary>
-    public const int SessionidFieldNumber = 4;
-    private string sessionid_ = "";
+    /// <summary>Field number for the "session" field.</summary>
+    public const int SessionFieldNumber = 4;
+    private string session_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Sessionid {
-      get { return sessionid_; }
+    public string Session {
+      get { return session_; }
       set {
-        sessionid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        session_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -2473,7 +2475,7 @@ namespace HWL.IMCore.Protocol {
       if (IsSuccess != other.IsSuccess) return false;
       if (Message != other.Message) return false;
       if (IsOnline != other.IsOnline) return false;
-      if (Sessionid != other.Sessionid) return false;
+      if (Session != other.Session) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2483,7 +2485,7 @@ namespace HWL.IMCore.Protocol {
       if (IsSuccess != false) hash ^= IsSuccess.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
       if (IsOnline != false) hash ^= IsOnline.GetHashCode();
-      if (Sessionid.Length != 0) hash ^= Sessionid.GetHashCode();
+      if (Session.Length != 0) hash ^= Session.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2509,9 +2511,9 @@ namespace HWL.IMCore.Protocol {
         output.WriteRawTag(24);
         output.WriteBool(IsOnline);
       }
-      if (Sessionid.Length != 0) {
+      if (Session.Length != 0) {
         output.WriteRawTag(34);
-        output.WriteString(Sessionid);
+        output.WriteString(Session);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2530,8 +2532,8 @@ namespace HWL.IMCore.Protocol {
       if (IsOnline != false) {
         size += 1 + 1;
       }
-      if (Sessionid.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Sessionid);
+      if (Session.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Session);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2553,8 +2555,8 @@ namespace HWL.IMCore.Protocol {
       if (other.IsOnline != false) {
         IsOnline = other.IsOnline;
       }
-      if (other.Sessionid.Length != 0) {
-        Sessionid = other.Sessionid;
+      if (other.Session.Length != 0) {
+        Session = other.Session;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2580,7 +2582,7 @@ namespace HWL.IMCore.Protocol {
             break;
           }
           case 34: {
-            Sessionid = input.ReadString();
+            Session = input.ReadString();
             break;
           }
         }
@@ -2617,7 +2619,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImChatUserMessageRequest(ImChatUserMessageRequest other) : this() {
-      chatUserMessageContent_ = other.chatUserMessageContent_ != null ? other.chatUserMessageContent_.Clone() : null;
+      ChatUserMessageContent = other.chatUserMessageContent_ != null ? other.ChatUserMessageContent.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2752,7 +2754,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImChatUserMessageResponse(ImChatUserMessageResponse other) : this() {
-      chatUserMessageContent_ = other.chatUserMessageContent_ != null ? other.chatUserMessageContent_.Clone() : null;
+      ChatUserMessageContent = other.chatUserMessageContent_ != null ? other.ChatUserMessageContent.Clone() : null;
       buildTime_ = other.buildTime_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -3383,7 +3385,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImChatGroupMessageRequest(ImChatGroupMessageRequest other) : this() {
-      chatGroupMessageContent_ = other.chatGroupMessageContent_ != null ? other.chatGroupMessageContent_.Clone() : null;
+      ChatGroupMessageContent = other.chatGroupMessageContent_ != null ? other.ChatGroupMessageContent.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3518,7 +3520,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImChatGroupMessageResponse(ImChatGroupMessageResponse other) : this() {
-      chatGroupMessageContent_ = other.chatGroupMessageContent_ != null ? other.chatGroupMessageContent_.Clone() : null;
+      ChatGroupMessageContent = other.chatGroupMessageContent_ != null ? other.ChatGroupMessageContent.Clone() : null;
       buildTime_ = other.buildTime_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -4309,7 +4311,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImAddFriendMessageRequest(ImAddFriendMessageRequest other) : this() {
-      addFriendMessageContent_ = other.addFriendMessageContent_ != null ? other.addFriendMessageContent_.Clone() : null;
+      AddFriendMessageContent = other.addFriendMessageContent_ != null ? other.AddFriendMessageContent.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4444,7 +4446,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImAddFriendMessageResponse(ImAddFriendMessageResponse other) : this() {
-      addFriendMessageContent_ = other.addFriendMessageContent_ != null ? other.addFriendMessageContent_.Clone() : null;
+      AddFriendMessageContent = other.addFriendMessageContent_ != null ? other.AddFriendMessageContent.Clone() : null;
       buildTime_ = other.buildTime_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -5328,7 +5330,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImChatSettingMessageRequest(ImChatSettingMessageRequest other) : this() {
-      chatSettingMessageContent_ = other.chatSettingMessageContent_ != null ? other.chatSettingMessageContent_.Clone() : null;
+      ChatSettingMessageContent = other.chatSettingMessageContent_ != null ? other.ChatSettingMessageContent.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -5463,7 +5465,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImChatSettingMessageResponse(ImChatSettingMessageResponse other) : this() {
-      chatSettingMessageContent_ = other.chatSettingMessageContent_ != null ? other.chatSettingMessageContent_.Clone() : null;
+      ChatSettingMessageContent = other.chatSettingMessageContent_ != null ? other.ChatSettingMessageContent.Clone() : null;
       buildTime_ = other.buildTime_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -5627,7 +5629,7 @@ namespace HWL.IMCore.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImChatSettingMessageContent(ImChatSettingMessageContent other) : this() {
       settingType_ = other.settingType_;
-      settingUser_ = other.settingUser_ != null ? other.settingUser_.Clone() : null;
+      SettingUser = other.settingUser_ != null ? other.SettingUser.Clone() : null;
       groupGuid_ = other.groupGuid_;
       groupNote_ = other.groupNote_;
       groupName_ = other.groupName_;
@@ -5876,7 +5878,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImGroupOperateMessageRequest(ImGroupOperateMessageRequest other) : this() {
-      groupOperateMessageContent_ = other.groupOperateMessageContent_ != null ? other.groupOperateMessageContent_.Clone() : null;
+      GroupOperateMessageContent = other.groupOperateMessageContent_ != null ? other.GroupOperateMessageContent.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -6011,7 +6013,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImGroupOperateMessageResponse(ImGroupOperateMessageResponse other) : this() {
-      groupOperateMessageContent_ = other.groupOperateMessageContent_ != null ? other.groupOperateMessageContent_.Clone() : null;
+      GroupOperateMessageContent = other.groupOperateMessageContent_ != null ? other.GroupOperateMessageContent.Clone() : null;
       buildTime_ = other.buildTime_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -6175,7 +6177,7 @@ namespace HWL.IMCore.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImGroupOperateMessageContent(ImGroupOperateMessageContent other) : this() {
       operateType_ = other.operateType_;
-      operateUser_ = other.operateUser_ != null ? other.operateUser_.Clone() : null;
+      OperateUser = other.operateUser_ != null ? other.OperateUser.Clone() : null;
       groupGuid_ = other.groupGuid_;
       groupName_ = other.groupName_;
       groupUsers_ = other.groupUsers_.Clone();
@@ -6626,7 +6628,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImNearCircleOperateMessageRequest(ImNearCircleOperateMessageRequest other) : this() {
-      nearCircleOperateMessageContent_ = other.nearCircleOperateMessageContent_ != null ? other.nearCircleOperateMessageContent_.Clone() : null;
+      NearCircleOperateMessageContent = other.nearCircleOperateMessageContent_ != null ? other.NearCircleOperateMessageContent.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -6761,7 +6763,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImNearCircleOperateMessageResponse(ImNearCircleOperateMessageResponse other) : this() {
-      nearCircleOperateMessageContent_ = other.nearCircleOperateMessageContent_ != null ? other.nearCircleOperateMessageContent_.Clone() : null;
+      NearCircleOperateMessageContent = other.nearCircleOperateMessageContent_ != null ? other.NearCircleOperateMessageContent.Clone() : null;
       buildTime_ = other.buildTime_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -6925,9 +6927,9 @@ namespace HWL.IMCore.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImNearCircleOperateMessageContent(ImNearCircleOperateMessageContent other) : this() {
       operateType_ = other.operateType_;
-      postUser_ = other.postUser_ != null ? other.postUser_.Clone() : null;
-      originUser_ = other.originUser_ != null ? other.originUser_.Clone() : null;
-      replyUser_ = other.replyUser_ != null ? other.replyUser_.Clone() : null;
+      PostUser = other.postUser_ != null ? other.PostUser.Clone() : null;
+      OriginUser = other.originUser_ != null ? other.OriginUser.Clone() : null;
+      ReplyUser = other.replyUser_ != null ? other.ReplyUser.Clone() : null;
       nearCircleId_ = other.nearCircleId_;
       commentId_ = other.commentId_;
       commentCont_ = other.commentCont_;
@@ -7242,7 +7244,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImCircleOperateMessageRequest(ImCircleOperateMessageRequest other) : this() {
-      circleOperateMessageContent_ = other.circleOperateMessageContent_ != null ? other.circleOperateMessageContent_.Clone() : null;
+      CircleOperateMessageContent = other.circleOperateMessageContent_ != null ? other.CircleOperateMessageContent.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -7377,7 +7379,7 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImCircleOperateMessageResponse(ImCircleOperateMessageResponse other) : this() {
-      circleOperateMessageContent_ = other.circleOperateMessageContent_ != null ? other.circleOperateMessageContent_.Clone() : null;
+      CircleOperateMessageContent = other.circleOperateMessageContent_ != null ? other.CircleOperateMessageContent.Clone() : null;
       buildTime_ = other.buildTime_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -7541,9 +7543,9 @@ namespace HWL.IMCore.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImCircleOperateMessageContent(ImCircleOperateMessageContent other) : this() {
       operateType_ = other.operateType_;
-      postUser_ = other.postUser_ != null ? other.postUser_.Clone() : null;
-      originUser_ = other.originUser_ != null ? other.originUser_.Clone() : null;
-      replyUser_ = other.replyUser_ != null ? other.replyUser_.Clone() : null;
+      PostUser = other.postUser_ != null ? other.PostUser.Clone() : null;
+      OriginUser = other.originUser_ != null ? other.OriginUser.Clone() : null;
+      ReplyUser = other.replyUser_ != null ? other.ReplyUser.Clone() : null;
       circleId_ = other.circleId_;
       commentId_ = other.commentId_;
       commentCont_ = other.commentCont_;
@@ -7855,9 +7857,10 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImSystemMessageRequest(ImSystemMessageRequest other) : this() {
-      toUserId_ = other.toUserId_;
+      ToUser = other.toUser_ != null ? other.ToUser.Clone() : null;
       toGroupGuid_ = other.toGroupGuid_;
-      systemMessageContent_ = other.systemMessageContent_ != null ? other.systemMessageContent_.Clone() : null;
+      toGroupName_ = other.toGroupName_;
+      SystemMessageContent = other.systemMessageContent_ != null ? other.SystemMessageContent.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -7866,14 +7869,14 @@ namespace HWL.IMCore.Protocol {
       return new ImSystemMessageRequest(this);
     }
 
-    /// <summary>Field number for the "toUserId" field.</summary>
-    public const int ToUserIdFieldNumber = 1;
-    private ulong toUserId_;
+    /// <summary>Field number for the "toUser" field.</summary>
+    public const int ToUserFieldNumber = 1;
+    private global::HWL.IMCore.Protocol.ImUserContent toUser_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ulong ToUserId {
-      get { return toUserId_; }
+    public global::HWL.IMCore.Protocol.ImUserContent ToUser {
+      get { return toUser_; }
       set {
-        toUserId_ = value;
+        toUser_ = value;
       }
     }
 
@@ -7888,8 +7891,19 @@ namespace HWL.IMCore.Protocol {
       }
     }
 
+    /// <summary>Field number for the "toGroupName" field.</summary>
+    public const int ToGroupNameFieldNumber = 3;
+    private string toGroupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ToGroupName {
+      get { return toGroupName_; }
+      set {
+        toGroupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "systemMessageContent" field.</summary>
-    public const int SystemMessageContentFieldNumber = 3;
+    public const int SystemMessageContentFieldNumber = 4;
     private global::HWL.IMCore.Protocol.ImSystemMessageContent systemMessageContent_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::HWL.IMCore.Protocol.ImSystemMessageContent SystemMessageContent {
@@ -7912,8 +7926,9 @@ namespace HWL.IMCore.Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ToUserId != other.ToUserId) return false;
+      if (!object.Equals(ToUser, other.ToUser)) return false;
       if (ToGroupGuid != other.ToGroupGuid) return false;
+      if (ToGroupName != other.ToGroupName) return false;
       if (!object.Equals(SystemMessageContent, other.SystemMessageContent)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -7921,8 +7936,9 @@ namespace HWL.IMCore.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (ToUserId != 0UL) hash ^= ToUserId.GetHashCode();
+      if (toUser_ != null) hash ^= ToUser.GetHashCode();
       if (ToGroupGuid.Length != 0) hash ^= ToGroupGuid.GetHashCode();
+      if (ToGroupName.Length != 0) hash ^= ToGroupName.GetHashCode();
       if (systemMessageContent_ != null) hash ^= SystemMessageContent.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -7937,16 +7953,20 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (ToUserId != 0UL) {
-        output.WriteRawTag(8);
-        output.WriteUInt64(ToUserId);
+      if (toUser_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ToUser);
       }
       if (ToGroupGuid.Length != 0) {
         output.WriteRawTag(18);
         output.WriteString(ToGroupGuid);
       }
-      if (systemMessageContent_ != null) {
+      if (ToGroupName.Length != 0) {
         output.WriteRawTag(26);
+        output.WriteString(ToGroupName);
+      }
+      if (systemMessageContent_ != null) {
+        output.WriteRawTag(34);
         output.WriteMessage(SystemMessageContent);
       }
       if (_unknownFields != null) {
@@ -7957,11 +7977,14 @@ namespace HWL.IMCore.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (ToUserId != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ToUserId);
+      if (toUser_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ToUser);
       }
       if (ToGroupGuid.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(ToGroupGuid);
+      }
+      if (ToGroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ToGroupName);
       }
       if (systemMessageContent_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(SystemMessageContent);
@@ -7977,11 +8000,17 @@ namespace HWL.IMCore.Protocol {
       if (other == null) {
         return;
       }
-      if (other.ToUserId != 0UL) {
-        ToUserId = other.ToUserId;
+      if (other.toUser_ != null) {
+        if (toUser_ == null) {
+          toUser_ = new global::HWL.IMCore.Protocol.ImUserContent();
+        }
+        ToUser.MergeFrom(other.ToUser);
       }
       if (other.ToGroupGuid.Length != 0) {
         ToGroupGuid = other.ToGroupGuid;
+      }
+      if (other.ToGroupName.Length != 0) {
+        ToGroupName = other.ToGroupName;
       }
       if (other.systemMessageContent_ != null) {
         if (systemMessageContent_ == null) {
@@ -8000,8 +8029,11 @@ namespace HWL.IMCore.Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            ToUserId = input.ReadUInt64();
+          case 10: {
+            if (toUser_ == null) {
+              toUser_ = new global::HWL.IMCore.Protocol.ImUserContent();
+            }
+            input.ReadMessage(toUser_);
             break;
           }
           case 18: {
@@ -8009,6 +8041,10 @@ namespace HWL.IMCore.Protocol {
             break;
           }
           case 26: {
+            ToGroupName = input.ReadString();
+            break;
+          }
+          case 34: {
             if (systemMessageContent_ == null) {
               systemMessageContent_ = new global::HWL.IMCore.Protocol.ImSystemMessageContent();
             }
@@ -8046,7 +8082,10 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ImSystemMessageResponse(ImSystemMessageResponse other) : this() {
-      systemMessageContent_ = other.systemMessageContent_ != null ? other.systemMessageContent_.Clone() : null;
+      ToUser = other.toUser_ != null ? other.ToUser.Clone() : null;
+      toGroupGuid_ = other.toGroupGuid_;
+      toGroupName_ = other.toGroupName_;
+      SystemMessageContent = other.systemMessageContent_ != null ? other.SystemMessageContent.Clone() : null;
       buildTime_ = other.buildTime_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -8056,8 +8095,41 @@ namespace HWL.IMCore.Protocol {
       return new ImSystemMessageResponse(this);
     }
 
+    /// <summary>Field number for the "toUser" field.</summary>
+    public const int ToUserFieldNumber = 1;
+    private global::HWL.IMCore.Protocol.ImUserContent toUser_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::HWL.IMCore.Protocol.ImUserContent ToUser {
+      get { return toUser_; }
+      set {
+        toUser_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "toGroupGuid" field.</summary>
+    public const int ToGroupGuidFieldNumber = 2;
+    private string toGroupGuid_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ToGroupGuid {
+      get { return toGroupGuid_; }
+      set {
+        toGroupGuid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "toGroupName" field.</summary>
+    public const int ToGroupNameFieldNumber = 3;
+    private string toGroupName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ToGroupName {
+      get { return toGroupName_; }
+      set {
+        toGroupName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "systemMessageContent" field.</summary>
-    public const int SystemMessageContentFieldNumber = 1;
+    public const int SystemMessageContentFieldNumber = 4;
     private global::HWL.IMCore.Protocol.ImSystemMessageContent systemMessageContent_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::HWL.IMCore.Protocol.ImSystemMessageContent SystemMessageContent {
@@ -8068,7 +8140,7 @@ namespace HWL.IMCore.Protocol {
     }
 
     /// <summary>Field number for the "buildTime" field.</summary>
-    public const int BuildTimeFieldNumber = 2;
+    public const int BuildTimeFieldNumber = 5;
     private ulong buildTime_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ulong BuildTime {
@@ -8091,6 +8163,9 @@ namespace HWL.IMCore.Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (!object.Equals(ToUser, other.ToUser)) return false;
+      if (ToGroupGuid != other.ToGroupGuid) return false;
+      if (ToGroupName != other.ToGroupName) return false;
       if (!object.Equals(SystemMessageContent, other.SystemMessageContent)) return false;
       if (BuildTime != other.BuildTime) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -8099,6 +8174,9 @@ namespace HWL.IMCore.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (toUser_ != null) hash ^= ToUser.GetHashCode();
+      if (ToGroupGuid.Length != 0) hash ^= ToGroupGuid.GetHashCode();
+      if (ToGroupName.Length != 0) hash ^= ToGroupName.GetHashCode();
       if (systemMessageContent_ != null) hash ^= SystemMessageContent.GetHashCode();
       if (BuildTime != 0UL) hash ^= BuildTime.GetHashCode();
       if (_unknownFields != null) {
@@ -8114,12 +8192,24 @@ namespace HWL.IMCore.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (systemMessageContent_ != null) {
+      if (toUser_ != null) {
         output.WriteRawTag(10);
+        output.WriteMessage(ToUser);
+      }
+      if (ToGroupGuid.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(ToGroupGuid);
+      }
+      if (ToGroupName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ToGroupName);
+      }
+      if (systemMessageContent_ != null) {
+        output.WriteRawTag(34);
         output.WriteMessage(SystemMessageContent);
       }
       if (BuildTime != 0UL) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(40);
         output.WriteUInt64(BuildTime);
       }
       if (_unknownFields != null) {
@@ -8130,6 +8220,15 @@ namespace HWL.IMCore.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (toUser_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ToUser);
+      }
+      if (ToGroupGuid.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ToGroupGuid);
+      }
+      if (ToGroupName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ToGroupName);
+      }
       if (systemMessageContent_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(SystemMessageContent);
       }
@@ -8146,6 +8245,18 @@ namespace HWL.IMCore.Protocol {
     public void MergeFrom(ImSystemMessageResponse other) {
       if (other == null) {
         return;
+      }
+      if (other.toUser_ != null) {
+        if (toUser_ == null) {
+          toUser_ = new global::HWL.IMCore.Protocol.ImUserContent();
+        }
+        ToUser.MergeFrom(other.ToUser);
+      }
+      if (other.ToGroupGuid.Length != 0) {
+        ToGroupGuid = other.ToGroupGuid;
+      }
+      if (other.ToGroupName.Length != 0) {
+        ToGroupName = other.ToGroupName;
       }
       if (other.systemMessageContent_ != null) {
         if (systemMessageContent_ == null) {
@@ -8168,13 +8279,28 @@ namespace HWL.IMCore.Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
+            if (toUser_ == null) {
+              toUser_ = new global::HWL.IMCore.Protocol.ImUserContent();
+            }
+            input.ReadMessage(toUser_);
+            break;
+          }
+          case 18: {
+            ToGroupGuid = input.ReadString();
+            break;
+          }
+          case 26: {
+            ToGroupName = input.ReadString();
+            break;
+          }
+          case 34: {
             if (systemMessageContent_ == null) {
               systemMessageContent_ = new global::HWL.IMCore.Protocol.ImSystemMessageContent();
             }
             input.ReadMessage(systemMessageContent_);
             break;
           }
-          case 16: {
+          case 40: {
             BuildTime = input.ReadUInt64();
             break;
           }

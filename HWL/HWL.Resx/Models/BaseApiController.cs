@@ -1,12 +1,5 @@
 ﻿using GMSF.Model;
-using HWL.Service;
-using HWL.Tools.Resx;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
 
 namespace HWL.Resx.Models
 {
@@ -23,5 +16,6 @@ namespace HWL.Resx.Models
                 Body = t
             };
         }
+
     }
 }

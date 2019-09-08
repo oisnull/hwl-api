@@ -8,6 +8,7 @@ using System.Linq;
 using HWL.Entity;
 using HWL.Redis;
 using HWL.IMClient;
+using HWL.IMCore.Protocol;
 
 namespace HWL.Service.User.Service
 {
@@ -66,8 +67,13 @@ namespace HWL.Service.User.Service
             if (!isExistInGroup)
             {
                 res.GroupUserInfos = GetGroupUsers(groupGuid);
-                string userName = res.GroupUserInfos?.Where(g => g.UserId == request.UserId).Select(g => g.UserName).FirstOrDefault();
-                IMClientV.INSTANCE.SendSystemMessage((ulong)request.UserId, userName, groupGuid, getNearDesc());
+                ImUserContent user = res.GroupUserInfos?.Where(g => g.UserId == request.UserId).Select(g => new ImUserContent
+                {
+                    UserId = (ulong)g.UserId,
+                    UserName = g.UserName,
+                    UserImage = g.UserImage,
+                }).FirstOrDefault();
+                IMClientV.INSTANCE.SendSystemMessage(user, groupGuid, getNearDesc());
             }
 
             return res;

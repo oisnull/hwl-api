@@ -25,11 +25,11 @@ namespace HWL.ShareConfig
             }
         }
 
-        protected static IConfigurationSection ApiSettings
+        protected static IConfigurationSection AppSettings
         {
             get
             {
-                return Configuration.GetSection("ApiSettings");
+                return Configuration.GetSection("AppSettings");
             }
         }
 

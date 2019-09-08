@@ -16,7 +16,7 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return Convert.ToInt32(ApiSettings["UserLoginExpireDay"]);
+                return Convert.ToInt32(AppSettings["UserLoginExpireDay"]);
             }
         }
 
@@ -27,7 +27,7 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return Convert.ToInt32(ApiSettings["UserCodeExpireSecond"]);
+                return Convert.ToInt32(AppSettings["UserCodeExpireSecond"]);
             }
         }
 
@@ -38,7 +38,15 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return ApiSettings["UploadDirectory"];
+                return AppSettings["UploadDirectory"];
+            }
+        }
+
+        public static string LogDirectory
+        {
+            get
+            {
+                return AppSettings["LogDirectory"];
             }
         }
 
@@ -49,7 +57,7 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return ApiSettings["FileAccessUrl"];
+                return AppSettings["FileAccessUrl"];
             }
         }
 
@@ -84,7 +92,7 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return Convert.ToInt32(ApiSettings["UserAddFriendTotalCount"]);
+                return Convert.ToInt32(AppSettings["UserAddFriendTotalCount"]);
             }
         }
 
@@ -95,7 +103,7 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return Convert.ToInt32(ApiSettings["UserAddFriendDayCount"]);
+                return Convert.ToInt32(AppSettings["UserAddFriendDayCount"]);
             }
         }
 

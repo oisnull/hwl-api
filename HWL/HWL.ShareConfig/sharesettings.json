@@ -1,9 +1,10 @@
 ﻿{
-  "ApiSettings": {
+  "AppSettings": {
     "UserLoginExpireDay": 30, //用户登录过期时间设置,按天算,指在当前时间往后加的天数
     "UserCodeExpireSecond": 120, //用户验证时,发送的验证码过期时间配置,单位：秒
     "UserAddFriendTotalCount": 3000, //添加好友总数量上限
     "UserAddFriendDayCount": 30, //每天添加好友数量上限
+    "LogDirectory": "E:\\hwl-log",
     "UploadDirectory": "E:\\hwl-upload", //文件上传目录配置,值为当前计算机的绝对地址
     "FileAccessUrl": "http://192.168.1.6:8033/upload" //文件对外访问的地址配置,值以http://或者https://开头
   },
@@ -13,11 +14,12 @@
     "MsgHandlerRedisHosts": "127.0.0.1:8379,allowadmin=true,password=123456" //消息处理地址配置
   },
   "IMSettings": {
-    "IMHost": "127.0.0.1",
+    //"IMHost": "127.0.0.1",
+    "IMHost": "192.168.1.6",
     "IMPort": 8081
   },
   "ConnectionStrings": {
-    "HWLDBConnectionString": "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303"
-    //"HWLDBConnectionStringHome": "Data Source=.;Initial Catalog=hwl;Persist Security Info=True;User ID=sa;Password=ac.123456"
+    //"HWLDBConnectionString": "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303",
+    "HWLDBConnectionString": "Data Source=.;Initial Catalog=hwl;Persist Security Info=True;User ID=sa;Password=ac.123456"
   }
 }

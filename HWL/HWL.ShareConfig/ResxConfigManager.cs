@@ -12,7 +12,7 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return ApiSettings["UploadDirectory"];
+                return AppSettings["UploadDirectory"];
             }
         }
 
@@ -23,7 +23,7 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return ApiSettings["FileAccessUrl"];
+                return AppSettings["FileAccessUrl"];
             }
         }
 

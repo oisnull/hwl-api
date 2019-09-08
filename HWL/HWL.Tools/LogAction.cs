@@ -10,42 +10,24 @@ namespace HWL.Tools
     public class LogAction
     {
         private static object obj = new object();
-        private string logDir = "/log/";
-        public LogAction()
-        {
-            logDir = HttpContext.Current.Server.MapPath(logDir);
-            if (!Directory.Exists(logDir))
-            {
-                Directory.CreateDirectory(logDir);
-            }
-        }
-
-        /// <summary>
-        /// path为相对路径
-        /// </summary>
-        public LogAction(string fileName)
-            : this()
-        {
-            this._fileName = fileName;
-        }
-
+        private string _logDir;
         private string _fileName;
-
-        public string FileName
+        public LogAction(string logDir)
         {
-            get { return logDir + _fileName; }
-            set { _fileName = value; }
+            this._logDir = logDir;
+            this._fileName = this._logDir + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
         }
+
 
         public void WriterLog(string content)
         {
             lock (obj)
             {
-                if (!File.Exists(this.FileName))
+                if (!File.Exists(this._fileName))
                 {
-                    File.Create(this.FileName).Close();
+                    File.Create(this._fileName).Close();
                 }
-                FileInfo finfo = new FileInfo(this.FileName);
+                FileInfo finfo = new FileInfo(this._fileName);
                 using (FileStream fs = finfo.OpenWrite())
                 {
                     StreamWriter sw = new StreamWriter(fs);
@@ -61,7 +43,7 @@ namespace HWL.Tools
         public string ReadLog()
         {
             string s = "";
-            StreamReader sr = new StreamReader(this.FileName, Encoding.UTF8);
+            StreamReader sr = new StreamReader(this._fileName, Encoding.UTF8);
             s = sr.ReadToEnd();
             sr.Close();
             sr.Dispose();

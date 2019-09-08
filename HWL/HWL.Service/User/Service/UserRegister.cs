@@ -85,7 +85,7 @@ namespace HWL.Service.User.Service
             //添加用户到数据库
             t_user model = new t_user()
             {
-                id = 0,
+                //id = 0,
                 email = this.request.Email ?? " ",
                 mobile = this.request.Mobile ?? " ",
                 password = this.request.PasswordOK,
