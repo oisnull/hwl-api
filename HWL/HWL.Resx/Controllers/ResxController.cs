@@ -3,10 +3,7 @@ using GMSF.Model;
 using HWL.Resx.Models;
 using HWL.Service;
 using HWL.Service.Resx.Body;
-using HWL.ShareConfig;
-using HWL.Tools;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace HWL.Resx.Controllers
 {
@@ -14,8 +11,6 @@ namespace HWL.Resx.Controllers
     [ApiController]
     public class ResxController : BaseApiController
     {
-        private static LogAction log = new LogAction(AppConfigManager.LogDirectory);
-
         [HttpPost]
         [Description("Resx upload handle")]
         public Response<ResxUploadResponseBody> ResxUpload([FromForm] ResxUploadRequestBody requestBody)
@@ -28,10 +23,6 @@ namespace HWL.Resx.Controllers
         [Description("Image upload handle")]
         public Response<ImageUploadResponseBody> ImageUpload([FromForm] ImageUploadRequestBody requestBody)
         {
-            var files = Request.Form.Files;
-            log.WriterLog("Count:" + files.Count);
-            log.WriterLog(JsonConvert.SerializeObject(requestBody));
-
             Request<ImageUploadRequestBody> request = base.GetDefaultRequest(requestBody.Token, requestBody);
             return ResxService.ImageUpload(request);
         }
