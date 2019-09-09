@@ -41,7 +41,7 @@ namespace HWL.RabbitMQ
                 Port = MQConfigManager.MQPort,
                 UserName = MQConfigManager.UserName,
                 Password = MQConfigManager.Password,
-            });
+            };
             return factory.CreateConnection();
         }
 

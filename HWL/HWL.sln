@@ -34,6 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevLog", "DevLog", "{1ECF57
 		DevLog\firstend.txt = DevLog\firstend.txt
 		DevLog\git-doc.txt = DevLog\git-doc.txt
 		DevLog\GMSF.dll = DevLog\GMSF.dll
+		DevLog\hwl-doc.txt = DevLog\hwl-doc.txt
 		mq-doc.txt = mq-doc.txt
 		DevLog\rec.txt = DevLog\rec.txt
 		DevLog\secondend.txt = DevLog\secondend.txt
@@ -51,11 +52,11 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HWL.DBScript", "HWL.DBScrip
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Push", "Push", "{60DCD928-95E5-4160-9B54-D2B418B73369}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWL.PushStandard", "HWL.PushStandard\HWL.PushStandard.csproj", "{69A0EE03-C16B-4201-B057-10AD712F29CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWL.PushStandard", "HWL.PushStandard\HWL.PushStandard.csproj", "{69A0EE03-C16B-4201-B057-10AD712F29CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWL.PushTest", "HWL.PushTest\HWL.PushTest.csproj", "{739BEA10-FCB1-4F34-B655-6A0451C7ACD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWL.PushTest", "HWL.PushTest\HWL.PushTest.csproj", "{739BEA10-FCB1-4F34-B655-6A0451C7ACD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWL.RabbitMQ", "HWL.RabbitMQ\HWL.RabbitMQ.csproj", "{5FA8BA46-FCB9-4F0A-B942-A34771B94BB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWL.RabbitMQ", "HWL.RabbitMQ\HWL.RabbitMQ.csproj", "{5FA8BA46-FCB9-4F0A-B942-A34771B94BB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
