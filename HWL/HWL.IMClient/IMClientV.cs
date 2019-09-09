@@ -1,5 +1,6 @@
 ﻿using HWL.IMClient.Core;
 using HWL.IMClient.Send;
+using HWL.IMCore.Protocol;
 using HWL.ShareConfig;
 using System;
 using System.Collections.Generic;
@@ -43,11 +44,11 @@ namespace HWL.IMClient
             }
         }
 
-        public void SendSystemMessage(ulong toUserId, string toUserName, string toGroupGuid, string toGroupName)
+        public void SendSystemMessage(ImUserContent toUser, string toGroupGuid, string toGroupName)
         {
             checkConnect();
 
-            im.send(new SystemMessageSend(toUserId, toUserName, toGroupGuid, toGroupName));
+            im.send(new SystemMessageSend(toUser, toGroupGuid, toGroupName));
         }
     }
 }

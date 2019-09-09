@@ -31,8 +31,8 @@ namespace HWL.IMClient.Listen
 
         public override void success(ImUserValidateResponse response)
         {
-            MessageRequestHeadManager.setSessionId(response.Sessionid);
-            succCallback(response.Sessionid);
+            MessageRequestHeadManager.setSessionId(response.Session);
+            succCallback(response.Session);
         }
 
         public override void failure(uint code, string message)

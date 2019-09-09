@@ -13,7 +13,12 @@ namespace HWL.IMClientTest
         static void Main(string[] args)
         {
             IMClientV.SetConnectListener(new DefaultClientConnectListenerV2());
-            IMClientV.INSTANCE.SendSystemMessage(1, "uname", null, null);
+            IMClientV.INSTANCE.SendSystemMessage(new IMCore.Protocol.ImUserContent()
+            {
+                UserId = 3,
+                UserImage = "http://192.168.1.6:8033/images/default.png",
+                UserName = "HWL-4028333"
+            }, "2311d5f9-19ec-4567-aac8-557f62b6bbc6", "浦晓南路(test-1)");
 
             Console.ReadLine();
         }

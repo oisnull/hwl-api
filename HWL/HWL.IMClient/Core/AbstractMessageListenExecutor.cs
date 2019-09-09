@@ -36,7 +36,7 @@ namespace HWL.IMClient.Core
                         success(responseBody);
                         flag = true;
                         break;
-                    case (uint)ImMessageResponseCode.SessionidInvalid:
+                    case (uint)ImMessageResponseCode.SessionInvalid:
                         sessionidInvalid();
                         break;
                     case (uint)ImMessageResponseCode.Failed:

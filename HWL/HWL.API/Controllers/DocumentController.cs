@@ -86,7 +86,7 @@ namespace HWL.API.Controllers
             StringBuilder sb = new StringBuilder();
             sb.Append("<html>");
             sb.Append("<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\" />");
-            sb.Append("<title>API list</title>");
+            sb.Append("<title>Web api list</title>");
             sb.Append("<script src=\"/js/api_test.js\"></script>");
             sb.Append("<body>");
             int idx = 1;

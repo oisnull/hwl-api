@@ -5,15 +5,13 @@ namespace HWL.IMClient.Send
 {
     public class SystemMessageSend : AbstractMessageSendExecutor
     {
-        ulong toUserId = 0L;
-        string toUserName = null;
+        ImUserContent toUser = null;
         string toGroupGuid = null;
         string groupName = null;
 
-        public SystemMessageSend(ulong toUserId, string toUserName, string groupGuid, string groupName)
+        public SystemMessageSend(ImUserContent toUser, string groupGuid, string groupName)
         {
-            this.toUserId = toUserId;
-            this.toUserName = toUserName;
+            this.toUser = toUser;
             this.toGroupGuid = groupGuid;
             this.groupName = groupName;
         }
@@ -29,12 +27,12 @@ namespace HWL.IMClient.Send
             {
                 SystemMessageRequest = new ImSystemMessageRequest()
                 {
-                    ToUserId = toUserId,
+                    ToUser = this.toUser,
                     ToGroupGuid = toGroupGuid ?? "",
                     SystemMessageContent = new ImSystemMessageContent()
                     {
                         SystemMessageType = ImSystemMessageType.AddNearGroup,
-                        AddGroupDesc = string.Format("Welcome {0} to {1} group.", toUserName, groupName),
+                        AddGroupDesc = string.Format("Welcome {0} to {1} group.", this.toUser.UserName, groupName),
                         ToUserDesc = string.Format("Welcome to {0}", groupName)
                     }
                 }

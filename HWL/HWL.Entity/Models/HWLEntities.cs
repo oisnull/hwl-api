@@ -36,21 +36,19 @@ namespace HWL.Entity.Models
         public virtual DbSet<t_user_friend> t_user_friend { get; set; }
         public virtual DbSet<t_user_pos> t_user_pos { get; set; }
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseSqlServer("Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303");
-//            }
-//        }
+        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //        {
+        //            if (!optionsBuilder.IsConfigured)
+        //            {
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+        //                optionsBuilder.UseSqlServer("Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303");
+        //            }
+        //        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<t_admin>(entity =>
             {
-                entity.Property(e => e.id).ValueGeneratedNever();
-
                 entity.Property(e => e.create_date).HasColumnType("datetime");
 
                 entity.Property(e => e.login_name)
@@ -213,8 +211,6 @@ namespace HWL.Entity.Models
 
             modelBuilder.Entity<t_user>(entity =>
             {
-                entity.Property(e => e.id).ValueGeneratedNever();
-
                 entity.Property(e => e.circle_back_image)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -246,8 +242,6 @@ namespace HWL.Entity.Models
 
             modelBuilder.Entity<t_user_code>(entity =>
             {
-                entity.Property(e => e.id).ValueGeneratedNever();
-
                 entity.Property(e => e.code)
                     .IsRequired()
                     .HasMaxLength(6);

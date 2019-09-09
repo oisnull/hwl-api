@@ -9,7 +9,6 @@
     <Compile Remove="Base64ImageAction.cs" />
     <Compile Remove="CacheAction.cs" />
     <Compile Remove="CustomJson.cs" />
-    <Compile Remove="LogAction.cs" />
     <Compile Remove="ViewExtensions.cs" />
   </ItemGroup>
 

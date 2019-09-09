@@ -9,6 +9,7 @@ get-help scaffold-dbcontext –detailed
 
 //Update all model
 Scaffold-DbContext "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context "HWLEntities" -UseDatabaseNames -Force
+Scaffold-DbContext "Data Source=.;Initial Catalog=hwl;Persist Security Info=True;User ID=sa;Password=ac.123456" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context "HWLEntities" -UseDatabaseNames -Force
 
 //Update specify model
 Scaffold-DbContext "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context "HWLEntities" -Tables "t_admin" -UseDatabaseNames -Force
