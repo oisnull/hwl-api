@@ -48,5 +48,13 @@ namespace HWL.ShareConfig
                 return Configuration.GetSection("IMSettings");
             }
         }
+
+        protected static IConfigurationSection RabbitMQSettings
+        {
+            get
+            {
+                return Configuration.GetSection("RabbitMQSettings");
+            }
+        }
     }
 }

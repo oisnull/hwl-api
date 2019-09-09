@@ -12,3 +12,7 @@ Scaffold-DbContext "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Securi
 
 //Update specify model
 Scaffold-DbContext "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context "HWLEntities" -Tables "t_admin" -UseDatabaseNames -Force
+
+//NUGET Reset command:
+Update-Package -ProjectName 'MediationConfigService'  -Reinstall
+Update-Package -Reinstall

@@ -1,4 +1,7 @@
-//撤消最近一次commit
+//revert commit
 git reset --soft HEAD^
 git reset --soft HEAD~1
 git reset --soft HEAD~2
+
+git branch -D branch-name
+git checkout --track origin/branch-name
