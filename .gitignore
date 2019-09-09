@@ -42,3 +42,9 @@
 /HWL/HWL.DBScript/HWL.DBScript.dbmdl
 /HWL/HWL.Resx/wwwroot/upload
 /HWL/HWL.Resx/Properties/PublishProfiles
+/HWL/HWL.PushStandard/bin
+/HWL/HWL.PushStandard/obj
+/HWL/HWL.PushTest/bin
+/HWL/HWL.PushTest/obj
+/HWL/HWL.RabbitMQ/bin
+/HWL/HWL.RabbitMQ/obj
