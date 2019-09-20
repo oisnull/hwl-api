@@ -10,7 +10,13 @@ namespace HWL.ShareConfig
 
         static ShareConfiguration()
         {
-            string settingFilePath = Path.Combine(AppContext.BaseDirectory, "sharesettings.json");
+            string env = Environment.GetEnvironmentVariable("Environment")?.ToLower();
+            if (string.IsNullOrEmpty(env) || string.IsNullOrWhiteSpace(env))
+            {
+                env = "prod";
+            }
+
+            string settingFilePath = Path.Combine(AppContext.BaseDirectory, $"sharesettings.{env}.json");
 
             Configuration = new ConfigurationBuilder()
                 .AddJsonFile(settingFilePath, false)

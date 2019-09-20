@@ -22,7 +22,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="sharesettings.json">
+    <None Update="sharesettings.company.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="sharesettings.home.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="sharesettings.prod.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
