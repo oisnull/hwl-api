@@ -20,6 +20,7 @@
 /HWL/HWL.Service/obj
 /HWL/HWL.ShareConfig/bin
 /HWL/HWL.ShareConfig/obj
+/HWL/HWL.ShareConfig/Properties/launchSettings.json
 /HWL/HWL.Tools/bin
 /HWL/HWL.Tools/obj
 /HWL/HWL.H5/wwwroot/app.png

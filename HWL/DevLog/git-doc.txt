@@ -4,4 +4,5 @@ git reset --soft HEAD~1
 git reset --soft HEAD~2
 
 git branch -D branch-name
+git branch --set-upstream master origin/master
 git checkout --track origin/branch-name
