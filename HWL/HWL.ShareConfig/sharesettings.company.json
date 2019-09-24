@@ -17,6 +17,12 @@
     "IMHost": "127.0.0.1",
     "IMPort": 8081
   },
+  "RabbitMQSettings": {
+    "Host": "127.0.0.1",
+    "Port": 5672,
+    "UserName": "guest",
+    "Password": "guest"
+  },
   "ConnectionStrings": {
     "HWLDBConnectionString": "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303"
   }

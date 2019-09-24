@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace HWL.PushStandard
 {
+    [Serializable]
     public class PushPositionModel
     {
         //user(id)
@@ -17,12 +18,5 @@ namespace HWL.PushStandard
         public int PosId { get; set; }
         public float lon { get; set; }
         public float lat { get; set; }
-    }
-
-    public enum PushPositionType
-    {
-        User = 0,
-        Near = 1,
-        Area = 2
     }
 }

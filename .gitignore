@@ -6,12 +6,15 @@
 /HWL/.vs
 /HWL/HWL.API/bin
 /HWL/HWL.API/obj
+/HWL/HWL.API/Properties/launchSettings.json
 /HWL/HWL.Entity/bin
 /HWL/HWL.Entity/obj
 /HWL/HWL.H5/bin
 /HWL/HWL.H5/obj
+/HWL/HWL.H5/Properties/launchSettings.json
 /HWL/HWL.Manage/bin
 /HWL/HWL.Manage/obj
+/HWL/HWL.Manage/Properties/launchSettings.json
 /HWL/HWL.Manage.Service/bin
 /HWL/HWL.Manage.Service/obj
 /HWL/HWL.Redis/bin
@@ -47,5 +50,6 @@
 /HWL/HWL.PushStandard/obj
 /HWL/HWL.PushTest/bin
 /HWL/HWL.PushTest/obj
+/HWL/HWL.PushTest/Properties/launchSettings.json
 /HWL/HWL.RabbitMQ/bin
 /HWL/HWL.RabbitMQ/obj

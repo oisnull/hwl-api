@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace HWL.PushStandard
 {
+    [Serializable]
     public class PushMessageModel
     {
         public string OriginUrl { get; set; }

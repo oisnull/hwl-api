@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace HWL.PushStandard
 {
+    [Serializable]
     public class PushModel
     {
         //system coll
         //test
         //other
-        public int SourceType { get; set; }
+        public SourceType SourceType { get; set; }
 
         //user(id)
         //near(lon,lat)
@@ -30,6 +31,4 @@ namespace HWL.PushStandard
         TestCreate = 1,
         //...
     }
-
-
 }

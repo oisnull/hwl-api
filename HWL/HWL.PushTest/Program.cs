@@ -1,13 +1,16 @@
-﻿using RabbitMQ.Client;
+﻿using HWL.PushStandard;
+using HWL.RabbitMQ;
+using RabbitMQ.Client;
 using System;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace HWL.PushTest
 {
     class Program
     {
-        //put model into queue
-        static void Main(string[] args)
+        static void Test1()
         {
             var factory = new ConnectionFactory()
             {
@@ -37,6 +40,75 @@ namespace HWL.PushTest
 
             Console.WriteLine(" Press [enter] to exit.");
             Console.ReadLine();
+        }
+
+        static void Test2()
+        {
+            string testQueue = "test-1";
+            //string msg = "Hello world";
+
+            MQConsumer.ReceiveMessage(testQueue, m =>
+            {
+                Console.WriteLine(m);
+            });
+
+            while (true)
+            {
+                string inputText = Console.ReadLine();
+                if (!string.IsNullOrEmpty(inputText) && !string.IsNullOrWhiteSpace(inputText))
+                {
+                    MQPublisher.PushMessage(testQueue, Encoding.UTF8.GetBytes(inputText));
+                }
+            }
+        }
+
+        static void Test3()
+        {
+            foreach (var item in PushPositionQueue.QUEUE_SYMBOLS)
+            {
+                Console.WriteLine($"{item.Value} receive start...");
+                MQConsumer.ReceiveMessage(item.Value, m =>
+                {
+                    Console.WriteLine($"{item.Value}:{m}");
+                });
+            }
+
+            Func<string, PushModel> CreateModel = (txt) =>
+            {
+                return new PushModel()
+                {
+                    PositionModel = new PushPositionModel()
+                    {
+                        //PositionType = PushPositionType.User,
+                        PositionType = PushPositionType.Near,
+                        UserId = 1,
+                    },
+                    SourceType = SourceType.TestCreate,
+                    PushMessageType = 0,
+                    MessageModel = new PushMessageModel()
+                    {
+                        Title = $"{txt}-1",
+                        Content = $"content-{txt}-test",
+                        OriginDate = DateTime.Now.ToString()
+                    },
+                };
+            };
+
+            while (true)
+            {
+                string inputText = Console.ReadLine();
+                if (!string.IsNullOrEmpty(inputText) && !string.IsNullOrWhiteSpace(inputText))
+                {
+                    PushModel model = CreateModel(inputText);
+                    PushArticle.Process(model);
+                }
+            }
+        }
+
+        //put model into queue
+        static void Main(string[] args)
+        {
+            Test3();
         }
     }
 }
