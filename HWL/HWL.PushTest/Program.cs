@@ -1,4 +1,5 @@
-﻿using HWL.PushStandard;
+﻿using HWL.PushFunction;
+using HWL.PushStandard;
 using HWL.RabbitMQ;
 using RabbitMQ.Client;
 using System;
@@ -100,7 +101,7 @@ namespace HWL.PushTest
                 if (!string.IsNullOrEmpty(inputText) && !string.IsNullOrWhiteSpace(inputText))
                 {
                     PushModel model = CreateModel(inputText);
-                    PushArticle.Process(model);
+                    PushEntry.Process(model);
                 }
             }
         }

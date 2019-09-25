@@ -13,10 +13,10 @@ namespace HWL.PushStandard
         //near(lon,lat)
         //area(pos id)
         public PushPositionType PositionType { get; set; }
-
         public int UserId { get; set; }
         public int PosId { get; set; }
-        public float lon { get; set; }
-        public float lat { get; set; }
+        public float Lon { get; set; }
+        public float Lat { get; set; }
     }
 }
+

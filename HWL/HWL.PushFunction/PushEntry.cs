@@ -1,12 +1,11 @@
 ﻿using HWL.PushStandard;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
-namespace HWL.PushTest
+namespace HWL.PushFunction
 {
-    public class PushArticle
+    public class PushEntry
     {
         public static void Process(PushModel model)
         {
@@ -20,5 +19,7 @@ namespace HWL.PushTest
             byte[] bytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(model));
             RabbitMQ.MQPublisher.PushMessage(queueName, bytes);
         }
+
+
     }
 }

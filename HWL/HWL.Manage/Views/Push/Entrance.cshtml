@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "Push Entrance";
+}
+
+@model HWL.PushStandard.PushModel
+
+<style type="text/css">
+    .table th {
+        text-align: left;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="/Main/Index">首页</a></li>
+                    <li><a href="/Push/List" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true">推送历史列表</a></li>
+                    <li class="active"><span>推送测试</span></li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box clearfix">
+                    <form id="form1" action="#" method="post">
+                        <input type="hidden" id="hidden_id" name="Id" value="">
+                        <div style="text-align: left;margin:10px;" class="panel">
+                            <div class="panel-heading">
+                                <b>编辑推送数据</b>
+                            </div>
+
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th style="width:180px;">SourceType <font color="red">*</font>：</th>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.SourceType, SelectItems.GetPushSourceTypeList(), new { @class = "form-control" })
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>PushMessageType <font color="red">*</font>：</th>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.PushMessageType, SelectItems.GetPushMessageTypeList(), new { @class = "form-control" })
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>PositionType <font color="red">*</font>：</th>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.PositionModel.PositionType, SelectItems.GetPositionTypeList(), new { @class = "form-control" })
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Position-UserId ：</th>
+                                        <td>
+                                            <input type="text" class="form-control" name="PositionModel.UserId" value="@(Model?.PositionModel?.UserId??1)" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Position-PosId ：</th>
+                                        <td>
+                                            <input type="text" class="form-control" name="PositionModel.PosId" value="@(Model?.PositionModel?.PosId)" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Position-Lon ：</th>
+                                        <td>
+                                            <input type="text" class="form-control" name="PositionModel.Lon" value="@(Model?.PositionModel?.Lon)" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Position-Lat ：</th>
+                                        <td>
+                                            <input type="text" class="form-control" name="PositionModel.Lat" value="@(Model?.PositionModel?.Lat)" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>OriginUrl ：</th>
+                                        <td><input type="text" class="form-control" name="MessageModel.OriginUrl" value="@(Model?.MessageModel?.OriginUrl)"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Title ：</th>
+                                        <td><input type="text" class="form-control" name="MessageModel.Title" value="@(Model?.MessageModel?.Title??"title-1")"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Keys ：</th>
+                                        <td><input type="text" class="form-control" name="MessageModel.Keys" value="@(Model?.MessageModel?.Keys)"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Author ：</th>
+                                        <td><input type="text" class="form-control" name="MessageModel.Author" value="@(Model?.MessageModel?.Author)"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Summary ：</th>
+                                        <td><input type="text" class="form-control" name="MessageModel.Summary" value="@(Model?.MessageModel?.Summary)"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>ImageUrls ：</th>
+                                        <td><input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Content ：</th>
+                                        <td><input type="text" class="form-control" name="MessageModel.Content" value="@(Model?.MessageModel?.Content??"test-content-1")"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>OriginDate ：</th>
+                                        <td><input type="text" class="form-control" name="MessageModel.OriginDate" value="@(Model?.MessageModel?.OriginDate??DateTime.Now.ToString())"></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p style="margin:10px;">
+                            <input type="submit" class="btn btn-submit btn-primary" style="width:100px;margin-left: 0px;margin-right:10px;" value="发 布">
+                            <a class="btn btn-default" style="width:100px;margin-left: 10px;margin-right:10px;" href="/Push/List?page=0" id="a_return" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true">返 回</a>
+
+                            <span id="span_info" style="margin-left:10px;"></span>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/jquery.form.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    var isAction = false;
+    $("form").submit(function () {
+        if (isAction) {
+            return false;
+        }
+        isAction = true;
+
+        $("span#span_info").html("<font color='blue'>数据发布中，请稍后...</font>");
+
+        $(this).ajaxSubmit({
+            type: "post",
+            url: "/Push/Publish/",
+            success: function (data) {
+                if (data.state > 0) {
+                    $("span#span_info").html("<font color='blue'>发布成功,跳转中...</font>");
+                    Sleep(this, 1500);
+                    this.NextStep = function () {
+                        document.getElementById("a_return").click();
+                    }
+                } else {
+                    $("span#span_info").html("<font color='red'>" + data.error + "</font>");
+                    isAction = false;
+                }
+            }
+        });
+        return false;
+    });
+</script>

@@ -19,8 +19,9 @@ namespace HWL.PushStandard
         //area(pos id)
         public PushPositionModel PositionModel { get; set; }
 
-        //near circle = 0
-        public int PushMessageType { get; set; }
+        //near circle = 0(default)
+        //chat record = 1
+        public PushMessageType PushMessageType { get; set; }
 
         public PushMessageModel MessageModel { get; set; }
     }
@@ -29,6 +30,13 @@ namespace HWL.PushStandard
     {
         SystemCollection = 0,
         TestCreate = 1,
+        //...
+    }
+
+    public enum PushMessageType
+    {
+        NearCirlce = 0,
+        ChatRecord = 1,
         //...
     }
 }

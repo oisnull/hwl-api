@@ -53,3 +53,5 @@
 /HWL/HWL.PushTest/Properties/launchSettings.json
 /HWL/HWL.RabbitMQ/bin
 /HWL/HWL.RabbitMQ/obj
+/HWL/HWL.PushFunction/bin
+/HWL/HWL.PushFunction/obj

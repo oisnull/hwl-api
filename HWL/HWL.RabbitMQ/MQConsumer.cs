@@ -35,7 +35,7 @@ namespace HWL.RabbitMQ
             ConsumeChannel.QueueBind(queueInfo.QueueName, DEFAULT_EXCHANGE_NAME, queueInfo.QueueName, null);
         }
 
-        public static void ReceiveMessage(string queueName, Action<string> callback)
+        public static void ReceiveMessage(string queueName, Action<byte[]> callback)
         {
             BindQueue(queueName);
             EventingBasicConsumer consumer = new EventingBasicConsumer(ConsumeChannel);
@@ -46,7 +46,7 @@ namespace HWL.RabbitMQ
                 if (e == null || e.Body == null || e.Body.Length <= 0) return;
 
                 //handle logic for this
-                callback(Encoding.UTF8.GetString(e.Body));
+                callback(e.Body);
             };
         }
     }
