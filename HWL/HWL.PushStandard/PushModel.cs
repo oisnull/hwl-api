@@ -17,6 +17,11 @@ namespace HWL.PushStandard
         //user(id)
         //near(lon,lat)
         //area(pos id)
+        public PushPositionType PositionType { get; set; }
+
+        //user(id)
+        //near(lon,lat)
+        //area(pos id)
         public PushPositionModel PositionModel { get; set; }
 
         //near circle = 0(default)

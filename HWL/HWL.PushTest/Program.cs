@@ -78,10 +78,10 @@ namespace HWL.PushTest
             {
                 return new PushModel()
                 {
+                    //PositionType = PushPositionType.User,
+                    PositionType = PushPositionType.Near,
                     PositionModel = new PushPositionModel()
                     {
-                        //PositionType = PushPositionType.User,
-                        PositionType = PushPositionType.Near,
                         UserId = 1,
                     },
                     SourceType = SourceType.TestCreate,

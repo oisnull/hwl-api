@@ -9,7 +9,7 @@ namespace HWL.PushFunction
 {
     public class ConsumeEntry
     {
-        public static void Process()
+        public static void Start()
         {
             foreach (var item in PushPositionQueue.QUEUE_SYMBOLS)
             {
@@ -18,9 +18,31 @@ namespace HWL.PushFunction
                     string jsonString = Encoding.UTF8.GetString(m);
                     PushModel model = JsonConvert.DeserializeObject<PushModel>(jsonString);
 
-
+                    IConsumeHandler consumeHandler = ConsumeFactory.Create(model.PositionType);
+                    consumeHandler.Process(model);
                 });
             }
+        }
+    }
+
+    public class ConsumeFactory
+    {
+        public static IConsumeHandler Create(PushPositionType positionType)
+        {
+            IConsumeHandler handler = null;
+            switch (positionType)
+            {
+                case PushPositionType.User:
+                    handler = new UserConsumeHandler();
+                    break;
+                case PushPositionType.Near:
+                    break;
+                case PushPositionType.Area:
+                    break;
+                default:
+                    break;
+            }
+            return handler;
         }
     }
 }
