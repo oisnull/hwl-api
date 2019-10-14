@@ -70,7 +70,8 @@ namespace HWL.PushTest
                 Console.WriteLine($"{item.Value} receive start...");
                 MQConsumer.ReceiveMessage(item.Value, m =>
                 {
-                    Console.WriteLine($"{item.Value}:{m}");
+                    string msg = Encoding.UTF8.GetString(m);
+                    Console.WriteLine($"{item.Value}:{msg}");
                 });
             }
 
