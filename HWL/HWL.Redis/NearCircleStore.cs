@@ -18,7 +18,7 @@ namespace HWL.Redis
         /// <summary>
         /// 创建附近圈子信息位置数据,返回创建成功后的组标识
         /// </summary>
-        public bool CreateNearCirclePos(int circleId, double lon, double lat)
+        public static bool CreateNearCirclePos(int circleId, double lon, double lat)
         {
             bool succ = false;
             RedisUtils.DefaultInstance.Exec(RedisConfigManager.NEAR_CIRCLE_GEO_DB, db =>
@@ -31,7 +31,7 @@ namespace HWL.Redis
         /// <summary>
         /// 检测附近1000M内的组数据,并返回对应的组标识
         /// </summary>
-        public List<int> GetNearCircleIds(double lon, double lat)
+        public static List<int> GetNearCircleIds(double lon, double lat)
         {
             if (lon < 0 && lat < 0) return null;
 
@@ -48,7 +48,7 @@ namespace HWL.Redis
             return ids;
         }
 
-        public bool DeleteNearCircleId(int nearCircleId)
+        public static bool DeleteNearCircleId(int nearCircleId)
         {
             if (nearCircleId <= 0) return false;
             bool succ = false;

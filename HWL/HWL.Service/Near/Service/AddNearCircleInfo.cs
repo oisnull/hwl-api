@@ -1,6 +1,5 @@
 ﻿using HWL.Entity;
 using HWL.Entity.Models;
-using HWL.Redis;
 using HWL.Service.Near.Body;
 using System;
 using System.Collections.Generic;
@@ -93,7 +92,7 @@ namespace HWL.Service.Near.Service
             //向redis中添加信息的位置数据
             if (res.NearCircleId > 0)
             {
-                bool succ = new NearCircleStore().CreateNearCirclePos(res.NearCircleId, this.request.Lon, this.request.Lat);
+                bool succ = Redis.NearCircleStore.CreateNearCirclePos(res.NearCircleId, this.request.Lon, this.request.Lat);
                 if (!succ)//如果添加失败,则将数据库中已经添加的数据删除
                 {
                     db.t_near_circle.Remove(model);

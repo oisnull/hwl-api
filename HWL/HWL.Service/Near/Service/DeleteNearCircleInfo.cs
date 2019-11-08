@@ -41,7 +41,7 @@ namespace HWL.Service.Near.Service
                 return res;
             }
 
-            bool succ = new Redis.NearCircleStore().DeleteNearCircleId(this.request.NearCircleId);
+            bool succ = Redis.NearCircleStore.DeleteNearCircleId(this.request.NearCircleId);
             //if (!succ) throw new Exception("删除失败");
             if (succ)
             {

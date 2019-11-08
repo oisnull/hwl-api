@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HWL.Entity\HWL.Entity.csproj" />
+    <ProjectReference Include="..\HWL.PushFunction\HWL.PushFunction.csproj" />
+    <ProjectReference Include="..\HWL.PushStandard\HWL.PushStandard.csproj" />
+    <ProjectReference Include="..\HWL.ShareConfig\HWL.ShareConfig.csproj" />
+    <ProjectReference Include="..\HWL.Tools\HWL.Tools.csproj" />
+  </ItemGroup>
+
+</Project>

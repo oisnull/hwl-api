@@ -27,6 +27,9 @@ namespace HWL.PushFunction
 
             this.CheckMessageModel();
 
+            //save to db for current user id 
+
+
         }
 
         protected void CheckMessageModel()

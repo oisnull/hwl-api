@@ -1,6 +1,5 @@
 ﻿using HWL.Entity.Models;
 using HWL.Entity.Extends;
-using HWL.Redis;
 using HWL.Service.Generic;
 using HWL.Service.Near.Body;
 using HWL.Service.User;
@@ -43,7 +42,7 @@ namespace HWL.Service.Near.Service
                 return res;
             }
 
-            List<int> geoIdList = new NearCircleStore().GetNearCircleIds(this.request.Lon, this.request.Lat);
+            List<int> geoIdList = Redis.NearCircleStore.GetNearCircleIds(this.request.Lon, this.request.Lat);
             if (geoIdList == null || geoIdList.Count <= 0) return res;
 
             List<int> ids = null;
