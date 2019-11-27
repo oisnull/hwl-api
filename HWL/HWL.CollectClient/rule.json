@@ -1,0 +1,272 @@
+﻿[
+  {
+    "Description": "beyondsoft",
+    "Url": "https://www.beyondsoft.com/",
+    "Level": 3,
+    "Enable": false,
+    "Rules": [
+      {
+        "Key": "title",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//div[@class='detial_01']/h1[1]",
+          "ExtractType": "Text"
+        }
+      },
+      {
+        "Key": "date",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//div[@class='lab clearfix mrg-btm20']/span[2]",
+          "ExtractType": "Text"
+        },
+        "Filter": {
+          "DefaultValues": null,
+          "RemoveChar": {
+            "IsRegex": false,
+            "Chars": [ "时间：", "Time：" ]
+          }
+        }
+      },
+      {
+        "Key": "images",
+        "IsList": true,
+        "Xpath": {
+          "XpathRule": "//div[@class='detial_01']//img/@src",
+          "XpathEndAttributes": [ "src" ]
+        }
+      }
+    ]
+  },
+  {
+    "Description": "cnn",
+    "Url": "https://edition.cnn.com/2019/02/13/world/china-india-greener-planet-scli-intl/index.html",
+    "Level": 2,
+    "Enable": false,
+    "Rules": [
+      {
+        "Key": "title",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//h1[@class='pg-headline']",
+          "ExtractType": "Text"
+        }
+      },
+      {
+        "Key": "keys",
+        "IsList": false,
+        "Rule": {
+          "DefaultValue": "CNN NEW"
+        }
+      },
+      {
+        "Key": "images",
+        "IsList": true,
+        "Xpath": {
+          "XpathRule": "//section[@id='body-text']//img[@src]",
+          "XpathEndAttributes": [ "src" ]
+        }
+      },
+      {
+        "Key": "content",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//section[@id='body-text']"
+        },
+        "Filter": {
+          "DefaultValues": null,
+          "RemoveChar": {
+            "IsRegex": true,
+            "Chars": [
+              "<[a|A]\\s*[^>]*>(.*?)</[a|A]>",
+              "<cite\\s*[^>]*>(.*?)</cite>",
+              "<div class=\"zn-body__read-more-outbrain\">.*</div>"
+            ]
+          }
+        }
+      },
+      {
+        "Key": "author",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//span[@class='metadata__byline__author']",
+          "ExtractType": "Text"
+        }
+      }
+    ]
+  },
+  {
+    "Description": "toutiao",
+    "Url": "https://www.toutiao.com/a6762824502825976333/",
+    "Level": 3,
+    "Enable": false,
+    "Rules": [
+      {
+        "Key": "title",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//h1[@class='article-title']",
+          "ExtractType": "Text"
+        }
+      },
+      {
+        "Key": "publishdate",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//div[@class='article-sub']/span[2]",
+          "ExtractType": "Text"
+        }
+      },
+      {
+        "Key": "summary",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//div[@class='article-content']/p[1]",
+          "ExtractType": "Text"
+        }
+      },
+      {
+        "Key": "images",
+        "IsList": true,
+        "Xpath": {
+          "XpathRule": "//div[@class='article-content']//img/@src",
+          "XpathEndAttributes": [ "src" ]
+        }
+      },
+      {
+        "Key": "content",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//div[@class='article-content']",
+          "ExtractType": "Html"
+        }
+      },
+      {
+        "Key": "author",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//div[@class='article-sub']/span[1]",
+          "ExtractType": "Text"
+        }
+      }
+    ]
+  },
+  {
+    "Description": "baidu-news",
+    "Url": "http://baijiahao.baidu.com/s?id=1650146502027667116",
+    "Level": 3,
+    "Enable": false,
+    "Rules": [
+      {
+        "Key": "title",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//div[@class='article-title']",
+          "ExtractType": "Text"
+        }
+      },
+      {
+        "Key": "author",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "(//p[@class='author-name'])[1]",
+          "ExtractType": "Text"
+        }
+      },
+      {
+        "Key": "publishdate",
+        "IsList": true,
+        "Xpath": {
+          "XpathRule": "//div[@class='article-source article-source-bjh']/span[position()<3]",
+          "ExtractType": "Text"
+        },
+        "Filter": {
+          "RemoveChar": {
+            "IsRegex": false,
+            "Chars": [ "发布时间：" ]
+          }
+        }
+      },
+      {
+        "Key": "content",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//div[@class='article-content']",
+          "ExtractType": "Html"
+        }
+      }
+    ]
+  },
+  {
+    "Description": "163-news",
+    "Url": "https://news.163.com/19/1127/09/EUVS3V370001899O.html",
+    "Charset": "GBK",
+    "Level": 3,
+    "Enable": true,
+    "Rules": [
+      {
+        "Key": "title",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//div[@class='post_content_main']/h1[1]",
+          "ExtractType": "Text"
+        }
+      },
+      {
+        "Key": "official",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//div[@class='post_time_source']/a[1]",
+          "ExtractType": "Text"
+        }
+      },
+      {
+        "Key": "author",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//span[@class='ep-editor'][1]",
+          "ExtractType": "Text"
+        },
+        "Filter": {
+          "RemoveChar": {
+            "IsRegex": false,
+            "Chars": [ "责任编辑：" ]
+          }
+        }
+      },
+      {
+        "Key": "publishdate",
+        "IsList": true,
+        "Xpath": {
+          "XpathRule": "//div[@class='post_time_source']/text()",
+          "ExtractType": "Text"
+        },
+        "Filter": {
+          "RemoveChar": {
+            "IsRegex": false,
+            "Chars": [ "来源:" ]
+          }
+        }
+      },
+      {
+        "Key": "content",
+        "IsList": false,
+        "Xpath": {
+          "XpathRule": "//div[@class='post_text']",
+          "ExtractType": "Html"
+        },
+        "Filter": {
+          "RemoveChar": {
+            "IsRegex": true,
+            "Chars": [
+              "<[a|A]\\s*[^>]*>(.*?)</[a|A]>",
+              "<a[^>]+href=\"([^\"]*)\"[^>]*>([\\s\\S]*?)</a>",
+              "<iframe(.*?)><\/iframe>",
+              "<!-- 作者 -->([\\s\\S]*)<!-- 声明 -->"
+            ]
+          }
+        }
+      }
+    ]
+  }
+]
