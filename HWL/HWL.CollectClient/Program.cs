@@ -7,6 +7,7 @@ using HWL.CollectCore.Parse;
 using HWL.CollectCore;
 using Newtonsoft.Json;
 using System.Linq;
+using HWL.CollectClient.Storage;
 
 namespace HWL.CollectClient
 {
@@ -170,6 +171,13 @@ namespace HWL.CollectClient
             Console.WriteLine(JsonConvert.SerializeObject(rules));
         }
 
+        static Func<ICollectListener> collectListener = () =>
+        {
+            CollectProcessListener processListener = new CollectProcessListener();
+            processListener.DataProcess = new SaveToTxt();
+            return processListener;
+        };
+
         static void RuleConfigFileTest()
         {
             string configPath = $"{AppDomain.CurrentDomain.BaseDirectory}/rule.json";
@@ -178,7 +186,7 @@ namespace HWL.CollectClient
             config.Level = 0;
 
             Collection collection = new Collection();
-            collection.CollectListener = () => new CollectProcessListener();
+            collection.CollectListener = collectListener;
             collection.IsContinue = false;
             collection.Execute(config);
 
@@ -190,7 +198,7 @@ namespace HWL.CollectClient
             string configPath = $"{AppDomain.CurrentDomain.BaseDirectory}/rule.json";
 
             Collection collection = new Collection(configPath);
-            collection.CollectListener = () => new CollectProcessListener();
+            collection.CollectListener = collectListener;
             collection.Execute();
 
             Console.ReadLine();
@@ -212,9 +220,9 @@ namespace HWL.CollectClient
 
             //RuleConfigTest();
 
-            RuleConfigFileTest();
+            //RuleConfigFileTest();
 
-            //CollectionTest();
+            CollectionTest();
         }
     }
 }

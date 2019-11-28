@@ -42,7 +42,8 @@ namespace HWL.CollectCore
             CollectContinueModel continueModel = this.IsContinue ? collectListener.OnContinue(config.Description, config.Url) : null;
             if (continueModel != null)
             {
-                ruleParser.LevelProcessContinue(continueModel.ContinueUrl, continueModel.ContinueLevel, collectListener);
+                ruleParser.LevelProcess(continueModel.ContinueUrl, continueModel.ContinueLevel, collectListener);
+                this.ContinueExecute(ruleParser, config, collectListener);
             }
             else
             {
@@ -50,6 +51,16 @@ namespace HWL.CollectCore
             }
 
             collectListener.OnEnd(config.Description, config.Url, config.Level);
+        }
+
+        private void ContinueExecute(RuleParser ruleParser, RuleConfigModel config, ICollectListener collectListener)
+        {
+            CollectContinueModel continueModel = collectListener.OnContinue(config.Description, config.Url);
+            if (continueModel != null)
+            {
+                ruleParser.LevelProcess(continueModel.ContinueUrl, continueModel.ContinueLevel, collectListener);
+                this.ContinueExecute(ruleParser, config, collectListener);
+            }
         }
 
         public void Execute()

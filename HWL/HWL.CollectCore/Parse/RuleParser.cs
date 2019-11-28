@@ -43,21 +43,21 @@ namespace HWL.CollectCore.Parse
             if (processListener == null)
                 throw new ArgumentNullException(typeof(IProcessListener).Name);
 
-            LevelProcess(this.entranceUrl, INIT_LEVEL, processListener);
+            LevelParse(this.entranceUrl, INIT_LEVEL, processListener);
         }
 
-        public void LevelProcessContinue(string continueUrl, int continueLevel, IProcessListener processListener)
+        public void LevelProcess(string levelUrl, int extractLevel, IProcessListener processListener)
         {
             if (processListener == null)
                 throw new ArgumentNullException(typeof(IProcessListener).Name);
 
-            if (string.IsNullOrEmpty(continueUrl) || string.IsNullOrWhiteSpace(continueUrl))
+            if (string.IsNullOrEmpty(levelUrl) || string.IsNullOrWhiteSpace(levelUrl))
                 return;
 
-            LevelProcess(continueUrl, continueLevel, processListener);
+            LevelParse(levelUrl, extractLevel, processListener);
         }
 
-        private void LevelProcess(string levelUrl, int extractLevel, IProcessListener processListener)
+        private void LevelParse(string levelUrl, int extractLevel, IProcessListener processListener)
         {
             List<string> processUrls = null;
             try
@@ -78,7 +78,7 @@ namespace HWL.CollectCore.Parse
                     extractLevel++;
                     foreach (var item in processUrls)
                     {
-                        this.LevelProcess(item, extractLevel, processListener);
+                        this.LevelParse(item, extractLevel, processListener);
                     }
                 }
             }

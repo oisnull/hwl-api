@@ -155,7 +155,7 @@
     "Description": "baidu-news",
     "Url": "http://baijiahao.baidu.com/s?id=1650146502027667116",
     "Level": 3,
-    "Enable": false,
+    "Enable": true,
     "Rules": [
       {
         "Key": "title",

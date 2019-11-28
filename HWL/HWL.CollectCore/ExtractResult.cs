@@ -29,9 +29,20 @@ namespace HWL.CollectCore
 
     public class ContentResult
     {
-        //public string Key { get; set; }
         public bool IsList { get; set; }
         public string Content { get; set; }
         public List<string> Contents { get; set; }
+
+        public bool HasValue()
+        {
+            if (this.IsList)
+            {
+                return this.Contents != null && this.Contents.Count > 0 && !this.Contents.Exists(c => string.IsNullOrEmpty(c));
+            }
+            else
+            {
+                return !string.IsNullOrEmpty(this.Content);
+            }
+        }
     }
 }

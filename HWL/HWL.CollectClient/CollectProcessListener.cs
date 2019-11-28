@@ -1,16 +1,15 @@
-﻿using HWL.CollectCore;
+﻿using HWL.CollectClient.Storage;
+using HWL.CollectCore;
 using HWL.Redis;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Web;
 
 namespace HWL.CollectClient
 {
     public class CollectProcessListener : ICollectListener
     {
         private string rootUrl;
+        public IDataProcess DataProcess { get; set; }
 
         public void OnStart(string desc, string url, int level)
         {
@@ -62,7 +61,7 @@ namespace HWL.CollectClient
             if (existUrls != null && existUrls.Count > 0)
                 e.Hrefs.RemoveAll(u => existUrls.Contains(u));
 
-            string localFileName = SaveToTxt(e);
+            string localFileName = DataProcess?.Save(rootUrl, e);
 
             //delete url from 0
             //move url to 1
@@ -79,32 +78,6 @@ namespace HWL.CollectClient
             Console.WriteLine($"{e.Level}, {e.OriginUrl}, {e.Hrefs?.Count}");
 
             return e.Hrefs;
-        }
-
-        private string SaveToTxt(ExtractResult e)
-        {
-            if (e == null) return null;
-
-            string saveDir = $"E:\\hwl-collect\\{HttpUtility.UrlEncode(rootUrl)}";
-            string savePath = $"{saveDir}\\{Guid.NewGuid().ToString()}.txt";
-
-            try
-            {
-                if (!Directory.Exists(saveDir))
-                {
-                    Directory.CreateDirectory(saveDir);
-                }
-                File.AppendAllLines(savePath, new string[] { e.OriginUrl, e.Level.ToString(), e.ConvertContentToJsonString() }, Encoding.UTF8);
-                return savePath;
-            }
-            catch (Exception ex)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Save html content to path of {savePath} failed, {CollectTools.GetExceptionMessages(ex)}.");
-                Console.ResetColor();
-            }
-
-            return null;
         }
     }
 }

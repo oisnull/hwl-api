@@ -68,7 +68,7 @@ namespace HWL.CollectCore.Parse
 
             if (model.XpathEndAttributes != null && model.XpathEndAttributes.Count > 0)
             {
-                return nodes.Select(n => n.Attributes.Where(a => model.XpathEndAttributes.Contains(a.Name)).Select(a => a.Value).FirstOrDefault()).
+                return nodes.Select(n => n.Attributes.Where(a => model.XpathEndAttributes.Contains(a.Name)).Select(a => a.Value?.Trim()).FirstOrDefault()).
                     Where(n => !string.IsNullOrEmpty(n))
                     .ToList();
             }
