@@ -11,7 +11,8 @@
   "RedisSettings": {
     "GroupUserTotalCount": 500, //群组好友总数量上限
     "UserDynamicRedisHosts": "127.0.0.1:6379,allowadmin=true,password=123456", //用户token配置
-    "MsgHandlerRedisHosts": "127.0.0.1:8379,allowadmin=true,password=123456" //消息处理地址配置
+    "IMMessageRedisHosts": "127.0.0.1:6379,allowadmin=true,password=123456", //消息处理地址配置
+    "CollectionRedisHosts": "127.0.0.1:6379,allowadmin=true,password=123456"
   },
   "IMSettings": {
     "IMHost": "127.0.0.1",
