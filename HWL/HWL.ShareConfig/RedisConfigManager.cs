@@ -42,11 +42,19 @@ namespace HWL.ShareConfig
         /// <summary>
         /// 消息处理地址配置
         /// </summary>
-        public static string MsgHandlerRedisHosts
+        public static string IMMessageRedisHosts
         {
             get
             {
-                return RedisSettings["MsgHandlerRedisHosts"];
+                return RedisSettings["IMMessageRedisHosts"];
+            }
+        }
+
+        public static string CollectionRedisHosts
+        {
+            get
+            {
+                return RedisSettings["CollectionRedisHosts"];
             }
         }
 
@@ -115,5 +123,8 @@ namespace HWL.ShareConfig
         /// 个人组所在的数据库
         /// </summary>
         //public const int GROUP_DB = 12;
+
+
+        public const int COLLECTION_HREFS_DB = 21;
     }
 }

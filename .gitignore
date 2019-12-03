@@ -53,7 +53,14 @@
 /HWL/HWL.PushTest/Properties/launchSettings.json
 /HWL/HWL.RabbitMQ/bin
 /HWL/HWL.RabbitMQ/obj
+/HWL/HWL.CollectClient/bin
+/HWL/HWL.CollectClient/obj
+/HWL/HWL.CollectClient/Properties/launchSettings.json
+/HWL/HWL.CollectCore/bin
+/HWL/HWL.CollectCore/obj
 /HWL/HWL.PushFunction/bin
 /HWL/HWL.PushFunction/obj
 /HWL/HWL.PushService/bin
 /HWL/HWL.PushService/obj
+/HWL/HWL.CollectXUnitTest/bin
+/HWL/HWL.CollectXUnitTest/obj

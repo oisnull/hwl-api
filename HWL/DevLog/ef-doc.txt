@@ -4,6 +4,11 @@ Scaffold-DbContext [-Connection] <String> [-Provider] <String> [-OutputDir <Stri
 //ef core help command:
 get-help scaffold-dbcontext –detailed
 
+dotnet ef dbcontext scaffold --help
+
+//dotnet tool installl command:
+dotnet tool install -g dotnet-ef
+
 //EF core database first command:
 //Select project for this:
 

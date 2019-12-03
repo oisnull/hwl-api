@@ -9,6 +9,7 @@ namespace HWL.Redis
         private static object _locker = new Object();
         private static RedisConnection _instance1 = null;
         private static RedisConnection _instance2 = null;
+        private static RedisConnection _instance3 = null;
 
         public static RedisConnection DefaultInstance
         {
@@ -38,11 +39,29 @@ namespace HWL.Redis
                     {
                         if (_instance2 == null || !_instance2.IsConnected)
                         {
-                            _instance2 = new RedisConnection(RedisConfigManager.MsgHandlerRedisHosts);
+                            _instance2 = new RedisConnection(RedisConfigManager.IMMessageRedisHosts);
                         }
                     }
                 }
                 return _instance2;
+            }
+        }
+
+        public static RedisConnection CollectionInstance
+        {
+            get
+            {
+                if (_instance3 == null)
+                {
+                    lock (_locker)
+                    {
+                        if (_instance3 == null || !_instance3.IsConnected)
+                        {
+                            _instance3 = new RedisConnection(RedisConfigManager.CollectionRedisHosts);
+                        }
+                    }
+                }
+                return _instance3;
             }
         }
     }
