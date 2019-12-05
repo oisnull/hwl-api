@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using HWL.PushStandard;
 
-namespace HWL.PushFunction
+namespace HWL.PushService
 {
     public class UserConsumeHandler : IConsumeHandler
     {

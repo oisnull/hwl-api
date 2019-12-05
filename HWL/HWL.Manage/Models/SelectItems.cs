@@ -91,12 +91,12 @@ namespace HWL.Manage
                 {
                     Value=((int)PushPositionType.User).ToString(),
                     Text= PushPositionType.User.ToString(),
-                    Selected=true
                 },
                 new SelectListItem()
                 {
                     Value=((int)PushPositionType.Near).ToString(),
                     Text= PushPositionType.Near.ToString(),
+                    Selected=true
                 },
                 new SelectListItem()
                 {

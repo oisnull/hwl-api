@@ -13,7 +13,8 @@ namespace HWL.Redis
         /// <summary>
         /// 搜索附近信息的范围初始值
         /// </summary>
-        public const int NEAR_CIRCLE_RANGE = 1000;
+        const int NEAR_CIRCLE_RANGE = 1000;
+        const string NEAR_CIRCLE_GEO_KEY = "near:circle:pos";
 
         /// <summary>
         /// 创建附近圈子信息位置数据,返回创建成功后的组标识
@@ -23,7 +24,7 @@ namespace HWL.Redis
             bool succ = false;
             RedisUtils.DefaultInstance.Exec(RedisConfigManager.NEAR_CIRCLE_GEO_DB, db =>
              {
-                 succ = db.GeoAdd(RedisConfigManager.NEAR_CIRCLE_GEO_KEY, lon, lat, circleId);
+                 succ = db.GeoAdd(NEAR_CIRCLE_GEO_KEY, lon, lat, circleId);
              });
             return succ;
         }
@@ -38,7 +39,7 @@ namespace HWL.Redis
             List<int> ids = null;
             RedisUtils.DefaultInstance.Exec(RedisConfigManager.NEAR_CIRCLE_GEO_DB, db =>
              {
-                 GeoRadiusResult[] results = db.GeoRadius(RedisConfigManager.NEAR_CIRCLE_GEO_KEY, lon, lat, NEAR_CIRCLE_RANGE, GeoUnit.Miles, -1);
+                 GeoRadiusResult[] results = db.GeoRadius(NEAR_CIRCLE_GEO_KEY, lon, lat, NEAR_CIRCLE_RANGE, GeoUnit.Miles, -1);
                  if (results != null && results.Length > 0)
                  {
                      ids = results.Select(s => (int)s.Member).OrderByDescending(s => s).ToList();
@@ -54,7 +55,7 @@ namespace HWL.Redis
             bool succ = false;
             RedisUtils.DefaultInstance.Exec(RedisConfigManager.NEAR_CIRCLE_GEO_DB, db =>
              {
-                 succ = db.GeoRemove(RedisConfigManager.NEAR_CIRCLE_GEO_KEY, nearCircleId);
+                 succ = db.GeoRemove(NEAR_CIRCLE_GEO_KEY, nearCircleId);
              });
             return succ;
         }

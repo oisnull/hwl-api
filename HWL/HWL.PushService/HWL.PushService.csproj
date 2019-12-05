@@ -6,8 +6,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HWL.Entity\HWL.Entity.csproj" />
-    <ProjectReference Include="..\HWL.PushFunction\HWL.PushFunction.csproj" />
     <ProjectReference Include="..\HWL.PushStandard\HWL.PushStandard.csproj" />
+    <ProjectReference Include="..\HWL.RabbitMQ\HWL.RabbitMQ.csproj" />
+    <ProjectReference Include="..\HWL.Redis\HWL.Redis.csproj" />
     <ProjectReference Include="..\HWL.ShareConfig\HWL.ShareConfig.csproj" />
     <ProjectReference Include="..\HWL.Tools\HWL.Tools.csproj" />
   </ItemGroup>

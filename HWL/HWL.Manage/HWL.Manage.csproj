@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HWL.Manage.Service\HWL.Manage.Service.csproj" />
-    <ProjectReference Include="..\HWL.PushFunction\HWL.PushFunction.csproj" />
+    <ProjectReference Include="..\HWL.PushService\HWL.PushService.csproj" />
   </ItemGroup>
 
   <ItemGroup>

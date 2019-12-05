@@ -21,8 +21,8 @@
   "RabbitMQSettings": {
     "Host": "127.0.0.1",
     "Port": 5672,
-    "UserName": "guest",
-    "Password": "guest"
+    "UserName": "liytest",
+    "Password": "ya.li.4321"
   },
   "ConnectionStrings": {
     "HWLDBConnectionString": "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303"

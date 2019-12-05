@@ -1,13 +1,13 @@
-﻿using HWL.PushFunction;
+﻿using HWL.PushService;
 using HWL.PushStandard;
 using HWL.RabbitMQ;
+using HWL.Tools;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace HWL.PushTest
+namespace HWL.PushClient
 {
     class Program
     {
@@ -107,10 +107,42 @@ namespace HWL.PushTest
             }
         }
 
+        static void Test4()
+        {
+            foreach (var item in PushPositionQueue.QUEUE_SYMBOLS)
+            {
+                Console.WriteLine($"{item.Value} receive start...");
+                MQConsumer.ReceiveMessage(item.Value, m =>
+                {
+                    string msg = Encoding.UTF8.GetString(m);
+                    Console.WriteLine($"{item.Value}:{msg}");
+
+                    try
+                    {
+                        PushModel model = JsonConvert.DeserializeObject<PushModel>(msg);
+                        IConsumeHandler consumeHandler = ConsumeFactory.Create(model.PositionType);
+                        consumeHandler.Process(model);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"Process failure:{CommonCs.GetExceptionMessages(ex)}");
+                        Console.ResetColor();
+                    }
+                });
+            }
+        }
+
         //put model into queue
         static void Main(string[] args)
         {
-            Test3();
+            //Test1();
+
+            //Test2();
+
+            //Test3();
+
+            Test4();
         }
     }
 }

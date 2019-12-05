@@ -10,9 +10,9 @@ namespace HWL.PushStandard
     public class PushPositionModel
     {
         public int UserId { get; set; }
-        public int PosId { get; set; }
-        public float Lon { get; set; }
-        public float Lat { get; set; }
+        public double Lon { get; set; }
+        public double Lat { get; set; }
+        public string PosDetails { get; set; }
     }
 }
 

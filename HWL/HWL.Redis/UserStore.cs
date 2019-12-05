@@ -7,6 +7,8 @@ namespace HWL.Redis
 {
     public class UserStore
     {
+        const string USER_GEO_KEY = "user:pos";
+
         /// <summary>
         /// 搜索附近用户的范围
         /// </summary>
@@ -90,7 +92,7 @@ namespace HWL.Redis
             bool succ = false;
             RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_GEO_DB, db =>
              {
-                 succ = db.GeoAdd(RedisConfigManager.USER_GEO_KEY, lon, lat, userId.ToString());
+                 succ = db.GeoAdd(USER_GEO_KEY, lon, lat, userId.ToString());
              });
             return succ;
         }
@@ -101,7 +103,7 @@ namespace HWL.Redis
             int[] userIdArray = null;
             RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_GEO_DB, db =>
              {
-                 GeoRadiusResult[] results = db.GeoRadius(RedisConfigManager.USER_GEO_KEY, lon, lat, USER_SEARCH_RANGE, GeoUnit.Miles);
+                 GeoRadiusResult[] results = db.GeoRadius(USER_GEO_KEY, lon, lat, USER_SEARCH_RANGE, GeoUnit.Miles);
                  if (results != null && results.Length > 0)
                  {
                      userIdArray = new int[results.Length];

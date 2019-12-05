@@ -13,8 +13,7 @@ namespace HWL.ShareConfig
             string env = Environment.GetEnvironmentVariable("Environment")?.ToLower();
             if (string.IsNullOrEmpty(env) || string.IsNullOrWhiteSpace(env))
             {
-                env = "company";
-                //throw new ArgumentNullException("Environment");
+                throw new ArgumentNullException("Environment");
             }
 
             string settingFilePath = Path.Combine(AppContext.BaseDirectory, $"sharesettings.{env}.json");

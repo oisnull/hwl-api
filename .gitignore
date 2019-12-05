@@ -48,8 +48,6 @@
 /HWL/HWL.Resx/Properties/PublishProfiles
 /HWL/HWL.PushStandard/bin
 /HWL/HWL.PushStandard/obj
-/HWL/HWL.PushTest/bin
-/HWL/HWL.PushTest/obj
 /HWL/HWL.PushTest/Properties/launchSettings.json
 /HWL/HWL.RabbitMQ/bin
 /HWL/HWL.RabbitMQ/obj
@@ -64,3 +62,6 @@
 /HWL/HWL.PushService/obj
 /HWL/HWL.CollectXUnitTest/bin
 /HWL/HWL.CollectXUnitTest/obj
+/HWL/HWL.PushClient/obj
+/HWL/HWL.PushClient/bin
+/HWL/HWL.PushClient/Properties/launchSettings.json

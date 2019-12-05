@@ -39,27 +39,6 @@ namespace HWL.Service.Near.Service
             }
         }
 
-        private CircleContentType GetContentType()
-        {
-            if (!string.IsNullOrEmpty(this.request.LinkUrl) && !string.IsNullOrEmpty(this.request.LinkTitle))
-            {
-                return CircleContentType.Link;
-            }
-            if (!string.IsNullOrEmpty(this.request.Content) && !(this.request.Images == null || this.request.Images.Count <= 0))
-            {
-                return CircleContentType.TextImage;
-            }
-            if (!string.IsNullOrEmpty(this.request.Content))
-            {
-                return CircleContentType.Text;
-            }
-            if (!(this.request.Images == null || this.request.Images.Count <= 0))
-            {
-                return CircleContentType.Image;
-            }
-            return CircleContentType.Other;
-        }
-
         public override AddNearCircleInfoResponseBody ExecuteCore()
         {
             AddNearCircleInfoResponseBody res = new AddNearCircleInfoResponseBody();
@@ -67,7 +46,7 @@ namespace HWL.Service.Near.Service
             {
                 user_id = this.request.UserId,
                 content_info = this.request.Content,
-                content_type = GetContentType(),
+                content_type = CustomerEnumDesc.GetCircleContentType(this.request.Content, this.request.LinkUrl, this.request.LinkTitle, this.request.Images?.Count ?? 0),
                 link_image = this.request.LinkImage,
                 link_title = this.request.LinkTitle,
                 link_url = this.request.LinkUrl,

@@ -14,7 +14,8 @@ namespace HWL.Redis
         /// <summary>
         /// 搜索附近的范围初始值
         /// </summary>
-        public const int NEAR_RANGE = 100;
+        const int NEAR_RANGE = 100;
+        const string GROUP_GEO_KEY = "group:pos";
 
         /// <summary>
         /// 检测周围100M内的组数据,并返回对应的组标识列表
@@ -26,7 +27,7 @@ namespace HWL.Redis
             List<string> keys = null;
             RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_GEO_DB, db =>
              {
-                 GeoRadiusResult[] results = db.GeoRadius(RedisConfigManager.GROUP_GEO_KEY, lon, lat, NEAR_RANGE, GeoUnit.Miles, 1);
+                 GeoRadiusResult[] results = db.GeoRadius(GROUP_GEO_KEY, lon, lat, NEAR_RANGE, GeoUnit.Miles, 1);
                  if (results != null && results.Length > 0)
                  {
                      keys = results.Select(s => s.Member.ToString()).ToList();
@@ -254,7 +255,7 @@ namespace HWL.Redis
             string guid = Guid.NewGuid().ToString();
             RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_GEO_DB, db =>
              {
-                 db.GeoAdd(RedisConfigManager.GROUP_GEO_KEY, lon, lat, guid);
+                 db.GeoAdd(GROUP_GEO_KEY, lon, lat, guid);
              });
             return guid;
         }

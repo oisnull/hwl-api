@@ -13,9 +13,6 @@ namespace HWL.Entity.Extends
         public List<AreaModel> children { get; set; }
     }
 
-    /// <summary>
-    /// 位置详情
-    /// </summary>
     public class PosDetails
     {
         public string Country { get; set; }
@@ -25,5 +22,17 @@ namespace HWL.Entity.Extends
         public string Details { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
+    }
+
+    public class GeoInfo
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string Details { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Latitude},{this.Longitude},{this.Details}";
+        }
     }
 }

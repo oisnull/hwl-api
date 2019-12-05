@@ -57,69 +57,89 @@
                                     <tr>
                                         <th>Position-UserId ：</th>
                                         <td>
-                                            <input type="text" class="form-control" name="PositionModel.UserId" value="@(Model?.PositionModel?.UserId??1)" />
+                                            <input type="text" class="form-control" name="PositionModel.UserId" value="@(Model?.PositionModel?.UserId)" />
                                         </td>
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <th>Position-PosId ：</th>
+                                        <th>Position Data ：</th>
                                         <td>
-                                            <input type="text" class="form-control" name="PositionModel.PosId" value="@(Model?.PositionModel?.PosId)" />
+                                            <div class="panel" style="margin-bottom:0;">
+                                                <table class="table" style="margin-bottom:0;">
+                                                    <tr>
+                                                        <th>Position-PosId ：</th>
+                                                        <td>
+                                                            @Html.DropDownListFor(model => model.PositionModel.PosDetails, (List<SelectListItem>)ViewBag.GeoInfos, new { @class = "form-control" })
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Position-Lon ：</th>
+                                                        <td>
+                                                            <input type="text" class="form-control" name="PositionModel.Lon" value="@(Model?.PositionModel?.Lon)" />
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Position-Lat ：</th>
+                                                        <td>
+                                                            <input type="text" class="form-control" name="PositionModel.Lat" value="@(Model?.PositionModel?.Lat)" />
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                         </td>
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <th>Position-Lon ：</th>
+                                        <th>Push Data ：</th>
                                         <td>
-                                            <input type="text" class="form-control" name="PositionModel.Lon" value="@(Model?.PositionModel?.Lon)" />
+                                            <div class="panel" style="margin-bottom:0;">
+                                                <table class="table" style="margin-bottom:0;">
+                                                    <tr>
+                                                        <th>OriginUrl ：</th>
+                                                        <td><input type="text" class="form-control" name="MessageModel.OriginUrl" value="@(Model?.MessageModel?.OriginUrl)"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Title ：</th>
+                                                        <td><input type="text" class="form-control" name="MessageModel.Title" value="@(Model?.MessageModel?.Title)"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Summary ：</th>
+                                                        <td><input type="text" class="form-control" name="MessageModel.Summary" value="@(Model?.MessageModel?.Summary)"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Content ：</th>
+                                                        <td><input type="text" class="form-control" name="MessageModel.Content" value="@(Model?.MessageModel?.Content)"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>ImageUrls ：</th>
+                                                        <td><input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Keys ：</th>
+                                                        <td><input type="text" class="form-control" name="MessageModel.Keys" value="@(Model?.MessageModel?.Keys)"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Author ：</th>
+                                                        <td><input type="text" class="form-control" name="MessageModel.Author" value="@(Model?.MessageModel?.Author)"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>OriginDate ：</th>
+                                                        <td><input type="text" class="form-control" name="MessageModel.OriginDate" value="@(Model?.MessageModel?.OriginDate)"></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                         </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Position-Lat ：</th>
-                                        <td>
-                                            <input type="text" class="form-control" name="PositionModel.Lat" value="@(Model?.PositionModel?.Lat)" />
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>OriginUrl ：</th>
-                                        <td><input type="text" class="form-control" name="MessageModel.OriginUrl" value="@(Model?.MessageModel?.OriginUrl)"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Title ：</th>
-                                        <td><input type="text" class="form-control" name="MessageModel.Title" value="@(Model?.MessageModel?.Title??"title-1")"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Keys ：</th>
-                                        <td><input type="text" class="form-control" name="MessageModel.Keys" value="@(Model?.MessageModel?.Keys)"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Author ：</th>
-                                        <td><input type="text" class="form-control" name="MessageModel.Author" value="@(Model?.MessageModel?.Author)"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Summary ：</th>
-                                        <td><input type="text" class="form-control" name="MessageModel.Summary" value="@(Model?.MessageModel?.Summary)"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>ImageUrls ：</th>
-                                        <td><input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Content ：</th>
-                                        <td><input type="text" class="form-control" name="MessageModel.Content" value="@(Model?.MessageModel?.Content??"test-content-1")"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>OriginDate ：</th>
-                                        <td><input type="text" class="form-control" name="MessageModel.OriginDate" value="@(Model?.MessageModel?.OriginDate??DateTime.Now.ToString())"></td>
                                         <td></td>
                                     </tr>
                                 </tbody>
@@ -143,30 +163,41 @@
 <script type="text/javascript">
 
     var isAction = false;
-    $("form").submit(function () {
-        if (isAction) {
-            return false;
-        }
-        isAction = true;
+    $(function () {
+        $("form").submit(function () {
+            if (isAction) {
+                return false;
+            }
+            isAction = true;
 
-        $("span#span_info").html("<font color='blue'>数据发布中，请稍后...</font>");
+            $("span#span_info").html("<font color='blue'>数据发布中，请稍后...</font>");
 
-        $(this).ajaxSubmit({
-            type: "post",
-            url: "/Push/Publish/",
-            success: function (data) {
-                if (data.state > 0) {
-                    $("span#span_info").html("<font color='blue'>发布成功,跳转中...</font>");
-                    Sleep(this, 1500);
-                    this.NextStep = function () {
-                        document.getElementById("a_return").click();
+            $(this).ajaxSubmit({
+                type: "post",
+                url: "/Push/Publish/",
+                success: function (data) {
+                    if (data.state > 0) {
+                        $("span#span_info").html("<font color='blue'>发布成功,跳转中...</font>");
+                        Sleep(this, 1500);
+                        this.NextStep = function () {
+                            document.getElementById("a_return").click();
+                        }
+                    } else {
+                        $("span#span_info").html("<font color='red'>" + data.error + "</font>");
+                        isAction = false;
                     }
-                } else {
-                    $("span#span_info").html("<font color='red'>" + data.error + "</font>");
-                    isAction = false;
                 }
+            });
+            return false;
+        });
+
+        $("#PositionModel_PosDetails").bind("change", function () {
+            if (this.value) {
+                var geos = this.value.split(',');
+                $("input[name='PositionModel.Lat']").val(geos[0]);
+                $("input[name='PositionModel.Lon']").val(geos[1]);
             }
         });
-        return false;
     });
+
 </script>

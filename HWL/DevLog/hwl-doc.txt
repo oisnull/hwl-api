@@ -4,3 +4,15 @@ https://www.jianshu.com/p/3f1cc5a7bf8c
 //Use iis debug for hwl
 https://stackoverflow.com/questions/36296572/debugging-asp-net-core-applications-running-in-iis/36302287
 https://docs.microsoft.com/zh-cn/aspnet/core/host-and-deploy/iis/index?view=aspnetcore-2.2
+
+//Set environment variables in local iis
+<system.webServer>
+    <handlers>
+		<add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
+    </handlers>
+    <aspNetCore processPath="dotnet" arguments=".\HWL.API.dll" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" >
+		<environmentVariables>
+			<environmentVariable name="Environment" value="company" />
+		</environmentVariables>
+	</aspNetCore>
+</system.webServer>

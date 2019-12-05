@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Text;
 
-namespace HWL.PushFunction
+namespace HWL.PushService
 {
     public class PushEntry
     {

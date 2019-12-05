@@ -454,5 +454,18 @@ namespace HWL.Tools
                 return formatter.Deserialize(ms);
             }
         }
+
+        public static string GetExceptionMessages(Exception e)
+        {
+            List<string> messages = new List<string>() { e.Message };
+            Exception ex = e;
+            while (ex.InnerException != null)
+            {
+                ex = ex.InnerException;
+                messages.Add(ex.Message);
+            }
+
+            return string.Join(";", messages);
+        }
     }
 }

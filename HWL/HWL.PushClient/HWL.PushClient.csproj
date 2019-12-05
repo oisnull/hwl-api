@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HWL.PushStandard\HWL.PushStandard.csproj" />
-    <ProjectReference Include="..\HWL.RabbitMQ\HWL.RabbitMQ.csproj" />
+    <ProjectReference Include="..\HWL.PushService\HWL.PushService.csproj" />
   </ItemGroup>
 
 </Project>
