@@ -1,5 +1,6 @@
 ﻿using HWL.Entity;
 using HWL.Entity.Models;
+using HWL.Redis;
 using HWL.Service.Near.Body;
 using System;
 using System.Collections.Generic;
@@ -40,17 +41,9 @@ namespace HWL.Service.Near.Service
                 return res;
             }
 
-            bool succ = new Redis.NearCircleStore().DeleteNearCircleId(this.request.NearCircleId);
+            bool succ = NearCircleStore.DeleteNearCircleId(this.request.NearCircleId);
             if (succ)
             {
-                //try
-                //{
-                var imgs = db.t_near_circle_image.Where(l => l.near_circle_id == this.request.NearCircleId).ToList();
-                if (imgs != null && imgs.Count > 0)
-                {
-                    db.t_near_circle_image.RemoveRange(imgs);
-                }
-
                 var comments = db.t_near_circle_comment.Where(l => l.near_circle_id == this.request.NearCircleId).ToList();
                 if (comments != null && comments.Count > 0)
                 {

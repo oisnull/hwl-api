@@ -89,9 +89,7 @@ namespace HWL.PushClient
                     PushMessageType = 0,
                     MessageModel = new PushMessageModel()
                     {
-                        Title = $"{txt}-1",
                         Content = $"content-{txt}-test",
-                        OriginDate = DateTime.Now.ToString()
                     },
                 };
             };

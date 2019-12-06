@@ -67,7 +67,7 @@
                                             <div class="panel" style="margin-bottom:0;">
                                                 <table class="table" style="margin-bottom:0;">
                                                     <tr>
-                                                        <th>Position-PosId ：</th>
+                                                        <th style="width:150px;">Position-PosId ：</th>
                                                         <td>
                                                             @Html.DropDownListFor(model => model.PositionModel.PosDetails, (List<SelectListItem>)ViewBag.GeoInfos, new { @class = "form-control" })
                                                         </td>
@@ -98,43 +98,23 @@
                                             <div class="panel" style="margin-bottom:0;">
                                                 <table class="table" style="margin-bottom:0;">
                                                     <tr>
-                                                        <th>OriginUrl ：</th>
-                                                        <td><input type="text" class="form-control" name="MessageModel.OriginUrl" value="@(Model?.MessageModel?.OriginUrl)"></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Title ：</th>
-                                                        <td><input type="text" class="form-control" name="MessageModel.Title" value="@(Model?.MessageModel?.Title)"></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Summary ：</th>
-                                                        <td><input type="text" class="form-control" name="MessageModel.Summary" value="@(Model?.MessageModel?.Summary)"></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Content ：</th>
+                                                        <th style="width:150px;">Content ：</th>
                                                         <td><input type="text" class="form-control" name="MessageModel.Content" value="@(Model?.MessageModel?.Content)"></td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
                                                         <th>ImageUrls ：</th>
-                                                        <td><input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)"></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Keys ：</th>
-                                                        <td><input type="text" class="form-control" name="MessageModel.Keys" value="@(Model?.MessageModel?.Keys)"></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Author ：</th>
-                                                        <td><input type="text" class="form-control" name="MessageModel.Author" value="@(Model?.MessageModel?.Author)"></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>OriginDate ：</th>
-                                                        <td><input type="text" class="form-control" name="MessageModel.OriginDate" value="@(Model?.MessageModel?.OriginDate)"></td>
+                                                        <td>
+                                                            <input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)" />
+                                                            <input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)" />
+                                                            <input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)" />
+                                                            <input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)" />
+                                                            <input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)" />
+                                                            <input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)" />
+                                                            <input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)" />
+                                                            <input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)" />
+                                                            <input type="text" class="form-control" name="MessageModel.ImageUrls" value="@(Model?.MessageModel?.ImageUrls)" />
+                                                        </td>
                                                         <td></td>
                                                     </tr>
                                                 </table>

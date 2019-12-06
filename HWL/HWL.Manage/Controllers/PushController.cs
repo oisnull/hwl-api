@@ -46,14 +46,8 @@ namespace HWL.Manage.Controllers
                 PositionType = PushPositionType.Near,
                 MessageModel = new PushMessageModel()
                 {
-                    Title = $"title-{randomText}",
                     Content = $"content-{randomText}",
-                    Author = "system",
-                    //Summary = "",
                     //ImageUrls = null,
-                    //Keys = "",
-                    OriginDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    OriginUrl = $"http://{randomText}",
                 }
             };
             return View(defaultPushModel);

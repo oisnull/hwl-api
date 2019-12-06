@@ -37,9 +37,6 @@ namespace HWL.PushService
             if (this.messageModel == null)
                 throw new ArgumentNullException("PushMessageModel");
 
-            if (string.IsNullOrEmpty(this.messageModel.Title))
-                throw new ArgumentNullException("PushMessageModel.Title");
-
             if (string.IsNullOrEmpty(this.messageModel.Content))
                 throw new ArgumentNullException("PushMessageModel.Content");
         }

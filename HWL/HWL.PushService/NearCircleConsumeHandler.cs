@@ -49,6 +49,7 @@ namespace HWL.PushService
                 lon = this.positionModel.Lon,
                 pos_desc = this.positionModel.PosDetails,
                 pos_id = 0,
+                image_urls = CircleImageParser.GetImageString(this.messageModel.ImageUrls),
                 comment_count = 0,
                 image_count = 0,
                 like_count = 0,
@@ -59,15 +60,15 @@ namespace HWL.PushService
             db.SaveChanges();
 
             NearCircleStore.CreateNearCirclePos(model.id, model.lon, model.lat);
+
+            //send im message to near users
+            //... ...
         }
 
         protected void CheckMessageModel()
         {
             if (this.messageModel == null)
                 throw new ArgumentNullException("PushMessageModel");
-
-            if (string.IsNullOrEmpty(this.messageModel.Title))
-                throw new ArgumentNullException("PushMessageModel.Title");
 
             if (string.IsNullOrEmpty(this.messageModel.Content))
                 throw new ArgumentNullException("PushMessageModel.Content");
