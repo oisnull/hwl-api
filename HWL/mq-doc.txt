@@ -1,0 +1,17 @@
+//start mq server command:
+//default port:5672
+/sbin/rabbitmq-server.bat
+
+//mq web management command:
+/sbin/rabbitmq-plugins enable rabbitmq_management
+
+//management initialization login account:
+//default link:http://127.0.0.1:15672
+name:guest
+pwd:guest
+
+//add user and set tag/permission command:
+//doc link:https://www.rabbitmq.com/rabbitmqctl.8.html#User_Management
+/sbin/rabbitmqctl add_user liytest ya.li.4321
+/sbin/rabbitmqctl set_permissions -p / liytest ".*" ".*" ".*"
+/sbin/rabbitmqctl set_user_tags liytest test

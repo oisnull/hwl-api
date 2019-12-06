@@ -13,7 +13,7 @@ namespace HWL.ShareConfig
             string env = Environment.GetEnvironmentVariable("Environment")?.ToLower();
             if (string.IsNullOrEmpty(env) || string.IsNullOrWhiteSpace(env))
             {
-                env = "prod";
+                throw new ArgumentNullException("Environment");
             }
 
             string settingFilePath = Path.Combine(AppContext.BaseDirectory, $"sharesettings.{env}.json");
@@ -52,6 +52,14 @@ namespace HWL.ShareConfig
             get
             {
                 return Configuration.GetSection("IMSettings");
+            }
+        }
+
+        protected static IConfigurationSection RabbitMQSettings
+        {
+            get
+            {
+                return Configuration.GetSection("RabbitMQSettings");
             }
         }
     }

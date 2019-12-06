@@ -100,5 +100,26 @@ namespace HWL.Entity
                 CircleContentType.TextImage,
             };
         }
+
+        public static CircleContentType GetCircleContentType(string content, string linkUrl, string linkTitle, int imageCount)
+        {
+            if (!string.IsNullOrEmpty(linkUrl) && !string.IsNullOrEmpty(linkTitle))
+            {
+                return CircleContentType.Link;
+            }
+            if (!string.IsNullOrEmpty(content) && imageCount >= 0)
+            {
+                return CircleContentType.TextImage;
+            }
+            if (!string.IsNullOrEmpty(content))
+            {
+                return CircleContentType.Text;
+            }
+            if (imageCount > 0)
+            {
+                return CircleContentType.Image;
+            }
+            return CircleContentType.Other;
+        }
     }
 }

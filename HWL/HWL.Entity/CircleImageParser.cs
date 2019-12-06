@@ -60,5 +60,14 @@ namespace HWL.Entity
 
             return string.Join(FIRST_SEPARATOR, images.ConvertAll(i => ConvertToString(i)));
         }
+
+        public static string GetImageString(List<string> images)
+        {
+            images?.RemoveAll(r => string.IsNullOrEmpty(r?.Trim()));
+
+            if (images == null || images.Count <= 0) return null;
+
+            return string.Join(FIRST_SEPARATOR, images);
+        }
     }
 }

@@ -18,3 +18,7 @@ dotnet ef dbcontext scaffold "Data Source=.;Initial Catalog=hwl;Persist Security
 
 //Update specify model
 dotnet ef dbcontext scaffold "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303" Microsoft.EntityFrameworkCore.SqlServer --output-dir=Models --context="HWLEntities" --table="t_admin" --use-database-names --startup-project="HWL.Entity" --force
+
+//NUGET Reset command:
+Update-Package -ProjectName 'MediationConfigService'  -Reinstall
+Update-Package -Reinstall

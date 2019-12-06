@@ -73,7 +73,6 @@ namespace HWL.ShareConfig
          * 6,存储用户好友信息,格式：db=8 set userid:fuserid remark 过期时间为 5分钟
          */
 
-        public const string USER_GEO_KEY = "user:pos";
         public const int USER_TOKEN_DB = 00;
         public const int TOKEN_USER_DB = 01;
         public const int USER_SESSION_DB = 02;
@@ -86,31 +85,11 @@ namespace HWL.ShareConfig
         public const int USER_BASERINFO_ERPIRE_TIME = 30;//用户基本信息过期时间配置，单位：分钟
         public const int USER_FRIEND_ERPIRE_TIME = 30;//用户对应的好友信息过期时间配置，单位：分钟
 
-
-
-        /// <summary>
-        /// 附近圈子信息geo的key
-        /// </summary>
-        public const string NEAR_CIRCLE_GEO_KEY = "near:circle:pos";
-
         /// <summary>
         /// 附近圈子信息所在的数据库
         /// </summary>
         public const int NEAR_CIRCLE_GEO_DB = 20;
 
-
-
-        /*
-         * 功能描述：
-         * 1,存储组位置,格式：db=5 geo group:pos lat lon guid
-         * 2,存储组用户集合,格式：db=6 set groupGuid userids
-         * 
-         */
-
-        /// <summary>
-        /// 组geo的key
-        /// </summary>
-        public const string GROUP_GEO_KEY = "group:pos";
         /// <summary>
         /// 组所在的数据库
         /// </summary>
@@ -123,7 +102,6 @@ namespace HWL.ShareConfig
         /// 个人组所在的数据库
         /// </summary>
         //public const int GROUP_DB = 12;
-
 
         public const int COLLECTION_HREFS_DB = 21;
     }
