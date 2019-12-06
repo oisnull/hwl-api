@@ -64,7 +64,7 @@ namespace HWL.Service.Circle.Service
             t_circle model = new t_circle()
             {
                 user_id = this.request.UserId,
-                circle_content = this.request.Content,
+                content_info = this.request.Content,
                 content_type = GetContentType(),
                 link_image = this.request.LinkImage,
                 link_title = this.request.LinkTitle,
@@ -72,7 +72,7 @@ namespace HWL.Service.Circle.Service
                 lat = this.request.Lat,
                 lon = this.request.Lon,
                 id = 0,
-                pos_id = this.request.PosId,
+                image_urls = CircleImageParser.GetImageString(this.request.Images),
                 pos_desc = this.request.PosDesc,
                 comment_count = 0,
                 image_count = this.request.Images != null ? this.request.Images.Count : 0,
@@ -87,38 +87,36 @@ namespace HWL.Service.Circle.Service
             res.ContentType = model.content_type;
             res.PublishTime = model.publish_time;
 
-            if (res.CircleId > 0)
-            {
-                if (this.request.Images != null && this.request.Images.Count > 0)
-                {
-                    //添加图片
-                    List<t_circle_image> imgModels = new List<t_circle_image>();
-                    this.request.Images.ForEach((i) =>
-                    {
-                        if (string.IsNullOrEmpty(i.Url)) return;
-                        imgModels.Add(new t_circle_image()
-                        {
-                            circle_id = model.id,
-                            user_id = model.user_id,
-                            image_url = i.Url,
-                            height = i.Height,
-                            width = i.Width
-                        });
-                    });
+            //if (res.CircleId > 0)
+            //{
+            //    if (this.request.Images != null && this.request.Images.Count > 0)
+            //    {
+            //        List<t_circle_image> imgModels = new List<t_circle_image>();
+            //        this.request.Images.ForEach((i) =>
+            //        {
+            //            if (string.IsNullOrEmpty(i.Url)) return;
+            //            imgModels.Add(new t_circle_image()
+            //            {
+            //                circle_id = model.id,
+            //                user_id = model.user_id,
+            //                image_url = i.Url,
+            //                height = i.Height,
+            //                width = i.Width
+            //            });
+            //        });
 
-                    if (imgModels == null || imgModels.Count <= 0) return res;
+            //        if (imgModels == null || imgModels.Count <= 0) return res;
 
-                    try
-                    {
-                        db.t_circle_image.AddRange(imgModels);
-                        db.SaveChanges();
-                    }
-                    catch (Exception)
-                    {
-                        //可以忽略这个错误
-                    }
-                }
-            }
+            //        try
+            //        {
+            //            db.t_circle_image.AddRange(imgModels);
+            //            db.SaveChanges();
+            //        }
+            //        catch (Exception)
+            //        {
+            //        }
+            //    }
+            //}
             return res;
         }
     }

@@ -36,13 +36,11 @@ namespace HWL.Service.Near.Service
             t_near_circle model = db.t_near_circle.Where(l => l.id == this.request.NearCircleId && l.user_id == this.request.UserId).FirstOrDefault();
             if (model == null)
             {
-                //throw new Exception("要删除的数据不存在");
                 res.Status = ResultStatus.Success;
                 return res;
             }
 
-            bool succ = Redis.NearCircleStore.DeleteNearCircleId(this.request.NearCircleId);
-            //if (!succ) throw new Exception("删除失败");
+            bool succ = new Redis.NearCircleStore().DeleteNearCircleId(this.request.NearCircleId);
             if (succ)
             {
                 //try
@@ -64,12 +62,6 @@ namespace HWL.Service.Near.Service
                 {
                     db.t_near_circle_like.RemoveRange(likes);
                 }
-
-                //}
-                //catch (Exception)
-                //{
-                //    //可以忽略这个错误
-                //}
             }
 
             db.t_near_circle.Remove(model);

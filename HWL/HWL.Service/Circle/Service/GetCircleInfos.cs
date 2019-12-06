@@ -83,7 +83,7 @@ namespace HWL.Service.Circle.Service
             {
                 CircleId = q.id,
                 ContentType = q.content_type,
-                CircleContent = q.circle_content,
+                CircleContent = q.content_info,
                 CommentCount = q.comment_count,
                 ImageCount = q.image_count,
                 Lat = q.lat,
@@ -92,7 +92,7 @@ namespace HWL.Service.Circle.Service
                 LinkTitle = q.link_title,
                 LinkUrl = q.link_url,
                 Lon = q.lon,
-                PosId = q.pos_id,
+                Images = CircleImageParser.GetImages(q.image_urls),
                 PublishUserId = q.user_id,
                 PublishTime = GenericUtility.FormatDate(q.publish_time),
                 UpdateTime = GenericUtility.FormatDate2(q.update_time),
@@ -113,12 +113,12 @@ namespace HWL.Service.Circle.Service
         {
             if (infos == null || infos.Count <= 0) return;
 
-            List<int> imageCircleIds = infos.Where(n => CustomerEnumDesc.ImageContentTypes().Contains(n.ContentType)).Select(n => n.CircleId).ToList();
-            List<t_circle_image> imageList = null;
-            if (imageCircleIds != null && imageCircleIds.Count > 0)
-            {
-                imageList = db.t_circle_image.Where(i => imageCircleIds.Contains(i.circle_id)).ToList();
-            }
+            //List<int> imageCircleIds = infos.Where(n => CustomerEnumDesc.ImageContentTypes().Contains(n.ContentType)).Select(n => n.CircleId).ToList();
+            //List<t_circle_image> imageList = null;
+            //if (imageCircleIds != null && imageCircleIds.Count > 0)
+            //{
+            //    imageList = db.t_circle_image.Where(i => imageCircleIds.Contains(i.circle_id)).ToList();
+            //}
             List<int> circleIds = infos.Select(n => n.CircleId).ToList();
             var likeList = db.t_circle_like.Where(l => circleIds.Contains(l.circle_id) && l.is_delete == false).ToList();
             var commentList = db.t_circle_comment.Where(c => circleIds.Contains(c.circle_id)).ToList();
@@ -138,15 +138,15 @@ namespace HWL.Service.Circle.Service
 
             foreach (var item in infos)
             {
-                if (imageList != null && imageList.Count > 0)
-                {
-                    item.Images = imageList.Where(i => i.circle_id == item.CircleId).Select(i => new ImageInfo()
-                    {
-                        Url = i.image_url,
-                        Height = i.height,
-                        Width = i.width
-                    }).ToList();
-                }
+                //if (imageList != null && imageList.Count > 0)
+                //{
+                //    item.Images = imageList.Where(i => i.circle_id == item.CircleId).Select(i => new ImageInfo()
+                //    {
+                //        Url = i.image_url,
+                //        Height = i.height,
+                //        Width = i.width
+                //    }).ToList();
+                //}
 
                 if (userList != null && userList.Count > 0)
                 {

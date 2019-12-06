@@ -84,7 +84,7 @@ namespace HWL.Service.Near.Service
                 Content = c.content_info,
                 ContentType = c.content_type,
                 PosDesc = c.pos_desc,
-                //Images = null,
+                Images = CircleImageParser.GetImages(c.image_urls),
                 LikeCount = c.like_count,
                 LinkImage = c.link_image,
                 LinkTitle = c.link_title,
@@ -103,12 +103,12 @@ namespace HWL.Service.Near.Service
         {
             if (infos == null || infos.Count <= 0) return;
 
-            List<int> imageCircleIds = infos.Where(n => CustomerEnumDesc.ImageContentTypes().Contains(n.ContentType)).Select(n => n.NearCircleId).ToList();
-            List<t_near_circle_image> imageList = null;
-            if (imageCircleIds != null && imageCircleIds.Count > 0)
-            {
-                imageList = db.t_near_circle_image.Where(i => imageCircleIds.Contains(i.near_circle_id)).ToList();
-            }
+            //List<int> imageCircleIds = infos.Where(n => CustomerEnumDesc.ImageContentTypes().Contains(n.ContentType)).Select(n => n.NearCircleId).ToList();
+            //List<t_near_circle_image> imageList = null;
+            //if (imageCircleIds != null && imageCircleIds.Count > 0)
+            //{
+            //    imageList = db.t_near_circle_image.Where(i => imageCircleIds.Contains(i.near_circle_id)).ToList();
+            //}
             List<int> circleIds = infos.Select(n => n.NearCircleId).ToList();
             var likeList = db.t_near_circle_like.Where(l => circleIds.Contains(l.near_circle_id) && l.is_delete == false).ToList();
             var commentList = db.t_near_circle_comment.Where(c => circleIds.Contains(c.near_circle_id)).ToList();
@@ -128,15 +128,15 @@ namespace HWL.Service.Near.Service
 
             foreach (var item in infos)
             {
-                if (imageList != null && imageList.Count > 0)
-                {
-                    item.Images = imageList.Where(i => i.near_circle_id == item.NearCircleId).Select(i => new ImageInfo()
-                    {
-                        Url = i.image_url,
-                        Height = i.height,
-                        Width = i.width
-                    }).ToList();
-                }
+                //if (imageList != null && imageList.Count > 0)
+                //{
+                //    item.Images = imageList.Where(i => i.near_circle_id == item.NearCircleId).Select(i => new ImageInfo()
+                //    {
+                //        Url = i.image_url,
+                //        Height = i.height,
+                //        Width = i.width
+                //    }).ToList();
+                //}
 
                 if (userList != null && userList.Count > 0)
                 {

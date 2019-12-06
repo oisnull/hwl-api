@@ -13,11 +13,11 @@ dotnet tool install -g dotnet-ef
 //Select project for this:
 
 //Update all model
-Scaffold-DbContext "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context "HWLEntities" -UseDatabaseNames -Force
-Scaffold-DbContext "Data Source=.;Initial Catalog=hwl;Persist Security Info=True;User ID=sa;Password=ac.123456" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context "HWLEntities" -UseDatabaseNames -Force
+dotnet ef dbcontext scaffold "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303" Microsoft.EntityFrameworkCore.SqlServer --output-dir=Models --context="HWLEntities" --use-database-names --startup-project="HWL.Entity" --force
+dotnet ef dbcontext scaffold "Data Source=.;Initial Catalog=hwl;Persist Security Info=True;User ID=sa;Password=ac.123456" Microsoft.EntityFrameworkCore.SqlServer --output-dir=Models --context="HWLEntities" --use-database-names --startup-project="HWL.Entity" --force
 
 //Update specify model
-Scaffold-DbContext "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context "HWLEntities" -Tables "t_admin" -UseDatabaseNames -Force
+dotnet ef dbcontext scaffold "Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303" Microsoft.EntityFrameworkCore.SqlServer --output-dir=Models --context="HWLEntities" --table="t_admin" --use-database-names --startup-project="HWL.Entity" --force
 
 //NUGET Reset command:
 Update-Package -ProjectName 'MediationConfigService'  -Reinstall
