@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HWL.Entity;
 
 namespace HWL.Service.Circle.Service
 {
@@ -50,10 +51,10 @@ namespace HWL.Service.Circle.Service
             {
                 CircleId = model.id,
                 CommentCount = model.comment_count,
-                CircleContent = model.circle_content,
+                CircleContent = model.content_info,
                 ContentType = model.content_type,
                 PosDesc = model.pos_desc,
-                //Images = null,
+                Images = CircleImageParser.GetImages(model.image_urls),
                 ImageCount = model.image_count,
                 LikeCount = model.like_count,
                 LinkImage = model.link_image,
@@ -73,12 +74,12 @@ namespace HWL.Service.Circle.Service
 
         private void BindInfo(CircleInfo info)
         {
-            info.Images = db.t_circle_image.Where(i => i.circle_id == info.CircleId).Select(i => new ImageInfo()
-            {
-                Url = i.image_url,
-                Height = i.height,
-                Width = i.width
-            }).ToList();
+            //info.Images = db.t_circle_image.Where(i => i.circle_id == info.CircleId).Select(i => new ImageInfo()
+            //{
+            //    Url = i.image_url,
+            //    Height = i.height,
+            //    Width = i.width
+            //}).ToList();
 
             var user = db.t_user.Where(u => u.id == info.PublishUserId).FirstOrDefault();
             string friendRemark = db.t_user_friend.Where(f => f.user_id == this.request.UserId && f.friend_user_id == info.PublishUserId).Select(f => f.friend_user_remark).FirstOrDefault();

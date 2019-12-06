@@ -5,8 +5,7 @@ using HWL.Service.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HWL.Entity;
 
 namespace HWL.Service.Circle.Service
 {
@@ -74,7 +73,7 @@ namespace HWL.Service.Circle.Service
             {
                 CircleId = q.id,
                 ContentType = q.content_type,
-                CircleContent = q.circle_content,
+                CircleContent = q.content_info,
                 CommentCount = q.comment_count,
                 ImageCount = q.image_count,
                 Lat = q.lat,
@@ -83,14 +82,13 @@ namespace HWL.Service.Circle.Service
                 LinkTitle = q.link_title,
                 LinkUrl = q.link_url,
                 Lon = q.lon,
-                PosId = q.pos_id,
+                Images = CircleImageParser.GetImages(q.image_urls),
                 PublishUserId = q.user_id,
                 PublishTime = GenericUtility.FormatDate(q.publish_time),
                 UpdateTime = GenericUtility.FormatDate2(q.update_time),
 
                 //IsLike = false,
                 //CommentInfos = null,
-                //Images = null,
                 //LikeUserInfos = null,
                 //PostUserInfo = null,
             });

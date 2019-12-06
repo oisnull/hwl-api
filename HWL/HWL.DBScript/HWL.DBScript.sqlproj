@@ -70,11 +70,9 @@
     <Build Include="t_near_circle_comment.sql" />
     <Build Include="t_near_circle_like.sql" />
     <Build Include="t_circle_comment.sql" />
-    <Build Include="t_near_circle_image.sql" />
     <Build Include="t_admin.sql" />
     <Build Include="t_user.sql" />
     <Build Include="t_user_code.sql" />
-    <Build Include="t_circle_image.sql" />
     <Build Include="t_circle_like.sql" />
     <Build Include="t_circle.sql" />
     <Build Include="t_near_circle.sql" />

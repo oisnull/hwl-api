@@ -61,3 +61,6 @@
 /HWL/HWL.PushService/obj
 /HWL/HWL.CollectXUnitTest/bin
 /HWL/HWL.CollectXUnitTest/obj
+/HWL/HWL.PushClient/bin
+/HWL/HWL.PushClient/obj
+/HWL/HWL.PushClient/Properties/launchSettings.json

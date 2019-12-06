@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HWL.Entity;
 
 namespace HWL.Service.Near.Service
 {
@@ -51,11 +52,11 @@ namespace HWL.Service.Near.Service
                 Content = model.content_info,
                 ContentType = model.content_type,
                 PosDesc = model.pos_desc,
-                //Images = null,
                 LikeCount = model.like_count,
                 LinkImage = model.link_image,
                 LinkTitle = model.link_title,
                 LinkUrl = model.link_url,
+                Images = CircleImageParser.GetImages(model.image_urls),
                 PublishTime = GenericUtility.FormatDate(model.publish_time),
                 UpdateTime = GenericUtility.FormatDate2(model.update_time),
                 PublishUserId = model.user_id,
@@ -70,12 +71,12 @@ namespace HWL.Service.Near.Service
 
         private void BindInfo(NearCircleInfo info)
         {
-            info.Images = db.t_near_circle_image.Where(i => i.near_circle_id == info.NearCircleId).Select(i => new ImageInfo()
-            {
-                Url = i.image_url,
-                Height = i.height,
-                Width = i.width
-            }).ToList();
+            //info.Images = db.t_near_circle_image.Where(i => i.near_circle_id == info.NearCircleId).Select(i => new ImageInfo()
+            //{
+            //    Url = i.image_url,
+            //    Height = i.height,
+            //    Width = i.width
+            //}).ToList();
 
             var user = db.t_user.Where(u => u.id == info.PublishUserId).FirstOrDefault();
             string friendRemark = db.t_user_friend.Where(f => f.user_id == this.request.UserId && f.friend_user_id == info.PublishUserId).Select(f => f.friend_user_remark).FirstOrDefault();

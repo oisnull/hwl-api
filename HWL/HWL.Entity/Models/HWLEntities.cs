@@ -19,7 +19,6 @@ namespace HWL.Entity.Models
         public virtual DbSet<t_app_version> t_app_version { get; set; }
         public virtual DbSet<t_circle> t_circle { get; set; }
         public virtual DbSet<t_circle_comment> t_circle_comment { get; set; }
-        public virtual DbSet<t_circle_image> t_circle_image { get; set; }
         public virtual DbSet<t_circle_like> t_circle_like { get; set; }
         public virtual DbSet<t_city> t_city { get; set; }
         public virtual DbSet<t_country> t_country { get; set; }
@@ -28,7 +27,6 @@ namespace HWL.Entity.Models
         public virtual DbSet<t_group_user> t_group_user { get; set; }
         public virtual DbSet<t_near_circle> t_near_circle { get; set; }
         public virtual DbSet<t_near_circle_comment> t_near_circle_comment { get; set; }
-        public virtual DbSet<t_near_circle_image> t_near_circle_image { get; set; }
         public virtual DbSet<t_near_circle_like> t_near_circle_like { get; set; }
         public virtual DbSet<t_province> t_province { get; set; }
         public virtual DbSet<t_user> t_user { get; set; }
@@ -36,14 +34,9 @@ namespace HWL.Entity.Models
         public virtual DbSet<t_user_friend> t_user_friend { get; set; }
         public virtual DbSet<t_user_pos> t_user_pos { get; set; }
 
-        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //        {
-        //            if (!optionsBuilder.IsConfigured)
-        //            {
-        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-        //                optionsBuilder.UseSqlServer("Data Source=10.61.8.55;Initial Catalog=testzl;Persist Security Info=True;User ID=sa;Password=Fang.303");
-        //            }
-        //        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -83,7 +76,9 @@ namespace HWL.Entity.Models
 
             modelBuilder.Entity<t_circle>(entity =>
             {
-                entity.Property(e => e.circle_content).HasMaxLength(4000);
+                entity.Property(e => e.content_info).HasMaxLength(2000);
+
+                entity.Property(e => e.image_urls).HasMaxLength(2000);
 
                 entity.Property(e => e.link_image).HasMaxLength(200);
 
@@ -105,13 +100,6 @@ namespace HWL.Entity.Models
                     .HasMaxLength(1000);
 
                 entity.Property(e => e.comment_time).HasColumnType("datetime");
-            });
-
-            modelBuilder.Entity<t_circle_image>(entity =>
-            {
-                entity.Property(e => e.image_url)
-                    .IsRequired()
-                    .HasMaxLength(200);
             });
 
             modelBuilder.Entity<t_circle_like>(entity =>
@@ -168,7 +156,9 @@ namespace HWL.Entity.Models
 
             modelBuilder.Entity<t_near_circle>(entity =>
             {
-                entity.Property(e => e.content_info).HasMaxLength(500);
+                entity.Property(e => e.content_info).HasMaxLength(2000);
+
+                entity.Property(e => e.image_urls).HasMaxLength(2000);
 
                 entity.Property(e => e.link_image).HasMaxLength(200);
 
@@ -188,13 +178,6 @@ namespace HWL.Entity.Models
                 entity.Property(e => e.comment_time).HasColumnType("datetime");
 
                 entity.Property(e => e.content_info).HasMaxLength(500);
-            });
-
-            modelBuilder.Entity<t_near_circle_image>(entity =>
-            {
-                entity.Property(e => e.image_url)
-                    .IsRequired()
-                    .HasMaxLength(200);
             });
 
             modelBuilder.Entity<t_near_circle_like>(entity =>

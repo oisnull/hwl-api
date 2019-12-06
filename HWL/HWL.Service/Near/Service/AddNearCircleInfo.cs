@@ -79,6 +79,7 @@ namespace HWL.Service.Near.Service
                 pos_desc = this.request.PosDesc,
                 comment_count = 0,
                 image_count = this.request.Images != null ? this.request.Images.Count : 0,
+                image_urls = CircleImageParser.GetImageString(this.request.Images),
                 like_count = 0,
                 publish_time = DateTime.Now,
                 update_time = DateTime.Now
@@ -100,38 +101,37 @@ namespace HWL.Service.Near.Service
                     db.SaveChanges();
                     throw new Exception("发布附近信息失败");
                 }
-                else
-                {
-                    if (this.request.Images != null && this.request.Images.Count > 0)
-                    {
-                        //添加图片
-                        List<t_near_circle_image> imgModels = new List<t_near_circle_image>();
-                        this.request.Images.ForEach((i) =>
-                        {
-                            if (string.IsNullOrEmpty(i.Url)) return;
-                            imgModels.Add(new t_near_circle_image()
-                            {
-                                near_circle_id = model.id,
-                                near_circle_user_id = model.user_id,
-                                image_url = i.Url,
-                                height = i.Height,
-                                width = i.Width
-                            });
-                        });
+                //else
+                //{
+                //    if (this.request.Images != null && this.request.Images.Count > 0)
+                //    {
+                //        List<t_near_circle_image> imgModels = new List<t_near_circle_image>();
+                //        this.request.Images.ForEach((i) =>
+                //        {
+                //            if (string.IsNullOrEmpty(i.Url)) return;
+                //            imgModels.Add(new t_near_circle_image()
+                //            {
+                //                near_circle_id = model.id,
+                //                near_circle_user_id = model.user_id,
+                //                image_url = i.Url,
+                //                height = i.Height,
+                //                width = i.Width
+                //            });
+                //        });
 
-                        if (imgModels == null || imgModels.Count <= 0) return res;
+                //        if (imgModels == null || imgModels.Count <= 0) return res;
 
-                        try
-                        {
-                            db.t_near_circle_image.AddRange(imgModels);
-                            db.SaveChanges();
-                        }
-                        catch (Exception)
-                        {
-                            //可以忽略这个错误
-                        }
-                    }
-                }
+                //        try
+                //        {
+                //            db.t_near_circle_image.AddRange(imgModels);
+                //            db.SaveChanges();
+                //        }
+                //        catch (Exception)
+                //        {
+                //            //可以忽略这个错误
+                //        }
+                //    }
+                //}
             }
             return res;
         }
