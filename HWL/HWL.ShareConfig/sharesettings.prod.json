@@ -6,13 +6,16 @@
     "UserAddFriendDayCount": 30, //每天添加好友数量上限
     "LogDirectory": "E:\\hwl-log",
     "UploadDirectory": "E:\\hwl-upload", //文件上传目录配置,值为当前计算机的绝对地址
-    "FileAccessUrl": "http://192.168.1.6:8033/upload" //文件对外访问的地址配置,值以http://或者https://开头
+    "FileAccessUrl": "http://192.168.1.6:8033/upload" //文件对外访问的地址配置,值以http://或者https://开头,upload可作为虚拟目录名
   },
   "RedisSettings": {
     "GroupUserTotalCount": 500, //群组好友总数量上限
     "UserDynamicRedisHosts": "127.0.0.1:6379,allowadmin=true,password=123456", //用户token配置
     "IMMessageRedisHosts": "127.0.0.1:6379,allowadmin=true,password=123456", //消息处理地址配置
-    "CollectionRedisHosts": "127.0.0.1:6379,allowadmin=true,password=123456"
+    "CollectionRedisHosts": "127.0.0.1:6379,allowadmin=true,password=123456",
+    "HWLManageSessionRedisHosts": "127.0.0.1:6379,allowAdmin=true,password=123456,defaultdatabase=0",
+    "HWLManageSessionRedisInstance": "hwlmg:sessionid:",
+    "HWLManageSessionTimeOut": 30 //minute
   },
   "IMSettings": {
     "IMHost": "192.168.1.6",

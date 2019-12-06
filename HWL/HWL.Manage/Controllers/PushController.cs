@@ -72,6 +72,10 @@ namespace HWL.Manage.Controllers
             if (model.PositionModel.UserId <= 0)
                 return Json(new { state = -1, error = "UserId can't be empty." });
 
+            UserService userService = new UserService(dbContext);
+            if (!userService.IsExistUser(model.PositionModel.UserId))
+                return Json(new { state = -1, error = $"Not found user data by current id of {model.PositionModel.UserId}." });
+
             string[] posDetails = model.PositionModel.PosDetails?.Split(',');
             if (posDetails != null && posDetails.Length > 0)
                 model.PositionModel.PosDetails = posDetails[posDetails.Length - 1];

@@ -218,6 +218,8 @@ namespace HWL.Entity.Models
 
                 entity.Property(e => e.register_date).HasColumnType("datetime");
 
+                entity.Property(e => e.source).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.symbol).HasMaxLength(20);
 
                 entity.Property(e => e.update_date).HasColumnType("datetime");

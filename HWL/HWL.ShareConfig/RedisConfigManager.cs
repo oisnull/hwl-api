@@ -27,8 +27,6 @@ namespace HWL.ShareConfig
             }
         }
 
-
-
         ///// <summary>
         ///// 用户基本信息地址配置
         ///// </summary>
@@ -39,6 +37,7 @@ namespace HWL.ShareConfig
         //        return ConfigurationManager.AppSettings["UserBaseInfoRedisHosts"].ToString();
         //    }
         //}
+
         /// <summary>
         /// 消息处理地址配置
         /// </summary>
@@ -47,6 +46,30 @@ namespace HWL.ShareConfig
             get
             {
                 return RedisSettings["IMMessageRedisHosts"];
+            }
+        }
+
+        public static string HWLManageSessionRedisHosts
+        {
+            get
+            {
+                return RedisSettings["HWLManageSessionRedisHosts"];
+            }
+        }
+
+        public static string HWLManageSessionRedisInstance
+        {
+            get
+            {
+                return RedisSettings["HWLManageSessionRedisInstance"];
+            }
+        }
+
+        public static int HWLManageSessionTimeOut
+        {
+            get
+            {
+                return Convert.ToInt32(RedisSettings["HWLManageSessionTimeOut"]);
             }
         }
 

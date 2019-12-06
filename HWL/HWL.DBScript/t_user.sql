@@ -9,6 +9,7 @@
     [life_notes]        NVARCHAR (200) NULL,
     [sex]               INT            NOT NULL,
     [status]            INT            NOT NULL,
+    [source]            INT            NOT NULL DEFAULT 1,
     [circle_back_image] NVARCHAR (100) NOT NULL,
     [register_country]  INT            NOT NULL,
     [register_province] INT            NOT NULL,

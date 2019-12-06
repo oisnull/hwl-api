@@ -31,6 +31,15 @@ namespace HWL.Entity
     }
 
     /// <summary>
+    /// 用户来源：1手动注册 2系统创建
+    /// </summary>
+    public enum UserSource
+    {
+        Register = 1,
+        System = 2,
+    }
+
+    /// <summary>
     /// 性别: 0女 1男 2未知
     /// </summary>
     public enum UserSex

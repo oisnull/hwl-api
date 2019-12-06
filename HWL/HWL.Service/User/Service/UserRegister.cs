@@ -36,10 +36,6 @@ namespace HWL.Service.User.Service
             {
                 throw new Exception("密码确认不能为空");
             }
-            if (this.request.Password.Contains(" "))
-            {
-                throw new Exception("密码中不能包含空格");
-            }
             if (this.request.PasswordOK.Trim() != this.request.Password.Trim())
             {
                 throw new Exception("两次密码输入不一致");
@@ -86,10 +82,11 @@ namespace HWL.Service.User.Service
             t_user model = new t_user()
             {
                 //id = 0,
-                email = this.request.Email ?? " ",
-                mobile = this.request.Mobile ?? " ",
+                email = this.request.Email ?? "",
+                mobile = this.request.Mobile ?? "",
                 password = this.request.PasswordOK,
 
+                source = UserSource.Register,
                 status = UserStatus.Normal,
                 sex = UserSex.Unknow,
                 register_date = DateTime.Now,

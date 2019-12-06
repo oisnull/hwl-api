@@ -76,7 +76,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @*@if (ViewBag.UseList == null || ViewBag.UseList.Count <= 0)
+                                    @if (ViewBag.UseList == null || ViewBag.UseList.Count <= 0)
                                     {
                                         <tr style="text-align:center;">
                                             <td colspan="6">
@@ -91,10 +91,12 @@
                                             <tr style="text-align:center;vertical-align:middle;" onmouseover=" this.style.background='#F4F7FA' ;" onmouseout="this.style.background = '';">
                                                 <td>@m.Id</td>
                                                 <td>@m.Name / @m.Symbol</td>
-                                                <td>@m.Email <br/> @m.Mobile</td>
+                                                <td>@m.Email <br /> @m.Mobile</td>
                                                 @if (!string.IsNullOrEmpty(m.HeadImage))
                                                 {
-                                                    <td onclick="ShowImg('@m.HeadImage')"><img width="80" height="80" src="@m.HeadImage" class="attachment-thumbnail wp-post-image" alt="@m.HeadImage"></td>
+                                                    <td>
+                                                        <a href="@m.HeadImage" target="_blank"><img width="80" height="80" src="@m.HeadImage" class="attachment-thumbnail wp-post-image" alt="@m.HeadImage" /></a>
+                                                    </td>
                                                 }
                                                 else
                                                 {
@@ -107,11 +109,11 @@
                                                 </td>
                                             </tr>
                                         }
-                                    }*@
+                                    }
                                 </tbody>
                             </table>
                             <div class="page">
-                                @*@(new HtmlString(ViewBag.PageHtml))*@
+                                @Html.Raw(ViewBag.PageHtml)
                             </div>
                         </div>
                     </div>
@@ -121,6 +123,8 @@
     </div>
 </div>
 
+<link href="~/js/bootstrap.3.3.2/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<script src="~/js/bootstrap.3.3.2/datetimepicker/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript">
     String.prototype.getParameter = function (key) {
         var re = new RegExp(key + '=([^&]*)(?:&)?');
@@ -128,28 +132,27 @@
     };
 
     $(function () {
-        //$(".form_datetime").datetimepicker({ language: "zh-CN", format: 'yyyy-mm-dd', autoclose: true, todayHighlight: true, minView: 'month' });
+        $(".form_datetime").datetimepicker({ language: "zh-CN", format: 'yyyy-mm-dd', autoclose: true, todayHighlight: true, minView: 'month' });
 
-        ////获取page中的参数
-        //var url = $("div.page").find("a:first").attr("href");
-        //document.getElementById("txtname").value = url.getParameter("email");
-        //var state = url.getParameter("state");
-        //if (document.getElementById("MemberStart") != null) {
-        //    document.getElementById("MemberStart").value = state == null || state == "" ? 0 : state;
-        //}
-        //document.getElementById("startDate").value = url.getParameter("startdate");
-        //document.getElementById("endDate").value = url.getParameter("enddate");
+        var url = $("div.page").find("a:first").attr("href");
+        document.getElementById("txtname").value = url.getParameter("email");
+        var state = url.getParameter("state");
+        if (document.getElementById("MemberStart") != null) {
+            document.getElementById("MemberStart").value = state == null || state == "" ? 0 : state;
+        }
+        document.getElementById("startDate").value = url.getParameter("startdate");
+        document.getElementById("endDate").value = url.getParameter("enddate");
     })
-    //查询
-    function SellectMember() {
+
+    function SelectMember() {
 
     }
 
     function ShowImg(src) {
         var index = layer.open({
             type: 2,
-            title: false, //不显示标题
-            content: src, //捕获的元素
+            title: false,
+            content: src,
             success: function (layer2) {
                 $("<img/>").attr("src", src).load(function () {
                     layer.style(index, {

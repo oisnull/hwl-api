@@ -15,6 +15,7 @@ namespace HWL.Entity.Models
         public string life_notes { get; set; }
         public UserSex sex { get; set; }
         public UserStatus status { get; set; }
+        public UserSource source { get; set; }
         public string circle_back_image { get; set; }
         public int register_country { get; set; }
         public int register_province { get; set; }

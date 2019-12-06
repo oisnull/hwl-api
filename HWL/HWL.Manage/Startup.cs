@@ -28,10 +28,17 @@ namespace HWL.Manage
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
+            services.AddDistributedRedisCache(option =>
+            {
+                option.InstanceName = RedisConfigManager.HWLManageSessionRedisInstance;
+                option.Configuration = RedisConfigManager.HWLManageSessionRedisHosts;
+            });
+
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.IdleTimeout = TimeSpan.FromMinutes(RedisConfigManager.HWLManageSessionTimeOut);
+                options.Cookie.HttpOnly = true;
             });
 
             services.Configure<CookiePolicyOptions>(options =>

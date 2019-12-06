@@ -65,15 +65,7 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return FileAccessUrl + "/upload/user/default.png";
-            }
-        }
-
-        public static string UserDefaultLoaclHeadImage
-        {
-            get
-            {
-                return UploadDirectory + "/upload/user/default.png";
+                return FileAccessUrl + "/user/default.png";
             }
         }
 
@@ -81,7 +73,7 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return FileAccessUrl + "/upload/user/circleback.png";
+                return FileAccessUrl + "/user/circleback.png";
             }
         }
 

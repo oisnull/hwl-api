@@ -50,6 +50,17 @@ namespace HWL.Entity.Extends
         public DateTime UpdateDate { get; set; }
     }
 
+    public class UserEditInfo
+    {
+        public string Email { get; set; }
+        public string Mobile { get; set; }
+        public string Password { get; set; }
+        public string PasswordOK { get; set; }
+        public string Name { get; set; }
+        public string HeadImage { get; set; }
+        public string LifeNotes { get; set; }
+    }
+
     public class UserFriendInfo
     {
         public int Id { get; set; }
