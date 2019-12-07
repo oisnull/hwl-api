@@ -48,7 +48,7 @@ namespace HWL.Manage
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<HWLEntities>(options => options.UseSqlServer(ShareConfiguration.DBConnectionString));
+            services.AddDbContext<HWLEntities>(options => options.UseSqlServer(ShareConfiguration.DBConnectionString, b => b.UseRowNumberForPaging()));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
