@@ -36,7 +36,7 @@ namespace HWL.Entity
             return images;
         }
 
-        private static string ConvertToString(ImageInfo img)
+        public static string ConvertToString(ImageInfo img)
         {
             string str = null;
             if (!string.IsNullOrEmpty(img.Url))

@@ -2,7 +2,7 @@
 Scaffold-DbContext [-Connection] <String> [-Provider] <String> [-OutputDir <String>] [-ContextDir <String>] [-Context <String>] [-Schemas <String[]>] [-Tables <String[]>] [-DataAnnotations] [-UseDatabaseNames] [-Force] [-Project <String>] [-StartupProject <String>] [<CommonParameters>]
 
 //ef core help command:
-get-help scaffold-dbcontext –detailed
+get-help scaffold-dbcontext ¨Cdetailed
 
 dotnet ef dbcontext scaffold --help
 
