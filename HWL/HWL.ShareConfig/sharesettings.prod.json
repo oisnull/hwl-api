@@ -28,6 +28,6 @@
     "Password": "ya.li.4321"
   },
   "ConnectionStrings": {
-    "HWLDBConnectionString": "Data Source=.;Initial Catalog=hwl;Persist Security Info=True;User ID=sa;Password=ac.123456"
+    "HWLDBConnectionString": "Data Source=.;Initial Catalog=hwl;Persist Security Info=True;User ID=hwldbmgr;Password=ac.123456"
   }
 }

@@ -15,3 +15,12 @@ pwd:guest
 /sbin/rabbitmqctl add_user liytest ya.li.4321
 /sbin/rabbitmqctl set_permissions -p / liytest ".*" ".*" ".*"
 /sbin/rabbitmqctl set_user_tags liytest test
+
+//check the port 8081 is occupying
+netstat -ano|findstr 8081
+
+//close the process
+taskkill -F -PID ****
+
+//search process
+tasklist|findstr pid
