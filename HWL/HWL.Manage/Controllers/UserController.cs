@@ -28,10 +28,10 @@ namespace HWL.Manage.Controllers
         public ActionResult List(int page = 0)
         {
             int pageCount = 20;
-            int recordCount = 0;
+            int recordCount = userService.GetUserCount();
 
             ViewBag.UseList = userService.GetUserList(page, pageCount);
-            ViewBag.PageHtml = CommonCs.GetPageHtmlStr(recordCount, pageCount, page, 8, "/User/List/", "");
+            ViewBag.PageHtml = CommonCs.GetPageHtmlStr(recordCount, pageCount, page, 8, "/User/List", "");
             return View();
         }
 

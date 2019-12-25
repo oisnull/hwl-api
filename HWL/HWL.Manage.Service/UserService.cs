@@ -80,6 +80,11 @@ namespace HWL.Manage.Service
             return db.t_user.Count(u => u.id == userId) > 0;
         }
 
+        public int GetUserCount()
+        {
+            return db.t_user.Count();
+        }
+
         public List<UserManageInfo> GetUserList(int pageIndex, int pageSize = 20)
         {
             pageIndex = pageIndex <= 0 ? 1 : pageIndex;
