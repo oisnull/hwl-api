@@ -5,9 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace HWL.Manage
 {
@@ -55,12 +52,16 @@ namespace HWL.Manage
                 {
                     if (filterContext.HttpContext.Request.IsAjaxRequest())
                     {
-                        HttpResponse response = filterContext.HttpContext.Response;
-                        response.Headers.Add("sessionstatus", "timeout");
-                        response.WriteAsync("<script>TimeoutError();</script>").ConfigureAwait(false);
+                        filterContext.Result = new ContentResult()
+                        {
+                            ContentType = "text/html",
+                            Content = "<script>TimeoutError();</script>"
+                        };
                     }
                     else
+                    {
                         filterContext.Result = RedirectToRoute("Default", new { Controller = "Home", Action = "Login" });
+                    }
                 }
             }
 
@@ -71,32 +72,5 @@ namespace HWL.Manage
         {
             base.OnActionExecuted(context);
         }
-
-        //protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        //{
-        //    if (currentAdmin == null)
-        //    {
-        //        if (filterContext.RequestContext.HttpContext.Request.IsAjaxRequest())
-        //        {
-        //            //filterContext.HttpContext.Response.StatusCode = 406;
-        //            //filterContext.Result = new JsonResult()
-        //            //{
-        //            //    Data = new { status = 406, error = "登录超时，请重新登录！" },
-        //            //    JsonRequestBehavior = JsonRequestBehavior.AllowGet
-        //            //};
-        //            Response.AppendHeader("sessionstatus", "timeout");
-        //            Response.Write("<script>TimeoutError();</script>");
-        //            Response.End();
-        //        }
-        //        else
-        //        {
-        //            //filterContext.Result = new RedirectResult("/Home/Login?null");
-        //            filterContext.Result = RedirectToRoute("Default", new { Controller = "Home", Action = "Login" });
-        //        }
-        //    }
-        //    else
-        //        base.OnActionExecuting(filterContext);
-
-        //}
     }
 }

@@ -27,25 +27,10 @@
 
             $.ajaxSetup({
                 error: function (xhr, status, e) {
-                    //alert(xhr.status);
-                    //if (xhr.status == 405) {
-                    //} else if (xhr.status == 406) {
-                    //    var ret= window.confirm("登录超时,请重新登录")
-                    //    if (true) {
-                    //        window.location = "/Home/Login?null";
-                    //    }
-                    //} else {
-                    //    layer.open({ content: "服务器出现未知错误", time: 1.5 });
-                    //}
                 },
                 beforeSend: function (xhr) {
-                    //alert("beforeSend");
                 },
                 complete: function (xhr, textStatus) {
-                    var sessionstatus = xhr.getResponseHeader("sessionstatus");
-                    if (sessionstatus == "timeout") {
-                        TimeoutError();
-                    }
                 }
             });
         });
@@ -55,6 +40,7 @@
             window.confirm("登录超时,请重新登录")
             window.location = "/Home/Login?null";
         }
+
         function Sleep(obj, iMinSecond) {
             if (window.eventList == null)
                 window.eventList = new Array();
