@@ -108,5 +108,53 @@ namespace HWL.Manage.Service
               .Take(pageSize)
               .ToList();
         }
+
+        public List<UserPosInfo> GetUserPosInfos(string pos, DateTime? startDate, DateTime? endDate, int pageSize = 30)
+        {
+            var query = from p in db.t_user_pos
+                        join u in db.t_user on p.user_id equals u.id
+                        orderby p.update_date descending
+                        select new UserPosInfo
+                        {
+                            UserId = p.user_id,
+                            UserName = u.name,
+                            UserSymbol = u.symbol,
+                            PosDetails = p.pos_details,
+                            Longitude = p.lon,
+                            Latitude = p.lat,
+                            CreateDate = p.create_date,
+                            UpdateDate = p.update_date
+                        };
+
+            if (!string.IsNullOrEmpty(pos))
+                query = query.Where(q => q.PosDetails.Contains(pos));
+
+            if (startDate != null && endDate != null)
+                query = query.Where(q => q.UpdateDate >= startDate.Value && q.UpdateDate < endDate.Value);
+
+            return query.Take(pageSize).ToList();
+        }
+
+        public List<GroupPosInfo> GetGroupAndUserInfos(double? lon, double? lat)
+        {
+            if (lon == null || lat == null) return null;
+
+            List<string> groupGuids = Redis.GroupStore.GetGroupGuids(lon.Value, lat.Value);
+            if (groupGuids == null || groupGuids.Count <= 0) return null;
+
+            List<GroupPosInfo> infos = new List<GroupPosInfo>(groupGuids.Count);
+            foreach (var item in groupGuids)
+            {
+                List<int> userIds = Redis.GroupStore.GetGroupUserIds(item);
+                infos.Add(new GroupPosInfo
+                {
+                    GroupGuid = item,
+                    GroupUserCount = userIds?.Count ?? 0,
+                    GroupUserIds = string.Join(",", userIds)
+                    //GroupUserIds = userIds
+                });
+            }
+            return infos;
+        }
     }
 }

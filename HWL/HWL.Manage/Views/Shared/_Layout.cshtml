@@ -41,6 +41,11 @@
             window.location = "/Home/Login?null";
         }
 
+        String.prototype.getParameter = function (key) {
+            var re = new RegExp(key + '=([^&]*)(?:&)?');
+            return this.match(re) && this.match(re)[1];
+        };
+
         function Sleep(obj, iMinSecond) {
             if (window.eventList == null)
                 window.eventList = new Array();

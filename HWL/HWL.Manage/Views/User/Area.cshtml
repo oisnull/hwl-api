@@ -1,0 +1,102 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="javascript:;">首页</a></li>
+                    <li class="active"><span>区域组用户</span></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box clearfix">
+                    <header class="main-box-header clearfix">
+                        <h2 style="font-weight:900;" class="pull-left">按经纬度筛选组用户</h2>
+                    </header>
+                    <div class="main-box-body clearfix">
+                        <table>
+                            <tr style="height:55px;">
+                                <th style="width:120px;">经度 - 纬度 ：</th>
+                                <td>
+                                    <input type="text" class="form-control" style="width:180px; " value="@ViewBag.Lon" id="longitude" placeholder="Longitude" size="50" />&nbsp; - &nbsp;
+                                    <input type="text" class="form-control" style="width:180px;" value="@ViewBag.Lat" id="latitude" placeholder="Latitude" size="50" />
+                                </td>
+                                <td style="width:50px;"></td>
+                                <td>
+                                    <a href="javascript:;" onclick="SearchGroups()" class="btn btn-default" style="width:100px;">查询</a> &nbsp;&nbsp;&nbsp;
+                                    <a href="/User/Area" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true" style="vertical-align:bottom;">重置</a>
+                                    <a id="a_search" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true" style="display:none;"></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box clearfix">
+                    <header class="main-box-header clearfix">
+                        <h2 style="font-weight:900;" class="pull-left">组用户列表</h2>
+                    </header>
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="center">组标识</th>
+                                        <th class="center">用户数</th>
+                                        <th class="center">用户ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.GroupPos == null || ViewBag.GroupPos.Count <= 0)
+                                    {
+                                        <tr style="text-align:center;">
+                                            <td colspan="3">
+                                                @if (ViewBag.Lon != null && ViewBag.Lat != null)
+                                                {
+                                                    <font color="red">当前区域内没有找到可用的组信息</font>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        foreach (HWL.Entity.Extends.GroupPosInfo pos in ViewBag.GroupPos)
+                                        {
+                                            <tr style="text-align:center;vertical-align:middle;" onmouseover=" this.style.background='#F4F7FA' ;" onmouseout="this.style.background = '';">
+                                                <td>@pos.GroupGuid</td>
+                                                <td>@pos.GroupUserCount</td>
+                                                <td>@pos.GroupUserIds</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function SearchGroups() {
+        var lon = document.getElementById("longitude").value;
+        var lat = document.getElementById("latitude").value;
+        if (lon && lat) {
+            var aObj = document.getElementById('a_search');
+            aObj.href = "/User/Area?lon=" + lon + "&lat=" + lat;
+            aObj.click();
+        }
+    }
+</script>

@@ -44,7 +44,7 @@
                                 </td>
                                 <td style="width:100px;"></td>
                                 <td colspan="3">
-                                    <a href="javascript:;" class="btn btn-default" style="width:100px;" onclick="SellectMember();">查询</a> &nbsp;&nbsp;&nbsp;
+                                    <a href="javascript:;" class="btn btn-default" style="width:100px;" onclick="SearchUsers();">查询</a> &nbsp;&nbsp;&nbsp;
                                     <a href="/Member/List/" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true" style="vertical-align:bottom;">重置</a>
                                     <a href="/Member/List/" id="a_membersellect" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true" style="display:none;">会员条件筛选</a>
                                 </td>
@@ -126,11 +126,6 @@
 <link href="~/js/bootstrap.3.3.2/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <script src="~/js/bootstrap.3.3.2/datetimepicker/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript">
-    String.prototype.getParameter = function (key) {
-        var re = new RegExp(key + '=([^&]*)(?:&)?');
-        return this.match(re) && this.match(re)[1];
-    };
-
     $(function () {
         $(".form_datetime").datetimepicker({ language: "zh-CN", format: 'yyyy-mm-dd', autoclose: true, todayHighlight: true, minView: 'month' });
 
@@ -144,7 +139,7 @@
         document.getElementById("endDate").value = url.getParameter("enddate");
     })
 
-    function SelectMember() {
+    function SearchUsers() {
 
     }
 

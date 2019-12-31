@@ -66,13 +66,29 @@ namespace HWL.Manage.Controllers
 
                 int userId = userService.AddUser(user);
                 if (userId <= 0)
-                    return Json(new { state = -1, error = "用户创建失败." });
+                    return Json(new { state = -1, error = "Create user failed." });
             }
             catch (Exception ex)
             {
                 return Json(new { state = -1, error = ex.Message });
             }
             return Json(new { state = 1 });
+        }
+
+        public ActionResult NewPos(string pos = null, DateTime? sd = null, DateTime? ed = null)
+        {
+            ViewBag.UserPos = userService.GetUserPosInfos(pos, sd, ed);
+            return View(new Models.SearchPosModel() { Pos = pos, StartDate = sd?.ToString("yyyy-MM-dd"), EndDate = ed?.ToString("yyyy-MM-dd") });
+        }
+
+        public ActionResult Area(double? lon = null, double? lat = null)
+        {
+            ViewBag.GroupPos = userService.GetGroupAndUserInfos(lon, lat);
+            //ViewBag.Lon = lon ?? 121.499328613281;
+            //ViewBag.Lat = lat ?? 31.0719089508057;
+            ViewBag.Lon = lon;
+            ViewBag.Lat = lat;
+            return View();
         }
     }
 }

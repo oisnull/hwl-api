@@ -61,12 +61,11 @@ namespace HWL.Service.User.Service
                 Status = ResultStatus.Success,
                 UserPosId = upos.id,
                 UserGroupGuid = groupGuid,
-                GroupUserInfos = null
+                GroupUserInfos = GetGroupUsers(groupGuid)
             };
 
             if (!isExistInGroup)
             {
-                res.GroupUserInfos = GetGroupUsers(groupGuid);
                 ImUserContent user = res.GroupUserInfos?.Where(g => g.UserId == request.UserId).Select(g => new ImUserContent
                 {
                     UserId = (ulong)g.UserId,
