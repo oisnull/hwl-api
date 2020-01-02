@@ -35,7 +35,7 @@ namespace HWL.ShareConfig
             _disable = true;
         }
 
-        public static void InitConfigure(string repositoryName = "NETCoreRepository")
+        public static void InitConfigure(string repositoryName = "HWLRepository")
         {
             string configFilePath = Path.Combine(AppContext.BaseDirectory, "log4net.config");
             repository = LogManager.CreateRepository(repositoryName);

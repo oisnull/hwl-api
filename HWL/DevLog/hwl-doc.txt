@@ -16,3 +16,32 @@ https://docs.microsoft.com/zh-cn/aspnet/core/host-and-deploy/iis/index?view=aspn
 		</environmentVariables>
 	</aspNetCore>
 </system.webServer>
+
+//The example code for Authentication
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+public class UserAuthorizeAttribute : AuthorizeAttribute, IAuthorizationFilter
+{
+    public void OnAuthorization(AuthorizationFilterContext context)
+    {
+        var user = context.HttpContext.User;
+        var groups = AuthGroupNames;
+
+        if (!user.Identity.IsAuthenticated || groups == null || groups.Count <= 0)
+        {
+            return;
+        }
+
+        if (!groups.Exists(g => user.IsInRole(g)))
+        {
+            if (context.HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                context.Result = new StatusCodeResult((int)HttpStatusCode.Forbidden);
+            }
+            else
+            {
+                context.HttpContext.Response.Redirect("/error/e403");
+            }
+            return;
+        }
+    }
+}
