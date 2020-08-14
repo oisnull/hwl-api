@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace HWL.Service.Generic
 {
@@ -18,6 +16,35 @@ namespace HWL.Service.Generic
         {
             if (dt == null) return null;
             return dt.Value.ToString("yyyy-MM-dd HH:mm:ss ff");
+        }
+
+        public static bool IsValidMail(string emailAddress)
+        {
+            if (string.IsNullOrEmpty(emailAddress?.Trim())) return false;
+
+            try
+            {
+                MailAddress m = new MailAddress(emailAddress);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 判断输入的字符串是否是一个合法的手机号
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool IsValidPhone(string phoneString)
+        {
+            if (string.IsNullOrEmpty(phoneString?.Trim())) return false;
+
+            Regex regex = new Regex("^1[34578]\\d{9}$");
+            return regex.IsMatch(phoneString);
         }
 
         /// <summary>

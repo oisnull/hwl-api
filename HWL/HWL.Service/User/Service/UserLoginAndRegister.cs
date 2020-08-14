@@ -3,17 +3,21 @@ using HWL.Entity.Extends;
 using HWL.Entity.Models;
 using HWL.Redis;
 using HWL.Service.User.Body;
+using HWL.ShareConfig;
+using HWL.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace HWL.Service.User.Service
 {
-    public class UserLogin : GMSF.ServiceHandler<UserLoginRequestBody, UserLoginResponseBody>
+    public class UserLoginAndRegister : GMSF.ServiceHandler<UserLoginAndRegisterRequestBody, UserLoginAndRegisterResponseBody>
     {
         private readonly HWLEntities db;
+        private bool isMail = false;
+        private bool isMobile = false;
 
-        public UserLogin(HWLEntities dbContext, UserLoginRequestBody request) : base(request)
+        public UserLoginAndRegister(HWLEntities dbContext, UserLoginAndRegisterRequestBody request) : base(request)
         {
             this.db = dbContext;
         }
@@ -22,36 +26,49 @@ namespace HWL.Service.User.Service
         {
             base.ValidateRequestParams();
 
-            if (string.IsNullOrEmpty(this.request.Email) && string.IsNullOrEmpty(this.request.Mobile))
+            isMail = !string.IsNullOrEmpty(this.request.Email) && Generic.GenericUtility.IsValidMail(this.request.Email);
+
+            isMobile = !string.IsNullOrEmpty(this.request.Mobile) && Generic.GenericUtility.IsValidPhone(this.request.Mobile);
+
+            if (!isMail && !isMobile)
             {
-                throw new Exception("手机或者邮箱不能为空");
+                throw new Exception("手机或者邮箱格式错误");
             }
-            if (string.IsNullOrEmpty(this.request.Password))
+
+            if (string.IsNullOrEmpty(this.request.CheckCode))
             {
-                throw new Exception("密码不能为空");
+                throw new Exception("验证码不能为空");
             }
         }
 
-        public override UserLoginResponseBody ExecuteCore()
+        public override UserLoginAndRegisterResponseBody ExecuteCore()
         {
-            UserLoginResponseBody res = new UserLoginResponseBody();
+            UserLoginAndRegisterResponseBody res = new UserLoginAndRegisterResponseBody();
             IQueryable<t_user> query = db.t_user;
+            IQueryable<t_user_code> codeQuery = db.t_user_code;
 
-            if (!string.IsNullOrEmpty(this.request.Mobile))
+            if (this.isMobile)
             {
                 query = query.Where(u => u.mobile == this.request.Mobile);
+                codeQuery = db.t_user_code.Where(u => u.user_account == this.request.Mobile);
             }
             else
             {
                 query = query.Where(u => u.email == this.request.Email);
+                codeQuery = db.t_user_code.Where(u => u.user_account == this.request.Email);
+            }
+
+            if (this.request.CheckCode != AppConfigManager.CheckCodeForDebug)
+            {
+                t_user_code oldCode = codeQuery.OrderByDescending(u => u.id).FirstOrDefault();
+                if (oldCode == null || oldCode.code != this.request.CheckCode) throw new Exception("验证码错误");
+                if (oldCode.expire_time <= DateTime.Now) throw new Exception("验证码已过期");
             }
 
             t_user user = query.FirstOrDefault();
-            if (user == null) throw new Exception("用户不存在");
+            if (user == null) user = this.CreateUser();
             if (user.status != UserStatus.Normal) throw new Exception("用户已经被禁用");
-            if (user.password != this.request.Password) throw new Exception("密码错误");//CommonCs.GetMd5Str32(this.request.Password)
 
-            UserStore.RemoveUserToken(user.id);
             string userToken = UserUtility.BuildToken(user.id);
             bool succ = UserStore.SaveUserToken(user.id, userToken);
             if (!succ) throw new Exception("用户登录token生成失败");
@@ -88,14 +105,36 @@ namespace HWL.Service.User.Service
                 CircleBackImage = user.circle_back_image,
                 UserSex = user.sex,
                 LifeNotes = user.life_notes,
-                //RegisterPosIdList = posIdList,
-                //RegisterPosList = posList,
                 RegAreaInfo = pos,
                 FriendCount = db.t_user_friend.Where(f => f.user_id == user.id).Count(),
                 GroupCount = db.t_group_user.Where(f => f.user_id == user.id).Count()
             };
 
             return res;
+        }
+
+        private t_user CreateUser()
+        {
+            t_user model = new t_user()
+            {
+                //id = 0,
+                email = this.request.Email ?? "",
+                mobile = this.request.Mobile ?? "",
+                password = "123456",
+
+                source = UserSource.Register,
+                status = UserStatus.Normal,
+                sex = UserSex.Unknow,
+                register_date = DateTime.Now,
+                update_date = DateTime.Now,
+                name = $"{AppConfigManager.DefaultEAppName}-{RandomText.GetNum()}",
+                head_image = AppConfigManager.UserDefaultHeadImage,
+                circle_back_image = AppConfigManager.UserCircleBackImage,
+            };
+            db.t_user.Add(model);
+            db.SaveChanges();
+
+            return model;
         }
     }
 }

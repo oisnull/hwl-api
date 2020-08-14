@@ -9,6 +9,11 @@ namespace HWL.ShareConfig
 {
     public class AppConfigManager : ShareConfiguration
     {
+        public static string DefaultAppName { get; } = "ZiChat";
+        public static string DefaultEAppName { get; } = "ZL";
+        public static string CheckCodeForDebug { get; } = "888888";
+
+
         /// <summary>
         /// 用户登录过期时间设置,按天算,指在当前时间往后加的天数
         /// </summary>

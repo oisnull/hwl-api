@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevLog", "DevLog", "{1ECF57
 		mq-doc.txt = mq-doc.txt
 		DevLog\rec.txt = DevLog\rec.txt
 		DevLog\secondend.txt = DevLog\secondend.txt
+		DevLog\third.txt = DevLog\third.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IM", "IM", "{C290EA82-FBCF-499B-AD33-69442D9A8834}"
@@ -66,7 +67,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWL.RabbitMQ", "HWL.RabbitM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWL.PushService", "HWL.PushService\HWL.PushService.csproj", "{00B1CD87-CA2B-4F20-9AFE-2677787FAB40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWL.PushClient", "HWL.PushClient\HWL.PushClient.csproj", "{DB3414FF-D3E0-4A7F-BA63-C2934AF562AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWL.PushClient", "HWL.PushClient\HWL.PushClient.csproj", "{DB3414FF-D3E0-4A7F-BA63-C2934AF562AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

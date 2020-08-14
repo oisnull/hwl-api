@@ -37,7 +37,14 @@ namespace HWL.API.Controllers
         [Description("用户注册")]
         public Response<UserRegisterResponseBody> UserRegister(Request<UserRegisterRequestBody> request)
         {
-            return UserService.UserRegister(dbContext,request);
+            return UserService.UserRegister(dbContext, request);
+        }
+
+        [HttpPost]
+        [Description("用户登陆并且注册")]
+        public Response<UserLoginAndRegisterResponseBody> UserLoginAndRegister(Request<UserLoginAndRegisterRequestBody> request)
+        {
+            return UserService.UserLoginAndRegister(dbContext, request);
         }
 
         [HttpPost]

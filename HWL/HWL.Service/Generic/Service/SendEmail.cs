@@ -4,10 +4,7 @@ using HWL.Entity.Models;
 using HWL.Service.Generic.Body;
 using HWL.Tools;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace HWL.Service.Generic.Service
 {
@@ -18,12 +15,18 @@ namespace HWL.Service.Generic.Service
         {
             this.db = dbContext;
         }
+
         protected override void ValidateRequestParams()
         {
             base.ValidateRequestParams();
             if (string.IsNullOrEmpty(this.request.Email))
             {
-                throw new Exception("邮箱格式错误");
+                throw new Exception("Email can't be empty.");
+            }
+
+            if (!GenericUtility.IsValidMail(this.request.Email))
+            {
+                throw new Exception("The current format of email is invaild.");
             }
         }
 
@@ -40,11 +43,12 @@ namespace HWL.Service.Generic.Service
             int codeId = User.UserUtility.AddCode(db, CodeType.Register, randText, emailInfo.Item2, this.request.Email); //发送成功后记录验证码
             if (codeId <= 0)
             {
-                throw new Exception("验证码发送失败");
+                throw new Exception("Check code send failed.");
             }
 
             return new SendEmailResponseBody()
             {
+                CurrentEmail = this.request.Email,
                 Status = ResultStatus.Success,
                 //CheckCode = randText
             };

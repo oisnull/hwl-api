@@ -9,14 +9,12 @@ namespace HWL.Service.Generic.Body
 {
     public class SendSMSRequestBody
     {
-        /// <summary>
-        /// 接收者的手机号码
-        /// </summary>
         public string Mobile { get; set; }
     }
 
     public class SendSMSResponseBody
     {
+        public string CurrentMobile { get; set; }
         public ResultStatus Status { get; set; }
     }
 }
