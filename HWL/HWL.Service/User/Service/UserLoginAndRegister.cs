@@ -58,9 +58,10 @@ namespace HWL.Service.User.Service
                 codeQuery = db.t_user_code.Where(u => u.user_account == this.request.Email);
             }
 
+            t_user_code oldCode = null;
             if (this.request.CheckCode != AppConfigManager.CheckCodeForDebug)
             {
-                t_user_code oldCode = codeQuery.OrderByDescending(u => u.id).FirstOrDefault();
+                oldCode = codeQuery.OrderByDescending(u => u.id).FirstOrDefault();
                 if (oldCode == null || oldCode.code != this.request.CheckCode) throw new Exception("验证码错误");
                 if (oldCode.expire_time <= DateTime.Now) throw new Exception("验证码已过期");
             }
@@ -93,7 +94,7 @@ namespace HWL.Service.User.Service
                                             District = dist.name,
                                         }).FirstOrDefault();
 
-            res.UserInfo = new Entity.Extends.UserBaseInfo()
+            res.UserInfo = new UserBaseInfo()
             {
                 Id = user.id,
                 Symbol = user.symbol,
@@ -109,6 +110,13 @@ namespace HWL.Service.User.Service
                 FriendCount = db.t_user_friend.Where(f => f.user_id == user.id).Count(),
                 GroupCount = db.t_group_user.Where(f => f.user_id == user.id).Count()
             };
+
+            //设置注册码过期
+            if (oldCode != null)
+            {
+                oldCode.expire_time = oldCode.expire_time.AddDays(-1);
+                db.SaveChanges();
+            }
 
             return res;
         }
