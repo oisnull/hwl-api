@@ -74,25 +74,29 @@ namespace HWL.Service.User.Service
             bool succ = UserStore.SaveUserToken(user.id, userToken);
             if (!succ) throw new Exception("用户登录token生成失败");
 
-            UserRegisterAreaInfo pos = (from country in db.t_country
-                                        join province in db.t_province on country.id equals province.country_id
-                                        join city in db.t_city on province.id equals city.province_id
-                                        join dist in db.t_district on city.id equals dist.city_id
-                                        where country.id == user.register_country &&
-                                        province.id == user.register_province &&
-                                        city.id == user.register_city &&
-                                        dist.id == user.register_district
-                                        select new UserRegisterAreaInfo
-                                        {
-                                            CountryId = country.id,
-                                            Country = country.name,
-                                            ProvinceId = province.id,
-                                            Province = province.name,
-                                            CityId = city.id,
-                                            City = city.name,
-                                            DistrictId = dist.id,
-                                            District = dist.name,
-                                        }).FirstOrDefault();
+            UserRegisterAreaInfo pos = null;
+            if (user.register_country > 0 || user.register_province > 0 || user.register_city > 0 || user.register_district > 0)
+            {
+                pos = (from country in db.t_country
+                       join province in db.t_province on country.id equals province.country_id
+                       join city in db.t_city on province.id equals city.province_id
+                       join dist in db.t_district on city.id equals dist.city_id
+                       where country.id == user.register_country &&
+                       province.id == user.register_province &&
+                       city.id == user.register_city &&
+                       dist.id == user.register_district
+                       select new UserRegisterAreaInfo
+                       {
+                           CountryId = country.id,
+                           Country = country.name,
+                           ProvinceId = province.id,
+                           Province = province.name,
+                           CityId = city.id,
+                           City = city.name,
+                           DistrictId = dist.id,
+                           District = dist.name,
+                       }).FirstOrDefault();
+            }
 
             res.UserInfo = new UserBaseInfo()
             {

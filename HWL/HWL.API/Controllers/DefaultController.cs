@@ -366,6 +366,13 @@ namespace HWL.API.Controllers
         }
 
         [HttpPost]
+        [Description("终端日志收集")]
+        public void CollectLog(Request<CollectLogRequestBody> request)
+        {
+            GenericService.CollectLog(dbContext, request);
+        }
+
+        [HttpPost]
         [Description("设置用户圈子背景图片")]
         public Response<SetUserCircleBackImageResponseBody> SetUserCircleBackImage(Request<SetUserCircleBackImageRequestBody> request)
         {

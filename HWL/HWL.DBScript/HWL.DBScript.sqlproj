@@ -79,5 +79,6 @@
     <Build Include="t_group.sql" />
     <Build Include="t_group_user.sql" />
     <Build Include="t_app_version.sql" />
+    <Build Include="t_app_log.sql" />
   </ItemGroup>
 </Project>
