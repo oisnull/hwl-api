@@ -17,7 +17,7 @@ namespace HWL.API
         {
             Configuration = configuration;
 
-            Log4NetManager.InitConfigure();
+            LogHelper.InitConfigure("api");
         }
 
         public IConfiguration Configuration { get; }

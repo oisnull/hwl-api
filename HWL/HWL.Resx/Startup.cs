@@ -20,6 +20,8 @@ namespace HWL.Resx
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            ShareConfig.LogHelper.InitConfigure("resx");
         }
 
         public IConfiguration Configuration { get; }

@@ -4,8 +4,7 @@
     "UserCodeExpireSecond": 120, //用户验证时,发送的验证码过期时间配置,单位：秒
     "UserAddFriendTotalCount": 3000, //添加好友总数量上限
     "UserAddFriendDayCount": 30, //每天添加好友数量上限
-    "LogDirectory": "E:\\hwl-logs",
-    "UploadDirectory": "E:\\hwl-upload", //文件上传目录配置,值为当前计算机的绝对地址
+    "UploadDirectory": "E:\\hwl-upload\\", //文件上传目录配置,值为当前计算机的绝对地址
     "FileAccessUrl": "http://10.61.8.23:8081/upload" //文件对外访问的地址配置,值以http://或者https://开头,upload可作为虚拟目录名
   },
   "RedisSettings": {
@@ -29,5 +28,13 @@
   },
   "ConnectionStrings": {
     "HWLDBConnectionString": "Data Source=.;Initial Catalog=zltest;Persist Security Info=True;User ID=sa;Password=WCNM.weiruan.2"
+  },
+  "LogSettings": {
+    "LogDirectory": "hwl-logs",
+    "EnableDebug": true,
+    "EnableInfo": true,
+    "EnableWarn": true,
+    "EnableError": true,
+    "EnableFatal": true
   }
 }

@@ -46,15 +46,7 @@ namespace HWL.ShareConfig
                 return AppSettings["UploadDirectory"];
             }
         }
-
-        public static string LogDirectory
-        {
-            get
-            {
-                return AppSettings["LogDirectory"];
-            }
-        }
-
+        
         /// <summary>
         /// 文件对外访问的地址配置,值以http://或者https://开头
         /// </summary>

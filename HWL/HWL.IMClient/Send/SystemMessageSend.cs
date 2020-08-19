@@ -46,7 +46,7 @@ namespace HWL.IMClient.Send
 
         public override void failure(string message)
         {
-            ShareConfig.Log4NetManager.Error($"SystemMessageSend:{message}");
+            ShareConfig.LogHelper.Error($"SystemMessageSend:{message}");
         }
     }
 }
