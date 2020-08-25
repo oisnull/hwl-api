@@ -6,7 +6,7 @@ namespace HWL.Manage.Controllers
     {
         public ActionResult Index()
         {
-            return View(base.currentAdmin);
+            return View();
         }
        
         public ActionResult Default()

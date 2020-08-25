@@ -1,4 +1,7 @@
-﻿<div class="row">
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12">
@@ -26,7 +29,7 @@
                                         <td style="width:100px;"></td>
                                         <td>
                                             <a href="javascript:;" class="btn btn-default" style="width:100px;" onclick="">查询</a> &nbsp;&nbsp;&nbsp;
-                                            <a href="/Article/Category/" id="a_reset" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true" style="vertical-align:bottom;">重置</a>
+                                            <a href="/Article/Category/" id="a_reset" style="vertical-align:bottom;">重置</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -75,7 +78,7 @@
                                                 <td><a href="@item.DownloadUrl" target="_blank">@item.DownloadUrl</a></td>
                                                 <td>@item.PublishTime</td>
                                                 <td>
-                                                    <a href="/App/Publish/?id=@item.Id" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true">编辑</a>
+                                                    <a href="/App/Publish/?id=@item.Id">编辑</a>
                                                 </td>
                                             </tr>
                                         }

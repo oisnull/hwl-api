@@ -6,9 +6,24 @@ namespace HWL.ShareConfig
 {
     public class ShareConfiguration
     {
-        protected static IConfiguration Configuration;
+        private static IConfiguration _configuration;
 
-        static ShareConfiguration()
+        protected static IConfiguration Configuration
+        {
+            get
+            {
+                if (_configuration != null)
+                {
+                    return _configuration;
+                }
+
+                InitConfiguration();
+
+                return _configuration;
+            }
+        }
+
+        public static void InitConfiguration()
         {
             if (string.IsNullOrEmpty(CurrentEnvironment) || string.IsNullOrWhiteSpace(CurrentEnvironment))
             {
@@ -17,10 +32,25 @@ namespace HWL.ShareConfig
 
             string settingFilePath = Path.Combine(AppContext.BaseDirectory, $"sharesettings.{CurrentEnvironment}.json");
 
-            Configuration = new ConfigurationBuilder()
+            _configuration = new ConfigurationBuilder()
                 .AddJsonFile(settingFilePath, false)
                 .Build();
         }
+
+        //protected static IConfiguration Configuration;
+        //static ShareConfiguration()
+        //{
+        //    if (string.IsNullOrEmpty(CurrentEnvironment) || string.IsNullOrWhiteSpace(CurrentEnvironment))
+        //    {
+        //        throw new ArgumentNullException("Environment");
+        //    }
+
+        //    string settingFilePath = Path.Combine(AppContext.BaseDirectory, $"sharesettings.{CurrentEnvironment}.json");
+
+        //    Configuration = new ConfigurationBuilder()
+        //        .AddJsonFile(settingFilePath, false)
+        //        .Build();
+        //}
 
         public static string CurrentEnvironment { get; } = Environment.GetEnvironmentVariable("Environment")?.ToLower();
 

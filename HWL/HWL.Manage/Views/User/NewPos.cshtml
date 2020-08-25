@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model SearchPosModel
 
@@ -36,8 +36,8 @@
                                 <td style="width:50px;"></td>
                                 <td>
                                     <a href="javascript:;" class="btn btn-default" style="width:100px;" onclick="SearchPos()">查询</a> &nbsp;&nbsp;&nbsp;
-                                    <a id="a_userpos" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true" style="display:none;"></a>
-                                    <a href="/User/NewPos" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true" style="vertical-align:bottom;">重置</a>
+                                    <a id="a_userpos" style="display:none;"></a>
+                                    <a href="/User/NewPos" style="vertical-align:bottom;">重置</a>
                                 </td>
                             </tr>
                         </table>
@@ -90,7 +90,7 @@
                                                 <td>@pos.CreateDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
                                                 <td>@pos.UpdateDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
                                                 <td>
-                                                    <a href="/User/Area?lon=@pos.Longitude&lat=@pos.Latitude" data-ajax-update="#main_content" data-ajax-mode="replace" data-ajax="true">搜索组</a>
+                                                    <a href="/User/Area?lon=@pos.Longitude&lat=@pos.Latitude">搜索组</a>
                                                 </td>
                                             </tr>
                                         }
