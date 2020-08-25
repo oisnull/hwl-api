@@ -10,65 +10,30 @@ namespace HWL.ShareConfig
 
         static ShareConfiguration()
         {
-            string env = Environment.GetEnvironmentVariable("Environment")?.ToLower();
-            if (string.IsNullOrEmpty(env) || string.IsNullOrWhiteSpace(env))
+            if (string.IsNullOrEmpty(CurrentEnvironment) || string.IsNullOrWhiteSpace(CurrentEnvironment))
             {
                 throw new ArgumentNullException("Environment");
             }
 
-            string settingFilePath = Path.Combine(AppContext.BaseDirectory, $"sharesettings.{env}.json");
+            string settingFilePath = Path.Combine(AppContext.BaseDirectory, $"sharesettings.{CurrentEnvironment}.json");
 
             Configuration = new ConfigurationBuilder()
                 .AddJsonFile(settingFilePath, false)
                 .Build();
         }
 
-        protected static IConfigurationSection RedisSettings
-        {
-            get
-            {
-                return Configuration.GetSection("RedisSettings");
-            }
-        }
+        public static string CurrentEnvironment { get; } = Environment.GetEnvironmentVariable("Environment")?.ToLower();
 
-        protected static IConfigurationSection AppSettings
-        {
-            get
-            {
-                return Configuration.GetSection("AppSettings");
-            }
-        }
+        protected static IConfigurationSection RedisSettings { get; } = Configuration.GetSection("RedisSettings");
 
-        public static string DBConnectionString
-        {
-            get
-            {
-                return Configuration.GetConnectionString("HWLDBConnectionString");
-            }
-        }
+        protected static IConfigurationSection AppSettings { get; } = Configuration.GetSection("AppSettings");
 
-        protected static IConfigurationSection IMSettings
-        {
-            get
-            {
-                return Configuration.GetSection("IMSettings");
-            }
-        }
+        public static string DBConnectionString { get; } = Configuration.GetConnectionString("HWLDBConnectionString");
 
-        protected static IConfigurationSection RabbitMQSettings
-        {
-            get
-            {
-                return Configuration.GetSection("RabbitMQSettings");
-            }
-        }
+        protected static IConfigurationSection IMSettings { get; } = Configuration.GetSection("IMSettings");
 
-        protected static IConfigurationSection LogSettings
-        {
-            get
-            {
-                return Configuration.GetSection("LogSettings");
-            }
-        }
+        protected static IConfigurationSection RabbitMQSettings { get; } = Configuration.GetSection("RabbitMQSettings");
+
+        protected static IConfigurationSection LogSettings { get; } = Configuration.GetSection("LogSettings");
     }
 }

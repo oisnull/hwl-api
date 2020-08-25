@@ -18,6 +18,7 @@ namespace HWL.API
             Configuration = configuration;
 
             LogHelper.InitConfigure("api");
+            LogHelper.Debug($"environment:{ShareConfiguration.CurrentEnvironment}");
         }
 
         public IConfiguration Configuration { get; }

@@ -9,6 +9,7 @@ using HWL.Entity;
 using HWL.Redis;
 using HWL.IMClient;
 using HWL.IMCore.Protocol;
+using HWL.ShareConfig;
 
 namespace HWL.Service.User.Service
 {
@@ -53,6 +54,8 @@ namespace HWL.Service.User.Service
 
         public override SetUserPosResponseBody ExecuteCore()
         {
+            //LogHelper.Debug($"UserId:{request.UserId},LastGroupGuid:{request.LastGroupGuid},Details:{request.Details},Lat:{request.Latitude},Lon:{request.Longitude}", typeof(SetUserPos));
+
             t_user_pos upos = this.SavePos();
             string groupGuid = GetGroupGuid(upos);
 
@@ -63,6 +66,8 @@ namespace HWL.Service.User.Service
                 UserGroupGuid = groupGuid,
                 GroupUserInfos = GetGroupUsers(groupGuid)
             };
+
+            //LogHelper.Debug($"CurrentGroupGuid:{groupGuid},LastGroupGuid:{request.LastGroupGuid},GroupUserCount:{res.GroupUserInfos?.Count}", typeof(SetUserPos));
 
             if (!isExistInGroup)
             {
