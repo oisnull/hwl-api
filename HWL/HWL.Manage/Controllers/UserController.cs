@@ -90,5 +90,13 @@ namespace HWL.Manage.Controllers
             ViewBag.Lat = lat;
             return View();
         }
+
+        public ActionResult NearUsers(double? lon, double? lat)
+        {
+            ViewBag.NearUsers = userService.GetNearUserRadius(lon, lat);
+            ViewBag.Lon = lon;
+            ViewBag.Lat = lat;
+            return View();
+        }
     }
 }

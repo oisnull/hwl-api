@@ -2,6 +2,7 @@
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HWL.Redis
 {
@@ -10,7 +11,7 @@ namespace HWL.Redis
         const string USER_GEO_KEY = "user:pos";
 
         /// <summary>
-        /// 搜索附近用户的范围
+        /// 搜索附近用户的范围(单位:米)
         /// </summary>
         const int USER_SEARCH_RANGE = 1000;
 
@@ -97,23 +98,22 @@ namespace HWL.Redis
             return succ;
         }
 
-        //获取附近的用户列表
-        public static int[] GetNearUserList(double lon, double lat)
+        public static int[] GetNearUserIds(double lon, double lat)
         {
-            int[] userIdArray = null;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_GEO_DB, db =>
-             {
-                 GeoRadiusResult[] results = db.GeoRadius(USER_GEO_KEY, lon, lat, USER_SEARCH_RANGE, GeoUnit.Miles);
-                 if (results != null && results.Length > 0)
-                 {
-                     userIdArray = new int[results.Length];
-                     for (int i = 0; i < results.Length; i++)
-                     {
-                         userIdArray[i] = Convert.ToInt32(results[i].Member);
-                     }
-                 }
-             });
-            return userIdArray;
+            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_GEO_DB, db =>
+            {
+                GeoRadiusResult[] results = db.GeoRadius(USER_GEO_KEY, lon, lat, USER_SEARCH_RANGE, GeoUnit.Meters);
+
+                return results?.Select(r => Convert.ToInt32(r.Member)).ToArray();
+            });
+        }
+
+        public static GeoRadiusResult[] GetNearUserRadius(double lon, double lat)
+        {
+            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_GEO_DB, db =>
+            {
+                return db.GeoRadius(USER_GEO_KEY, lon, lat, USER_SEARCH_RANGE, GeoUnit.Meters);
+            });
         }
 
         #endregion

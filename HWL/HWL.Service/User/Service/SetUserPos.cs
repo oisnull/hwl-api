@@ -191,12 +191,16 @@ namespace HWL.Service.User.Service
                 db.SaveChanges();
             }
 
+            //t_user_pos upos = db.t_user_pos.Where(u => u.user_id == this.request.UserId &&
+            //                                            u.country_id == country.id &&
+            //                                            u.province_id == province.id &&
+            //                                            u.city_id == city.id &&
+            //                                            u.district_id == district.id &&
+            //                                            u.pos_details == this.request.Details
+            //                                        ).FirstOrDefault();
             t_user_pos upos = db.t_user_pos.Where(u => u.user_id == this.request.UserId &&
-                                                        u.country_id == country.id &&
-                                                        u.province_id == province.id &&
-                                                        u.city_id == city.id &&
-                                                        u.district_id == district.id &&
-                                                        u.pos_details == this.request.Details
+                                                        u.lon == request.Longitude &&
+                                                        u.lat == request.Latitude
                                                     ).FirstOrDefault();
             if (upos == null)
             {

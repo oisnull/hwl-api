@@ -54,7 +54,7 @@
                     </header>
                     <div class="main-box-body clearfix">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th class="center">用户昵称/标识</th>
@@ -78,7 +78,7 @@
                                     {
                                         foreach (HWL.Entity.Extends.UserPosInfo pos in ViewBag.UserPos)
                                         {
-                                            <tr style="text-align:center;vertical-align:middle;" onmouseover=" this.style.background = '#F4F7FA'" onmouseout="this.style.background = ''">
+                                            <tr>
                                                 <td>@pos.UserName / @pos.UserSymbol</td>
                                                 <td>@pos.PosDetails</td>
                                                 <td style="width:200px;">
@@ -91,6 +91,7 @@
                                                 <td>@pos.UpdateDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
                                                 <td>
                                                     <a href="/User/Area?lon=@pos.Longitude&lat=@pos.Latitude">搜索组</a>
+                                                    <a href="/User/NearUsers?lon=@pos.Longitude&lat=@pos.Latitude">搜索用户</a>
                                                 </td>
                                             </tr>
                                         }

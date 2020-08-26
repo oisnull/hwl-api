@@ -21,7 +21,7 @@ namespace HWL.Redis
                     {
                         if (_instance1 == null || !_instance1.IsConnected)
                         {
-                            _instance1 = new RedisConnection(RedisConfigManager.UserDynamicRedisHosts);
+                            _instance1 = new RedisConnection(RedisConfigManager.UserDynamicRedisHosts, new DefaultRedisConnectionListener());
                         }
                     }
                 }
@@ -39,7 +39,7 @@ namespace HWL.Redis
                     {
                         if (_instance2 == null || !_instance2.IsConnected)
                         {
-                            _instance2 = new RedisConnection(RedisConfigManager.IMMessageRedisHosts);
+                            _instance2 = new RedisConnection(RedisConfigManager.IMMessageRedisHosts, new DefaultRedisConnectionListener());
                         }
                     }
                 }
@@ -57,7 +57,7 @@ namespace HWL.Redis
                     {
                         if (_instance3 == null || !_instance3.IsConnected)
                         {
-                            _instance3 = new RedisConnection(RedisConfigManager.CollectionRedisHosts);
+                            _instance3 = new RedisConnection(RedisConfigManager.CollectionRedisHosts, new DefaultRedisConnectionListener());
                         }
                     }
                 }

@@ -3,6 +3,7 @@ using HWL.Entity.Extends;
 using HWL.Entity.Models;
 using HWL.ShareConfig;
 using HWL.Tools;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -155,6 +156,45 @@ namespace HWL.Manage.Service
                 });
             }
             return infos;
+        }
+
+        public List<UserRadiusInfo> GetNearUserRadius(double? lon, double? lat)
+        {
+            if (lon == null || lat == null) return null;
+
+            GeoRadiusResult[] radius = Redis.UserStore.GetNearUserRadius(lon.Value, lat.Value);
+            if (radius == null || radius.Length <= 0) return null;
+
+            List<UserRadiusInfo> posInfos = new List<UserRadiusInfo>();
+            UserRadiusInfo pos = null;
+            foreach (var item in radius)
+            {
+                pos = new UserRadiusInfo()
+                {
+                    UserId = Convert.ToInt32(item.Member),
+                    Longitude = item.Position.Value.Longitude,
+                    Latitude = item.Position.Value.Latitude,
+                    Distance = item.Distance.Value
+                };
+                var user = (from u in db.t_user
+                            join p in db.t_user_pos
+                            on u.id equals p.user_id
+                            where u.id == pos.UserId && p.lat == pos.Latitude && p.lon == pos.Longitude
+                            select new
+                            {
+                                u.name,
+                                p.pos_details,
+                                p.update_date
+                            }).FirstOrDefault();
+                if (user != null)
+                {
+                    pos.UserName = user.name;
+                    pos.UpdateDate = user.update_date;
+                    pos.PosDetails = user.pos_details;
+                }
+                posInfos.Add(pos);
+            }
+            return posInfos;
         }
     }
 }

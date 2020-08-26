@@ -44,7 +44,19 @@ namespace HWL.Entity.Extends
         public string PosDetails { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public double Distance { get; set; }
         public DateTime CreateDate { get; set; }
+        public DateTime UpdateDate { get; set; }
+    }
+
+    public class UserRadiusInfo
+    {
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string PosDetails { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public double Distance { get; set; }
         public DateTime UpdateDate { get; set; }
     }
 
