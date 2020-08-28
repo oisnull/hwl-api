@@ -11,6 +11,8 @@ namespace HWL.Entity.Extends
         public int Id { get; set; }
         public string Name { get; set; }
         public string Version { get; set; }
+        public string UpgradeLog { get; set; }
+        public long Size { get; set; }
         public string DownloadUrl { get; set; }
         public DateTime PublishTime { get; set; }
     }

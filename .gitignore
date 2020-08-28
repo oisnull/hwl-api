@@ -69,3 +69,5 @@
 /HWL/CommonTest/bin
 /HWL/CommonTest/Properties/launchSettings.json
 /HWL/HWL.API/Logs
+/HWL/HWL.IMClientTest/Properties/launchSettings.json
+/HWL/HWL.IMClientTest/HWL.IMClientTest.csproj.user

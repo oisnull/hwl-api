@@ -5,70 +5,74 @@
 @model HWL.Entity.Extends.AppExt
 <div class="row">
     <div class="col-lg-12">
-        <div class="row">
-            <div class="col-lg-12">
-                <ol class="breadcrumb">
-                    <li><a href="/Main/Index">首页</a></li>
-                    <li><a href="/App/List">历史版本列表</a></li>
-                    <li class="active"><span>发布新版本</span></li>
-                </ol>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="main-box clearfix">
-                    <form id="form1" action="#" method="post">
-                        <input type="hidden" id="hidden_id" name="Id" value="@Model.Id">
-                        <div style="text-align: left;margin:10px;" class="panel">
-                            <div class="panel-heading">
-                                <b>发布APP新版本</b>
-                            </div>
+        <ol class="breadcrumb">
+            <li><a href="/Main/Index">首页</a></li>
+            <li><a href="/App/List">历史版本列表</a></li>
+            <li class="active"><span>发布新版本</span></li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-box clearfix">
+            <form id="form1" action="#" method="post">
+                <input type="hidden" id="hidden_id" name="Id" value="@Model.Id">
+                <div style="text-align: left;margin:10px;" class="panel">
+                    <div class="panel-heading">
+                        <b>发布APP新版本</b>
+                    </div>
 
-                            <table class="table">
-                                <tbody>
+                    <table class="table">
+                        <tbody>
 
-                                    <tr>
-                                        <th style="width:150px;">APP名称 <font color="red">*</font>：</th>
-                                        <td><input type="text" class="form-control" name="Name" value="@Model.Name" style="width:20%;" maxlength="20"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th style="width:150px;">版本号 ：</th>
-                                        <td><input type="text" class="form-control" name="Version" value="@Model.Version" style="width: 20%;" maxlength="10"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th style="width:150px;">版本文件 ：</th>
-                                        <td><input type="file" name="file_apk" class="form-control" style="width:20%;height: auto;"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th style="width:150px;">下载地址 ：</th>
-                                        <td><input type="text" class="form-control" name="DownloadUrl" value="@Model.DownloadUrl" style="width:50%;" maxlength="300"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>发布日期：</th>
-                                        <td>@Model.PublishTime</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <p style="margin:10px;">
-                            <input type="submit" class="btn btn-submit btn-primary" style="width:100px;margin-left: 0px;margin-right:10px;" value="发 布">
-                            <a class="btn btn-default" style="width:100px;margin-left: 10px;margin-right:10px;" href="/App/List?page=0" id="a_return">返 回</a>
+                            <tr>
+                                <th style="width:150px;">APP名称 <font color="red">*</font>：</th>
+                                <td><input type="text" class="form-control" name="Name" value="@Model.Name" style="width:20%;" maxlength="20"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th style="width:150px;">版本号 ：</th>
+                                <td><input type="text" class="form-control" name="Version" value="@Model.Version" style="width: 20%;" maxlength="10"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th style="width:150px;">升级日志 ：</th>
+                                <td><textarea type="text" class="form-control" name="UpgradeLog" value="@Model.UpgradeLog" style="width: 80%;" rows="5"></textarea></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th style="width:150px;">版本文件 ：</th>
+                                <td><input type="file" name="file_apk" class="form-control" style="width:20%;height: auto;"></td>
+                                <td></td>
+                            </tr>
                             @if (Model.Id > 0)
                             {
-                                <a style="vertical-align:bottom;" href="javascript:;" id="a_del_art">删除</a>
+                                <tr>
+                                    <th style="width:150px;">下载地址 ：</th>
+                                    <td><a href="@Model.DownloadUrl" target="_blank">@Model.DownloadUrl</a></td>
+                                    <td></td>
+                                </tr>
                             }
-
-                            <span id="span_info" style="margin-left:10px;"></span>
-                        </p>
-                    </form>
+                            <tr>
+                                <th>发布日期：</th>
+                                <td>@Model.PublishTime</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+
+                <p style="margin:10px;">
+                    <input type="submit" class="btn btn-submit btn-primary" style="width:100px;margin-left: 0px;margin-right:10px;" value="发 布">
+                    <a class="btn btn-default" style="width:100px;margin-left: 10px;margin-right:10px;" href="/App/List?page=0" id="a_return">返 回</a>
+                    @if (Model.Id > 0)
+                    {
+                        <a style="vertical-align:bottom;" href="javascript:;" id="a_del_art">删除</a>
+                    }
+
+                    <span id="span_info" style="margin-left:10px;"></span>
+                </p>
+            </form>
         </div>
     </div>
 </div>

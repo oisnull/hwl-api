@@ -18,6 +18,7 @@ namespace HWL.Tools.Resx
         public bool Success { get; set; }
         public string Message { get; set; }
         public string ResxAccessUrl { get; set; }
+        public long ResxSize { get; set; }
     }
 
     public class ResxImageResult : ResxResult

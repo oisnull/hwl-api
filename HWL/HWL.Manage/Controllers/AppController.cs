@@ -70,6 +70,7 @@ namespace HWL.Manage.Controllers
             if (result.Success)
             {
                 string error;
+                model.Size = result.ResxSize;
                 model.DownloadUrl = result.ResxAccessUrl;
                 int ret = appService.AppVersionAction(model, out error);
                 if (ret > 0)
@@ -84,6 +85,27 @@ namespace HWL.Manage.Controllers
             else
             {
                 return Json(new { state = -1, error = result.Message });
+            }
+        }
+
+        public ActionResult PushVersion()
+        {
+            ViewBag.AppList = appService.GetAppVersionList(3);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PushToUsers(int appId, string userIds)
+        {
+            string error;
+            int result = appService.AddAppVersionPush(appId, userIds, out error);
+            if (result > 0)
+            {
+                return Json(new { state = 1 });
+            }
+            else
+            {
+                return Json(new { state = -1, error });
             }
         }
     }

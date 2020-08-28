@@ -16,8 +16,8 @@ namespace HWL.Entity.Models
         }
 
         public virtual DbSet<t_admin> t_admin { get; set; }
-        public virtual DbSet<t_app_log> t_app_log { get; set; }
         public virtual DbSet<t_app_version> t_app_version { get; set; }
+        public virtual DbSet<t_app_version_push> t_app_version_push { get; set; }
         public virtual DbSet<t_circle> t_circle { get; set; }
         public virtual DbSet<t_circle_comment> t_circle_comment { get; set; }
         public virtual DbSet<t_circle_like> t_circle_like { get; set; }
@@ -58,21 +58,6 @@ namespace HWL.Entity.Models
                     .HasMaxLength(30);
             });
 
-            modelBuilder.Entity<t_app_log>(entity =>
-            {
-                entity.Property(e => e.app_type).HasMaxLength(50);
-
-                entity.Property(e => e.app_version)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.crash_details).HasColumnType("text");
-
-                entity.Property(e => e.crash_info).HasMaxLength(200);
-
-                entity.Property(e => e.create_time).HasColumnType("datetime");
-            });
-
             modelBuilder.Entity<t_app_version>(entity =>
             {
                 entity.Property(e => e.app_name).HasMaxLength(50);
@@ -88,6 +73,17 @@ namespace HWL.Entity.Models
                 entity.Property(e => e.publish_time).HasColumnType("datetime");
 
                 entity.Property(e => e.update_time).HasColumnType("datetime");
+
+                entity.Property(e => e.upgrade_log).HasColumnType("text");
+            });
+
+            modelBuilder.Entity<t_app_version_push>(entity =>
+            {
+                entity.Property(e => e.push_date).HasColumnType("datetime");
+
+                entity.Property(e => e.pushed_users)
+                    .IsRequired()
+                    .HasMaxLength(200);
             });
 
             modelBuilder.Entity<t_circle>(entity =>
