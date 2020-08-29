@@ -16,4 +16,13 @@ namespace HWL.Entity.Extends
         public string DownloadUrl { get; set; }
         public DateTime PublishTime { get; set; }
     }
+
+    public class AppVersionInfo
+    {
+        public string AppName { get; set; }
+        public string AppVersion { get; set; }
+        public string UpgradeLog { get; set; }
+        public long AppSize { get; set; }
+        public string DownloadUrl { get; set; }
+    }
 }

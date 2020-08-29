@@ -91,6 +91,7 @@
                     $("span#span_info").html("<font color='blue'>推送成功,跳转中...</font>");
                     Sleep(this, 1500);
                     this.NextStep = function () {
+                        window.location = window.location;
                     }
                 } else {
                     $("span#span_info").html("<font color='red'>" + data.error + "</font>");

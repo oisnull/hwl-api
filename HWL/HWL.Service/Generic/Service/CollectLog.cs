@@ -28,8 +28,8 @@ namespace HWL.Service.Generic.Service
                 crash_info = request.CrashInfo,
                 create_time = DateTime.Now,
             };
-            db.t_app_log.Add(log);
-            db.SaveChanges();
+            //db.t_app_log.Add(log);
+            //db.SaveChanges();
         }
     }
 }

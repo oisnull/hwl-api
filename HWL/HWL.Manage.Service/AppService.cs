@@ -43,6 +43,8 @@ namespace HWL.Manage.Service
                 Id = v.id,
                 DownloadUrl = v.download_url,
                 Name = v.app_name,
+                Size = v.app_size ?? 0,
+                UpgradeLog = v.upgrade_log,
                 PublishTime = v.publish_time,
                 Version = v.app_version,
             }).FirstOrDefault();

@@ -16,7 +16,9 @@
     <div class="col-lg-12">
         <div class="main-box clearfix">
             <form id="form1" action="#" method="post">
-                <input type="hidden" id="hidden_id" name="Id" value="@Model.Id">
+                <input type="hidden" id="hidden_id" name="Id" value="@Model.Id" />
+                <input type="hidden" name="DownloadUrl" value="@Model.DownloadUrl" />
+                <input type="hidden" name="Size" value="@Model.Size" />
                 <div style="text-align: left;margin:10px;" class="panel">
                     <div class="panel-heading">
                         <b>发布APP新版本</b>
@@ -37,7 +39,7 @@
                             </tr>
                             <tr>
                                 <th style="width:150px;">升级日志 ：</th>
-                                <td><textarea type="text" class="form-control" name="UpgradeLog" value="@Model.UpgradeLog" style="width: 80%;" rows="5"></textarea></td>
+                                <td><textarea type="text" class="form-control" name="UpgradeLog" style="width: 80%;" rows="5">@Model.UpgradeLog</textarea></td>
                                 <td></td>
                             </tr>
                             <tr>

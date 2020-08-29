@@ -12,6 +12,8 @@ namespace HWL.IMClientTest
     {
         static void Main(string[] args)
         {
+            ShareConfig.LogHelper.InitConfigure("imtest");
+
             IMClientV.SetConnectListener(new DefaultClientConnectListenerV2());
             //IMClientV.INSTANCE.SendSystemMessage(new IMCore.Protocol.ImUserContent()
             //{
@@ -20,13 +22,13 @@ namespace HWL.IMClientTest
             //    UserName = "HWL-4028333"
             //}, "2311d5f9-19ec-4567-aac8-557f62b6bbc6", "浦晓南路(test-1)");
 
-            //IMClientV.INSTANCE.SendAppVersionMessage(new ulong[] { 1, 2 }, new IMCore.Protocol.ImAppVersionContent()
+            //IMClientV.INSTANCE.SendAppVersionMessage(new ulong[] { 16, 2 }, new IMCore.Protocol.ImAppVersionContent()
             //{
             //    AppName = "hwl",
             //    AppSize = 3449122,
             //    AppVersion = "1.0.0",
             //    DownloadUrl = "http://10.61.8.23:8081/upload/apkversion/sampledebug20200827155826.apk",
-            //    UpgradeLog = "1，DomainLevelMetrics.script DomainToUETTile.script SparkUETGivenMUID.script UETGivenMUID.script"
+            //    UpgradeLog = "1,DomainLevelMetrics.script\n2,DomainToUETTile.script\n3,SparkUETGivenMUID.script\n4,UETGivenMUID.script"
             //});
 
             Console.ReadLine();
