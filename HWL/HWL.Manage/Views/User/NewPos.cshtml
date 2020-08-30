@@ -57,7 +57,7 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="center">用户昵称/标识</th>
+                                        <th class="center">用户Id/昵称</th>
                                         <th class="center">位置详细</th>
                                         <th class="center">经纬度</th>
                                         <th class="center">添加日期</th>
@@ -78,8 +78,8 @@
                                     {
                                         foreach (HWL.Entity.Extends.UserPosInfo pos in ViewBag.UserPos)
                                         {
-                                            <tr>
-                                                <td>@pos.UserName / @pos.UserSymbol</td>
+                                            <tr style="text-align:center;">
+                                                <td>@pos.UserId / @pos.UserName</td>
                                                 <td>@pos.PosDetails</td>
                                                 <td style="width:200px;">
                                                     <p>@pos.Longitude</p>

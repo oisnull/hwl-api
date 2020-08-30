@@ -19,6 +19,9 @@ namespace HWL.H5
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            ShareConfig.LogHelper.InitConfigure("h5");
+            ShareConfig.LogHelper.Debug($"environment:{ShareConfig.ShareConfiguration.CurrentEnvironment}");
         }
 
         public IConfiguration Configuration { get; }

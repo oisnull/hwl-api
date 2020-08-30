@@ -45,3 +45,7 @@ public class UserAuthorizeAttribute : AuthorizeAttribute, IAuthorizationFilter
         }
     }
 }
+
+//Set MIME type for download apk file in IIS
+APK
+application/vnd.android.package-archive
