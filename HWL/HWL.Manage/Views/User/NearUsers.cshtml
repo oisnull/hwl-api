@@ -30,8 +30,7 @@
                                 <td style="width:50px;"></td>
                                 <td>
                                     <a href="javascript:;" onclick="SearchGroups()" class="btn btn-default" style="width:100px;">查询</a> &nbsp;&nbsp;&nbsp;
-                                    <a href="/User/Area" style="vertical-align:bottom;">重置</a>
-                                    <a id="a_search" style="display:none;"></a>
+                                    <a href="/User/NearUsers" style="vertical-align:bottom;">重置</a>
                                 </td>
                             </tr>
                         </table>
@@ -98,9 +97,7 @@
         var lon = document.getElementById("longitude").value;
         var lat = document.getElementById("latitude").value;
         if (lon && lat) {
-            var aObj = document.getElementById('a_search');
-            aObj.href = "/User/Area?lon=" + lon + "&lat=" + lat;
-            aObj.click();
+            window.location.href = "/User/NearUsers?lon=" + lon + "&lat=" + lat;
         }
     }
 </script>
