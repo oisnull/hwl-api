@@ -13,9 +13,14 @@ namespace HWL.Service.User.Body
         public string City { get; set; }
         public string District { get; set; }
         public string Street { get; set; }
+        public string Town { get; set; }
         public string Details { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public string CoorType { get; set; }
+        public int LocationWhere { get; set; }
+        public string LocationType { get; set; }
+        public float Radius { get; set; }
     }
 
     public class SetUserPosResponseBody

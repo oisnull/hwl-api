@@ -80,6 +80,7 @@
     <Build Include="t_group_user.sql" />
     <Build Include="t_app_version.sql" />
     <Build Include="t_app_version_push.sql" />
+    <Build Include="t_town.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HWL.DBScript.refactorlog" />

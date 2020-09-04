@@ -57,6 +57,9 @@ namespace HWL.Service.User.Service
             //LogHelper.Debug($"UserId:{request.UserId},LastGroupGuid:{request.LastGroupGuid},Details:{request.Details},Lat:{request.Latitude},Lon:{request.Longitude}", typeof(SetUserPos));
 
             t_user_pos upos = this.SavePos();
+            if (upos == null)
+                throw new Exception("Save pos info failed for current user.");
+
             string groupGuid = GetGroupGuid(upos);
 
             SetUserPosResponseBody res = new SetUserPosResponseBody()
@@ -77,7 +80,8 @@ namespace HWL.Service.User.Service
                     UserName = g.UserName,
                     UserImage = g.UserImage,
                 }).FirstOrDefault();
-                IMClientV.INSTANCE.SendSystemMessage(user, groupGuid, getNearDesc());
+                if (user != null)
+                    IMClientV.INSTANCE.SendSystemMessage(user, groupGuid, getNearDesc());
             }
 
             return res;
@@ -85,7 +89,7 @@ namespace HWL.Service.User.Service
 
         public string getNearDesc()
         {
-            string desc = null;
+            string desc = request.Street;
             if (string.IsNullOrEmpty(request.Street))
             {
                 desc = request.District;
@@ -109,7 +113,7 @@ namespace HWL.Service.User.Service
 
         public string GetGroupGuid(t_user_pos upos)
         {
-            //1,save user lat,lon
+            //1,save user by lat,lon
             //2,check group is exist in lat,lon
             //3,if non-exist and create group by lat,lon and save user and back group guid else directly back group guid
             //4,if current group guid is not equal request.lastGroupGuid and delete user from request.lastGroupGuid
@@ -140,95 +144,123 @@ namespace HWL.Service.User.Service
 
         public t_user_pos SavePos()
         {
-            t_country country = db.t_country.Where(c => c.name == this.request.Country).FirstOrDefault();
-            if (country == null)
+            try
             {
-                country = new t_country()
+                #region Save t_country,t_province,t_city,t_district,t_town
+                t_country country = db.t_country.Where(c => c.name == this.request.Country).FirstOrDefault();
+                if (country == null)
                 {
-                    id = 0,
-                    name = this.request.Country,
-                };
-                db.t_country.Add(country);
+                    country = new t_country()
+                    {
+                        id = 0,
+                        name = this.request.Country,
+                    };
+                    db.t_country.Add(country);
+                    db.SaveChanges();
+                }
+
+                t_province province = db.t_province.Where(p => p.name == this.request.Province).FirstOrDefault();
+                if (province == null)
+                {
+                    province = new t_province()
+                    {
+                        id = 0,
+                        country_id = country.id,
+                        name = this.request.Province,
+                    };
+                    db.t_province.Add(province);
+                    db.SaveChanges();
+                }
+
+                t_city city = db.t_city.Where(c => c.name == this.request.City).FirstOrDefault();
+                if (city == null)
+                {
+                    city = new t_city()
+                    {
+                        id = 0,
+                        province_id = province.id,
+                        name = this.request.City,
+                    };
+                    db.t_city.Add(city);
+                    db.SaveChanges();
+                }
+
+                t_district district = db.t_district.Where(p => p.name == this.request.District).FirstOrDefault();
+                if (district == null)
+                {
+                    district = new t_district()
+                    {
+                        id = 0,
+                        city_id = city.id,
+                        name = this.request.District,
+                    };
+                    db.t_district.Add(district);
+                    db.SaveChanges();
+                }
+
+                t_town town = db.t_town.Where(p => p.name == this.request.Town).FirstOrDefault();
+                if (town == null)
+                {
+                    town = new t_town()
+                    {
+                        id = 0,
+                        district_id = district.id,
+                        name = this.request.Town,
+                    };
+                    db.t_town.Add(town);
+                    db.SaveChanges();
+                }
+                #endregion
+
+                //t_user_pos upos = db.t_user_pos.Where(u => u.user_id == this.request.UserId &&
+                //                                            u.country_id == country.id &&
+                //                                            u.province_id == province.id &&
+                //                                            u.city_id == city.id &&
+                //                                            u.district_id == district.id &&
+                //                                            u.pos_details == this.request.Details
+                //                                        ).FirstOrDefault();
+                t_user_pos upos = db.t_user_pos.Where(u => u.user_id == this.request.UserId &&
+                                                            u.lon == request.Longitude &&
+                                                            u.lat == request.Latitude
+                                                        ).FirstOrDefault();
+                if (upos == null)
+                {
+                    upos = new t_user_pos()
+                    {
+                        id = 0,
+                        create_date = DateTime.Now,
+                        update_date = DateTime.Now,
+                        geohash_key = Geohash.Encode(this.request.Latitude, this.request.Longitude),
+                        lat = this.request.Latitude,
+                        lon = this.request.Longitude,
+                        pos_details = this.request.Details,
+                        user_id = this.request.UserId,
+                        city_id = city.id,
+                        country_id = country.id,
+                        district_id = district.id,
+                        province_id = province.id,
+                        coordinate_type = request.CoorType,
+                        location_type = request.LocationType,
+                        Location_where = request.LocationWhere,
+                        radius = request.Radius,
+                        town_id = town.id,
+                    };
+                    db.t_user_pos.Add(upos);
+                }
+                else
+                {
+                    upos.update_date = DateTime.Now;
+                }
+
                 db.SaveChanges();
+                return upos;
             }
-
-            t_province province = db.t_province.Where(p => p.name == this.request.Province).FirstOrDefault();
-            if (province == null)
+            catch (Exception ex)
             {
-                province = new t_province()
-                {
-                    id = 0,
-                    country_id = country.id,
-                    name = this.request.Province,
-                };
-                db.t_province.Add(province);
-                db.SaveChanges();
+                string currentParams = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+                LogHelper.Error(currentParams + "___" + ex.ToString(), typeof(SetUserPos));
             }
-
-            t_city city = db.t_city.Where(c => c.name == this.request.City).FirstOrDefault();
-            if (city == null)
-            {
-                city = new t_city()
-                {
-                    id = 0,
-                    province_id = province.id,
-                    name = this.request.City,
-                };
-                db.t_city.Add(city);
-                db.SaveChanges();
-            }
-
-            t_district district = db.t_district.Where(p => p.name == this.request.District).FirstOrDefault();
-            if (district == null)
-            {
-                district = new t_district()
-                {
-                    id = 0,
-                    city_id = city.id,
-                    name = this.request.District,
-                };
-                db.t_district.Add(district);
-                db.SaveChanges();
-            }
-
-            //t_user_pos upos = db.t_user_pos.Where(u => u.user_id == this.request.UserId &&
-            //                                            u.country_id == country.id &&
-            //                                            u.province_id == province.id &&
-            //                                            u.city_id == city.id &&
-            //                                            u.district_id == district.id &&
-            //                                            u.pos_details == this.request.Details
-            //                                        ).FirstOrDefault();
-            t_user_pos upos = db.t_user_pos.Where(u => u.user_id == this.request.UserId &&
-                                                        u.lon == request.Longitude &&
-                                                        u.lat == request.Latitude
-                                                    ).FirstOrDefault();
-            if (upos == null)
-            {
-                upos = new t_user_pos()
-                {
-                    id = 0,
-                    create_date = DateTime.Now,
-                    update_date = DateTime.Now,
-                    geohash_key = Geohash.Encode(this.request.Latitude, this.request.Longitude),
-                    lat = this.request.Latitude,
-                    lon = this.request.Longitude,
-                    pos_details = this.request.Details,
-                    user_id = this.request.UserId,
-                    city_id = city.id,
-                    country_id = country.id,
-                    district_id = district.id,
-                    province_id = province.id,
-                };
-                db.t_user_pos.Add(upos);
-            }
-            else
-            {
-                upos.update_date = DateTime.Now;
-            }
-
-            db.SaveChanges();
-
-            return upos;
+            return null;
         }
     }
 }

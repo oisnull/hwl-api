@@ -8,6 +8,10 @@ namespace HWL.Entity.Models
         public int id { get; set; }
         public int user_id { get; set; }
         public string pos_details { get; set; }
+        public string coordinate_type { get; set; }
+        public int? Location_where { get; set; }
+        public string location_type { get; set; }
+        public double? radius { get; set; }
         public double lon { get; set; }
         public double lat { get; set; }
         public string geohash_key { get; set; }
@@ -15,6 +19,7 @@ namespace HWL.Entity.Models
         public int province_id { get; set; }
         public int city_id { get; set; }
         public int district_id { get; set; }
+        public int town_id { get; set; }
         public DateTime create_date { get; set; }
         public DateTime update_date { get; set; }
     }

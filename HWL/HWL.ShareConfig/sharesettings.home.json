@@ -14,7 +14,7 @@
     "CollectionRedisHosts": "127.0.0.1:6379,allowadmin=true,password=123456",
     "HWLManageSessionRedisHosts": "127.0.0.1:6379,allowAdmin=true,password=123456,defaultdatabase=0",
     "HWLManageSessionRedisInstance": "hwlmg:sessionid:",
-    "HWLManageSessionTimeOut": 30 //minute
+    "HWLManageSessionTimeOut": 120 //minute
   },
   "IMSettings": {
     "IMHost": "192.168.2.210",

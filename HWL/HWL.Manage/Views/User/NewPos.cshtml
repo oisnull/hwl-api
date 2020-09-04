@@ -58,8 +58,8 @@
                                 <thead>
                                     <tr>
                                         <th class="center">用户Id/昵称</th>
-                                        <th class="center">位置详细</th>
                                         <th class="center">经纬度</th>
+                                        <th class="center">位置详细</th>
                                         <th class="center">添加日期</th>
                                         <th class="center">更新日期</th>
                                         <th class="center">操作</th>
@@ -79,14 +79,17 @@
                                         foreach (HWL.Entity.Extends.UserPosInfo pos in ViewBag.UserPos)
                                         {
                                             <tr style="text-align:center;">
-                                                <td>@pos.UserId / @pos.UserName</td>
-                                                <td>@pos.PosDetails</td>
-                                                <td style="width:200px;">
-                                                    <p>@pos.Longitude</p>
-                                                    <p>
-                                                        @pos.Latitude
-                                                    </p>
+                                                <td>
+                                                    @pos.UserId / @pos.UserName
+                                                    @(string.IsNullOrEmpty(pos.LocationType) ? "" : $"({pos.LocationType})")
                                                 </td>
+                                                <td style="width:200px;">
+                                                    <p>
+                                                        @(string.IsNullOrEmpty(pos.CoorType) ? "" : $"({@pos.CoorType})") @pos.Longitude
+                                                    </p>
+                                                    <p>@pos.Latitude</p>
+                                                </td>
+                                                <td>@pos.PosDetails</td>
                                                 <td>@pos.CreateDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
                                                 <td>@pos.UpdateDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
                                                 <td>

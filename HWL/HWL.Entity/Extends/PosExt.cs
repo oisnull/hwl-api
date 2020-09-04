@@ -45,6 +45,9 @@ namespace HWL.Entity.Extends
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public double Distance { get; set; }
+        public string CoorType { get; set; }
+        public string LocationType { get; set; }
+        public double Radius { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
     }

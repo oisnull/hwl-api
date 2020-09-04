@@ -92,9 +92,11 @@ namespace HWL.Redis
 
             bool succ = false;
             RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_GEO_DB, db =>
-             {
-                 succ = db.GeoAdd(USER_GEO_KEY, lon, lat, userId.ToString());
-             });
+            {
+                string userIdStr = userId.ToString();
+                db.SortedSetRemove(USER_GEO_KEY, userIdStr);
+                succ = db.GeoAdd(USER_GEO_KEY, lon, lat, userIdStr);
+            });
             return succ;
         }
 

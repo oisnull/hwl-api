@@ -123,6 +123,9 @@ namespace HWL.Manage.Service
                             PosDetails = p.pos_details,
                             Longitude = p.lon,
                             Latitude = p.lat,
+                            CoorType = p.coordinate_type,
+                            LocationType = p.location_type,
+                            Radius = p.radius ?? 0,
                             CreateDate = p.create_date,
                             UpdateDate = p.update_date
                         };
