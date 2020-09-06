@@ -59,6 +59,7 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="test" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="t_city.sql" />
@@ -81,11 +82,10 @@
     <Build Include="t_app_version.sql" />
     <Build Include="t_app_version_push.sql" />
     <Build Include="t_town.sql" />
+    <None Include="test\init_db.sql" />
+    <None Include="test\ip_replace.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HWL.DBScript.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="init_db.sql" />
   </ItemGroup>
 </Project>
