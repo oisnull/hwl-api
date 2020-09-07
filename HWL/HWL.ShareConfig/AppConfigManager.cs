@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace HWL.ShareConfig
 {
@@ -46,7 +42,7 @@ namespace HWL.ShareConfig
                 return AppSettings["UploadDirectory"];
             }
         }
-        
+
         /// <summary>
         /// 文件对外访问的地址配置,值以http://或者https://开头
         /// </summary>
@@ -62,7 +58,7 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return FileAccessUrl + "/user/default.png";
+                return Path.Combine(FileAccessUrl, "user/default.png");
             }
         }
 
@@ -70,7 +66,7 @@ namespace HWL.ShareConfig
         {
             get
             {
-                return FileAccessUrl + "/user/circleback.png";
+                return Path.Combine(FileAccessUrl, "user/circleback.png");
             }
         }
 
