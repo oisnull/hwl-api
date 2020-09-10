@@ -40,16 +40,17 @@ namespace HWL.Service.User.Service
         }
 
         //{
-        //	"UserId": 1,
-        //	"LastGroupGuid": null,
-        //	"Country": "中国",
-        //	"Province": "上海市",
-        //	"City": "上海市",
-        //	"District": "闵行区",
-        //	"Street": "金色阳光世博幼儿园",
-        //	"Details": "上海市闵行区浦申路靠近上海闵行区金色阳光世博幼儿园",
-        //	"Latitude":31.0732898712158,
-        //	"Longitude": 121.507202148438
+        //    "UserId": 33,
+        //    "LastGroupGuid": null,
+        //    "Country": "中国",
+        //    "Province": "上海市",
+        //    "City": "上海市",
+        //    "District": "闵行区",
+        //    "Town": "浦锦街道",
+        //    "Street": "联航路",
+        //    "Details": "中国上海市闵行区浦锦街道联航路",
+        //    "Latitude": 31.0718173980713,
+        //    "Longitude": 121.499031066895
         //}
 
         public override SetUserPosResponseBody ExecuteCore()
@@ -58,10 +59,24 @@ namespace HWL.Service.User.Service
 
             t_user_pos upos = this.SavePos();
             if (upos == null)
-                throw new Exception("Save pos info failed for current user.");
+            {
+                return new SetUserPosResponseBody()
+                {
+                    Status = ResultStatus.Failed,
+                    ErrorMessage = "Save pos info failed for current user."
+                };
+            }
 
-            string groupGuid = GetGroupGuid(upos);
+            if (!UserStore.SavePos(upos.user_id, upos.lon, upos.lat))
+            {
+                return new SetUserPosResponseBody()
+                {
+                    Status = ResultStatus.Failed,
+                    ErrorMessage = "Save user info failed by lon and lat."
+                };
+            }
 
+            string groupGuid = this.GetNearGroupGuid(upos);
             SetUserPosResponseBody res = new SetUserPosResponseBody()
             {
                 Status = ResultStatus.Success,
@@ -97,47 +112,44 @@ namespace HWL.Service.User.Service
             return desc + "附近";
         }
 
-        public List<UserSecretInfo> GetGroupUsers(string groupGuid)
+        public List<NearUserInfo> GetGroupUsers(string groupGuid)
         {
             List<int> userIds = GroupStore.GetGroupUserIds(groupGuid);
             if (userIds == null || userIds.Count <= 0) return null;
 
-            return db.t_user.Where(u => userIds.Contains(u.id))
-                .Select(u => new UserSecretInfo()
+            List<NearUserInfo> users = db.t_user.Where(u => userIds.Contains(u.id))
+                .Select(u => new NearUserInfo()
                 {
                     UserId = u.id,
                     UserName = u.name,
                     UserImage = u.head_image,
                 }).ToList();
+
+            if (request.IsDistance)
+            {
+                var distDic = UserStore.GetUserDistances(request.UserId, userIds);
+                users.ForEach(f =>
+                {
+                    if (distDic.ContainsKey(f.UserId))
+                        f.Distance = distDic[f.UserId] ?? 0;
+                });
+            }
+            return users;
         }
 
-        public string GetGroupGuid(t_user_pos upos)
+        public string GetNearGroupGuid(t_user_pos upos)
         {
-            //1,save user by lat,lon
-            //2,check group is exist in lat,lon
-            //3,if non-exist and create group by lat,lon and save user and back group guid else directly back group guid
-            //4,if current group guid is not equal request.lastGroupGuid and delete user from request.lastGroupGuid
-
-            UserStore.SavePos(upos.user_id, upos.lon, upos.lat);
-
-            string groupGuid = GroupStore.GetNearGroupGuid(upos.lon, upos.lat);
-            if (groupGuid == null)
+            string groupGuid = GroupStore.GetAvailableNearGroupGuid(upos.lon, upos.lat);
+            if (groupGuid != request.LastGroupGuid && !string.IsNullOrEmpty(request.LastGroupGuid))
             {
-                groupGuid = GroupStore.CreateNearGroupPos(upos.lon, upos.lat);
+                GroupStore.DeleteGroupUser(request.LastGroupGuid, upos.user_id);
             }
-            else
-            {
-                //if user exist in group indicate that seted pos
-                if (GroupStore.ExistsInGroup(groupGuid, this.request.UserId))
-                {
-                    isExistInGroup = true;
-                    return groupGuid;
-                }
-            }
-            GroupStore.SaveGroupUser(groupGuid, upos.user_id);
 
-            if (!string.IsNullOrEmpty(this.request.LastGroupGuid) && this.request.LastGroupGuid != groupGuid)
-                GroupStore.DeleteGroupUser(this.request.LastGroupGuid, upos.user_id);
+            isExistInGroup = GroupStore.ExistsInGroup(groupGuid, request.UserId);
+            if (!isExistInGroup)
+            {
+                GroupStore.SaveGroupUser(groupGuid, upos.user_id);
+            }
 
             return groupGuid;
         }

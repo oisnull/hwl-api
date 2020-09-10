@@ -122,4 +122,12 @@ namespace HWL.Entity.Extends
         public string UserName { get; set; }
         public string UserImage { get; set; }
     }
+
+    public class NearUserInfo
+    {
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string UserImage { get; set; }
+        public double Distance { get; set; }
+    }
 }

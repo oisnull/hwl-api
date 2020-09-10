@@ -6,54 +6,59 @@ using HWL.ShareConfig;
 
 namespace HWL.Redis
 {
-    /// <summary>
-    /// 群组操作
-    /// </summary>
     public static class GroupStore
     {
-        /// <summary>
-        /// 搜索附近的范围初始值
-        /// </summary>
-        const int NEAR_RANGE = 100;
         const string GROUP_GEO_KEY = "group:pos";
 
-        /// <summary>
-        /// 检测周围100M内的组数据,并返回对应的组标识列表
-        /// </summary>
-        public static List<string> GetGroupGuids(double lon, double lat)
+        //public static string CreateNearGroupByPos(double lon, double lat)
+        //{
+        //    string guid = Guid.NewGuid().ToString();
+        //    RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_GEO_DB, db =>
+        //    {
+        //        db.GeoAdd(GROUP_GEO_KEY, lon, lat, guid);
+        //    });
+        //    return guid;
+        //}
+
+        public static List<string> SearchNearGroupGuids(double lon, double lat)
         {
             if (lon <= 0 || lat <= 0) return null;
 
-            List<string> keys = null;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_GEO_DB, db =>
-             {
-                 GeoRadiusResult[] results = db.GeoRadius(GROUP_GEO_KEY, lon, lat, NEAR_RANGE, GeoUnit.Miles, 1);
-                 if (results != null && results.Length > 0)
-                 {
-                     keys = results.Select(s => s.Member.ToString()).ToList();
-                 }
-             });
-
-            return keys;
+            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_GEO_DB, db =>
+            {
+                return db.GeoRadius(GROUP_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_GROUP_RANGE, GeoUnit.Miles, 1)?
+                .Select(s => s.Member.ToString()).ToList();
+            });
         }
 
-        /// <summary>
-        /// 检测周围100M内的组数据,并返回对应的组标识
-        /// </summary>
-        public static string GetNearGroupGuid(double lon, double lat)
+        public static string GetAvailableNearGroupGuid(double lon, double lat)
         {
-            List<string> groupGuids = GetGroupGuids(lon, lat);
-            if (groupGuids == null || groupGuids.Count <= 0) return null;
-
-            foreach (var guid in groupGuids)
+            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_GEO_DB, db =>
             {
-                if (GetGroupUserCount(guid) < RedisConfigManager.GroupUserTotalCount)
-                {
-                    return guid;
-                }
-            }
+                List<string> groupGuids = db.GeoRadius(GROUP_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_GROUP_RANGE, GeoUnit.Miles, 1)?
+                .Select(s => s.Member.ToString()).ToList();
 
-            return null;
+                string availableGroupGuid = null;
+                if (groupGuids != null && groupGuids.Count > 0)
+                {
+                    foreach (var guid in groupGuids)
+                    {
+                        if (GetGroupUserCount(guid) < RedisConfigManager.GroupUserTotalCount)
+                        {
+                            availableGroupGuid = guid;
+                            break;
+                        }
+                    }
+                }
+
+                if (availableGroupGuid == null)
+                {
+                    availableGroupGuid = Guid.NewGuid().ToString();
+                    db.GeoAdd(GROUP_GEO_KEY, lon, lat, availableGroupGuid);
+                }
+
+                return availableGroupGuid;
+            });
         }
 
         public static void SaveGroupUser(string groupGuid, params int[] userIds)
@@ -74,12 +79,9 @@ namespace HWL.Redis
 
         public static bool ExistsInGroup(string groupGuid, int userId)
         {
-            bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
-             {
-                 succ = db.SetContains(groupGuid, userId);
-             });
-            return succ;
+            if (string.IsNullOrEmpty(groupGuid) || userId <= 0) return false;
+
+            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db => db.SetContains(groupGuid, userId));
         }
 
         public static bool DeleteGroupUser(string groupGuid, int userId)
@@ -146,9 +148,9 @@ namespace HWL.Redis
             if (string.IsNullOrEmpty(groupGuid)) return 0;
             int count = 0;
             RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
-             {
-                 count = Convert.ToInt32(db.SetLength(groupGuid));
-             });
+            {
+                count = Convert.ToInt32(db.SetLength(groupGuid));
+            });
             return count;
         }
 
@@ -179,22 +181,10 @@ namespace HWL.Redis
         {
             if (string.IsNullOrEmpty(groupGuid)) return null;
 
-            List<int> userIds = new List<int>();
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
-             {
-                 RedisValue[] users = db.SetMembers(groupGuid);
-                 if (users != null && users.Length > 0)
-                 {
-                     userIds.AddRange(users.Select(u =>
-                     {
-                         int uid;
-                         u.TryParse(out uid);
-                         return uid;
-                     }).ToArray());
-                 }
-             });
-
-            return userIds;
+            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
+            {
+                return db.SetMembers(groupGuid)?.Select(u => int.Parse(u)).ToList();
+            });
         }
 
         ///// <summary>
@@ -246,19 +236,6 @@ namespace HWL.Redis
 
         //    return userIds;
         //}
-
-        /// <summary>
-        /// 创建组位置数据,返回创建成功后的组标识
-        /// </summary>
-        public static string CreateNearGroupPos(double lon, double lat)
-        {
-            string guid = Guid.NewGuid().ToString();
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_GEO_DB, db =>
-             {
-                 db.GeoAdd(GROUP_GEO_KEY, lon, lat, guid);
-             });
-            return guid;
-        }
 
         //#region 组的创建人操作
 

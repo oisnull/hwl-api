@@ -6,6 +6,7 @@ namespace HWL.Service.User.Body
 {
     public class SetUserPosRequestBody
     {
+        public bool IsDistance { get; set; }
         public int UserId { get; set; }
         public string LastGroupGuid { get; set; }
         public string Country { get; set; }
@@ -26,11 +27,12 @@ namespace HWL.Service.User.Body
     public class SetUserPosResponseBody
     {
         public ResultStatus Status { get; set; }
+        public string ErrorMessage { get; set; }
 
         public int UserPosId { get; set; }
 
         public string UserGroupGuid { get; set; }
 
-        public List<UserSecretInfo> GroupUserInfos { get; set; }
+        public List<NearUserInfo> GroupUserInfos { get; set; }
     }
 }

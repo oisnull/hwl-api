@@ -93,5 +93,6 @@ namespace HWL.ShareConfig
         }
 
         public const int GROUP_USER_IMAGE_COUNT = 9;
+        public const int SEARCH_NEAR_GROUP_RANGE = 100;//unit:m
     }
 }

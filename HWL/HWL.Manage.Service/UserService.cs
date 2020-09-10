@@ -144,7 +144,7 @@ namespace HWL.Manage.Service
         {
             if (lon == null || lat == null) return null;
 
-            List<string> groupGuids = Redis.GroupStore.GetGroupGuids(lon.Value, lat.Value);
+            List<string> groupGuids = Redis.GroupStore.SearchNearGroupGuids(lon.Value, lat.Value);
             if (groupGuids == null || groupGuids.Count <= 0) return null;
 
             List<GroupPosInfo> infos = new List<GroupPosInfo>(groupGuids.Count);

@@ -118,6 +118,18 @@ namespace HWL.Redis
             });
         }
 
+        public static Dictionary<int, double?> GetUserDistances(int currentUserId, List<int> distanceUserIds)
+        {
+            if (currentUserId <= 0 || distanceUserIds == null || distanceUserIds.Count <= 0) return null;
+
+            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_GEO_DB, db =>
+            {
+                return distanceUserIds.Where(u => u != currentUserId)
+                                    .Select(u => new { Key = u, Value = db.GeoDistance(USER_GEO_KEY, currentUserId, u) })
+                                    .ToDictionary(k => k.Key, v => v.Value);
+            });
+        }
+
         #endregion
 
         #region 用户token操作
