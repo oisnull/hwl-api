@@ -54,6 +54,7 @@
                                         <th class="center">组标识</th>
                                         <th class="center">用户数</th>
                                         <th class="center">用户ID</th>
+                                        <th class="center">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,6 +77,7 @@
                                                 <td>@pos.GroupGuid</td>
                                                 <td>@pos.GroupUserCount</td>
                                                 <td>@pos.GroupUserIds</td>
+                                                <td><a href="javascript:;" onclick="ClearGroupUsers('@pos.GroupGuid','@pos.GroupUserIds')">清空</a></td>
                                             </tr>
                                         }
                                     }
@@ -97,6 +99,18 @@
             var aObj = document.getElementById('a_search');
             aObj.href = "/User/Area?lon=" + lon + "&lat=" + lat;
             aObj.click();
+        }
+    }
+
+    function ClearGroupUsers(guid, userIds) {
+        if (window.confirm("确认要清空当前组 " + guid + " 里面的用户?")) {
+            $.post("/User/ClearGroupUsers", { groupGuid: guid }, data => {
+                if (data.state == 1) {
+                    window.location = window.location;
+                } else {
+                    alert(data.error);
+                }
+            });
         }
     }
 </script>

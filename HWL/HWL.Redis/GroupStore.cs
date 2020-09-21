@@ -84,32 +84,22 @@ namespace HWL.Redis
             return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db => db.SetContains(groupGuid, userId));
         }
 
-        public static bool DeleteGroupUser(string groupGuid, int userId)
+        public static bool DeleteGroupUsers(string groupGuid, params int[] userIds)
         {
-            if (string.IsNullOrEmpty(groupGuid) || userId <= 0) return false;
+            if (string.IsNullOrEmpty(groupGuid) || userIds == null || userIds.Length <= 0) return false;
 
-            bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
-             {
-                 RedisValue[] array = new RedisValue[1] { userId };
-                 if (db.SetRemove(groupGuid, array) > 0)
-                 {
-                     succ = true;
-                 }
-             });
-            return succ;
+            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
+            {
+                RedisValue[] array = userIds.Select(u => RedisValue.Unbox(u)).ToArray();
+                return db.SetRemove(groupGuid, array) > 0;
+            });
         }
 
         public static bool DeleteGroup(string groupGuid)
         {
             if (string.IsNullOrEmpty(groupGuid)) return false;
 
-            bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
-             {
-                 succ = db.KeyDelete(groupGuid);
-             });
-            return succ;
+            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db => db.KeyDelete(groupGuid));
         }
 
         public static bool DeleteGroup(string groupGuid, List<int> userIds)
@@ -117,13 +107,6 @@ namespace HWL.Redis
             if (string.IsNullOrEmpty(groupGuid)) return false;
 
             bool succ = false;
-            //base.DbNum = GROUP_DB;
-            //base.Exec(db =>
-            //{
-            //    succ = db.KeyDelete(groupGuid);
-            //});
-
-            //if (!succ) return false;
 
             if (userIds != null && userIds.Count > 0)
             {

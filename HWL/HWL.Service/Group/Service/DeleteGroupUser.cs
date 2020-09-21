@@ -45,7 +45,7 @@ namespace HWL.Service.Group.Service
                 db.SaveChanges();
             }
 
-            GroupStore.DeleteGroupUser(this.request.GroupGuid, this.request.UserId);
+            GroupStore.DeleteGroupUsers(this.request.GroupGuid, this.request.UserId);
             res.Status = ResultStatus.Success;
 
             try

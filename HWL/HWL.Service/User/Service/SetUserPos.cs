@@ -142,7 +142,7 @@ namespace HWL.Service.User.Service
             string groupGuid = GroupStore.GetAvailableNearGroupGuid(upos.lon, upos.lat);
             if (groupGuid != request.LastGroupGuid && !string.IsNullOrEmpty(request.LastGroupGuid))
             {
-                GroupStore.DeleteGroupUser(request.LastGroupGuid, upos.user_id);
+                GroupStore.DeleteGroupUsers(request.LastGroupGuid, upos.user_id);
             }
 
             isExistInGroup = GroupStore.ExistsInGroup(groupGuid, request.UserId);
