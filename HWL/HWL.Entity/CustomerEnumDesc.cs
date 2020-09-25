@@ -121,5 +121,25 @@ namespace HWL.Entity
             }
             return CircleContentType.Other;
         }
+
+        public static string GetAppVersionTypeDesc(AppVersionType versionType)
+        {
+            string desc = null;
+            switch (versionType)
+            {
+                case AppVersionType.InternalBeta:
+                    desc = "内测版本";
+                    break;
+                case AppVersionType.PublicBeta:
+                    desc = "公测版本";
+                    break;
+                case AppVersionType.Official:
+                    desc = "正式版本";
+                    break;
+                default:
+                    break;
+            }
+            return desc;
+        }
     }
 }

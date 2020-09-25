@@ -43,7 +43,7 @@
                             <tr style="text-align:center;">
                                 <td><input type="radio" name="appId" value="@item.Id" /></td>
                                 <td>@item.Name</td>
-                                <td>@item.Version</td>
+                                <td>@item.VersionTypeString - @item.Version</td>
                                 <td>@HWL.Tools.FileSizeFormatter.FormatSize(item.Size)</td>
                                 <td>@item.PublishTime</td>
                             </tr>

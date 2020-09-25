@@ -38,6 +38,30 @@
                                 <td></td>
                             </tr>
                             <tr>
+                                <th style="width:150px;">版本类型 ：</th>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="VersionType" id="VersionType_0" value="0" @(Model.VersionType == HWL.Entity.AppVersionType.InternalBeta ? "checked" : "")>
+                                        <label class="form-check-label" for="VersionType_0">
+                                            内测版本
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="VersionType" id="VersionType_1" value="1" @(Model.VersionType == HWL.Entity.AppVersionType.PublicBeta ? "checked" : "")>
+                                        <label class="form-check-label" for="VersionType_1">
+                                            公测版本
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="VersionType" id="VersionType_2" value="2" @(Model.VersionType == HWL.Entity.AppVersionType.Official ? "checked" : "")>
+                                        <label class="form-check-label" for="VersionType_2">
+                                            正式版本
+                                        </label>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
                                 <th style="width:150px;">升级日志 ：</th>
                                 <td><textarea type="text" class="form-control" name="UpgradeLog" style="width: 80%;" rows="5">@Model.UpgradeLog</textarea></td>
                                 <td></td>

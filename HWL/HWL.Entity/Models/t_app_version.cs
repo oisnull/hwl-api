@@ -8,6 +8,7 @@ namespace HWL.Entity.Models
         public int id { get; set; }
         public string app_name { get; set; }
         public string app_version { get; set; }
+        public AppVersionType app_version_type { get; set; }
         public long? app_size { get; set; }
         public string download_url { get; set; }
         public string upgrade_log { get; set; }

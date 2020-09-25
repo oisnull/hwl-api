@@ -23,7 +23,7 @@
                                 <th class="center" style="width:60px;">序号</th>
                                 <th class="center">APP名称</th>
                                 <th class="center">版本号</th>
-                                <th class="center">大小</th>
+                                <th class="center">版本-大小</th>
                                 <th class="center">下载地址</th>
                                 <th class="center">发布日期</th>
                                 <th class="center">操作</th>
@@ -46,7 +46,7 @@
                                         <td>@item.Id</td>
                                         <td>@item.Name</td>
                                         <td>@item.Version</td>
-                                        <td>@HWL.Tools.FileSizeFormatter.FormatSize(item.Size)</td>
+                                        <td>@item.VersionTypeString - @HWL.Tools.FileSizeFormatter.FormatSize(item.Size)</td>
                                         <td><a href="@item.DownloadUrl" target="_blank">下载</a></td>
                                         <td>@item.PublishTime</td>
                                         <td>

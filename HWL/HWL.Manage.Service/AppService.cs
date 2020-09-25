@@ -25,13 +25,16 @@ namespace HWL.Manage.Service
                 Size = v.app_size ?? 0,
                 PublishTime = v.publish_time,
                 Version = v.app_version,
+                VersionType = v.app_version_type,
             });
             if (topCount > 0)
             {
                 query = query.Take(topCount).OrderByDescending(o => o.Id);
             }
 
-            return query.ToList();
+            List<AppExt> list = query.ToList();
+            list.ForEach(f => f.VersionTypeString = CustomerEnumDesc.GetAppVersionTypeDesc(f.VersionType));
+            return list;
         }
 
         public AppExt GetAppVersionInfo(int id)
@@ -47,6 +50,7 @@ namespace HWL.Manage.Service
                 UpgradeLog = v.upgrade_log,
                 PublishTime = v.publish_time,
                 Version = v.app_version,
+                VersionType = v.app_version_type,
             }).FirstOrDefault();
         }
 
@@ -126,6 +130,7 @@ namespace HWL.Manage.Service
             }
             entity.app_name = model.Name;
             entity.app_version = model.Version;
+            entity.app_version_type = model.VersionType;
             entity.app_size = model.Size;
             entity.upgrade_log = model.UpgradeLog;
             entity.download_url = model.DownloadUrl;
