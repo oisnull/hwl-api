@@ -39,7 +39,7 @@ namespace HWL.Redis
             List<int> ids = null;
             RedisUtils.DefaultInstance.Exec(RedisConfigManager.NEAR_CIRCLE_GEO_DB, db =>
              {
-                 GeoRadiusResult[] results = db.GeoRadius(NEAR_CIRCLE_GEO_KEY, lon, lat, NEAR_CIRCLE_RANGE, GeoUnit.Miles, -1);
+                 GeoRadiusResult[] results = db.GeoRadius(NEAR_CIRCLE_GEO_KEY, lon, lat, NEAR_CIRCLE_RANGE, GeoUnit.Meters, -1);
                  if (results != null && results.Length > 0)
                  {
                      ids = results.Select(s => (int)s.Member).OrderByDescending(s => s).ToList();
