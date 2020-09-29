@@ -75,7 +75,7 @@ namespace HWL.Redis
         {
             if (string.IsNullOrEmpty(rootUrl) || urls == null || urls.Count <= 0) return;
 
-            RedisUtils.CollectionInstance.Exec(RedisConfigManager.COLLECTION_HREFS_DB, db =>
+            RedisUtils.CollectionInstance.Exec(AppConfigManager.COLLECTION_HREFS_DB, db =>
             {
                 HashEntry[] values = urls.ConvertAll(u => new HashEntry(u, GetHashValue(level))).ToArray();
                 db.HashSet(GetBeforeUrlKey(rootUrl), values);
@@ -86,7 +86,7 @@ namespace HWL.Redis
         {
             if (string.IsNullOrEmpty(rootUrl) || string.IsNullOrEmpty(currentUrl) || string.IsNullOrEmpty(localFileName)) return;
 
-            RedisUtils.CollectionInstance.Exec(RedisConfigManager.COLLECTION_HREFS_DB, db =>
+            RedisUtils.CollectionInstance.Exec(AppConfigManager.COLLECTION_HREFS_DB, db =>
             {
                 RedisValue item = db.HashGet(GetBeforeUrlKey(rootUrl), currentUrl);
                 if (!item.HasValue) return;
@@ -102,7 +102,7 @@ namespace HWL.Redis
         {
             if (string.IsNullOrEmpty(rootUrl) || string.IsNullOrEmpty(currentUrl)) return false;
 
-            return RedisUtils.CollectionInstance.Exec(RedisConfigManager.COLLECTION_HREFS_DB, db =>
+            return RedisUtils.CollectionInstance.Exec(AppConfigManager.COLLECTION_HREFS_DB, db =>
             {
                 RedisValue item = db.HashGet(GetBeforeUrlKey(rootUrl), currentUrl);
                 if (!item.HasValue) return false;
@@ -117,7 +117,7 @@ namespace HWL.Redis
             if (string.IsNullOrEmpty(rootUrl) || urls == null || urls.Count <= 0) return null;
 
             List<string> res = new List<string>();
-            RedisUtils.CollectionInstance.Exec(RedisConfigManager.COLLECTION_HREFS_DB, db =>
+            RedisUtils.CollectionInstance.Exec(AppConfigManager.COLLECTION_HREFS_DB, db =>
             {
                 Task<bool>[] tasks_0 = new Task<bool>[urls.Count];
                 Task<bool>[] tasks_1 = new Task<bool>[urls.Count];
@@ -158,7 +158,7 @@ namespace HWL.Redis
             if (string.IsNullOrEmpty(rootUrl) || urlModel == null) return false;
 
             bool succ = false;
-            RedisUtils.CollectionInstance.Exec(RedisConfigManager.COLLECTION_HREFS_DB, db =>
+            RedisUtils.CollectionInstance.Exec(AppConfigManager.COLLECTION_HREFS_DB, db =>
             {
                 if (db.HashDelete(GetBeforeUrlKey(rootUrl), urlModel.Url))
                 {
@@ -183,7 +183,7 @@ namespace HWL.Redis
         {
             if (string.IsNullOrEmpty(rootUrl)) return null;
 
-            return RedisUtils.CollectionInstance.Exec(RedisConfigManager.COLLECTION_HREFS_DB, db =>
+            return RedisUtils.CollectionInstance.Exec(AppConfigManager.COLLECTION_HREFS_DB, db =>
             {
                 int lastIndex = isLast ? (int)db.HashLength(GetBeforeUrlKey(rootUrl)) - 1 : 0;
                 if (lastIndex < 0) return null;
@@ -207,7 +207,7 @@ namespace HWL.Redis
             if (string.IsNullOrEmpty(rootUrl)) return null;
 
             List<UrlModel> urls = new List<UrlModel>();
-            RedisUtils.CollectionInstance.Exec(RedisConfigManager.COLLECTION_HREFS_DB, db =>
+            RedisUtils.CollectionInstance.Exec(AppConfigManager.COLLECTION_HREFS_DB, db =>
             {
                 HashEntry[] items = db.HashGetAll(GetBeforeUrlKey(rootUrl));
                 UrlModel model = null;

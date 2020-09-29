@@ -24,7 +24,7 @@ namespace HWL.Redis
         {
             if (lon <= 0 || lat <= 0) return null;
 
-            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_GEO_DB, db =>
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_GEO_DB, db =>
             {
                 return db.GeoRadius(GROUP_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_GROUP_RANGE, GeoUnit.Miles, 1)?
                 .Select(s => s.Member.ToString()).ToList();
@@ -33,7 +33,7 @@ namespace HWL.Redis
 
         public static string GetAvailableNearGroupGuid(double lon, double lat)
         {
-            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_GEO_DB, db =>
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_GEO_DB, db =>
             {
                 List<string> groupGuids = db.GeoRadius(GROUP_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_GROUP_RANGE, GeoUnit.Miles, 1)?
                 .Select(s => s.Member.ToString()).ToList();
@@ -66,7 +66,7 @@ namespace HWL.Redis
             if (string.IsNullOrEmpty(groupGuid)) return;
             if (userIds == null || userIds.Length <= 0) return;
 
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_USER_SET_DB, db =>
              {
                  RedisValue[] array = new RedisValue[userIds.Length];
                  for (int i = 0; i < userIds.Length; i++)
@@ -81,14 +81,14 @@ namespace HWL.Redis
         {
             if (string.IsNullOrEmpty(groupGuid) || userId <= 0) return false;
 
-            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db => db.SetContains(groupGuid, userId));
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_USER_SET_DB, db => db.SetContains(groupGuid, userId));
         }
 
         public static bool DeleteGroupUsers(string groupGuid, params int[] userIds)
         {
             if (string.IsNullOrEmpty(groupGuid) || userIds == null || userIds.Length <= 0) return false;
 
-            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_USER_SET_DB, db =>
             {
                 RedisValue[] array = userIds.Select(u => RedisValue.Unbox(u)).ToArray();
                 return db.SetRemove(groupGuid, array) > 0;
@@ -99,7 +99,7 @@ namespace HWL.Redis
         {
             if (string.IsNullOrEmpty(groupGuid)) return false;
 
-            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db => db.KeyDelete(groupGuid));
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_USER_SET_DB, db => db.KeyDelete(groupGuid));
         }
 
         public static bool DeleteGroup(string groupGuid, List<int> userIds)
@@ -110,7 +110,7 @@ namespace HWL.Redis
 
             if (userIds != null && userIds.Count > 0)
             {
-                RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
+                RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_USER_SET_DB, db =>
                  {
                      RedisValue[] array = new RedisValue[userIds.Count];
                      for (int i = 0; i < userIds.Count; i++)
@@ -130,7 +130,7 @@ namespace HWL.Redis
         {
             if (string.IsNullOrEmpty(groupGuid)) return 0;
             int count = 0;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_USER_SET_DB, db =>
             {
                 count = Convert.ToInt32(db.SetLength(groupGuid));
             });
@@ -164,7 +164,7 @@ namespace HWL.Redis
         {
             if (string.IsNullOrEmpty(groupGuid)) return null;
 
-            return RedisUtils.DefaultInstance.Exec(RedisConfigManager.GROUP_USER_SET_DB, db =>
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_USER_SET_DB, db =>
             {
                 return db.SetMembers(groupGuid)?.Select(u => int.Parse(u)).ToList();
             });
