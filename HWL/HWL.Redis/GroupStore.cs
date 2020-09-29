@@ -26,7 +26,7 @@ namespace HWL.Redis
 
             return RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_GEO_DB, db =>
             {
-                return db.GeoRadius(GROUP_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_GROUP_RANGE, GeoUnit.Miles, 1)?
+                return db.GeoRadius(GROUP_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_GROUP_RANGE, GeoUnit.Meters, 1)?
                 .Select(s => s.Member.ToString()).ToList();
             });
         }
@@ -35,7 +35,7 @@ namespace HWL.Redis
         {
             return RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_GEO_DB, db =>
             {
-                List<string> groupGuids = db.GeoRadius(GROUP_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_GROUP_RANGE, GeoUnit.Miles, 1)?
+                List<string> groupGuids = db.GeoRadius(GROUP_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_GROUP_RANGE, GeoUnit.Meters, 1)?
                 .Select(s => s.Member.ToString()).ToList();
 
                 string availableGroupGuid = null;
