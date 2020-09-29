@@ -5,7 +5,13 @@
     "UserAddFriendTotalCount": 3000, //添加好友总数量上限
     "UserAddFriendDayCount": 30, //每天添加好友数量上限
     "UploadDirectory": "C:\\wwwroot\\hwl-upload", //文件上传目录配置,值为当前计算机的绝对地址
-    "FileAccessUrl": "http://111.229.252.205:8085/upload" //文件对外访问的地址配置,值以http://或者https://开头,upload可作为虚拟目录名
+    "FileAccessUrl": "http://111.229.252.205:8085/upload", //文件对外访问的地址配置,值以http://或者https://开头,upload可作为虚拟目录名
+    "RelatedSystemLinks": {
+      "API Site": "http://111.229.252.205:8083",
+      "Official Site": "http://111.229.252.205:8082",
+      "Resx Site": "http://111.229.252.205:8085",
+      "Manage Site": "http://111.229.252.205:8084"
+    }
   },
   "RedisSettings": {
     "GroupUserTotalCount": 500, //群组好友总数量上限

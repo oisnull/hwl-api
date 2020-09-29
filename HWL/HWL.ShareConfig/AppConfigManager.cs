@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace HWL.ShareConfig
 {
     public class AppConfigManager : ShareConfiguration
     {
         public static string DefaultAppName { get; } = "ZiChat";
+        public static string DefaultCAppName { get; } = "知了";
         public static string DefaultEAppName { get; } = "ZL";
         public static string CheckCodeForDebug { get; } = "888888";
 
@@ -91,6 +94,18 @@ namespace HWL.ShareConfig
                 return Convert.ToInt32(AppSettings["UserAddFriendDayCount"]);
             }
         }
+
+        public static Dictionary<string, string> RelatedSystemLinks
+        {
+            get
+            {
+                return AppSettings.GetSection("RelatedSystemLinks")
+                    .GetChildren()
+                    .ToDictionary(x => x.Key, x => x.Value);
+            }
+        }
+
+
 
         /*
          * 功能描述：

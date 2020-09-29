@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>HWL后台管理系统-登录</title>
+    <title>@(HWL.ShareConfig.AppConfigManager.DefaultEAppName)后台管理系统-登录</title>
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="~/css/login.css" />
     <link href="~/js/bootstrap.3.3.2/css/bootstrap.min.css" rel="stylesheet" />
@@ -72,7 +72,7 @@
 
 <body class="login">
     <div class="wrapper">
-        <h1><a href="javascript:;"><img src="~/images/logo-big.png" alt="" class="retina-ready" height="49" width="59">HWL管理系统</a></h1>
+        <h1><a href="javascript:;"><img src="~/images/logo-big.png" alt="" class="retina-ready" height="49" width="59">@(HWL.ShareConfig.AppConfigManager.DefaultEAppName)管理系统</a></h1>
         <div class="login-body">
             <h2>系统登录</h2>
             <form id="form1" action="/Home/LoginDo" method="post">
@@ -98,7 +98,7 @@
                 </div>
             </form>
             <div class="forget">
-                <a href="javascript:;"><span>Copyright © 2017-2021 知了科技 All Rights Reserved </span></a>
+                <a href="javascript:;"><span>Copyright © 2017-2021 @(HWL.ShareConfig.AppConfigManager.DefaultCAppName)科技 All Rights Reserved </span></a>
             </div>
         </div>
     </div>
