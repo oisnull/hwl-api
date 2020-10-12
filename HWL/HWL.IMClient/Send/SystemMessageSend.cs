@@ -29,6 +29,7 @@ namespace HWL.IMClient.Send
                 {
                     ToUser = this.toUser,
                     ToGroupGuid = toGroupGuid ?? "",
+                    ToGroupName = groupName,
                     SystemMessageContent = new ImSystemMessageContent()
                     {
                         SystemMessageType = ImSystemMessageType.AddNearGroup,
