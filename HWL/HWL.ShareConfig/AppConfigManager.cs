@@ -124,6 +124,7 @@ namespace HWL.ShareConfig
         public const int USER_TOKEN_DB = 00;
         public const int TOKEN_USER_DB = 01;
         public const int USER_SESSION_DB = 02;
+        public const int USER_SESSION_OFFLINE_DB = 02;
         //const int USER_CREAT_GROUP_DB = 03;
         public const int USER_GEO_DB = 04;
         public const int USER_BASEINFO_DB = 07;
@@ -142,6 +143,7 @@ namespace HWL.ShareConfig
         /// 组所在的数据库
         /// </summary>
         public const int GROUP_GEO_DB = 10;
+        public const int GROUP_GEO_RECENT_USER_DB = 10;
         /// <summary>
         /// 组的用户set集合所在的数据库
         /// </summary>
@@ -154,6 +156,10 @@ namespace HWL.ShareConfig
         public const int COLLECTION_HREFS_DB = 21;
 
         public const int GROUP_USER_IMAGE_COUNT = 9;
+        /// <summary>
+        /// 搜索附近用户的范围初始值
+        /// </summary>
+        public const int SEARCH_NEAR_USER_RANGE = 500;//unit:m
         /// <summary>
         /// 搜索附近组的范围初始值
         /// </summary>

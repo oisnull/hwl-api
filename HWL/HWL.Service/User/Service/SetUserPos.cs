@@ -151,6 +151,8 @@ namespace HWL.Service.User.Service
                 GroupStore.SaveGroupUser(groupGuid, upos.user_id);
             }
 
+            GroupStore.SaveRecentUserInNearGroupAsync(upos.user_id, groupGuid);
+
             return groupGuid;
         }
 

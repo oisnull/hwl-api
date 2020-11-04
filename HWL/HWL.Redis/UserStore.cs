@@ -9,11 +9,7 @@ namespace HWL.Redis
     public class UserStore
     {
         const string USER_GEO_KEY = "user:pos";
-
-        /// <summary>
-        /// 搜索附近用户的范围(单位:米)
-        /// </summary>
-        const int USER_SEARCH_RANGE = 1000;
+        const string USER_SESSION_OFFLINE_DETAILS_KEY = "offline:user:details";
 
         #region 用户sessioin操作
         //存储用户会话状态(key为用户id)
@@ -81,6 +77,43 @@ namespace HWL.Redis
 
         #endregion
 
+        #region User Session Offline
+
+        public static void SaveUserSessionToOffline(int userId)
+        {
+            if (userId <= 0) return;
+
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_SESSION_OFFLINE_DB, db =>
+            {
+                db.HashSetAsync(USER_SESSION_OFFLINE_DETAILS_KEY, userId, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            });
+        }
+
+        /// <returns>userid,offlineTime</returns>
+        public static Dictionary<int, string> GetUserSessionOfflineInfos()
+        {
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_SESSION_OFFLINE_DB, db => db.HashGetAll(USER_SESSION_OFFLINE_DETAILS_KEY).ToDictionary(k => int.Parse(k.Name), v => v.Value.ToString()));
+        }
+
+        /// <param name="offlineTime">format:yyyy-MM-dd HH:mm:ss</param>
+        public static bool DeleteSessionOfflineUserInfo(int userId, string offlineTime = null)
+        {
+            if (userId <= 0) return false;
+
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_SESSION_OFFLINE_DB, db =>
+            {
+                RedisValue originOfflineTime = db.HashGet(USER_SESSION_OFFLINE_DETAILS_KEY, userId);
+                if (originOfflineTime.HasValue && offlineTime == originOfflineTime)
+                {
+                    return db.HashDelete(USER_SESSION_OFFLINE_DETAILS_KEY, userId);
+                }
+
+                return false;
+            });
+        }
+
+        #endregion
+
         #region 用户位置操作 (redis地理位置的坐标是以WGS84为标准，WGS84，全称World Geodetic System 1984，是为GPS全球定位系统使用而建立的坐标系统)
 
         //存储用户当前在线的位置信息
@@ -104,7 +137,7 @@ namespace HWL.Redis
         {
             return RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_GEO_DB, db =>
             {
-                GeoRadiusResult[] results = db.GeoRadius(USER_GEO_KEY, lon, lat, USER_SEARCH_RANGE, GeoUnit.Meters);
+                GeoRadiusResult[] results = db.GeoRadius(USER_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_USER_RANGE, GeoUnit.Meters);
 
                 return results?.Select(r => Convert.ToInt32(r.Member)).ToArray();
             });
@@ -114,7 +147,7 @@ namespace HWL.Redis
         {
             return RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_GEO_DB, db =>
             {
-                return db.GeoRadius(USER_GEO_KEY, lon, lat, USER_SEARCH_RANGE, GeoUnit.Meters);
+                return db.GeoRadius(USER_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_USER_RANGE, GeoUnit.Meters);
             });
         }
 

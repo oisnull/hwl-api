@@ -12,12 +12,10 @@ namespace HWL.ShareConfig
         {
             get
             {
-                if (_configuration != null)
+                if (_configuration == null)
                 {
-                    return _configuration;
+                    InitConfiguration();
                 }
-
-                InitConfiguration();
 
                 return _configuration;
             }
@@ -52,7 +50,7 @@ namespace HWL.ShareConfig
         //        .Build();
         //}
 
-        public static string CurrentEnvironment { get; } = Environment.GetEnvironmentVariable("Environment")?.ToLower();
+        public static string CurrentEnvironment { get { return Environment.GetEnvironmentVariable("Environment")?.ToLower(); } }
 
         protected static IConfigurationSection RedisSettings { get; } = Configuration.GetSection("RedisSettings");
 

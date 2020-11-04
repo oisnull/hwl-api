@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace HWL.Manage.Service
@@ -180,8 +181,8 @@ namespace HWL.Manage.Service
             int[] userIds = posInfos.Select(p => p.UserId).ToArray();
             var users = db.t_user.Where(u => userIds.Contains(u.id)).Select(u => new { u.id, u.name }).ToList();
 
-            string sqlString = $"SELECT * FROM (SELECT [user_id],lon,lat,pos_details,update_date, row_number() over(PARTITION BY[user_id] ORDER BY update_date DESC) AS num FROM t_user_pos WHERE [user_id] in ({string.Join(",", userIds)})) tbl WHERE num = 1";
-            var userPos = db.t_user_pos.FromSql(sqlString).Select(u => new
+            string sqlString = $"SELECT * FROM (SELECT [user_id],lon,lat,pos_details,update_date, row_number() over(PARTITION BY[user_id] ORDER BY update_date DESC) AS num FROM t_user_pos WHERE [user_id] in (@UserIds)) tbl WHERE num = 1";
+            var userPos = db.t_user_pos.FromSql(sqlString, new SqlParameter("@UserIds", string.Join(",", userIds))).Select(u => new
             {
                 u.user_id,
                 u.lat,

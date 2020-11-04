@@ -3,12 +3,14 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using HWL.ShareConfig;
+using System.Threading.Tasks;
 
 namespace HWL.Redis
 {
     public static class GroupStore
     {
         const string GROUP_GEO_KEY = "group:pos";
+        const string GROUP_GEO_RECENT_USER_KEY = "users:in:neargroup";
 
         //public static string CreateNearGroupByPos(double lon, double lat)
         //{
@@ -59,6 +61,20 @@ namespace HWL.Redis
 
                 return availableGroupGuid;
             });
+        }
+
+        public static Task<bool> SaveRecentUserInNearGroupAsync(int userId, string nearGroupGuid)
+        {
+            if (userId <= 0 || string.IsNullOrEmpty(nearGroupGuid)) return Task.FromResult(false);
+
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_GEO_RECENT_USER_DB, db => db.HashSetAsync(GROUP_GEO_RECENT_USER_KEY, userId.ToString(), nearGroupGuid));
+        }
+
+        public static string GetRecentUserInNearGroupGuid(int userId)
+        {
+            if (userId <= 0) return null;
+
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.GROUP_GEO_RECENT_USER_DB, db => db.HashGet(GROUP_GEO_RECENT_USER_KEY, userId.ToString()));
         }
 
         public static void SaveGroupUser(string groupGuid, params int[] userIds)
@@ -137,29 +153,6 @@ namespace HWL.Redis
             return count;
         }
 
-        //public static List<int> GetNearGroupUserIds(string groupGuid)
-        //{
-        //    if (string.IsNullOrEmpty(groupGuid)) return null;
-
-        //    List<int> userIds = new List<int>();
-        //    base.DbNum = GROUP_USER_SET_DB;
-        //    base.Exec(db =>
-        //    {
-        //        RedisValue[] users = db.SetMembers(groupGuid);
-        //        if (users != null && users.Length > 0)
-        //        {
-        //            userIds.AddRange(users.Select(u =>
-        //            {
-        //                int uid;
-        //                u.TryParse(out uid);
-        //                return uid;
-        //            }).ToArray());
-        //        }
-        //    });
-
-        //    return userIds;
-        //}
-
         public static List<int> GetGroupUserIds(string groupGuid)
         {
             if (string.IsNullOrEmpty(groupGuid)) return null;
@@ -169,73 +162,5 @@ namespace HWL.Redis
                 return db.SetMembers(groupGuid)?.Select(u => int.Parse(u)).ToList();
             });
         }
-
-        ///// <summary>
-        ///// 保存组用户
-        ///// </summary>
-        //public static void SaveGroupUser(string groupGuid,params int[] userIds)
-        //{
-        //    if (string.IsNullOrEmpty(groupGuid)) return;
-        //    if (userIds == null || userIds.Length <= 0) return;
-
-        //    base.DbNum = GROUP_USER_SET_DB;
-        //    base.Exec(db =>
-        //    {
-        //        RedisValue[] array = new RedisValue[userIds.Length];
-        //        for (int i = 0; i < userIds.Length; i++)
-        //        {
-        //            array[i] = userIds[i];
-        //        }
-        //        db.SetAdd(groupGuid, array);
-        //    });
-        //}
-
-        //public static int GetGroupUserCount(string groupGuid)
-        //{
-        //    if (string.IsNullOrEmpty(groupGuid)) return 0;
-        //    base.DbNum = GROUP_USER_SET_DB;
-        //    int count = 0;
-        //    base.Exec(db =>
-        //    {
-        //        count = Convert.ToInt32(db.SetLength(groupGuid));
-        //    });
-        //    return count;
-        //}
-
-        //public static List<string> GetGroupUserIds(string groupGuid)
-        //{
-        //    if (string.IsNullOrEmpty(groupGuid)) return null;
-
-        //    List<string> userIds = new List<string>();
-        //    base.DbNum = GROUP_USER_SET_DB;
-        //    base.Exec(db =>
-        //    {
-        //        RedisValue[] users = db.SetMembers(groupGuid);
-        //        if (users != null && users.Length > 0)
-        //        {
-        //            userIds.AddRange(users.ToStringArray());
-        //        }
-        //    });
-
-        //    return userIds;
-        //}
-
-        //#region 组的创建人操作
-
-        //public static bool SaveGroupCreateUser(string groupGuid,int userId)
-        //{
-        //    if (userId <= 0) return false;
-        //    if (string.IsNullOrEmpty(groupGuid)) return false;
-
-        //    bool succ = false;
-        //    base.DbNum = GROUP_CREATE_USER_DB;
-        //    base.Exec(db =>
-        //    {
-        //        succ = db.StringSet(groupGuid, userId.ToString());
-        //    });
-        //    return succ;
-        //}
-
-        //#endregion
     }
 }

@@ -71,3 +71,7 @@
 /HWL/HWL.API/Logs
 /HWL/HWL.IMClientTest/Properties/launchSettings.json
 /HWL/HWL.IMClientTest/HWL.IMClientTest.csproj.user
+/HWL/HWL.IMSessionMonitor/bin
+/HWL/HWL.IMSessionMonitor/obj
+/HWL/HWL.IMSessionMonitor/Properties
+/HWL/HWL.IMSessionMonitor/HWL.IMSessionMonitor.csproj.user
