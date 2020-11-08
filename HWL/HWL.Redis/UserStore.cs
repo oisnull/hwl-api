@@ -2,17 +2,14 @@
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HWL.Redis
 {
     public class UserStore
     {
         const string USER_GEO_KEY = "user:pos";
-
-        /// <summary>
-        /// 搜索附近用户的范围
-        /// </summary>
-        const int USER_SEARCH_RANGE = 1000;
+        const string USER_SESSION_OFFLINE_DETAILS_KEY = "offline:user:details";
 
         #region 用户sessioin操作
         //存储用户会话状态(key为用户id)
@@ -21,7 +18,7 @@ namespace HWL.Redis
             if (userId <= 0) return false;
             if (string.IsNullOrEmpty(sessionId)) return false;
             bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_SESSION_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_SESSION_DB, db =>
              {
                  succ = db.StringSet(userId.ToString(), sessionId);
              });
@@ -33,7 +30,7 @@ namespace HWL.Redis
             if (userId <= 0) return false;
 
             bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_SESSION_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_SESSION_DB, db =>
              {
                  succ = db.KeyDelete(userId.ToString());
              });
@@ -50,7 +47,7 @@ namespace HWL.Redis
             if (userId <= 0) return null;
 
             string sessionId = null;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_SESSION_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_SESSION_DB, db =>
              {
                  sessionId = db.StringGet(userId.ToString());
              });
@@ -67,7 +64,7 @@ namespace HWL.Redis
             if (userIds == null || userIds.Count <= 0) return null;
 
             List<string> sessions = new List<string>();
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_SESSION_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_SESSION_DB, db =>
              {
                  RedisValue[] values = db.StringGet(userIds.ConvertAll(u => (RedisKey)u).ToArray());
                  if (values != null && values.Length > 0)
@@ -76,6 +73,43 @@ namespace HWL.Redis
                  }
              });
             return sessions;
+        }
+
+        #endregion
+
+        #region User Session Offline
+
+        public static void SaveUserSessionToOffline(int userId)
+        {
+            if (userId <= 0) return;
+
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_SESSION_OFFLINE_DB, db =>
+            {
+                db.HashSetAsync(USER_SESSION_OFFLINE_DETAILS_KEY, userId, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            });
+        }
+
+        /// <returns>userid,offlineTime</returns>
+        public static Dictionary<int, string> GetUserSessionOfflineInfos()
+        {
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_SESSION_OFFLINE_DB, db => db.HashGetAll(USER_SESSION_OFFLINE_DETAILS_KEY).ToDictionary(k => int.Parse(k.Name), v => v.Value.ToString()));
+        }
+
+        /// <param name="offlineTime">format:yyyy-MM-dd HH:mm:ss</param>
+        public static bool DeleteSessionOfflineUserInfo(int userId, string offlineTime = null)
+        {
+            if (userId <= 0) return false;
+
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_SESSION_OFFLINE_DB, db =>
+            {
+                RedisValue originOfflineTime = db.HashGet(USER_SESSION_OFFLINE_DETAILS_KEY, userId);
+                if (originOfflineTime.HasValue && offlineTime == originOfflineTime)
+                {
+                    return db.HashDelete(USER_SESSION_OFFLINE_DETAILS_KEY, userId);
+                }
+
+                return false;
+            });
         }
 
         #endregion
@@ -90,30 +124,43 @@ namespace HWL.Redis
             if (lat <= 0) return false;
 
             bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_GEO_DB, db =>
-             {
-                 succ = db.GeoAdd(USER_GEO_KEY, lon, lat, userId.ToString());
-             });
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_GEO_DB, db =>
+            {
+                string userIdStr = userId.ToString();
+                db.SortedSetRemove(USER_GEO_KEY, userIdStr);
+                succ = db.GeoAdd(USER_GEO_KEY, lon, lat, userIdStr);
+            });
             return succ;
         }
 
-        //获取附近的用户列表
-        public static int[] GetNearUserList(double lon, double lat)
+        public static int[] GetNearUserIds(double lon, double lat)
         {
-            int[] userIdArray = null;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_GEO_DB, db =>
-             {
-                 GeoRadiusResult[] results = db.GeoRadius(USER_GEO_KEY, lon, lat, USER_SEARCH_RANGE, GeoUnit.Miles);
-                 if (results != null && results.Length > 0)
-                 {
-                     userIdArray = new int[results.Length];
-                     for (int i = 0; i < results.Length; i++)
-                     {
-                         userIdArray[i] = Convert.ToInt32(results[i].Member);
-                     }
-                 }
-             });
-            return userIdArray;
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_GEO_DB, db =>
+            {
+                GeoRadiusResult[] results = db.GeoRadius(USER_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_USER_RANGE, GeoUnit.Meters);
+
+                return results?.Select(r => Convert.ToInt32(r.Member)).ToArray();
+            });
+        }
+
+        public static GeoRadiusResult[] GetNearUserRadius(double lon, double lat)
+        {
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_GEO_DB, db =>
+            {
+                return db.GeoRadius(USER_GEO_KEY, lon, lat, AppConfigManager.SEARCH_NEAR_USER_RANGE, GeoUnit.Meters);
+            });
+        }
+
+        public static Dictionary<int, double?> GetUserDistances(int currentUserId, List<int> distanceUserIds)
+        {
+            if (currentUserId <= 0 || distanceUserIds == null || distanceUserIds.Count <= 0) return null;
+
+            return RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_GEO_DB, db =>
+            {
+                return distanceUserIds.Where(u => u != currentUserId)
+                                    .Select(u => new { Key = u, Value = db.GeoDistance(USER_GEO_KEY, currentUserId, u) })
+                                    .ToDictionary(k => k.Key, v => v.Value);
+            });
         }
 
         #endregion
@@ -154,7 +201,7 @@ namespace HWL.Redis
             if (userId <= 0) return false;
             if (string.IsNullOrEmpty(token) || string.IsNullOrWhiteSpace(token)) return false;
             bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_TOKEN_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_TOKEN_DB, db =>
              {
                  //直接存token,不管里面有没有
                  if (db.StringSet(userId.ToString(), token))
@@ -169,7 +216,7 @@ namespace HWL.Redis
         private static bool SaveTokenUser(int userId, string token, string oldToken = null)
         {
             bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.TOKEN_USER_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.TOKEN_USER_DB, db =>
              {
                  if (!string.IsNullOrEmpty(oldToken))
                  {
@@ -185,7 +232,7 @@ namespace HWL.Redis
             if (string.IsNullOrEmpty(token)) return 0;
 
             int userId = 0;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.TOKEN_USER_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.TOKEN_USER_DB, db =>
              {
                  string id = db.StringGet(token);
                  if (!string.IsNullOrEmpty(id))
@@ -201,7 +248,7 @@ namespace HWL.Redis
             if (userId <= 0) return null;
 
             string token = null;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_TOKEN_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_TOKEN_DB, db =>
              {
                  token = db.StringGet(userId.ToString());
              });
@@ -216,76 +263,17 @@ namespace HWL.Redis
             if (string.IsNullOrEmpty(token)) return true;
 
             bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_TOKEN_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_TOKEN_DB, db =>
              {
                  succ = db.KeyDelete(userId.ToString());
              });
 
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.TOKEN_USER_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.TOKEN_USER_DB, db =>
              {
                  succ = db.KeyDelete(token);
              });
             return succ;
         }
-
-        #endregion
-
-        #region 用户group操作
-        ///// <summary>
-        ///// 根据用户id获取组标识
-        ///// </summary>
-        ///// <param name="userId"></param>
-        ///// <returns></returns>
-        //public static string GetGroupByUserId(int userId)
-        //{
-        //    if (userId <= 0) return null;
-        //    base.DbNum = USER_CREAT_GROUP_DB;
-        //    string groupGuid = null;
-        //    RedisUtils.DefaultInstance.Exec(RedisConfigManager.NEAR_CIRCLE_GEO_DB,db=>
-        //    {
-        //        groupGuid = db.StringGet(userId.ToString());
-        //    });
-        //    return groupGuid;
-        //}
-
-        //public static Dictionary<int, string> GetGroupGuids(List<int> userIds)
-        //{
-        //    if (userIds == null || userIds.Count <= 0) return null;
-
-        //    Dictionary<int, string> groupGuids = new Dictionary<int, string>();
-        //    base.DbNum = USER_CREAT_GROUP_DB;
-        //    base.RedisUtils.DefaultInstance.Exec(RedisConfigManager.NEAR_CIRCLE_GEO_DB,db=>
-        //    {
-        //        RedisValue[] values = db.StringGet(userIds.ConvertAll(u => (RedisKey)u.ToString()).ToArray());
-        //        if (values != null && values.Length > 0)
-        //        {
-        //            //groupGuids.AddRange(values.ToStringArray());
-        //            for (int i = 0; i < userIds.Count; i++)
-        //            {
-        //                groupGuids.Add(userIds[i], values[i]);
-        //            }
-        //        }
-        //    });
-        //    return groupGuids;
-        //}
-
-        ///// <summary>
-        ///// 存储这个组是哪个用户创建的
-        ///// </summary>
-        ///// <returns></returns>
-        //public static bool CreateUserGroup(int userId, string groupGuid)
-        //{
-        //    if (userId <= 0) return false;
-        //    if (string.IsNullOrEmpty(groupGuid)) return false;
-        //    base.DbNum = USER_CREAT_GROUP_DB;
-        //    bool succ = false;
-        //    RedisUtils.DefaultInstance.Exec(RedisConfigManager.NEAR_CIRCLE_GEO_DB,db=>
-        //    {
-        //        succ = db.StringSet(userId.ToString(), groupGuid);
-        //    });
-
-        //    return succ;
-        //}
 
         #endregion
 
@@ -337,7 +325,7 @@ namespace HWL.Redis
         {
             if (userId <= 0) return false;
             bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_BASEINFO_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_BASEINFO_DB, db =>
              {
                  succ = db.StringSet(userId.ToString(), "", new TimeSpan(0, 0, 0, 0, 1));
              });
@@ -356,7 +344,7 @@ namespace HWL.Redis
             if (userId <= 0 || fuserId <= 0) return null;
 
             string[] remarks = null;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_FRIEND_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_FRIEND_DB, db =>
              {
                  RedisKey[] keys = new RedisKey[2];
                  keys[0] = string.Format("{0}:{1}", userId, fuserId);
@@ -378,10 +366,10 @@ namespace HWL.Redis
             if (userId <= 0 || fuserId <= 0 || string.IsNullOrEmpty(fremark)) return false;
 
             bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_FRIEND_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_FRIEND_DB, db =>
              {
                  string key = string.Format("{0}:{1}", userId, fuserId);
-                 succ = db.StringSet(key, fremark, new TimeSpan(0, RedisConfigManager.USER_FRIEND_ERPIRE_TIME, 0));
+                 succ = db.StringSet(key, fremark, new TimeSpan(0, AppConfigManager.USER_FRIEND_ERPIRE_TIME, 0));
              });
             return succ;
         }
@@ -393,7 +381,7 @@ namespace HWL.Redis
         {
             if (userId <= 0 || fuserId <= 0) return false;
             bool succ = false;
-            RedisUtils.DefaultInstance.Exec(RedisConfigManager.USER_FRIEND_DB, db =>
+            RedisUtils.DefaultInstance.Exec(AppConfigManager.USER_FRIEND_DB, db =>
              {
                  string key = string.Format("{0}:{1}", userId, fuserId);
                  succ = db.StringSet(key, "", new TimeSpan(0, 0, 0, 0, 1));

@@ -90,5 +90,26 @@ namespace HWL.Manage.Controllers
             ViewBag.Lat = lat;
             return View();
         }
+
+        public ActionResult NearUsers(double? lon, double? lat)
+        {
+            ViewBag.NearUsers = userService.GetNearUserRadius(lon, lat);
+            ViewBag.Lon = lon;
+            ViewBag.Lat = lat;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ClearGroupUsers(string groupGuid)
+        {
+            if (string.IsNullOrEmpty(groupGuid))
+                return Json(new { state = -1, error = "GroupGuid can't be empty." });
+
+            if (Redis.GroupStore.DeleteGroup(groupGuid))
+            {
+                return Json(new { state = 1 });
+            }
+            return Json(new { state = -1, error = "GroupGuid can't be empty." });
+        }
     }
 }

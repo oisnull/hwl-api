@@ -1,7 +1,21 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    HWL默认首页
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="/Main/Default">首页</a></li>
+    </ol>
+
+    <div class="main-box clearfix">
+        <header class="main-box-header clearfix">
+            <h2 style="font-weight:900;" class="pull-left">相关的系统地址</h2>
+        </header>
+        <div class="main-box-body clearfix">
+            @foreach (var item in HWL.ShareConfig.AppConfigManager.RelatedSystemLinks)
+            {
+                <p><a href="@item.Value" target="_blank">@item.Key</a></p>
+            }
+        </div>
+    </div>
 </div>

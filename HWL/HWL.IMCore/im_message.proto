@@ -19,6 +19,7 @@ enum ImMessageType {
     NearCircleOperate = 10;
     CircleOperate = 11;
     SystemMessage = 12;
+    AppVersion = 13;
 }
 
 enum ImMessageResponseCode {
@@ -60,6 +61,7 @@ message ImMessageRequest {
         ImNearCircleOperateMessageRequest nearCircleOperateMessageRequest = 11;
         ImCircleOperateMessageRequest circleOperateMessageRequest = 12;
         ImSystemMessageRequest systemMessageRequest = 13;
+		ImAppVersionRequest appVersionRequest = 14;
     }
 }
 
@@ -85,6 +87,7 @@ message ImMessageResponse {
         ImNearCircleOperateMessageResponse nearCircleOperateMessageResponse = 9;
         ImCircleOperateMessageResponse circleOperateMessageResponse = 10;
         ImSystemMessageResponse systemMessageResponse = 11;
+		ImAppVersionResponse appVersionResponse = 12;
     }
 }
 
@@ -305,6 +308,25 @@ message ImCircleOperateMessageContent {
     uint64 circleId = 5;
     uint64 commentId = 6;
     string commentCont = 7;
+}
+
+//app version
+message ImAppVersionRequest {
+	repeated uint64 userIds = 1 [packed=true];
+    ImAppVersionContent appVersionContent = 2;
+}
+
+message ImAppVersionResponse {
+    ImAppVersionContent appVersionContent = 1;
+    uint64 buildTime = 2;
+}
+
+message ImAppVersionContent {
+    string appName = 1;
+    string appVersion = 2;
+    uint64 appSize = 3;
+    string downloadUrl = 4;
+    string upgradeLog = 5;
 }
 
 //system message

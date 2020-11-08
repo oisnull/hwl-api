@@ -1,4 +1,4 @@
-//Retrofit2 multpart details:
+﻿//Retrofit2 multpart details:
 https://www.jianshu.com/p/3f1cc5a7bf8c
 
 //Use iis debug for hwl
@@ -45,3 +45,13 @@ public class UserAuthorizeAttribute : AuthorizeAttribute, IAuthorizationFilter
         }
     }
 }
+
+//Set MIME type for download apk file in IIS
+APK
+application/vnd.android.package-archive
+
+//redis geo cmd:
+add: geoadd user:pos longitude latitude "1"
+search: geopos user:pos "1"
+
+//在线坐标转换：https://tool.lu/coordinate/

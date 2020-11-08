@@ -3,8 +3,11 @@ using HWL.Entity.Extends;
 using HWL.Entity.Models;
 using HWL.ShareConfig;
 using HWL.Tools;
+using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace HWL.Manage.Service
@@ -122,6 +125,9 @@ namespace HWL.Manage.Service
                             PosDetails = p.pos_details,
                             Longitude = p.lon,
                             Latitude = p.lat,
+                            CoorType = p.coordinate_type,
+                            LocationType = p.location_type,
+                            Radius = p.radius ?? 0,
                             CreateDate = p.create_date,
                             UpdateDate = p.update_date
                         };
@@ -139,7 +145,7 @@ namespace HWL.Manage.Service
         {
             if (lon == null || lat == null) return null;
 
-            List<string> groupGuids = Redis.GroupStore.GetGroupGuids(lon.Value, lat.Value);
+            List<string> groupGuids = Redis.GroupStore.SearchNearGroupGuids(lon.Value, lat.Value);
             if (groupGuids == null || groupGuids.Count <= 0) return null;
 
             List<GroupPosInfo> infos = new List<GroupPosInfo>(groupGuids.Count);
@@ -155,6 +161,51 @@ namespace HWL.Manage.Service
                 });
             }
             return infos;
+        }
+
+        public List<UserRadiusInfo> GetNearUserRadius(double? lon, double? lat)
+        {
+            if (lon == null || lat == null) return null;
+
+            GeoRadiusResult[] radius = Redis.UserStore.GetNearUserRadius(lon.Value, lat.Value);
+            if (radius == null || radius.Length <= 0) return null;
+
+            List<UserRadiusInfo> posInfos = radius.Select(r => new UserRadiusInfo()
+            {
+                UserId = Convert.ToInt32(r.Member),
+                //Longitude = r.Position.Value.Longitude,
+                //Latitude = r.Position.Value.Latitude,
+                Distance = r.Distance.Value
+            }).ToList();
+
+            int[] userIds = posInfos.Select(p => p.UserId).ToArray();
+            var users = db.t_user.Where(u => userIds.Contains(u.id)).Select(u => new { u.id, u.name }).ToList();
+
+            string sqlString = $"SELECT * FROM (SELECT [user_id],lon,lat,pos_details,update_date, row_number() over(PARTITION BY[user_id] ORDER BY update_date DESC) AS num FROM t_user_pos WHERE [user_id] in (@UserIds)) tbl WHERE num = 1";
+            var userPos = db.t_user_pos.FromSql(sqlString, new SqlParameter("@UserIds", string.Join(",", userIds))).Select(u => new
+            {
+                u.user_id,
+                u.lat,
+                u.lon,
+                u.pos_details,
+                u.update_date
+            }).ToList();
+
+            posInfos.ForEach(f =>
+            {
+                var pos = userPos.Where(u => u.user_id == f.UserId).FirstOrDefault();
+                if (pos != null)
+                {
+                    f.Longitude = pos.lon;
+                    f.Latitude = pos.lat;
+                    f.PosDetails = pos.pos_details;
+                    f.UpdateDate = pos.update_date;
+                }
+                f.UserName = users.Where(u => u.id == f.UserId).Select(u => u.name).FirstOrDefault();
+            });
+
+
+            return posInfos;
         }
     }
 }

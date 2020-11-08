@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="ad20728f-eb8d-402b-a0ec-153ef5420609" ChangeDateTime="08/27/2020 05:53:50">
+    <Property Name="ElementName" Value="[dbo].[t_app_version].[download_url]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[t_app_version]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="app_size" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4379cf13-e6aa-4f32-9d4c-ea0b4d3ec65d" ChangeDateTime="08/27/2020 08:41:09">
+    <Property Name="ElementName" Value="[dbo].[t_app_log].[app_type]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[t_app_log]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="app_version_id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="edc3d4ac-7d9f-4e42-9f63-a2010102563c" ChangeDateTime="08/27/2020 08:43:17">
+    <Property Name="ElementName" Value="[dbo].[t_app_log].[app_version]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[t_app_log]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="pushed_users" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ae5be498-8ea1-4b3d-a2bf-ac751843151b" ChangeDateTime="08/27/2020 08:43:45">
+    <Property Name="ElementName" Value="[dbo].[t_app_log].[create_time]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[t_app_log]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="push_date" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d0dd2df4-130c-411d-bb69-5c14a156948a" ChangeDateTime="09/01/2020 07:18:30">
+    <Property Name="ElementName" Value="[dbo].[t_user_pos].[lat]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[t_user_pos]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="radius" />
+  </Operation>
+</Operations>

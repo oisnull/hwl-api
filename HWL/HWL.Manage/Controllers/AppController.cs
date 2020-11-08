@@ -61,29 +61,56 @@ namespace HWL.Manage.Controllers
         [HttpPost]
         public ActionResult Deploy(AppExt model)
         {
-            ResxHandler resx = new ResxHandler();
-            resx.ResxTypes = new List<string>() { ".apk" };
-            resx.SaveLocalDirectory = string.Format("{0}/apkversion", AppConfigManager.UploadDirectory);
-            resx.AccessUrl = string.Format("{0}/apkversion", ResxConfigManager.FileAccessUrl);
-            ResxResult result = resx.Upload(Request.Form.Files.FirstOrDefault());
-
-            if (result.Success)
+            string error;
+            var file = Request.Form.Files.FirstOrDefault();
+            if (file != null)
             {
-                string error;
-                model.DownloadUrl = result.ResxAccessUrl;
-                int ret = appService.AppVersionAction(model, out error);
-                if (ret > 0)
+                ResxHandler resx = new ResxHandler();
+                resx.ResxTypes = new List<string>() { ".apk" };
+                resx.SaveLocalDirectory = string.Format("{0}/apkversion", AppConfigManager.UploadDirectory);
+                resx.AccessUrl = string.Format("{0}/apkversion", ResxConfigManager.FileAccessUrl);
+                ResxResult result = resx.Upload(file);
+                if (result.Success)
                 {
-                    return Json(new { state = 1 });
+                    model.Size = result.ResxSize;
+                    model.DownloadUrl = result.ResxAccessUrl;
                 }
                 else
                 {
-                    return Json(new { state = -1, error });
+                    error = result.Message;
+                    return Json(new { state = -1, error = result.Message });
                 }
+            }
+
+            int ret = appService.AppVersionAction(model, out error);
+            if (ret > 0)
+            {
+                return Json(new { state = 1 });
             }
             else
             {
-                return Json(new { state = -1, error = result.Message });
+                return Json(new { state = -1, error });
+            }
+        }
+
+        public ActionResult PushVersion()
+        {
+            ViewBag.AppList = appService.GetAppVersionList(3);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PushToUsers(int appId, string userIds)
+        {
+            string error;
+            int result = appService.AddAppVersionPush(appId, userIds, out error);
+            if (result > 0)
+            {
+                return Json(new { state = 1 });
+            }
+            else
+            {
+                return Json(new { state = -1, error });
             }
         }
     }

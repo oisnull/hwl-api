@@ -34,6 +34,16 @@ namespace HWL.Service
             });
         }
 
+        public static void CollectLog(HWLEntities dbContext, Request<CollectLogRequestBody> request)
+        {
+            var context = new ServiceContext<CollectLogRequestBody>(request, new RequestValidate());
+            ContextProcessor.Execute(context, r =>
+            {
+                new CollectLog(dbContext, r.Body).Execute();
+                return 0;
+            });
+        }
+
         //public static Response CheckVersion(Request request)
         //{
         //    if (request == null)

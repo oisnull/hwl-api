@@ -50,5 +50,12 @@ namespace HWL.IMClient
 
             im.send(new SystemMessageSend(toUser, toGroupGuid, toGroupName));
         }
+
+        public void SendAppVersionMessage(ulong[] userIds, ImAppVersionContent versionContent)
+        {
+            checkConnect();
+
+            im.send(new AppVersionMessageSend(userIds, versionContent));
+        }
     }
 }

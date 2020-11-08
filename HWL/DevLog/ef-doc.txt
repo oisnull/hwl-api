@@ -1,6 +1,13 @@
 //ef core doc link:https://www.entityframeworktutorial.net/efcore/install-entity-framework-core.aspx
 Scaffold-DbContext [-Connection] <String> [-Provider] <String> [-OutputDir <String>] [-ContextDir <String>] [-Context <String>] [-Schemas <String[]>] [-Tables <String[]>] [-DataAnnotations] [-UseDatabaseNames] [-Force] [-Project <String>] [-StartupProject <String>] [<CommonParameters>]
 
+//Used in company
+Scaffold-DbContext "Data Source=.;Initial Catalog=zltest;Persist Security Info=True;User ID=sa;Password=WCNM.weiruan.2" Microsoft.EntityFrameworkCore.SqlServer -OutputDir "Models" -Context "HWLEntities" -UseDatabaseNames -StartupProject "HWL.Entity" -Project "HWL.Entity" -Force
+
+//Used in home
+Scaffold-DbContext "Data Source=.;Initial Catalog=hwl;Persist Security Info=True;User ID=sa;Password=ac.123456" Microsoft.EntityFrameworkCore.SqlServer -OutputDir "Models" -Context "HWLEntities" -UseDatabaseNames -StartupProject "HWL.Entity" -Project "HWL.Entity" -Force
+
+## Below is deprecated ##
 //ef core help command:
 get-help scaffold-dbcontext –detailed
 

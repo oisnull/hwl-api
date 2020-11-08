@@ -23,7 +23,12 @@ namespace HWL.Service.Generic.Service
             base.ValidateRequestParams();
             if (string.IsNullOrEmpty(this.request.Mobile))
             {
-                throw new Exception("手机号码不能为空");
+                throw new Exception("Mobile can't be empty.");
+            }
+
+            if (!GenericUtility.IsValidMail(this.request.Mobile))
+            {
+                throw new Exception("The current format of email is invaild.");
             }
         }
 

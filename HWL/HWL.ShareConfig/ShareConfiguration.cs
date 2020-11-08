@@ -6,61 +6,62 @@ namespace HWL.ShareConfig
 {
     public class ShareConfiguration
     {
-        protected static IConfiguration Configuration;
+        private static IConfiguration _configuration;
 
-        static ShareConfiguration()
+        protected static IConfiguration Configuration
         {
-            string env = Environment.GetEnvironmentVariable("Environment")?.ToLower();
-            if (string.IsNullOrEmpty(env) || string.IsNullOrWhiteSpace(env))
+            get
+            {
+                if (_configuration == null)
+                {
+                    InitConfiguration();
+                }
+
+                return _configuration;
+            }
+        }
+
+        public static void InitConfiguration()
+        {
+            if (string.IsNullOrEmpty(CurrentEnvironment) || string.IsNullOrWhiteSpace(CurrentEnvironment))
             {
                 throw new ArgumentNullException("Environment");
             }
 
-            string settingFilePath = Path.Combine(AppContext.BaseDirectory, $"sharesettings.{env}.json");
+            string settingFilePath = Path.Combine(AppContext.BaseDirectory, $"sharesettings.{CurrentEnvironment}.json");
 
-            Configuration = new ConfigurationBuilder()
+            _configuration = new ConfigurationBuilder()
                 .AddJsonFile(settingFilePath, false)
                 .Build();
         }
 
-        protected static IConfigurationSection RedisSettings
-        {
-            get
-            {
-                return Configuration.GetSection("RedisSettings");
-            }
-        }
+        //protected static IConfiguration Configuration;
+        //static ShareConfiguration()
+        //{
+        //    if (string.IsNullOrEmpty(CurrentEnvironment) || string.IsNullOrWhiteSpace(CurrentEnvironment))
+        //    {
+        //        throw new ArgumentNullException("Environment");
+        //    }
 
-        protected static IConfigurationSection AppSettings
-        {
-            get
-            {
-                return Configuration.GetSection("AppSettings");
-            }
-        }
+        //    string settingFilePath = Path.Combine(AppContext.BaseDirectory, $"sharesettings.{CurrentEnvironment}.json");
 
-        public static string DBConnectionString
-        {
-            get
-            {
-                return Configuration.GetConnectionString("HWLDBConnectionString");
-            }
-        }
+        //    Configuration = new ConfigurationBuilder()
+        //        .AddJsonFile(settingFilePath, false)
+        //        .Build();
+        //}
 
-        protected static IConfigurationSection IMSettings
-        {
-            get
-            {
-                return Configuration.GetSection("IMSettings");
-            }
-        }
+        public static string CurrentEnvironment { get { return Environment.GetEnvironmentVariable("Environment")?.ToLower(); } }
 
-        protected static IConfigurationSection RabbitMQSettings
-        {
-            get
-            {
-                return Configuration.GetSection("RabbitMQSettings");
-            }
-        }
+        protected static IConfigurationSection RedisSettings { get; } = Configuration.GetSection("RedisSettings");
+
+        protected static IConfigurationSection AppSettings { get; } = Configuration.GetSection("AppSettings");
+
+        public static string DBConnectionString { get; } = Configuration.GetConnectionString("HWLDBConnectionString");
+
+        protected static IConfigurationSection IMSettings { get; } = Configuration.GetSection("IMSettings");
+
+        protected static IConfigurationSection RabbitMQSettings { get; } = Configuration.GetSection("RabbitMQSettings");
+
+        protected static IConfigurationSection LogSettings { get; } = Configuration.GetSection("LogSettings");
     }
 }

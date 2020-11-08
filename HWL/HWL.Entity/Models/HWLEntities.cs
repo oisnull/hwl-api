@@ -17,6 +17,7 @@ namespace HWL.Entity.Models
 
         public virtual DbSet<t_admin> t_admin { get; set; }
         public virtual DbSet<t_app_version> t_app_version { get; set; }
+        public virtual DbSet<t_app_version_push> t_app_version_push { get; set; }
         public virtual DbSet<t_circle> t_circle { get; set; }
         public virtual DbSet<t_circle_comment> t_circle_comment { get; set; }
         public virtual DbSet<t_circle_like> t_circle_like { get; set; }
@@ -29,6 +30,7 @@ namespace HWL.Entity.Models
         public virtual DbSet<t_near_circle_comment> t_near_circle_comment { get; set; }
         public virtual DbSet<t_near_circle_like> t_near_circle_like { get; set; }
         public virtual DbSet<t_province> t_province { get; set; }
+        public virtual DbSet<t_town> t_town { get; set; }
         public virtual DbSet<t_user> t_user { get; set; }
         public virtual DbSet<t_user_code> t_user_code { get; set; }
         public virtual DbSet<t_user_friend> t_user_friend { get; set; }
@@ -72,6 +74,17 @@ namespace HWL.Entity.Models
                 entity.Property(e => e.publish_time).HasColumnType("datetime");
 
                 entity.Property(e => e.update_time).HasColumnType("datetime");
+
+                entity.Property(e => e.upgrade_log).HasColumnType("text");
+            });
+
+            modelBuilder.Entity<t_app_version_push>(entity =>
+            {
+                entity.Property(e => e.push_date).HasColumnType("datetime");
+
+                entity.Property(e => e.pushed_users)
+                    .IsRequired()
+                    .HasMaxLength(200);
             });
 
             modelBuilder.Entity<t_circle>(entity =>
@@ -192,6 +205,13 @@ namespace HWL.Entity.Models
                     .HasMaxLength(50);
             });
 
+            modelBuilder.Entity<t_town>(entity =>
+            {
+                entity.Property(e => e.name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
             modelBuilder.Entity<t_user>(entity =>
             {
                 entity.Property(e => e.circle_back_image)
@@ -253,11 +273,17 @@ namespace HWL.Entity.Models
 
             modelBuilder.Entity<t_user_pos>(entity =>
             {
-                entity.Property(e => e.create_date).HasColumnType("datetime");
+                entity.Property(e => e.coordinate_type).HasMaxLength(20);
+
+                entity.Property(e => e.create_date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.geohash_key)
                     .IsRequired()
                     .HasMaxLength(20);
+
+                entity.Property(e => e.location_type).HasMaxLength(10);
 
                 entity.Property(e => e.pos_details)
                     .IsRequired()

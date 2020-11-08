@@ -36,4 +36,10 @@
     <None Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\User\NearUsers.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

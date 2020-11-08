@@ -46,14 +46,14 @@ namespace HWL.Manage.Controllers
             }
             else
             {
-                base.SetAdminSession(result);
-                return Json(new { state = 1, gto = "/Main/Index" });
+                Models.AdminSessionManager.SetAdmin(result);
+                return Json(new { state = 1, gto = "/Main/Default" });
             }
         }
 
         public ActionResult Logout()
         {
-            base.ClearAdminSession();
+            Models.AdminSessionManager.ClearAdmin();
             return Redirect("/Home/Login");
         }
     }

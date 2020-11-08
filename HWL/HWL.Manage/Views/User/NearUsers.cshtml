@@ -1,0 +1,103 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="javascript:;">首页</a></li>
+                    <li class="active"><span>区域用户</span></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box clearfix">
+                    <header class="main-box-header clearfix">
+                        <h2 style="font-weight:900;" class="pull-left">按经纬度筛选用户</h2>
+                    </header>
+                    <div class="main-box-body clearfix">
+                        <table>
+                            <tr style="height:55px;">
+                                <th style="width:120px;">经度 - 纬度 ：</th>
+                                <td>
+                                    <input type="text" class="form-control" style="width:180px; " value="@ViewBag.Lon" id="longitude" placeholder="Longitude" size="50" />&nbsp; - &nbsp;
+                                    <input type="text" class="form-control" style="width:180px;" value="@ViewBag.Lat" id="latitude" placeholder="Latitude" size="50" />
+                                </td>
+                                <td style="width:50px;"></td>
+                                <td>
+                                    <a href="javascript:;" onclick="SearchGroups()" class="btn btn-default" style="width:100px;">查询</a> &nbsp;&nbsp;&nbsp;
+                                    <a href="/User/NearUsers" style="vertical-align:bottom;">重置</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box clearfix">
+                    <header class="main-box-header clearfix">
+                        <h2 style="font-weight:900;" class="pull-left">组用户列表</h2>
+                    </header>
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="center">Id/Name</th>
+                                        <th class="center">Lon/Lat</th>
+                                        <th class="center">Distance(M)</th>
+                                        <th class="center">PosDetails</th>
+                                        <th class="center">UpdateDate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.NearUsers == null || ViewBag.NearUsers.Count <= 0)
+                                    {
+                                        <tr style="text-align:center;">
+                                            <td colspan="3">
+                                                @if (ViewBag.Lon != null && ViewBag.Lat != null)
+                                                {
+                                                    <font color="red">当前区域内没有找到用户数据</font>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        foreach (HWL.Entity.Extends.UserRadiusInfo pos in ViewBag.NearUsers)
+                                        {
+                                            <tr style="text-align:center;">
+                                                <td>@pos.UserId / @pos.UserName</td>
+                                                <td>@pos.Longitude / @pos.Latitude</td>
+                                                <td>@pos.Distance</td>
+                                                <td>@pos.PosDetails</td>
+                                                <td>@pos.UpdateDate</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function SearchGroups() {
+        var lon = document.getElementById("longitude").value;
+        var lat = document.getElementById("latitude").value;
+        if (lon && lat) {
+            window.location.href = "/User/NearUsers?lon=" + lon + "&lat=" + lat;
+        }
+    }
+</script>

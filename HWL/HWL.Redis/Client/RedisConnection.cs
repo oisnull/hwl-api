@@ -6,9 +6,9 @@ namespace HWL.Redis.Client
     public class RedisConnection
     {
         private ConnectionMultiplexer connection;
-        private RedisConnectionListener connectionListener;
+        private IRedisConnectionListener connectionListener;
 
-        public RedisConnection(string connectionString, RedisConnectionListener connectionListener = null)
+        public RedisConnection(string connectionString, IRedisConnectionListener connectionListener = null)
         {
             this.connectionListener = connectionListener;
             this.Init(connectionString);

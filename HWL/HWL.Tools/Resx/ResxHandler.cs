@@ -65,6 +65,7 @@ namespace HWL.Tools.Resx
                 file.CopyTo(fileStream);
                 fileStream.Flush();
 
+                result.ResxSize = file.Length;
                 result.Success = true;
                 result.ResxAccessUrl = string.Format("{0}/{1}", this.AccessUrl, newFileName);
             }

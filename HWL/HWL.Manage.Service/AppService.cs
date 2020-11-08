@@ -1,6 +1,7 @@
 ﻿using HWL.Entity;
 using HWL.Entity.Extends;
 using HWL.Entity.Models;
+using HWL.IMClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +15,26 @@ namespace HWL.Manage.Service
         {
         }
 
-        public List<AppExt> GetAppVersionList()
+        public List<AppExt> GetAppVersionList(int topCount = 0)
         {
-            return db.t_app_version.Select(v => new AppExt
+            IQueryable<AppExt> query = db.t_app_version.Select(v => new AppExt
             {
                 Id = v.id,
                 DownloadUrl = v.download_url,
                 Name = v.app_name,
+                Size = v.app_size ?? 0,
                 PublishTime = v.publish_time,
                 Version = v.app_version,
-            }).ToList();
+                VersionType = v.app_version_type,
+            });
+            if (topCount > 0)
+            {
+                query = query.Take(topCount).OrderByDescending(o => o.Id);
+            }
+
+            List<AppExt> list = query.ToList();
+            list.ForEach(f => f.VersionTypeString = CustomerEnumDesc.GetAppVersionTypeDesc(f.VersionType));
+            return list;
         }
 
         public AppExt GetAppVersionInfo(int id)
@@ -35,8 +46,11 @@ namespace HWL.Manage.Service
                 Id = v.id,
                 DownloadUrl = v.download_url,
                 Name = v.app_name,
+                Size = v.app_size ?? 0,
+                UpgradeLog = v.upgrade_log,
                 PublishTime = v.publish_time,
                 Version = v.app_version,
+                VersionType = v.app_version_type,
             }).FirstOrDefault();
         }
 
@@ -116,6 +130,9 @@ namespace HWL.Manage.Service
             }
             entity.app_name = model.Name;
             entity.app_version = model.Version;
+            entity.app_version_type = model.VersionType;
+            entity.app_size = model.Size;
+            entity.upgrade_log = model.UpgradeLog;
             entity.download_url = model.DownloadUrl;
             entity.update_time = DateTime.Now;
 
@@ -129,6 +146,56 @@ namespace HWL.Manage.Service
                 error = ex.Message;
                 return 0;
             }
+        }
+
+        public int AddAppVersionPush(int appId, string userIds, out string error)
+        {
+            error = "";
+            if (appId <= 0)
+            {
+                error = "App id can't be empty.";
+                return 0;
+            }
+
+            t_app_version app = db.t_app_version.Where(a => a.id == appId).FirstOrDefault();
+            if (app == null)
+            {
+                error = $"Not found app version data by appid = {appId}.";
+                return 0;
+            }
+
+            ulong[] userIdArray = userIds?.Trim().Split(new string[] { ",", ";", " " }, StringSplitOptions.RemoveEmptyEntries)
+                .Where(u => !string.IsNullOrEmpty(u))
+                .Select(u => ulong.Parse(u))
+                .Distinct()
+                .ToArray();
+            if (userIdArray == null || userIdArray.Length <= 0)
+            {
+                error = "User Ids can't be empty.";
+                return 0;
+            }
+
+            t_app_version_push model = new t_app_version_push()
+            {
+                app_version_id = appId,
+                pushed_users = userIds,
+                push_date = DateTime.Now
+            };
+            db.t_app_version_push.Add(model);
+            db.SaveChanges();
+
+            if (model.id > 0)
+            {
+                IMClientV.INSTANCE.SendAppVersionMessage(userIdArray, new IMCore.Protocol.ImAppVersionContent()
+                {
+                    AppName = app.app_name,
+                    AppSize = (ulong)(app.app_size ?? 0),
+                    AppVersion = app.app_version,
+                    DownloadUrl = app.download_url,
+                    UpgradeLog = app.upgrade_log,
+                });
+            }
+            return 1;
         }
     }
 }

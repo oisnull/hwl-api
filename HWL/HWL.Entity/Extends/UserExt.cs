@@ -25,11 +25,13 @@ namespace HWL.Entity.Extends
         public string CircleBackImage { get; set; }
         public UserSex UserSex { get; set; }
         public string LifeNotes { get; set; }
-        /// <summary>
-        /// 概念不能为注册地址，应该为家乡地址
-        /// </summary>
-        public List<int> RegisterPosIdList { get; set; }
-        public List<string> RegisterPosList { get; set; }
+        ///// <summary>
+        ///// 概念不能为注册地址，应该为家乡地址
+        ///// </summary>
+        //public List<int> RegisterPosIdList { get; set; }
+        //public List<string> RegisterPosList { get; set; }
+
+        public UserRegisterAreaInfo RegAreaInfo { get; set; }
 
         public int FriendCount { get; set; }
         public int GroupCount { get; set; }
@@ -119,5 +121,13 @@ namespace HWL.Entity.Extends
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string UserImage { get; set; }
+    }
+
+    public class NearUserInfo
+    {
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string UserImage { get; set; }
+        public double Distance { get; set; }
     }
 }

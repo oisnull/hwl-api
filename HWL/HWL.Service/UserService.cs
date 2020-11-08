@@ -30,6 +30,15 @@ namespace HWL.Service
             });
         }
 
+        public static Response<UserLoginAndRegisterResponseBody> UserLoginAndRegister(HWLEntities dbContext, Request<UserLoginAndRegisterRequestBody> request)
+        {
+            var context = new ServiceContext<UserLoginAndRegisterRequestBody>(request, new RequestValidate(false, false));
+            return ContextProcessor.Execute(context, r =>
+            {
+                return new UserLoginAndRegister(dbContext, r.Body).Execute();
+            });
+        }
+
         public static Response<SetUserPasswordResponseBody> SetUserPassword(HWLEntities dbContext, Request<SetUserPasswordRequestBody> request)
         {
             var context = new ServiceContext<SetUserPasswordRequestBody>(request, new RequestValidate(false, false));

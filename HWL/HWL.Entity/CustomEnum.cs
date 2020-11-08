@@ -180,4 +180,11 @@ namespace HWL.Entity
         Near = 1,
         User = 2,
     }
+
+    public enum AppVersionType
+    {
+        InternalBeta = 0,
+        PublicBeta = 1,
+        Official = 2
+    }
 }

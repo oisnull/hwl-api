@@ -37,7 +37,14 @@ namespace HWL.API.Controllers
         [Description("用户注册")]
         public Response<UserRegisterResponseBody> UserRegister(Request<UserRegisterRequestBody> request)
         {
-            return UserService.UserRegister(dbContext,request);
+            return UserService.UserRegister(dbContext, request);
+        }
+
+        [HttpPost]
+        [Description("用户登陆并且注册")]
+        public Response<UserLoginAndRegisterResponseBody> UserLoginAndRegister(Request<UserLoginAndRegisterRequestBody> request)
+        {
+            return UserService.UserLoginAndRegister(dbContext, request);
         }
 
         [HttpPost]
@@ -356,6 +363,13 @@ namespace HWL.API.Controllers
         public Response<CheckVersionResponseBody> CheckVersion(Request<CheckVersionRequestBody> request)
         {
             return GenericService.CheckVersion(dbContext, request);
+        }
+
+        [HttpPost]
+        [Description("终端日志收集")]
+        public void CollectLog(Request<CollectLogRequestBody> request)
+        {
+            GenericService.CollectLog(dbContext, request);
         }
 
         [HttpPost]

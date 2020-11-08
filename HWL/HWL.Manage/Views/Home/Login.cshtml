@@ -9,17 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>HWL后台管理系统-登录</title>
+    <title>@(HWL.ShareConfig.AppConfigManager.DefaultEAppName)后台管理系统-登录</title>
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="~/css/login.css" />
     <link href="~/js/bootstrap.3.3.2/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="~/js/jquery-1.10.2.min.js"></script>
+    <script src="~/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.form.js" type="text/javascript"></script>
 
     <script type="text/javascript">
         var isAction = false;
         $(function () {
             $("form").submit(function () {
-                var $uemail = $("input[name=uemail]");
+                var $uemail = $("input[name=name]");
                 if ($uemail == null || $uemail.val() == "" || $uemail.val() == null) {
                     $uemail.focus();
                     $uemail.css("border-color", "red");
@@ -31,7 +32,7 @@
                     $("div#span_result").html("");
                 }
 
-                var $upw = $("input[name=upw]");
+                var $upw = $("input[name=pwd]");
                 if ($upw == null || $upw.val() == "" || $upw.val() == null || $upw.val().length < 6 || $upw.val().length > 20) {
                     $upw.css("border-color", "red");
                     $upw.focus();
@@ -44,23 +45,24 @@
                 }
 
                 form1.btn_submit.value = "登录中...";
-
-                $.post("/Home/LoginDo", { name: $uemail.val(), pwd: $upw.val() }, function (data) {
-                    if (data != null) {
-                        if (data.state > 0) {
-                            form1.btn_submit.value = "登录成功,跳转中...";
-                            console.log(data.gto);
-                            window.location.href = data.gto;
-                        } else {
-                            $("div#span_result").html("<span style='color:red'>" + data.error + "</span>");
-                            form1.btn_submit.value = "登 录";
-                            return;
+                $(this).ajaxSubmit({
+                    success: function (data) {
+                        if (data != null) {
+                            if (data.state > 0) {
+                                form1.btn_submit.value = "登录成功,跳转中...";
+                                console.log(data.gto);
+                                window.location.href = data.gto;
+                            } else {
+                                $("div#span_result").html("<span style='color:red'>" + data.error + "</span>");
+                                form1.btn_submit.value = "登 录";
+                                return;
+                            }
+                        }
+                        else {
+                            isAction = false;
                         }
                     }
-                    else {
-                        isAction = false;
-                    }
-                })
+                });
                 return false;
             })
         })
@@ -70,18 +72,18 @@
 
 <body class="login">
     <div class="wrapper">
-        <h1><a href="javascript:;"><img src="~/images/logo-big.png" alt="" class="retina-ready" height="49" width="59">HWL管理系统</a></h1>
+        <h1><a href="javascript:;"><img src="~/images/logo-big.png" alt="" class="retina-ready" height="49" width="59">@(HWL.ShareConfig.AppConfigManager.DefaultEAppName)管理系统</a></h1>
         <div class="login-body">
             <h2>系统登录</h2>
-            <form id="form1" action="/Home/LoginView" method="post">
+            <form id="form1" action="/Home/LoginDo" method="post">
                 <div class="control-group">
                     <div class="email controls">
-                        <input name="uemail" placeholder="用户名" class="form-control" data-rule-required="true" data-rule-email="true" type="text">
+                        <input name="name" placeholder="用户名" class="form-control" required type="text" maxlength="50" />
                     </div>
                 </div>
                 <div class="control-group">
                     <div class="pw controls">
-                        <input name="upw" placeholder="密码" class="form-control" data-rule-required="true" type="password">
+                        <input name="pwd" placeholder="密码" class="form-control" required type="password" maxlength="20" />
                     </div>
                 </div>
                 <div class="submit">
@@ -96,7 +98,7 @@
                 </div>
             </form>
             <div class="forget">
-                <a href="javascript:;"><span>Copyright © 2017-2019 HWL科技 All Rights Reserved </span></a>
+                <a href="javascript:;"><span>Copyright © 2017-2021 @(HWL.ShareConfig.AppConfigManager.DefaultCAppName)科技 All Rights Reserved </span></a>
             </div>
         </div>
     </div>

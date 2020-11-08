@@ -2,7 +2,7 @@
 
 namespace HWL.Redis.Client
 {
-    public interface RedisConnectionListener
+    public interface IRedisConnectionListener
     {
         void MuxerConfigurationChanged(object sender, EndPointEventArgs e);
 

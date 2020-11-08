@@ -29,6 +29,7 @@ namespace HWL.IMClient.Send
                 {
                     ToUser = this.toUser,
                     ToGroupGuid = toGroupGuid ?? "",
+                    ToGroupName = groupName,
                     SystemMessageContent = new ImSystemMessageContent()
                     {
                         SystemMessageType = ImSystemMessageType.AddNearGroup,
@@ -46,7 +47,7 @@ namespace HWL.IMClient.Send
 
         public override void failure(string message)
         {
-            ShareConfig.Log4NetManager.Error($"SystemMessageSend:{message}");
+            ShareConfig.LogHelper.Error($"SystemMessageSend:{message}");
         }
     }
 }

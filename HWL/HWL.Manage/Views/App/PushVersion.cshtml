@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Push Version To User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li><a href="/Main/Index">首页</a></li>
+            <li class="active"><span>推送版本</span></li>
+        </ol>
+    </div>
+</div>
+<div class="main-box clearfix">
+    <form id="form1" action="#" method="post">
+        <div style="text-align: left;margin:10px;" class="panel">
+            <div class="panel-heading">
+                <b>Select Push Version</b>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="center" style="width:60px;">#</th>
+                        <th class="center">App Name</th>
+                        <th class="center">App Version</th>
+                        <th class="center">App Size</th>
+                        <th class="center">Publish Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.AppList == null || ViewBag.AppList.Count <= 0)
+                    {
+                        <tr style="text-align:center;">
+                            <td colspan="5">
+                                <font color="red">Not found app version datas</font>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (HWL.Entity.Extends.AppExt item in ViewBag.AppList)
+                        {
+                            <tr style="text-align:center;">
+                                <td><input type="radio" name="appId" value="@item.Id" /></td>
+                                <td>@item.Name</td>
+                                <td>@item.VersionTypeString - @item.Version</td>
+                                <td>@HWL.Tools.FileSizeFormatter.FormatSize(item.Size)</td>
+                                <td>@item.PublishTime</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <div class="panel-heading">
+                <b>Input UserIds</b>
+            </div>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th style="width:150px;">User Id：</th>
+                        <td><input type="text" name="userIds" placeholder="输入用户Id,多个用逗号隔开" class="form-control" style="width:50%;" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="margin:10px;">
+            <input type="submit" class="btn btn-submit btn-primary" value="Push to user" style="width:100px;margin-left: 0px;margin-right:10px;" />
+            <span id="span_info" style="margin-left:10px;"></span>
+        </p>
+    </form>
+</div>
+
+<script src="/js/jquery.form.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var isAction = false;
+    $("form").submit(function () {
+        if (isAction) {
+            return false;
+        }
+        isAction = true;
+
+        $("span#span_info").html("<font color='blue'>推送中，请稍后...</font>");
+        $(this).ajaxSubmit({
+            type: "post",
+            url: "/App/PushToUsers",
+            success: function (data) {
+                console.log(data);
+                if (data.state > 0) {
+                    $("span#span_info").html("<font color='blue'>推送成功,跳转中...</font>");
+                    Sleep(this, 1500);
+                    this.NextStep = function () {
+                        window.location = window.location;
+                    }
+                } else {
+                    $("span#span_info").html("<font color='red'>" + data.error + "</font>");
+                    isAction = false;
+                }
+            }
+        });
+        return false;
+    });
+</script>

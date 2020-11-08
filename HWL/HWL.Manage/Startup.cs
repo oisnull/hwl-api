@@ -21,6 +21,9 @@ namespace HWL.Manage
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            ShareConfig.LogHelper.InitConfigure("mgr");
+            ShareConfig.LogHelper.Debug($"environment:{ShareConfig.ShareConfiguration.CurrentEnvironment}");
         }
 
         public IConfiguration Configuration { get; }
@@ -67,6 +70,8 @@ namespace HWL.Manage
             //    app.UseHsts();
             //}
 
+            Models.AppHttpContext.Services = app.ApplicationServices;
+
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -76,7 +81,7 @@ namespace HWL.Manage
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Main}/{action=Index}/{id?}");
+                    template: "{controller=Main}/{action=Default}/{id?}");
             });
         }
     }

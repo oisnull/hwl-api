@@ -6,3 +6,7 @@ git reset --soft HEAD~2
 git branch -D branch-name
 git branch --set-upstream master origin/master
 git checkout --track origin/branch-name
+
+netstat -ano
+netstat -aon|findstr "PORT"
+tasklist|findstr "PID"

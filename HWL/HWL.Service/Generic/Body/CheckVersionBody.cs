@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HWL.Entity.Extends;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,6 @@ namespace HWL.Service.Generic.Body
     {
         public bool IsNewVersion { get; set; }
 
-        public string NewVersion { get; set; }
-
-        public string DownLoadUrl { get; set; }
+        public AppVersionInfo AppVersionInfo { get; set; }
     }
 }
