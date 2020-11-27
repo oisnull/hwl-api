@@ -15,7 +15,7 @@ namespace HWL.Manage.Models
         {
             if (AppHttpContext.Current.Session.IsAvailable) return true;
 
-            ShareConfig.LogHelper.Error("HWL后台管理系统下的Session服务不可用，Session是存储在redis里面，请检测redis是否已经开户或者redis的相关配置是否正确", typeof(AdminSessionManager));
+            ShareConfig.LogHelper.Error($"{ShareConfig.AppConfigManager.DefaultAppName}后台管理系统下的Session服务不可用，Session是存储在redis里面，请检测redis是否已经开户或者redis的相关配置是否正确", typeof(AdminSessionManager));
 
             return false;
         }

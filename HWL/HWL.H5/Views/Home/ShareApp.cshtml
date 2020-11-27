@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
-    <title>HWL APP下载</title>
+    <title>@HWL.ShareConfig.AppConfigManager.DefaultAppName APP下载</title>
     <link href="~/css/share.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="hintContainer">
-            <p>想要了解你周围发生了什么有趣的事吗，快来看看呗!</p>
+            <p>想要了解你周围发生了什么事吗，快来看看呗!</p>
         </div>
         <div class="btnConatiner">
             <button id="btnAndroid" onclick="@(string.IsNullOrEmpty(ViewBag.AppUrl) ? "alert('没有找到下载地址,你可以到官网去联系官方人员!')" : "window.location ='" + ViewBag.AppUrl + "'" )">Android</button>

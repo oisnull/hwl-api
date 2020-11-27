@@ -59,7 +59,7 @@ namespace HWL.Manage.Service
                 email = user.Email ?? "",
                 mobile = user.Mobile ?? "",
                 password = user.PasswordOK,
-                name = string.IsNullOrEmpty(user.Name) ? "HWL-" + RandomText.GetNum() : user.Name,
+                name = string.IsNullOrEmpty(user.Name) ? $"{AppConfigManager.DefaultEAppName}-{RandomText.GetNum()}" : user.Name,
                 life_notes = user.LifeNotes,
                 head_image = string.IsNullOrEmpty(user.HeadImage) ? AppConfigManager.UserDefaultHeadImage : user.HeadImage,
 

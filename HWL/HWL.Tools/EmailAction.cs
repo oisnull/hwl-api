@@ -8,7 +8,7 @@ namespace HWL.Tools
     {
         static readonly string systemEmail = "1577592799@qq.com";
         //static readonly string systemEmailPwd = "293051liy";
-        static readonly string systemName = "hwl v1.0";
+        static readonly string systemName = "ZiChat v1.0";
         static readonly string authCode = "pqifivnkxippfjff";
 
         public static int smtpPort = 25;
