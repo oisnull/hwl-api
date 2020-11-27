@@ -15,7 +15,7 @@ a {text-decoration:none;}
 
 
 /*---头部---*/
-.head { width:1200px; height:80px; margin:0 auto;}
+.head { width:1200px; height:80px;}
 .logo { float:left; padding-top:23px;}
 .nav { float:left; padding-left:60px;}
 .nav ul li { float:left; padding:0 13px; position:relative;}

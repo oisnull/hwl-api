@@ -40,7 +40,7 @@ namespace HWL.H5.Controllers
             return View();
         }
 
-        public ActionResult Test()
+        public ActionResult Privacy()
         {
             return View();
         }

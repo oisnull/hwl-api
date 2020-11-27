@@ -10,11 +10,25 @@
     <link rel="stylesheet" type="text/css" href="~/css/index.css">
 </head>
 <body>
+    <div class="head">
+        <div class="nav">
+            <ul>
+                <li @(Context.Request.Path.Value == "/" || Context.Request.Path.Value?.ToLower() == "/home/index" ? "class=on" : "")>
+                    <h1><a href="/"><span>首页</span></a></h1>
+                </li>
+                <li @(Context.Request.Path.Value?.ToLower() == "/home/qrshare" ? "class=on" : "")>
+                    <h1><a href="/home/qrshare"><span>APP下载</span></a></h1>
+                </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
 
     @RenderBody()
 
     <div class="copy">
-        Copyright © 2017-2018 All Rights Reserved.
+        <a href="/home/privacy" style="color:#999;margin-right:20px;">@(HWL.ShareConfig.AppConfigManager.DefaultCAppName)隐私声明</a>
+        <span>Copyright © 2017-2018 All Rights Reserved.</span>
     </div>
 
 </body>
